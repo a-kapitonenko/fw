@@ -1,0 +1,66 @@
+html {
+  line-height: 1.5;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-weight: normal;
+  color: rgba(0,0,0,0.87);
+}
+
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #F1F1F2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h5 {
+  font-size: 1.64rem;
+  line-height: 110%;
+  margin: 1.0933333333rem 0 .656rem 0;
+}
+
+input[type="text"] {
+  border: 1px solid #808184;
+  vertical-align: top;
+  font-size: 16px;
+  width: 140px;
+  padding: 12px 10px;
+}
+
+.page__wrapper {
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-shadow: 0 0 15px 8px #c2c2c2;
+}
+
+.main-content {
+  margin: 0 5rem;
+  text-align: center;
+}
+
+.yellow-section {
+  background: #FFDC00;
+}
+
+.page__title {
+  padding: 2rem;
+  text-align: center;
+}
+
+.information__text {
+  margin: 10px 20px !important;
+  width: 150px;
+}
+
+.information__form {
+  text-align: center;
+  margin-top: 40px;
+}
