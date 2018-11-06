@@ -1,21 +1,28 @@
-// import { EnthusiasmAction } from './actions';
-// import { StoreState } from '../interface';
-// import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from './types';
+import { Reducer } from 'redux';
+import { FramesState, FramesActionTypes } from './types';
 
-// export interface initialState {
-//   open: boolean,
-// }
+const initialState: FramesState = {
+  fetching: false,
+  list: [],
+  selected: [],
+  errors: undefined,
+}
 
-// const initialState: initialState = {
-//   open: false,
-// }
+const reducer: Reducer<FramesState> = (state = initialState, action) => {
+  switch (action.type) {
+    case FramesActionTypes.FETCH_REQUEST: {
+      return { ...state, fetching: true }
+    }
+    case FramesActionTypes.FETCH_SUCCESS: {
+      return { ...state, fetching: false, list: action.payload }
+    }
+    case FramesActionTypes.FETCH_ERROR: {
+      return { ...state, fetching: false, errors: action.payload }
+    }
+    default: {
+      return state
+    }
+  }
+};
 
-// export function enthusiasm(state: StoreState, action: EnthusiasmAction): StoreState {
-//   switch (action.type) {
-//     case INCREMENT_ENTHUSIASM:
-//       return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };
-//     case DECREMENT_ENTHUSIASM:
-//       return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
-//   }
-//   return state;
-// }
+export { reducer as FramesReducer }

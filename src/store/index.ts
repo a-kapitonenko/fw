@@ -1,26 +1,20 @@
-// import { createStore, applyMiddleware, compose } from 'redux';
-// import { routerMiddleware } from 'react-router-redux';
-// import { createLogger } from 'redux-logger';
-// import thunk from 'redux-thunk';
-// import createHistory from 'history/createBrowserHistory';
+import { combineReducers } from 'redux';
+import { routerReducer, RouterState } from 'react-router-redux';
 
-// import rootReducer from './rootReducer';
+import { FramesState } from './frames/types';
+import { SearchPanelState } from './searchPanel/types';
 
-// const history = createHistory();
-// const logger = createLogger();
-// const enhancers: any = [];
-// const middleware = [logger, thunk, routerMiddleware(history)];
+import { FramesReducer } from './frames/reducer';
+import { SearchPanelReducer } from './searchPanel/reducer';
 
-// // if (process.env.NODE_ENV === 'development') {
-// //   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION;
+export interface ApplicationState {
+  routing: RouterState;
+  frames: FramesState;
+  searchPanel: SearchPanelState;
+}
 
-// //   if (typeof devToolsExtension === 'function') {
-// //     enhancers.push(devToolsExtension());
-// //   }
-// // }
-
-// const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
-
-// const store = createStore(rootReducer, composedEnhancers);
-
-// export default store;
+export const rootReducer = combineReducers<ApplicationState>({
+  routing: routerReducer,
+  frames: FramesReducer,
+  searchPanel: SearchPanelReducer,
+});
