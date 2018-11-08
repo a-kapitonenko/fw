@@ -4,7 +4,7 @@ export interface Frame {
   img: string;
 }
 
-export interface SelectedFrames extends Frame {
+export interface SelectedFrame extends Frame {
   compatibility: boolean;
 }
 
@@ -12,12 +12,14 @@ export const enum FramesActionTypes {
   FETCH_REQUEST = '@@frames/FETCH_REQUEST',
   FETCH_SUCCESS = '@@frames/FETCH_SUCCESS',
   FETCH_ERROR = '@@frames/FETCH_ERROR',
-  ADD_TO_SELECT = '@@frames/ADD_TO_SELECT',
+  ADD_SELECTED = '@@frames/ADD_SELECTED',
+  SET_SELECTED = '@@frames/SET_SELECTED',
+  DELETE_SELECTED = '@@frames/DELETE_SELECTED',
 }
 
 export interface FramesState {
   readonly fetching: boolean;
   readonly list: Frame[];
-  readonly selected: SelectedFrames[];
+  readonly selected: SelectedFrame[];
   readonly errors?: string;
 }

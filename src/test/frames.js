@@ -1,3 +1,5 @@
+const checkedFrames = [82850523738, 82850523730];
+
 export const frames = [
   {
     'upc': 82850523738,
@@ -33,6 +35,16 @@ export const frames = [
     'upc': 82840423738,
     'name': 'RR17116',
     'img': '7.png'
-
   }
 ];
+
+export const checkFrames = (frames) => {
+  return frames.map((frame) => {
+    console.log(frame);
+    
+    const checked = checkedFrames.find(el => el === frame.upc);
+    console.log(checked);
+
+    return ({ ...frame, compatibility: checked ? true : false});
+  });
+};

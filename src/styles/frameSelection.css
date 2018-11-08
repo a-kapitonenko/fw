@@ -1,7 +1,21 @@
 .frame-selection__form-title {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .frame-selection__form-input {
-    width: 50% !important;
+  margin: 2rem;
+}
+
+.frame-selection__table-img {
+  width: 200px;
+  height: 100px;
+}
+
+.frame-selection__table {
+  overflow-x: auto;
+  margin: 2rem;
+}
+
+.frame-selection__form-button {
+  margin: 2rem !important;
 }
