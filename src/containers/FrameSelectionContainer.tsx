@@ -48,6 +48,10 @@ class FrameSelectionContainer extends React.Component<AllProps> {
   }
 
   private handleSelect = (selectedValue: any) => {
+    if (selectedValue.length === 0) {
+      return;
+    }
+
     const { list, addSelected } = this.props;
     const frame = list.find((item: Frame) => item.upc === selectedValue.value);
     const selectedFrame: SelectedFrame  = createSelectedFrameData(frame);

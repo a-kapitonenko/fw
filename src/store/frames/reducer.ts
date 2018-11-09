@@ -5,7 +5,7 @@ const initialState: FramesState = {
   fetching: false,
   list: [],
   selected: [],
-  errors: undefined,
+  errors: '',
 }
 
 const reducer: Reducer<FramesState> = (state = initialState, action) => {

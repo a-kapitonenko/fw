@@ -19,7 +19,7 @@ export const enum FramesActionTypes {
 
 export interface FramesState {
   readonly fetching: boolean;
+  readonly errors?: string;
   readonly list: Frame[];
   readonly selected: SelectedFrame[];
-  readonly errors?: string;
 }
