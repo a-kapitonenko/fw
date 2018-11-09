@@ -9,7 +9,6 @@ import { Frame, SelectedFrame } from '../store/frames/types';
 import { ApplicationState } from '../store';
 
 import FrameTable from '../components/FrameTable';
-import InputInformation from '../components/InputInformation';
 
 import { createSelectedList, createSelectedFrameData } from '../helpers/frameSelectionHelper';
 
@@ -78,7 +77,6 @@ class FrameSelectionContainer extends React.Component<AllProps> {
             <FrameTable list={selected} />
             <Button className="frame-selection__form-button" variant="contained" onClick={() => handleCheck(selected)}>Check Frames</Button>
           </section>
-          <InputInformation />
         </div>
       </div>
     )
