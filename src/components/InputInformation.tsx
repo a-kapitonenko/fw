@@ -1,27 +1,44 @@
 import React from 'react';
-// import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 import { InputInformationFields } from '../constants/InputInformation';
 
 interface AllProps {
+  handleRxInformation: any,
 }
 
-const InputInformation = ({}: AllProps) => (
-  <div className="frame-selection__table">
+const InputInformation = ({ handleRxInformation }: AllProps) => (
+  <React.Fragment>
     {InputInformationFields.map((element, index) => (
       <TextField
         className="information__text"
         key={index}
-        id="outlined-name"
         label={`OD ${element.label}`}
         variant="outlined"
         InputLabelProps={{
           shrink: true,
         }}
+        onChange={(event) => {
+          return handleRxInformation('OD', element.id, event.target.value);
+        }}
       />
     ))}
-  </div>
+
+    {InputInformationFields.map((element, index) => (
+      <TextField
+        className="information__text"
+        key={index}
+        label={`OS ${element.label}`}
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={(event) => {
+          return handleRxInformation('OS', element.id, event.target.value);
+        }}
+      />
+    ))}
+  </React.Fragment>
 );
 
 export default InputInformation;

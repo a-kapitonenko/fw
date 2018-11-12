@@ -41,8 +41,8 @@ input[type="text"] {
   box-shadow: 0 0 15px 8px #c2c2c2;
 }
 
-.main-content {
-  margin: 0 5rem;
+.page__content {
+  margin: 0 4rem;
   text-align: center;
 }
 
@@ -58,6 +58,10 @@ input[type="text"] {
 .information__text {
   margin: 10px 20px !important;
   width: 120px;
+}
+
+.information__text input {
+  text-align: center;
 }
 
 .information__form {

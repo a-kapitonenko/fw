@@ -19,7 +19,7 @@ export const enum OrderActionTypes {
 }
 
 export interface OrderState {
-  readonly inputRx: {
+  readonly prescription: {
     OD: Rx,
     OS: Rx
   };

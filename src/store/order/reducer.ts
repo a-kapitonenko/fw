@@ -4,7 +4,7 @@ import { Frame } from '../frames/types';
 import { Lens } from '../lenses/types';
 
 const initialState: OrderState = {
-  inputRx: {
+  prescription: {
     OD: <Rx>{},
     OS: <Rx>{}
   },
@@ -20,7 +20,16 @@ const reducer: Reducer<OrderState> = (state = initialState, action) => {
       return { ...state, recommendation: action.payload };
     }
     case OrderActionTypes.SET_RX_INFORMATION: {
-      return { ...state, inputRx: action.payload };
+      return { 
+        ...state,
+        inputRx: {
+          ...state.prescription,
+          [action.payload.type]: {
+            ...state.prescription[action.payload.type],
+            [action.payload.field]:action.payload.value
+          }
+        }  
+      };
     }
     case OrderActionTypes.SET_LENS: {
       return { ...state, lens: action.payload };

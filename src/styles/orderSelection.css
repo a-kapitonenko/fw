@@ -1,0 +1,16 @@
+.order-selection__section {
+  border: 3px solid gray;
+  padding: 1.5rem 0;
+  margin: 2rem 0;
+}
+
+.order-selection__button {
+  text-decoration: none;
+}
+
+.order-selection__section-recommend {
+  border: 2px solid gray;
+  height: 200px;
+  margin: 2rem;
+  background-color: white;
+}
