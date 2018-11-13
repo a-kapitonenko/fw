@@ -7,3 +7,13 @@ export const InputInformationFields = [
   { id: 'PDNear', label: 'PD Near' },
   { id: 'prism', label: 'Prism' },
 ];
+
+export const fields = [
+  'sphere',
+  'cyclinder',
+  'axis',
+  'addition',
+  'PDDistance',
+  'PDNear',
+  'prism',
+];

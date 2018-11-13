@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 import { InputInformationFields } from '../constants/InputInformation';
+// import { isNumber } from '../helpers/orderSelectionHelper';
 
 interface AllProps {
   handleRxInformation: any,
@@ -15,12 +16,8 @@ const InputInformation = ({ handleRxInformation }: AllProps) => (
         key={index}
         label={`OD ${element.label}`}
         variant="outlined"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        onChange={(event) => {
-          return handleRxInformation('OD', element.id, event.target.value);
-        }}
+        InputLabelProps={{ shrink: true }}
+        onChange={(event) => handleRxInformation('OD', element.id, event.target.value)}
       />
     ))}
 
@@ -30,12 +27,8 @@ const InputInformation = ({ handleRxInformation }: AllProps) => (
         key={index}
         label={`OS ${element.label}`}
         variant="outlined"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        onChange={(event) => {
-          return handleRxInformation('OS', element.id, event.target.value);
-        }}
+        InputLabelProps={{ shrink: true }}
+        onChange={(event) => handleRxInformation('OS', element.id, event.target.value)}
       />
     ))}
   </React.Fragment>
