@@ -11,7 +11,7 @@ interface AllProps {
   className: string;
 }
 
-const Text = ({
+const TextFieldComponent = ({
   input,
   meta: { touched, error },
   className,
@@ -23,7 +23,7 @@ const Text = ({
   <TextField
     className={className}
     error={touched && error ? true : false}
-    helperText={error}
+    helperText={touched && error}
     InputLabelProps={InputLabelProps}
     inputProps={{
       ...input,
@@ -46,4 +46,4 @@ const Text = ({
   />
 );
 
-export default Text;
+export default TextFieldComponent;

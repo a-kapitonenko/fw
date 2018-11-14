@@ -1,29 +1,23 @@
 import { fields } from '../constants/InputInformation';
-import { OrderState } from '../store/order/types';
+// import { OrderState } from '../store/order/types';
+import { FormErrors } from 'redux-form';
 
 export default function (values: any) {
-  const errors = {
-    'OrderState': <OrderState>{}
+  const errors: FormErrors = {};
+  errors['prescription'] = {
+    OD: {},
+    OS: {}
   };
-  console.log(errors);
 
-  console.log(values.OrderState);
+  fields.forEach((field) => {
+    if (!values.prescription || !values.prescription.OD || !values.prescription.OD[field]) {
+      errors['prescription'].OD[field]= 'Required';
+    }
 
-  if (values.OrderState && values.OrderState.OD) {
-    fields.forEach((field) => {
-      if (!values.OrderState.OD[field]) {
-        errors.OrderState.prescription.OD[field]= 'Required';
-      }
-    });
-  }
-
-  if (values.OrderState && values.OrderState.OS) {
-    fields.forEach((field) => {
-      if (!values.OrderState.prescription.OS[field]) {
-        errors.OrderState.prescription.OS[field] = 'Required';
-      }
-    });
-  }
+    if (!values.prescription || !values.prescription.OS || !values.prescription.OS[field]) {
+      errors['prescription'].OS[field]= 'Required';
+    }
+  });
 
   return errors;
 };

@@ -6,10 +6,9 @@ import { OrderState } from '../store/order/types';
 import { InputInformationFields } from '../constants/InputInformation';
 import validate from '../helpers/validate';
 
-import Text from '../components/Text';
+import TextFieldComponent from '../components/TextFieldComponent';
 
 interface IProps {
-  handleRxInformation: any,
 }
 
 type AllProps = IProps & InjectedFormProps<OrderState, IProps>;
@@ -26,10 +25,10 @@ class InputInformation extends React.Component<AllProps> {
             className="information__text"
             InputLabelProps={{ shrink: true }}
             variant="outlined"
-            name={`OrderState.OD[${element.id}]`}
+            name={`prescription.OD[${element.id}]`}
             label={`OD ${element.label}`}
             number
-            component={Text}
+            component={TextFieldComponent}
           />
         ))}
 
@@ -39,10 +38,10 @@ class InputInformation extends React.Component<AllProps> {
             className="information__text"
             InputLabelProps={{ shrink: true }}
             variant="outlined"
-            name={`OrderState.OS[${element.id}]`}
+            name={`prescription.OS[${element.id}]`}
             label={`OS ${element.label}`}
             number
-            component={Text}
+            component={TextFieldComponent}
           />
         ))}
 
@@ -54,6 +53,7 @@ class InputInformation extends React.Component<AllProps> {
 
 const formConfiguration = {
   form: 'order',
+  destroyOnUnmount: false,
   validate
 };
 

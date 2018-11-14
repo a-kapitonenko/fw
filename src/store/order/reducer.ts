@@ -19,17 +19,8 @@ const reducer: Reducer<OrderState> = (state = initialState, action) => {
     case OrderActionTypes.SET_RECOMMENDATION: {
       return { ...state, recommendation: action.payload };
     }
-    case OrderActionTypes.SET_RX_INFORMATION: {
-      return { 
-        ...state,
-        inputRx: {
-          ...state.prescription,
-          [action.payload.type]: {
-            ...state.prescription[action.payload.type],
-            [action.payload.field]:action.payload.value
-          }
-        }  
-      };
+    case OrderActionTypes.SET_PRESCRIPTION: {
+      return { ...state, prescription: action.payload };
     }
     case OrderActionTypes.SET_LENS: {
       return { ...state, lens: action.payload };

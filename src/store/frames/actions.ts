@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import { FramesActionTypes, Frame, SelectedFrame } from './types';
+import { OrderState } from '../order/types';
 
 import { frames, checkFrames } from '../../test/frames';
 
@@ -9,7 +10,7 @@ export const fetchRequest = () => action(FramesActionTypes.FETCH_REQUEST);
 export const fetchSuccess = (list: Frame[]) => action(FramesActionTypes.FETCH_SUCCESS, list);
 export const fetchError = (message: string) => action(FramesActionTypes.FETCH_ERROR, message);
 
-export const fetchFrames: any = () => (dispatch: Dispatch) => {
+export const fetchFrames: any = (order: OrderState) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
 
   return new Promise((resolver) => {
@@ -31,3 +32,5 @@ export const fetchCheck: any = (frames: SelectedFrame[]) => (dispatch: Dispatch)
     dispatch(setSelected(selectedFrames));
   })
 };
+
+export const setSelectedFrame = (frame: Frame) => action(FramesActionTypes.SET_SELECTED_FRAME, frame);

@@ -9,8 +9,23 @@
 }
 
 .order-selection__section-recommend {
+  display: flex;
+  overflow: auto;
   border: 2px solid gray;
   height: 200px;
   margin: 2rem;
   background-color: white;
+}
+
+.order-selection__section-field {
+  display: flex;
+  overflow: auto;
+  border: 2px solid gray;
+  height: 50px;
+  margin: 2rem;
+  background-color: white;
+}
+
+.order-selection__section-recommend > p, .order-selection__section-field > p {
+  margin: auto 2rem;
 }

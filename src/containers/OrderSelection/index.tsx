@@ -8,45 +8,60 @@ import * as orderActions from '../../store/order/actions';
 import { ApplicationState } from '../../store';
 import { OrderState } from '../../store/order/types';
 
-// import InputInformation from '../../components/InputInformation';
 import InputInformation from '../PrescriptionSelection';
+import LensSelectionContainer from '../LensSelectionContainer';
 
 import '../../styles/orderSelection.css';
 
 interface PropsFromState {
-  recommendation: string;
+  order: OrderState;
 }
 
 interface PropsFromDispatch {
-  handleRxInformation: any;
+  savePrescription: any;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
-  recommendation: state.order.recommendation,
+  order: state.order,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleRxInformation: (type: string, field: string, value: string) => dispatch(orderActions.setRxInformation(type, field, value)),
+  savePrescription: (values: OrderState) => dispatch(orderActions.savePrescription(values)),
 });
 
 class Home extends React.Component<AllProps> {
   render() {
-    const { recommendation, handleRxInformation } = this.props;
+    const { order, savePrescription } = this.props;
 
     return (
       <div className="page__content">
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Input Rx Information</h2>
-          <InputInformation handleRxInformation={handleRxInformation} onSubmit={(value: OrderState) => console.log(1)}/>
+          <InputInformation onSubmit={savePrescription}/>
           
         </section>
 
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Recommendation</h2>
           <section className="order-selection__section-recommend">
-            <p>{recommendation}</p>
+            <p>{order.recommendation}</p>
+          </section>
+        </section>
+
+        <section className="order-selection__section">
+          <h2 className="order-selection__section-tittle">The following products can be used with the patients prescription</h2>
+          <h3>(Select the best NikonEyes Lens that best fits your needs)</h3>
+
+          <LensSelectionContainer />
+        </section>
+
+        <section className="order-selection__section">
+          <h2 className="order-selection__section-tittle">Selected NikonEyes Lens</h2>
+
+          <section className="order-selection__section-field">
+            <p>{order.lens.name}</p>
           </section>
         </section>
 

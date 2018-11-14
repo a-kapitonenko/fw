@@ -6,16 +6,29 @@
   margin: 2rem;
 }
 
-.frame-selection__table-img {
-  width: 200px;
-  height: 100px;
-}
-
 .frame-selection__table {
   overflow-x: auto;
   margin: 2rem;
 }
 
+.frame-selection__table-row {
+  height: 100px !important;
+  cursor: pointer;
+}
+
+.frame-selection__table-row:hover {
+  background-color: LightGray;
+}
+
+.frame-selection__table-img {
+  width: 160px;
+  height: 80px;
+}
+
 .frame-selection__form-button {
   margin: 2rem !important;
+}
+
+.row-selected {
+  background-color: darkgray !important;
 }

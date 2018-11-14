@@ -5,7 +5,7 @@ html {
   color: rgba(0,0,0,0.87);
 }
 
-body, h1, h2, p {
+body, h1, h2, h3, p {
   margin: 0;
   padding: 0;
 }

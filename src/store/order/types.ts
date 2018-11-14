@@ -13,7 +13,7 @@ export interface Rx {
 
 export const enum OrderActionTypes {
   SET_RECOMMENDATION = '@@order/SET_RECOMMENDATION',
-  SET_RX_INFORMATION = '@@order/SET_RX_INFORMATION',
+  SET_PRESCRIPTION = '@@order/SET_PRESCRIPTION',
   SET_LENS = '@@order/SET_LENS',
   SET_FRAME = '@@order/SET_FRAME',
 }
@@ -24,7 +24,8 @@ export interface OrderState {
     OS: Rx
   };
   readonly frame: Frame;
-  readonly fittingHeight: number,
-  readonly lens: Lens,
-  readonly recommendation: string,
+  readonly fittingHeight: number;
+  readonly lens: Lens;
+  readonly recommendation: string;
+  // readonly fetching: boolean;
 }

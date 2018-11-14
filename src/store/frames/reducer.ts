@@ -1,10 +1,11 @@
 import { Reducer } from 'redux';
-import { FramesState, FramesActionTypes } from './types';
+import { Frame, FramesState, FramesActionTypes } from './types';
 
 const initialState: FramesState = {
   fetching: false,
   list: [],
   selected: [],
+  selectedFrame: <Frame>{},
   errors: '',
 }
 
@@ -41,6 +42,9 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
         ...state, 
         selected: state.selected.filter(frame => frame != action.payload)
       };
+    }
+    case FramesActionTypes.SET_SELECTED_FRAME: {
+      return { ...state, selectedFrame: action.payload }
     }
     default: {
       return state

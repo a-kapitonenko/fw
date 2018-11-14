@@ -15,6 +15,7 @@ export const enum FramesActionTypes {
   ADD_SELECTED = '@@frames/ADD_SELECTED',
   SET_SELECTED = '@@frames/SET_SELECTED',
   DELETE_SELECTED = '@@frames/DELETE_SELECTED',
+  SET_SELECTED_FRAME = '@@frames/SET_SELECTED_FRAME',
 }
 
 export interface FramesState {
@@ -22,4 +23,5 @@ export interface FramesState {
   readonly errors?: string;
   readonly list: Frame[];
   readonly selected: SelectedFrame[];
+  readonly selectedFrame: Frame;
 }
