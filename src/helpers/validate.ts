@@ -1,5 +1,4 @@
 import { fields } from '../constants/InputInformation';
-// import { OrderState } from '../store/order/types';
 import { FormErrors } from 'redux-form';
 
 export default function (values: any) {

@@ -27,8 +27,16 @@
 
 .frame-selection__form-button {
   margin: 2rem !important;
+  width: 200px;
+  height: 60px;
 }
 
 .row-selected {
   background-color: darkgray !important;
+}
+
+.frame-selection__form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
 }

@@ -8,7 +8,7 @@ import * as orderActions from '../../store/order/actions';
 import { ApplicationState } from '../../store';
 import { OrderState } from '../../store/order/types';
 
-import InputInformation from '../PrescriptionSelection';
+import PrescriptionSelection from '../PrescriptionSelection';
 import LensSelectionContainer from '../LensSelectionContainer';
 
 import '../../styles/orderSelection.css';
@@ -39,8 +39,7 @@ class Home extends React.Component<AllProps> {
       <div className="page__content">
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Input Rx Information</h2>
-          <InputInformation onSubmit={savePrescription}/>
-          
+          <PrescriptionSelection onSubmit={savePrescription}/>
         </section>
 
         <section className="order-selection__section">
@@ -51,9 +50,10 @@ class Home extends React.Component<AllProps> {
         </section>
 
         <section className="order-selection__section">
-          <h2 className="order-selection__section-tittle">The following products can be used with the patients prescription</h2>
-          <h3>(Select the best NikonEyes Lens that best fits your needs)</h3>
-
+          <h2 className="order-selection__section-tittle">
+            The following products can be used with the patients prescription<br />
+            (Select the best NikonEyes Lens that best fits your needs)
+          </h2>
           <LensSelectionContainer />
         </section>
 
@@ -67,10 +67,10 @@ class Home extends React.Component<AllProps> {
 
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">The following frames are best suited for the patient</h2>
-          <Link className="order-selection__button" to="/select">
+          <Link className="order-selection__button" to="/select-frame">
             <Button variant="contained">
               Frame Selection
-              </Button>
+            </Button>
           </Link>
         </section>
       </div>

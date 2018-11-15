@@ -4,7 +4,7 @@ import { action } from 'typesafe-actions';
 import { FramesActionTypes, Frame, SelectedFrame } from './types';
 import { OrderState } from '../order/types';
 
-import { frames, checkFrames } from '../../test/frames';
+import { getFrames, checkFrames, getSimilarFrames } from '../../test/frames';
 
 export const fetchRequest = () => action(FramesActionTypes.FETCH_REQUEST);
 export const fetchSuccess = (list: Frame[]) => action(FramesActionTypes.FETCH_SUCCESS, list);
@@ -14,10 +14,27 @@ export const fetchFrames: any = (order: OrderState) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
 
   return new Promise((resolver) => {
-    resolver(frames)
+    const response = getFrames(order);
+
+    resolver(response);
   })
-  .then((frames: any) => {
-    dispatch(fetchSuccess(frames));
+  .then((response: any) => {
+    if (response.success) {
+      dispatch(fetchSuccess(response.frames));
+    } 
+  })
+};
+
+export const fetchSimilarFrames: any = (order: OrderState) => (dispatch: Dispatch) => {
+  return new Promise((resolver) => {
+    const response = getSimilarFrames(order);
+
+    resolver(response);
+  })
+  .then((response: any) => {
+    if (response.success) {
+      dispatch(setSimilarFrames(response.similarFrames));
+    }
   })
 };
 
@@ -34,3 +51,4 @@ export const fetchCheck: any = (frames: SelectedFrame[]) => (dispatch: Dispatch)
 };
 
 export const setSelectedFrame = (frame: Frame) => action(FramesActionTypes.SET_SELECTED_FRAME, frame);
+export const setSimilarFrames = (frames: Frame[]) => action(FramesActionTypes.SET_SIMILAR_FRAMES, frames);

@@ -44,11 +44,17 @@ class LensSelectionContainer extends React.Component<AllProps> {
   }
 
   render() {
-    const { list, handleClick } = this.props;
+    const { order, list, handleClick } = this.props;
     return (
       <section className="lens-selection__section">
         {list.map((lens: Lens) => (
-          <div key={lens.value} className="lens-selection__article" onClick={() => handleClick(lens)}>{lens.name}</div>
+          <div 
+            key={lens.value} 
+            className={`lens-selection__article ${order.lens === lens ? 'lens-selected' : ''}`} 
+            onClick={() => handleClick(lens)}
+          >
+            {lens.name}
+          </div>
         ))}
       </section>
     );

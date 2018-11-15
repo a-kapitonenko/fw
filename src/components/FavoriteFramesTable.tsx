@@ -12,7 +12,7 @@ import * as framesActions from '../store/frames/actions';
 import { frameTableConfig } from '../constants/frameTable';
 
 interface AllProps {
-  list: SelectedFrame[];
+  list: Frame[];
   selectedFrame: Frame; 
   handleClick: typeof framesActions.setSelectedFrame;
 }
@@ -28,21 +28,19 @@ const FrameTable = ({ list, selectedFrame, handleClick }: AllProps) => {
             <TableCell>UPC Code</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Picture</TableCell>
-            <TableCell>Compatibility</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {list.map((item: SelectedFrame) => {
             return (
               <TableRow 
-                key={item.upc} 
                 className={`frame-selection__table-row ${selectedFrame === item ? 'row-selected' : ''}`} 
+                key={item.upc} 
                 onClick={() => handleClick(item)}
               >
                 <TableCell>{item.upc}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell><img className="frame-selection__table-img" src={`/${item.img}`} /></TableCell>
-                <TableCell>{item.compatibility ? 'true' : 'false'}</TableCell>
               </TableRow>
             );
           })}

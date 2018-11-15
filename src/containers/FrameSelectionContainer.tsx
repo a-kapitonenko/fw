@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
 
@@ -80,12 +81,15 @@ class FrameSelectionContainer extends React.Component<AllProps> {
           <Select className="frame-selection__form-input" options={selectedList} onChange={this.handleSelect} />
           <FrameTable list={selected} selectedFrame={selectedFrame} handleClick={handleClick} />
           <Button className="frame-selection__form-button" variant="contained" onClick={() => handleCheck(selected)}>Check Frames</Button>
-        </section>
 
-        <section className="frame-selection__form-actions">
-          <Button variant="contained">Back</Button>
-          <div/>
-          <Button variant="contained">Back</Button>
+          <section className="frame-selection__form-actions">
+            <Link  to="/">
+              <Button className="frame-selection__form-button" variant="contained">Back</Button>
+            </Link>
+            <Link  to="/select-frame/favorite/">
+              <Button className="frame-selection__form-button" variant="contained">Next</Button>
+            </Link>
+          </section>
         </section>
       </div>
     )

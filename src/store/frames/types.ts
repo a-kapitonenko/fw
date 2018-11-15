@@ -16,6 +16,7 @@ export const enum FramesActionTypes {
   SET_SELECTED = '@@frames/SET_SELECTED',
   DELETE_SELECTED = '@@frames/DELETE_SELECTED',
   SET_SELECTED_FRAME = '@@frames/SET_SELECTED_FRAME',
+  SET_SIMILAR_FRAMES = '@@frmaes/SET_SIMILAR_FRAMES',
 }
 
 export interface FramesState {
@@ -24,4 +25,5 @@ export interface FramesState {
   readonly list: Frame[];
   readonly selected: SelectedFrame[];
   readonly selectedFrame: Frame;
+  readonly similarFrames: Frame[];
 }

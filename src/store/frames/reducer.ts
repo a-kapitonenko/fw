@@ -6,6 +6,7 @@ const initialState: FramesState = {
   list: [],
   selected: [],
   selectedFrame: <Frame>{},
+  similarFrames: [],
   errors: '',
 }
 
@@ -45,6 +46,9 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     }
     case FramesActionTypes.SET_SELECTED_FRAME: {
       return { ...state, selectedFrame: action.payload }
+    }
+    case FramesActionTypes.SET_SIMILAR_FRAMES: {
+      return { ...state, similarFrames: action.payload }
     }
     default: {
       return state

@@ -14,3 +14,7 @@
 .lens-selection__article:hover {
   background-color: lightgray;
 }
+
+.lens-selected {
+  background-color: darkgray !important;
+}
