@@ -64,18 +64,22 @@ class Home extends React.Component<PropsFromState> {
           </section>
         </section>
 
-        <section className="order-selection__section flex">
+        <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Frame Information</h2>
 
-          <section className="order-selection__section-field">
-            <p>{order.fittingHeight}</p>
-          </section>
-          <section className="order-selection__section-field">
-            <p>{order.frame.upc}</p>
-            <p>{order.frame.name}</p>
-          </section>
-          <section className="order-selection__section-field">
-            <img  src={`/${order.frame.img}`} />
+          <section className="flex">
+            <div className="flex" style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'column' }}>
+              <section className="order-selection__section-field">
+                <p>{order.fittingHeight}</p>
+              </section>
+              <section className="order-selection__section-field">
+                <p>{order.frame.upc}</p>
+                <p>{order.frame.name}</p>
+              </section>
+            </div> 
+            <section className="order-selection__section-field" style={{ height: '200px', flex: 1 }}>
+              <img  src={`/${order.frame.img}`} style={{ height: '100%', margin: 'auto' }}/>
+            </section>
           </section>
         </section>
       </div>

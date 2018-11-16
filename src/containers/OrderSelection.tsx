@@ -4,42 +4,43 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import * as orderActions from '../../store/order/actions';
-import { ApplicationState } from '../../store';
-import { OrderState } from '../../store/order/types';
+// import * as orderActions from '../store/order/actions';
+import { ApplicationState } from '../store';
+import { OrderState } from '../store/order/types';
 
-import PrescriptionSelection from '../PrescriptionSelection';
-import LensSelectionContainer from '../LensSelectionContainer';
+// import PrescriptionSelection from './PrescriptionSelection';
+import LensSelectionContainer from './LensSelectionContainer';
+import Prescription from './Prescription';
 
-import '../../styles/orderSelection.css';
+import '../styles/orderSelection.css';
 
 interface PropsFromState {
   order: OrderState;
 }
 
 interface PropsFromDispatch {
-  savePrescription: any;
+
 }
 
-type AllProps = PropsFromState & PropsFromDispatch;
+type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
   order: state.order,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  savePrescription: (values: OrderState) => dispatch(orderActions.savePrescription(values)),
+
 });
 
-class Home extends React.Component<AllProps> {
+class OrderSelection extends React.Component<ComponentProps> {
   render() {
-    const { order, savePrescription } = this.props;
+    const { order } = this.props;
 
     return (
       <div className="page__content">
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Input Rx Information</h2>
-          <PrescriptionSelection onSubmit={savePrescription}/>
+          <Prescription />
         </section>
 
         <section className="order-selection__section">
@@ -78,4 +79,4 @@ class Home extends React.Component<AllProps> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderSelection);

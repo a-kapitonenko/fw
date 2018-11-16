@@ -5,8 +5,24 @@ import { Lens } from '../lenses/types';
 
 const initialState: OrderState = {
   prescription: {
-    OD: <Rx>{},
-    OS: <Rx>{}
+    OD: <Rx>{
+      sphere: '',
+      cyclinder: '',
+      axis: '',
+      addition: '',
+      PDDistance: '',
+      PDNear: '',
+      prism: ''
+    },
+    OS: <Rx>{
+      sphere: '',
+      cyclinder: '',
+      axis: '',
+      addition: '',
+      PDDistance: '',
+      PDNear: '',
+      prism: ''
+    }
   },
   frame: <Frame>{},
   fittingHeight: 0,
@@ -16,11 +32,20 @@ const initialState: OrderState = {
 
 const reducer: Reducer<OrderState> = (state = initialState, action) => {
   switch (action.type) {
+    case OrderActionTypes.SET_RX_INFORMATION: {
+      return { 
+        ...state, 
+        prescription: {
+          ...state.prescription,
+          [action.payload.type]: {
+            ...state.prescription[action.payload.type],
+            [action.payload.field]: action.payload.value
+          }
+        }
+      };
+    }
     case OrderActionTypes.SET_RECOMMENDATION: {
       return { ...state, recommendation: action.payload };
-    }
-    case OrderActionTypes.SET_PRESCRIPTION: {
-      return { ...state, prescription: action.payload };
     }
     case OrderActionTypes.SET_LENS: {
       return { ...state, lens: action.payload };
