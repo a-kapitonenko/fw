@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
+import { fetchLenses } from '../lenses/actions';
 import { OrderActionTypes } from './types';
 import { Lens } from '../lenses/types';
 import { Frame } from '../frames/types';
@@ -21,6 +22,7 @@ export const savePrescription: any = (prescription: any) => (dispatch: Dispatch)
   .then((response: any) => {
     if (response.success) {
       dispatch(setRecommendation(response.recommendation));
+      dispatch(fetchLenses());
     }
   })
 };

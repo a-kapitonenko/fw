@@ -35,16 +35,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 class LensSelectionContainer extends React.Component<AllProps> {
-  componentDidUpdate(prevProps: AllProps) {
-    const { order, handleFetch } = this.props;
-
-    if (order.prescription !== prevProps.order.prescription) {
-      handleFetch(order);
-    }
-  }
-
   render() {
     const { order, list, handleClick } = this.props;
+    
     return (
       <section className="lens-selection__section">
         {list.map((lens: Lens) => (

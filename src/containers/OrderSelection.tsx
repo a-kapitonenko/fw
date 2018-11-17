@@ -8,9 +8,11 @@ import Button from '@material-ui/core/Button';
 import { ApplicationState } from '../store';
 import { OrderState } from '../store/order/types';
 
+import { isEmptyObject } from '../helpers/orderSelectionHelper';
+
 // import PrescriptionSelection from './PrescriptionSelection';
 import LensSelectionContainer from './LensSelectionContainer';
-import Prescription from './Prescription';
+import Prescription from './PrescriptionContainer';
 
 import '../styles/orderSelection.css';
 
@@ -35,6 +37,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 class OrderSelection extends React.Component<ComponentProps> {
   render() {
     const { order } = this.props;
+    const frameSelectionButtonDisabled = isEmptyObject(order.lens);
 
     return (
       <div className="page__content">
@@ -45,9 +48,9 @@ class OrderSelection extends React.Component<ComponentProps> {
 
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Recommendation</h2>
-          <section className="order-selection__section-recommend">
+          <div className="order-selection__section-recommend">
             <p>{order.recommendation}</p>
-          </section>
+          </div>
         </section>
 
         <section className="order-selection__section">
@@ -61,15 +64,15 @@ class OrderSelection extends React.Component<ComponentProps> {
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Selected NikonEyes Lens</h2>
 
-          <section className="order-selection__section-field">
+          <div className="order-selection__section-field">
             <p>{order.lens.name}</p>
-          </section>
+          </div>
         </section>
 
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">The following frames are best suited for the patient</h2>
           <Link className="order-selection__button" to="/select-frame">
-            <Button variant="contained">
+            <Button variant="contained" disabled={frameSelectionButtonDisabled}>
               Frame Selection
             </Button>
           </Link>

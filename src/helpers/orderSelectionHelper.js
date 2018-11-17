@@ -11,10 +11,24 @@ export const isNumber = (value) => {
   return true;
 };
 
-export const isPrescriptionFilled = (prescription) => {
+export const checkPrescriptionFilling = (prescription) => {
   for (const a in prescription) {
-    for (const b in a) {
-      console.log(prescription[a[b]]);
+    for (const b in prescription[a]) {
+      if (prescription[a][b].length === 0) {
+        return false;
+      }
     }
   }
+
+  return true;
+};
+
+export const isEmptyObject = (obj) => {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      return false;
+    }
+  }
+
+  return true;
 };

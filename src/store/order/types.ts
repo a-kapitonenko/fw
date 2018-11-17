@@ -1,7 +1,7 @@
 import { Frame } from '../frames/types';
 import { Lens } from '../lenses/types';
 
-export interface Rx {
+export type Rx = {
   sphere: string;
   cyclinder: string;
   axis: string;

@@ -1,4 +1,4 @@
-export interface Frame {
+export type Frame = {
   upc: number;
   name: string;
   img: string;

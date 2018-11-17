@@ -8,7 +8,7 @@ import { ApplicationState } from '../store';
 import { OrderState } from '../store/order/types';
 
 import { InputInformationFields } from '../constants/InputInformation';
-import { isPrescriptionFilled } from '../helpers/orderSelectionHelper';
+import { checkPrescriptionFilling } from '../helpers/orderSelectionHelper';
 
 interface PropsFromState {
   order: OrderState,
@@ -30,11 +30,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   savePrescription: (prescription: any) => dispatch(orderActions.savePrescription(prescription)),
 });
 
-class PrescriptionSelection extends React.Component<ComponentProps> {
+class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
   componentDidUpdate(prevProps: ComponentProps) {
     const { order, savePrescription } = this.props;
-    isPrescriptionFilled(order.prescription);
-    if (order.prescription !== prevProps.order.prescription) {
+    const isPrescriptionFilled = checkPrescriptionFilling(order.prescription);
+
+    if (order.prescription !== prevProps.order.prescription && isPrescriptionFilled) {
       savePrescription(order.prescription);
     }
   }
@@ -72,4 +73,4 @@ class PrescriptionSelection extends React.Component<ComponentProps> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrescriptionSelection);
+export default connect(mapStateToProps, mapDispatchToProps)(PrescriptionSelectionContainer);

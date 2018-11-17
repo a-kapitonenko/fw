@@ -1,4 +1,4 @@
-export interface Lens {
+export type Lens = {
   name: string;
   value: number;
 }

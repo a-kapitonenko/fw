@@ -26,7 +26,7 @@ const initialState: OrderState = {
   },
   frame: <Frame>{},
   fittingHeight: 0,
-  lens: <Lens>{},
+  lens: {} as Lens,
   recommendation: '',
 };
 
