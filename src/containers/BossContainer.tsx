@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 // import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import { InputInformationFields } from '../constants/InputInformation';
+import { PrescriptionFields } from '../constants/prescription';
 import { getCurrentDate } from '../helpers/bossHelper';
 
 import { ApplicationState } from '../store';
-import { OrderState } from '../store/order/types';
+import { IOrderState } from '../store/order/types';
 
 import '../styles/orderSelection.css';
 
 interface PropsFromState {
-  order: OrderState;
+  order: IOrderState;
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
@@ -32,7 +32,7 @@ class Home extends React.Component<PropsFromState> {
 
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Input Rx Information</h2>
-          {InputInformationFields.map((element, index) => (
+          {PrescriptionFields.map((element, index) => (
             <TextField 
               key={index}
               className="information__text" 
@@ -43,7 +43,7 @@ class Home extends React.Component<PropsFromState> {
               defaultValue={order.prescription.OD[element.id]}
             />
           ))}
-          {InputInformationFields.map((element, index) => (
+          {PrescriptionFields.map((element, index) => (
             <TextField 
               key={index}
               className="information__text" 

@@ -13,14 +13,16 @@ class App extends React.Component {
   render() {
     return (
       <div className="page__wrapper yellow-section">
-        <PageHeader />
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/select-frame/" component={FrameSelection} />
-            <Route path="/select-frame/favorite/" component={FavoriteFrames} />
-            <Route path="/order" component={BossContainer}/>
-          </Switch>
+          <React.Fragment>
+            <PageHeader />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/select-frame/" component={FrameSelection} />
+                <Route path="/select-frame/favorite/" component={FavoriteFrames} />
+                <Route path="/order" component={BossContainer}/>
+              </Switch>
+          </React.Fragment>
         </BrowserRouter>
       </div>
     );

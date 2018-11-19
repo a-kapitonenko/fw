@@ -1,4 +1,4 @@
-import { fields } from '../constants/InputInformation';
+import { fields } from '../constants/prescription';
 import { FormErrors } from 'redux-form';
 
 export default function (values: any) {

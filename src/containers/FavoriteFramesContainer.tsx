@@ -8,7 +8,7 @@ import * as framesActions from '../store/frames/actions';
 import * as orderActions from '../store/order/actions';
 
 import { Frame } from '../store/frames/types';
-import { OrderState } from '../store/order/types';
+import { IOrderState } from '../store/order/types';
 import { ApplicationState } from '../store';
 
 import FavoriteFramesTable from '../components/FavoriteFramesTable';
@@ -16,7 +16,7 @@ import FavoriteFramesTable from '../components/FavoriteFramesTable';
 import '../styles/frameSelection.css';
 
 interface PropsFromState {
-  order: OrderState;
+  order: IOrderState;
   similarFrames: Frame[];
   selectedFrame: Frame;
 }
@@ -36,7 +36,7 @@ const mapStateToProps = (state: ApplicationState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleFetch: (order: OrderState) => dispatch(framesActions.fetchSimilarFrames(order)),
+  handleFetch: (order: IOrderState) => dispatch(framesActions.fetchSimilarFrames(order)),
   handleClick: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
   handleSubmit: (frame: Frame) => {
     dispatch(framesActions.setSelected([]));

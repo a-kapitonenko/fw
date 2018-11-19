@@ -42,8 +42,6 @@ const lenses = [
 ];
 
 export const getLenses = (order) => {
-  console.log(order);
-
   return {
     success: true,
     lenses 

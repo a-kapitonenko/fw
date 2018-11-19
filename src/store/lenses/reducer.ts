@@ -1,13 +1,13 @@
 import { Reducer } from 'redux';
-import { LensesState, LensesActionTypes } from './types';
+import { ILensesState, LensesActionTypes } from './types';
 
-const initialState: LensesState = {
+const initialState: ILensesState = {
   fetching: false,
   list: [],
   errors: '',
 }
 
-const reducer: Reducer<LensesState> = (state = initialState, action) => {
+const reducer: Reducer<ILensesState> = (state = initialState, action) => {
   switch (action.type) {
     case LensesActionTypes.FETCH_REQUEST: {
       return { ...state, fetching: true };

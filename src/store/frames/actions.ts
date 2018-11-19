@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import { FramesActionTypes, Frame, SelectedFrame } from './types';
-import { OrderState } from '../order/types';
+import { IOrderState } from '../order/types';
 
 import { getFrames, checkFrames, getSimilarFrames } from '../../test/frames';
 
@@ -10,7 +10,7 @@ export const fetchRequest = () => action(FramesActionTypes.FETCH_REQUEST);
 export const fetchSuccess = (list: Frame[]) => action(FramesActionTypes.FETCH_SUCCESS, list);
 export const fetchError = (message: string) => action(FramesActionTypes.FETCH_ERROR, message);
 
-export const fetchFrames: any = (order: OrderState) => (dispatch: Dispatch) => {
+export const fetchFrames: any = (order: IOrderState) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
 
   return new Promise((resolver) => {
@@ -25,7 +25,7 @@ export const fetchFrames: any = (order: OrderState) => (dispatch: Dispatch) => {
   })
 };
 
-export const fetchSimilarFrames: any = (order: OrderState) => (dispatch: Dispatch) => {
+export const fetchSimilarFrames: any = (order: IOrderState) => (dispatch: Dispatch) => {
   return new Promise((resolver) => {
     const response = getSimilarFrames(order);
 

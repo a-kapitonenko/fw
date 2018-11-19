@@ -1,4 +1,4 @@
-export const InputInformationFields = [
+export const PrescriptionFields = [
   { id: 'sphere', label: 'Sphere' },
   { id: 'cyclinder', label: 'Cyclinder' },
   { id: 'axis', label: 'Axis' },

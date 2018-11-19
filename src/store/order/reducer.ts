@@ -1,36 +1,30 @@
 import { Reducer } from 'redux';
-import { OrderState, OrderActionTypes, Rx } from './types';
+import { IOrderState, OrderActionTypes, Prescription, OculusInfo } from './types';
 import { Frame } from '../frames/types';
 import { Lens } from '../lenses/types';
 
-const initialState: OrderState = {
-  prescription: {
-    OD: <Rx>{
-      sphere: '',
-      cyclinder: '',
-      axis: '',
-      addition: '',
-      PDDistance: '',
-      PDNear: '',
-      prism: ''
-    },
-    OS: <Rx>{
-      sphere: '',
-      cyclinder: '',
-      axis: '',
-      addition: '',
-      PDDistance: '',
-      PDNear: '',
-      prism: ''
-    }
+const initialOculusState: OculusInfo = {
+  sphere: '',
+  cyclinder: '',
+  axis: '',
+  addition: '',
+  PDDistance: '',
+  PDNear: '',
+  prism: '',
+};
+
+const initialState: IOrderState = {
+  prescription: <Prescription>{
+    OD: initialOculusState,
+    OS: initialOculusState
   },
   frame: <Frame>{},
   fittingHeight: 0,
-  lens: {} as Lens,
+  lens: <Lens>{},
   recommendation: '',
 };
 
-const reducer: Reducer<OrderState> = (state = initialState, action) => {
+const reducer: Reducer<IOrderState> = (state = initialState, action) => {
   switch (action.type) {
     case OrderActionTypes.SET_RX_INFORMATION: {
       return { 
@@ -59,5 +53,4 @@ const reducer: Reducer<OrderState> = (state = initialState, action) => {
   }
 };
 
-export { reducer as OrderReducer }
-
+export { reducer as OrderReducer };

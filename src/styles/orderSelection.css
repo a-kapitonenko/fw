@@ -8,7 +8,7 @@
   text-decoration: none;
 }
 
-.order-selection__section-recommend {
+.order-selection__recommend {
   display: flex;
   overflow: auto;
   border: 2px solid gray;
@@ -17,7 +17,7 @@
   background-color: white;
 }
 
-.order-selection__section-field {
+.order-selection__field {
   display: flex;
   overflow: auto;
   border: 2px solid gray;
@@ -26,6 +26,6 @@
   background-color: white;
 }
 
-.order-selection__section-recommend > p, .order-selection__section-field > p {
+.order-selection__recommend > p, .order-selection__section-field > p {
   margin: auto 2rem;
 }

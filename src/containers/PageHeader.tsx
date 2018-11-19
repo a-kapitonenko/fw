@@ -1,10 +1,11 @@
 import * as React from 'react';
+import LinkComponent from '../components/LinkComponent';
 
-class PageHeader extends React.Component {
+class PageHeader extends LinkComponent<{}>{
   render() {
     return (
       <div className="page__header">
-        <img src="/header-logo.png"/>
+        <img src="/header-logo.png" onClick={() => this.redirectToPage('/')}/>
       </div>
     );
   }

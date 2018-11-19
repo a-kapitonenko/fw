@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import { fetchLenses } from '../lenses/actions';
-import { OrderActionTypes } from './types';
+import { OrderActionTypes, Prescription } from './types';
 import { Lens } from '../lenses/types';
 import { Frame } from '../frames/types';
 
@@ -13,7 +13,7 @@ export const setRecommendation = (recommendation: string) => action(OrderActionT
 export const setLens = (lens: Lens) => action(OrderActionTypes.SET_LENS, lens);
 export const setFrame = (frame: Frame) => action(OrderActionTypes.SET_FRAME, frame);
 
-export const savePrescription: any = (prescription: any) => (dispatch: Dispatch) => {
+export const savePrescription: any = (prescription: Prescription) => (dispatch: Dispatch) => {
   return new Promise((resolver) => {
     const response = savePrescriptionInformation(prescription);
 

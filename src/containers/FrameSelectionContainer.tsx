@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import * as framesActions from '../store/frames/actions';
 import { Frame, SelectedFrame } from '../store/frames/types';
-import { OrderState } from '../store/order/types';
+import { IOrderState } from '../store/order/types';
 import { ApplicationState } from '../store';
 
 import { createSelectedList, createSelectedFrameData } from '../helpers/frameSelectionHelper';
@@ -17,7 +17,7 @@ import FrameTable from '../components/FrameTable';
 import '../styles/frameSelection.css';
 
 interface PropsFromState {
-  order: OrderState;
+  order: IOrderState;
   list: Frame[];
   selected: SelectedFrame[];
   selectedFrame: Frame;
@@ -41,7 +41,7 @@ const mapStateToProps = (state: ApplicationState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleFetch: (order: OrderState) => dispatch(framesActions.fetchFrames(order)),
+  handleFetch: (order: IOrderState) => dispatch(framesActions.fetchFrames(order)),
   addSelected: (frame: SelectedFrame) => dispatch(framesActions.addSelected(frame)),
   deleteSelected: (frame: SelectedFrame) => dispatch(framesActions.deleteSelected(frame)),
   handleClick: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
