@@ -8,6 +8,11 @@ const initialState: FramesState = {
   selectedFrame: <Frame>{},
   similarFrames: [],
   errors: '',
+  UPCSearch: {
+    fetching: false,
+    list: [],
+    errors: ''
+  }
 }
 
 const reducer: Reducer<FramesState> = (state = initialState, action) => {
@@ -49,6 +54,18 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     }
     case FramesActionTypes.SET_SIMILAR_FRAMES: {
       return { ...state, similarFrames: action.payload }
+    }
+
+
+
+    case FramesActionTypes.FETCH_UPC: {
+      return { ...state, UPCSearch: { ...state.UPCSearch, fetching: true }};
+    }
+    case FramesActionTypes.FETCH_UPC_ERROR: {
+      return { ...state, UPCSearch: { ...state.UPCSearch, errors: action.payload, fetching: false } };
+    }
+    case FramesActionTypes.FETCH_UPC_SUCCESS: {
+      return { ...state, UPCSearch: { ...state.UPCSearch, list: action.payload, fetching: false } };
     }
     default: {
       return state

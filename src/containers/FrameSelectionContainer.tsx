@@ -13,6 +13,7 @@ import { ApplicationState } from '../store';
 import { createSelectedList, createSelectedFrameData } from '../helpers/frameSelectionHelper';
 
 import FrameTable from '../components/FrameTable';
+import Test from './Test';
 
 import '../styles/frameSelection.css';
 
@@ -76,6 +77,10 @@ class FrameSelectionContainer extends React.Component<AllProps> {
       <div className="page__content">
         <h1 className="page__title">Tailored Frame Selection</h1>
 
+
+        <Test />
+
+
         <section className="frame-selection__form">
           <h2 className="frame-selection__form-title">Please enter up to five frame UPC's to check for compatibility and select the one that best suits the patient</h2>
           <Select className="frame-selection__form-input" options={selectedList} onChange={this.handleSelect} />
@@ -83,10 +88,10 @@ class FrameSelectionContainer extends React.Component<AllProps> {
           <Button className="frame-selection__form-button" variant="contained" onClick={() => handleCheck(selected)}>Check Frames</Button>
 
           <section className="frame-selection__form-actions">
-            <Link  to="/">
+            <Link to="/">
               <Button className="frame-selection__form-button" variant="contained">Back</Button>
             </Link>
-            <Link  to="/select-frame/favorite/">
+            <Link to="/select-frame/favorite/">
               <Button className="frame-selection__form-button" variant="contained">Next</Button>
             </Link>
           </section>
