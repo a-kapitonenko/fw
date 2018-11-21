@@ -26,6 +26,19 @@ h5 {
   margin: 1.0933333333rem 0 .656rem 0;
 }
 
+::-webkit-scrollbar {
+  background-color: #808184;
+  width: 6px;
+  height: 0px;
+  border-radius: 5px;
+  position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #FFBF00;
+}
+
 .page__wrapper {
   height: 100%;
   max-width: 1280px;

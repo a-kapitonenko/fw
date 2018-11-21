@@ -1,7 +1,3 @@
-.frame-selection__form-title {
-  padding: 2rem;
-}
-
 .frame-selection__form-input {
   margin: 2rem;
 }
@@ -43,7 +39,32 @@
 
 
 
-
-.aaaaa:focus {
-  outline: unset;
+.frame-selection__wrapper {
+  margin: 3rem;
 }
+
+.frame-selection__content {
+  background: #FFDC00;
+}
+
+.frame-selection__title, .frame-selection__form-title {
+  margin: 2rem;
+  text-align: center;
+}
+
+.frame-selection__form-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.qqq {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .2s,opacity .2s ease-in-out;
+}
+
+.-active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .2s .2s ease-in-out;
+} 

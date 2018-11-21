@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import Paper from '@material-ui/core/Paper';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
@@ -11,6 +9,7 @@ import { IOrderState } from '../store/order/types';
 import { ApplicationState } from '../store';
 
 import FrameSearch from './FrameSearch';
+import FrameFilter from './FrameFilter';
 
 import '../styles/frameSelection.css';
 
@@ -46,25 +45,22 @@ class Test extends React.Component<AllProps> {
   }
 
   render() {
-    const { open } = this.props;
+    const { open, handleClose } = this.props;
     return (
-      <Dialog open={open} className="aaaaa" fullScreen={true}>
-        <h1 className="page__title">Tailored Frame Selection</h1>
-        <section className="frame-selection__form">
-          <h2 className="frame-selection__form-title">Please enter up to five frame UPC's to check for compatibility and select the one that best suits the patient</h2>
-          <div>
-          <FrameSearch />
-          <FrameSearch />
-          </div>
-          <section className="frame-selection__form-actions">
-            <Link to="/">
+      <Dialog open={open} fullScreen={true} onEscapeKeyDown={() => handleClose()} className="frame-selection__wrapper">
+        <div className="frame-selection__content">
+          <h1 className="frame-selection__title">Tailored Frame Selection</h1>
+          <section className="frame-selection__form">
+            <div className="frame-selection__form-content">
+              <FrameSearch />
+              <FrameFilter />
+            </div>
+            <section className="frame-selection__form-actions">
               <Button className="frame-selection__form-button" variant="contained">Back</Button>
-            </Link>
-            <Link to="/select-frame/favorite/">
               <Button className="frame-selection__form-button" variant="contained">Next</Button>
-            </Link>
+            </section>
           </section>
-        </section>
+        </div>
       </Dialog>
     )
   }

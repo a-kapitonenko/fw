@@ -121,7 +121,8 @@ class FrameSearch extends React.Component<ComponentProps> {
     const { list, selectedFrames, selectedFrame, setSelectedFrame, fetching } = this.props;
 
     return (
-      <div>
+      <div style={{flex: 1}}>
+        <h2 className="frame-selection__form-title">Please enter up to five frame UPC's to check for compatibility and select the one that best suits the patient</h2>
         <Select
           defaultValue={selectedFrames}
           className="frame-search__search"
