@@ -2,6 +2,7 @@ import { Reducer } from 'redux';
 import { Frame, FramesState, FramesActionTypes } from './types';
 
 const initialState: FramesState = {
+  open: false,
   fetching: false,
   list: [],
   selected: [],
@@ -11,12 +12,20 @@ const initialState: FramesState = {
   UPCSearch: {
     fetching: false,
     list: [],
-    errors: ''
+    errors: '',
+    selectedFrames: [],
+    selectedFrame: <Frame>{}
   }
 }
 
 const reducer: Reducer<FramesState> = (state = initialState, action) => {
   switch (action.type) {
+    case FramesActionTypes.OPEN: {
+      return { ...state, open: true };
+    }
+    case FramesActionTypes.CLOSE: {
+      return { ...state, open: false };
+    }
     case FramesActionTypes.FETCH_REQUEST: {
       return { ...state, fetching: true };
     }
@@ -66,6 +75,12 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     }
     case FramesActionTypes.FETCH_UPC_SUCCESS: {
       return { ...state, UPCSearch: { ...state.UPCSearch, list: action.payload, fetching: false } };
+    }
+    case FramesActionTypes.SET_UPC_SELECTED: {
+      return { ...state, UPCSearch: { ...state.UPCSearch, selectedFrames: action.payload } };
+    }
+    case FramesActionTypes.SET_UPC_SELECTED_FRAME: {
+      return { ...state, UPCSearch: { ...state.UPCSearch, selectedFrame: action.payload } };
     }
     default: {
       return state

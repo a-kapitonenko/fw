@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import { ApplicationState } from '../store';
 import { IOrderState } from '../store/order/types';
+import * as framesActions from '../store/frames/actions';
 
 import { isEmptyObject } from '../helpers/mathHelper';
 
@@ -12,6 +13,7 @@ import LinkComponent from '../components/LinkComponent';
 import Section from '../components/Section';
 import PrescriptionSelectionContainer from './PrescriptionSelectionContainer';
 import LensSelectionContainer from './LensSelectionContainer';
+import TestSelection from '../containers/TestSelection';
 
 import '../styles/orderSelection.css';
 
@@ -20,7 +22,7 @@ type PropsFromState = {
 }
 
 type PropsFromDispatch = {
-
+  handleOpen: typeof framesActions.open;
 }
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -30,12 +32,12 @@ const mapStateToProps = (state: ApplicationState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-
+  handleOpen: () => dispatch(framesActions.open()),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
   render() {
-    const { order } = this.props;
+    const { order, handleOpen } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.lens);
 
     return (
@@ -53,9 +55,10 @@ class OrderSelection extends LinkComponent<ComponentProps> {
         </Section>
 
         <Section tittle="The following frames are best suited for the patient" wrap>
-          <Button variant="contained" disabled={frameSelectionButtonDisabled} onClick={() => this.redirectToPage('/select-frame')}>
+          <Button variant="contained" disabled={frameSelectionButtonDisabled} onClick={handleOpen}>
             Frame Selection
           </Button>
+          <TestSelection />
         </Section>
       </div>
     );

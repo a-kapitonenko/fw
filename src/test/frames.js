@@ -143,13 +143,15 @@ export const checkFrames = (frames) => {
   });
 };
 
-export const getFramesByUpc = (upc) => {
+export const getFramesByUpc = (order, upc) => {
   const response = newFrames.filter((frame) => {
     return frame.upc.indexOf(upc) === -1 ? false : true;
-  });
+  }).map((frame) => ({...frame, compatibility: checkCompatibility()}));
 
   return {
     success: true,
     result: response
   }
 };
+
+export const checkCompatibility = () => true;

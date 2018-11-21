@@ -1,0 +1,27 @@
+.frame-search__search {
+  margin: 2rem;
+}
+
+.frame-search__search > div {
+  cursor: text;
+}
+
+.frame-search__option {
+  border-bottom: 1px solid lightgray;
+}
+
+.frame-search__option > div {
+  cursor: text;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.frame-search__option > div:hover {
+  background-color: lightgray;
+}
+
+.frame-search__img {
+  height: 80px;
+  width: 160px;
+}
