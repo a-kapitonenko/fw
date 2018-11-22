@@ -37,7 +37,7 @@ const newFrames = [
     'value': '82850511738',
     'img': '6.png'
   },
-  { 
+  {
     'upc': '82840423738',
     'label': 'RR17116',
     'value': '82840423738',
@@ -49,7 +49,7 @@ const frames = [
   {
     'upc': '82850523738',
     'name': 'FM17116',
-    'img': '1.png' 
+    'img': '1.png'
   },
   {
     'upc': '82852333738',
@@ -76,7 +76,7 @@ const frames = [
     'name': 'FF17116',
     'img': '6.png'
   },
-  { 
+  {
     'upc': '82840423738',
     'name': 'RR17116',
     'img': '7.png'
@@ -87,7 +87,7 @@ const similarFrames = [
   {
     'upc': '81850523738',
     'name': 'FM17116',
-    'img': '1.png' 
+    'img': '1.png'
   },
   {
     'upc': '83852333738',
@@ -114,7 +114,7 @@ const similarFrames = [
     'name': 'FF17116',
     'img': '6.png'
   },
-  { 
+  {
     'upc': '88940423738',
     'name': 'RR17116',
     'img': '7.png'
@@ -139,14 +139,14 @@ export const checkFrames = (frames) => {
   return frames.map((frame) => {
     const checked = checkedFrames.find(el => el === frame.upc);
 
-    return ({ ...frame, compatibility: checked ? true : false});
+    return ({ ...frame, compatibility: checked ? true : false });
   });
 };
 
 export const getFramesByUpc = (order, upc) => {
   const response = newFrames.filter((frame) => {
     return frame.upc.indexOf(upc) === -1 ? false : true;
-  }).map((frame) => ({...frame, compatibility: checkCompatibility()}));
+  }).map((frame) => ({ ...frame, compatibility: checkCompatibility() }));
 
   return {
     success: true,
@@ -155,3 +155,37 @@ export const getFramesByUpc = (order, upc) => {
 };
 
 export const checkCompatibility = () => true;
+
+export const getFilterGroups = (order) => {
+  return {
+    success: true,
+    result: {
+      color: [
+        { name: 'Black', value: 'black' },
+        { name: 'Gold', value: 'gold' },
+        { name: 'Brown', value: 'brown' },
+        { name: 'Red', value: 'red' }
+      ],
+      width: [
+        { name: 'Narrow', value: 'narrow' },
+        { name: 'Medium', value: 'medium' },
+        { name: 'Wide', value: 'wide' }
+      ],
+      noseBridge: [
+        { name: 'Standard', value: 'standard' },
+        { name: 'Low bridge fit', value: 'lowBrigdeFit' }
+      ],
+      shape: [
+        { name: 'Square', value: 'square' },
+        { name: 'Rectangle', value: 'rectangle' },
+        { name: 'Round', value: 'round' },
+        { name: 'Cat-eye', value: 'catEye' }
+      ],
+      material: [
+        { name: 'Acetate', value: 'acetate' },
+        { name: 'Metal', value: 'metal' },
+        { name: 'Mixed material', value: 'mixedMaterial' }
+      ]
+    }
+  }
+};

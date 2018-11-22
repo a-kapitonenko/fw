@@ -74,6 +74,14 @@ h5 {
   margin-top: 40px;
 }
 
-.flex {
+.-flex, .-flex-around {
   display: flex;
+}
+
+.-flex-around {
+  justify-content: space-around
+}
+
+.-relative {
+  position: relative;
 }

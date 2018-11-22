@@ -50,3 +50,65 @@ export const frames = [
     'url': '10'
   }
 ];
+
+// export const filterProperties = {
+//   color: [
+//     { name: 'Black', value: 'black' }, 
+//     { name: 'Gold', value: 'gold' }, 
+//     { name: 'Brown', value: 'brown'}, 
+//     { name: 'Red', value: 'red' }
+//   ],
+//   fit: {
+//     width: [
+//       { name: 'Narrow', value: 'narrow' },
+//       { name: 'Medium', value: 'medium' },
+//       { name: 'Wide', value: 'wide' }
+//     ],
+//     noseBridge: [
+//       { name: 'Standard', value: 'standard' },
+//       { name: 'Low bridge fit', value: 'lowBrigdeFit' }
+//     ]
+//   },
+//   shape: [
+//     { name: 'Square', value: 'square' },
+//     { name: 'Rectangle', value: 'rectangle' },
+//     { name: 'Round', value: 'round' },
+//     { name: 'Cat-eye', value: 'catEye' }
+//   ],
+//   material: [
+//     { name: 'Acetate', value: 'acetate' },
+//     { name: 'Metal', value: 'metal'},
+//     { name: 'Mixed material', value: 'mixedMaterial' }
+//   ]
+// };
+
+export const filterProperties = {
+  color: [
+    { name: 'Black', value: 'black' }, 
+    { name: 'Gold', value: 'gold' }, 
+    { name: 'Brown', value: 'brown'}, 
+    { name: 'Red', value: 'red' }
+  ],
+  fit: {
+    width: [
+      { name: 'Narrow', value: 'narrow' },
+      { name: 'Medium', value: 'medium' },
+      { name: 'Wide', value: 'wide' }
+    ],
+    noseBridge: [
+      { name: 'Standard', value: 'standard' },
+      { name: 'Low bridge fit', value: 'lowBrigdeFit' }
+    ]
+  },
+  shape: [
+    { name: 'Square', value: 'square' },
+    { name: 'Rectangle', value: 'rectangle' },
+    { name: 'Round', value: 'round' },
+    { name: 'Cat-eye', value: 'catEye' }
+  ],
+  material: [
+    { name: 'Acetate', value: 'acetate' },
+    { name: 'Metal', value: 'metal'},
+    { name: 'Mixed material', value: 'mixedMaterial' }
+  ]
+};

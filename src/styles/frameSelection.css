@@ -57,7 +57,8 @@
   flex-wrap: wrap;
 }
 
-.qqq {
+.frame-filter__filter-group {
+  position: absolute;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s .2s,opacity .2s ease-in-out;
@@ -68,3 +69,24 @@
   opacity: 1;
   transition: opacity .2s .2s ease-in-out;
 } 
+
+.hide-vis {
+  border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    font-size: 16px;
+    color: #414b56;
+    background-color: #fff;
+}
+
+.checkbox__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}

@@ -2,7 +2,7 @@ export type Frame = {
   upc: number;
   name: string;
   img: string;
-}
+};
 
 export type UPCSearch = {
   fetching: boolean;
@@ -10,11 +10,11 @@ export type UPCSearch = {
   errors: string;
   selectedFrames: Frame[];
   selectedFrame: Frame;
-}
+};
 
 export interface SelectedFrame extends Frame {
   compatibility: boolean;
-}
+};
 
 export const enum FramesActionTypes {
   OPEN = '@@frames/OPEN',
@@ -33,7 +33,7 @@ export const enum FramesActionTypes {
   FETCH_UPC_SUCCESS = '@@frames/FETCH_UPC_SUCCESS',
   SET_UPC_SELECTED = '@@frames/SET_UPC_SELECTED',
   SET_UPC_SELECTED_FRAME = '@@frames/SET_UPC_SELECTED_FRAME',
-}
+};
 
 export interface FramesState {
   readonly open: boolean;
@@ -44,4 +44,4 @@ export interface FramesState {
   readonly selectedFrame: Frame;
   readonly similarFrames: Frame[];
   readonly UPCSearch: UPCSearch;
-}
+};
