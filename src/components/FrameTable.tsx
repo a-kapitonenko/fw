@@ -6,12 +6,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { Frame, SelectedFrame } from '../store/frames/types';
+import { Frame } from '../store/frames/types';
 
 import { frameTableConfig } from '../constants/frameTable';
 
-type ComponentProps = {
-  list: Frame[];
+export type ComponentProps = {
+  frames: Frame[];
   selectedFrame: Frame; 
   handleClick: any;
 };
@@ -27,19 +27,19 @@ class TestTable extends React.Component<ComponentProps> {
     );
   }
 
-  protected renderBodyRows(item: any) {
+  protected renderBodyRows(frame: Frame) {
     return (
       <React.Fragment>
-        <TableCell>{item.upc}</TableCell>
-        <TableCell>{item.label}</TableCell>
-        <TableCell><img className="frame-selection__table-img" src={`/${item.img}`} /></TableCell>
+        <TableCell>{frame.upc}</TableCell>
+        <TableCell>{frame.label}</TableCell>
+        <TableCell><img className="frame-selection__table-img" src={`/${frame.img}`} /></TableCell>
       </React.Fragment>
     );
   }
 
-  render() {
-    const { list, selectedFrame, handleClick } = this.props;
-    const emptyRows = frameTableConfig.rowsPerPage - list.length;
+  public render() {
+    const { frames, selectedFrame, handleClick } = this.props;
+    const emptyRows = frameTableConfig.rowsPerPage - frames.length;
 
     return (
       <Paper className="frame-selection__table">
@@ -50,14 +50,14 @@ class TestTable extends React.Component<ComponentProps> {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map((item: SelectedFrame) => {
+          {frames.map((frame: Frame) => {
             return (
               <TableRow
-                key={item.upc}
-                className={`frame-selection__table-row ${selectedFrame === item ? 'row-selected' : ''}`}
-                onClick={() => handleClick(item)}
+                key={frame.upc}
+                className={`frame-selection__table-row ${selectedFrame === frame ? 'row-selected' : ''}`}
+                onClick={() => handleClick(frame)}
               >
-                {this.renderBodyRows(item)}
+                {this.renderBodyRows(frame)}
               </TableRow>
             );
           })}

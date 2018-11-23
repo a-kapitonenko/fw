@@ -19,12 +19,16 @@ export const enum FilterActionTypes {
   FETCH_SUCCESS = '@@filter/FETCH_SUCCESS',
   FETCH_ERROR = '@@filter/FETCH_ERROR',
   CHANGE_CHECKED = '@@filter/CHANGE_CHECKED',
+  ADD_QUERY = '@@filter/ADD_QUERY',
+  DELETE_QUERY = '@@filter/DELETE_QUERY',
+  RESET_QUERY = '@@filter/RESET_QUERY',
+  SET_FRAMES = '@@filter/SET_FRAMES',
 };
 
 export interface IFilterState {
   readonly fetching: boolean;
-  readonly groups: Groups;
   readonly errors: string;
+  readonly groups: Groups;
   readonly query: Object;
   readonly frames: Frame[];
 };

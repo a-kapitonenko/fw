@@ -11,7 +11,7 @@ import { Frame } from '../store/frames/types';
 import { IOrderState } from '../store/order/types';
 import { ApplicationState } from '../store';
 
-import FavoriteFramesTable from '../components/FavoriteFramesTable';
+// import FavoriteFramesTable from '../components/FavoriteFramesTable';
 
 import '../styles/frameSelection.css';
 
@@ -39,7 +39,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleFetch: (order: IOrderState) => dispatch(framesActions.fetchSimilarFrames(order)),
   handleClick: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
   handleSubmit: (frame: Frame) => {
-    dispatch(framesActions.setSelected([]));
     dispatch(orderActions.setFrame(frame));
   },
 });
@@ -52,7 +51,7 @@ class FavoriteFramesContainer extends React.Component<AllProps> {
   }
 
   render() {
-    const { similarFrames, selectedFrame, handleClick, handleSubmit } = this.props;
+    const { selectedFrame, handleSubmit } = this.props;
 
     return (
       <div className="page__content">
@@ -63,7 +62,7 @@ class FavoriteFramesContainer extends React.Component<AllProps> {
             These frames are also compatible with the patients Rx and lens selection <br />
             Continue if patient is happy with current frame selection
           </h2>
-          <FavoriteFramesTable list={similarFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
+          {/* <FavoriteFramesTable list={similarFrames} selectedFrame={selectedFrame} handleClick={handleClick} /> */}
           <section className="frame-selection__form-actions">
             <Link to="/select-frame/">
               <Button className="frame-selection__form-button" variant="contained">Back</Button>

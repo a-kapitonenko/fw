@@ -1,8 +1,17 @@
-.frame-search__search {
+.frame-search {
+  position: relative;
+}
+
+.frame-search__title {
+  margin: 2rem;
+  text-align: center;
+}
+
+.frame-search__input {
   margin: 2rem;
 }
 
-.frame-search__search > div {
+.frame-search__input > div {
   cursor: text;
 }
 

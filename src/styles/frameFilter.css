@@ -1,18 +1,37 @@
-.frame-filter__filter {
-  flex: 1;
+.frame-filter {
   position: relative;
-}
-
-.frame-filter__filter-bar, .frame-filter__filter-groups {
   text-align: center;
 }
 
-.frame-filter__filter-group {
-  width: 100%;
-  margin-top: 2rem;
+.frame-filter__title {
+  margin: 2rem;
+  text-align: center;
 }
 
-.frame-filter__filter-group-label {
+.frame-filter__bar, .frame-filter__groups {
+  text-align: center;
+}
+
+.frame-filter__groups {
+  padding-bottom: 4rem;
+}
+
+.frame-filter__group {
+  width: 100%;
+  margin-top: 1rem;
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .2s,opacity .2s ease-in-out;
+}
+
+.frame-filter__group-label {
   position: absolute;
   top: -10px;
+}
+
+.-active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .2s .2s ease-in-out;
 }

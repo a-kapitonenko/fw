@@ -9,3 +9,13 @@ export function createFilterGroupsData(groups: Groups): Groups {
 
   return newGroups;
 }
+
+export function isEmptyQuery(query: Object): boolean {
+  for (const item in query) {
+    if (query[item].length !== 0) {
+      return false;
+    } 
+  }
+
+  return true;
+}

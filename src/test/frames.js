@@ -121,13 +121,6 @@ const similarFrames = [
   }
 ];
 
-export const getFrames = (order) => {
-  return {
-    success: true,
-    frames
-  };
-}
-
 export const getSimilarFrames = (order) => {
   return {
     success: true,
@@ -188,4 +181,11 @@ export const getFilterGroups = (order) => {
       ]
     }
   }
+};
+
+export const getFilterFrames = (order, query) => {
+  return {
+    success: true,
+    frames: newFrames  
+  };
 };

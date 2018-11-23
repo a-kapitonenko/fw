@@ -13,7 +13,7 @@ import LinkComponent from '../components/LinkComponent';
 import Section from '../components/Section';
 import PrescriptionSelectionContainer from './PrescriptionSelectionContainer';
 import LensSelectionContainer from './LensSelectionContainer';
-import TestSelection from '../containers/TestSelection';
+import FrameSelection from '../containers/FrameSelection';
 
 import '../styles/orderSelection.css';
 
@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
-  render() {
+  public render() {
     const { order, handleOpen } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.lens);
 
@@ -58,7 +58,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
           <Button variant="contained" disabled={frameSelectionButtonDisabled} onClick={handleOpen}>
             Frame Selection
           </Button>
-          <TestSelection />
+          <FrameSelection />
         </Section>
       </div>
     );

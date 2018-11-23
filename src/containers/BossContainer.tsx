@@ -74,7 +74,7 @@ class Home extends React.Component<PropsFromState> {
               </section>
               <section className="order-selection__section-field">
                 <p>{order.frame.upc}</p>
-                <p>{order.frame.name}</p>
+                <p>{order.frame.label}</p>
               </section>
             </div> 
             <section className="order-selection__section-field" style={{ height: '200px', flex: 1 }}>

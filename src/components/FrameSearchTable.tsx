@@ -1,10 +1,12 @@
 import * as React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 
-import FrameTable from './FrameTable';
+import { Frame } from '../store/frames/types';
+
+import FrameTable, { ComponentProps } from './FrameTable';
 
 class FrameSearchTable extends FrameTable {
-  constructor(props: any) {
+  constructor(props: ComponentProps) {
     super(props);
   }
 
@@ -17,11 +19,11 @@ class FrameSearchTable extends FrameTable {
     );
   }
 
-  protected renderBodyRows(item: any) {
+  protected renderBodyRows(frame: Frame) {
     return (
       <React.Fragment>
-        {super.renderBodyRows(item)}
-        <TableCell>{item.compatibility ? 'true' : 'false'}</TableCell>
+        {super.renderBodyRows(frame)}
+        <TableCell>{frame.compatibility ? 'true' : 'false'}</TableCell>
       </React.Fragment>
     );
   }

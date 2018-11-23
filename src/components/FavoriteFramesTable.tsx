@@ -6,7 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { Frame, SelectedFrame } from '../store/frames/types';
+import { Frame } from '../store/frames/types';
 import * as framesActions from '../store/frames/actions';
 
 import { frameTableConfig } from '../constants/frameTable';
@@ -31,7 +31,7 @@ const FrameTable = ({ list, selectedFrame, handleClick }: AllProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map((item: SelectedFrame) => {
+          {list.map((item: Frame) => {
             return (
               <TableRow 
                 className={`frame-selection__table-row ${selectedFrame === item ? 'row-selected' : ''}`} 
@@ -39,7 +39,7 @@ const FrameTable = ({ list, selectedFrame, handleClick }: AllProps) => {
                 onClick={() => handleClick(item)}
               >
                 <TableCell>{item.upc}</TableCell>
-                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.label}</TableCell>
                 <TableCell><img className="frame-selection__table-img" src={`/${item.img}`} /></TableCell>
               </TableRow>
             );

@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
-  componentDidUpdate(prevProps: ComponentProps) {
+  public componentDidUpdate(prevProps: ComponentProps) {
     const { order, savePrescription } = this.props;
     const prescriptionFilled = isPrescriptionFilled(order.prescription);
 
@@ -41,7 +41,7 @@ class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
     }
   }
 
-  render() {
+  public render() {
     const { order, handleChange } = this.props;
     const readOnly = !isEmptyObject(order.frame);
 

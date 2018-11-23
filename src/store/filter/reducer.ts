@@ -1,17 +1,19 @@
 import { Reducer } from 'redux';
 import { IFilterState, FilterActionTypes, Groups, Field } from './types';
 
+const initialGroupsState = {
+  color: [],
+  width: [],
+  noseBridge: [],
+  shape: [],
+  material: []
+}
+
 const initialState: IFilterState = {
   fetching: false,
-  groups: <Groups>{
-    color: [],
-    width: [],
-    noseBridge: [],
-    shape: [],
-    material: []
-  },
+  groups: <Groups>initialGroupsState,
   errors: '',
-  query: {},
+  query: initialGroupsState,
   frames: []
 };
 
@@ -41,7 +43,45 @@ const reducer: Reducer<IFilterState> = (state = initialState, action) => {
           ...state.groups,
           [action.payload.type]: item
         }
+      };
+    }
+    case FilterActionTypes.ADD_QUERY: {
+      return {
+        ...state,
+        query: {
+          ...state.query,
+          [action.payload.type]: [
+            ...state.query[action.payload.type],
+            action.payload.value
+          ]
+        }
+      };
+    }
+    case FilterActionTypes.DELETE_QUERY: {
+      const index = state.query[action.payload.type].indexOf(action.payload.value);
+
+      return {
+        ...state,
+        query: {
+          ...state.query,
+          [action.payload.type]: [
+            ...state.query[action.payload.type].slice(0, index),
+            ...state.query[action.payload.type].slice(index + 1)
+          ]
+        }
+      };
+    }
+    case FilterActionTypes.RESET_QUERY: {
+      const groups = <Groups>{};
+
+      for (const group in state.groups) {
+        groups[group] = state.groups[group].map((field: Field) => ({ ...field, checked: false }));
       }
+
+      return { ...state, groups };
+    }
+    case FilterActionTypes.SET_FRAMES: {
+      return { ...state, frames: action.payload };
     }
     default: {
       return state
