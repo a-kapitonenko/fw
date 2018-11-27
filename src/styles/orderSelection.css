@@ -10,6 +10,7 @@
 
 .order-selection__recommend {
   display: flex;
+  justify-content: center;
   overflow: auto;
   border: 2px solid gray;
   height: 200px;
@@ -19,6 +20,7 @@
 
 .order-selection__field {
   display: flex;
+  justify-content: center;
   overflow: auto;
   border: 2px solid gray;
   height: 50px;
@@ -26,6 +28,24 @@
   background-color: white;
 }
 
-.order-selection__recommend > p, .order-selection__section-field > p {
+.order-selection__recommend > p, .order-selection__field > p {
   margin: auto 2rem;
+}
+
+.order-selection__select {
+  margin: auto;
+  width: 120px;
+}
+
+.order-selection__frame {
+  margin: 2rem 2rem 0;
+}
+
+.order-selection__frame-img {
+  height: 200px;
+  width: 400px;
+}
+
+.order-selection__actions {
+  margin: 2rem;
 }

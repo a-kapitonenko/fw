@@ -8,7 +8,8 @@
 }
 
 .frame-search__input {
-  margin: 2rem;
+  padding-top: 2rem;
+  margin: 0 2rem;
 }
 
 .frame-search__input > div {

@@ -39,7 +39,7 @@ const LensSelection: React.SFC<ComponentProps> = ({ order, list, errors, handleC
         }
       </section>
     </section>
-
   );
-}
+};
+
 export default LensSelection;

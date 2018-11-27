@@ -6,3 +6,9 @@ export const savePrescriptionInformation = (values) => {
     recommendation: rec
   }
 };
+
+export const saveOrderInformation = (order) => {
+  return {
+    success: true,
+  }
+};

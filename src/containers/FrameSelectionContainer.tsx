@@ -2,21 +2,18 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
 
 import { ApplicationState } from '../store';
 import { IOrderState } from '../store/order/types';
 import { Frame } from '../store/frames/types';
 import * as framesActions from '../store/frames/actions';
 
-import FrameSearchContainer from './FrameSearchContainer';
-import FrameFilterContainer from './FrameFilterContainer';
-import FrameSearchTable from '../components/FrameSearchTable';
-import FrameTable from '../components/FrameTable';
+import FrameSelection from '../components/FrameSelection';
+import FrameFavorite from '../components/FrameFavorite';
 
 import '../styles/frameSelection.css';
 
-interface PropsFromState {
+type PropsFromState = {
   order: IOrderState;
   fetching: boolean;
   errors: string;
@@ -28,15 +25,16 @@ interface PropsFromState {
   similarFrames: Frame[];
 }
 
-interface PropsFromDispatch {
+type PropsFromDispatch = {
   handleFetch: typeof framesActions.fetchSimilarFrames;
   handleOpen: typeof framesActions.open;
   handleClose: typeof framesActions.close;
   setStep: typeof framesActions.setStep;
   setSelectedFrame: typeof framesActions.setSelectedFrame;
+  handleConfirm: any;
 }
 
-type AllProps = PropsFromState & PropsFromDispatch;
+type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
   order: state.order,
@@ -56,41 +54,66 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleClose: () => dispatch(framesActions.close()),
   setStep: (step: number) => dispatch(framesActions.setStep(step)),
   setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
+  handleConfirm: (order: IOrderState, frame: Frame) => dispatch(framesActions.fetchSubmit(order, frame)),
 });
 
-class FrameSelection extends React.Component<AllProps> {
+class FrameSelectionContainer extends React.Component<ComponentProps> {
   public componentDidMount() {
     const { order, handleFetch } = this.props;
 
     handleFetch(order);
   }
 
+  private handleClick = (frame: Frame) => {
+    const { selectedFrame, setSelectedFrame } = this.props;
+
+    if (selectedFrame === frame) {
+      const emptyFrame = {} as Frame;
+
+      setSelectedFrame(emptyFrame);
+    } else {
+      setSelectedFrame(frame);
+    }
+  };
+
   public render() {
-    const { open, searchFrames, filterFrames, selectedFrame, handleClose, setStep, setSelectedFrame } = this.props;
+    const {
+      order,
+      open, 
+      step, 
+      searchFrames, 
+      filterFrames, 
+      similarFrames, 
+      selectedFrame, 
+      setStep,
+      handleConfirm, 
+      handleClose, 
+    } = this.props;
+
     return (
       <Dialog open={open} fullScreen={true} onEscapeKeyDown={() => handleClose()} className="frame-selection__wrapper">
-        <div className="frame-selection__content yellow-section">
-          <h1 className="frame-selection__title">Tailored Frame Selection</h1>
-          <section className="frame-selection__form">
-            <div className="frame-selection__form-content">
-              <div className="frame-selection__form-section">
-                <FrameSearchContainer />
-                <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
-              </div>
-              <div className="frame-selection__form-section">
-                <FrameFilterContainer />
-                <FrameTable frames={filterFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
-              </div>
-            </div>
-            <section className="frame-selection__form-actions">
-              <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Back</Button>
-              <Button className="frame-selection__form-button" variant="contained" onClick={() => setStep(1)}>Next</Button>
-            </section>
-          </section>
-        </div>
+        {step === 1 && (
+          <FrameSelection
+            searchFrames={searchFrames}
+            filterFrames={filterFrames}
+            selectedFrame={selectedFrame}
+            setStep={setStep}
+            setSelectedFrame={this.handleClick}
+            handleClose={handleClose}
+          />
+        )}
+        {step === 2 && (
+          <FrameFavorite
+            similarFrames={similarFrames}
+            selectedFrame={selectedFrame}
+            setStep={setStep}
+            setSelectedFrame={this.handleClick}
+            onConfirm={(frame: Frame) => handleConfirm(order, frame)}
+          />
+        )}
       </Dialog>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FrameSelection);
+export default connect(mapStateToProps, mapDispatchToProps)(FrameSelectionContainer);

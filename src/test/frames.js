@@ -1,5 +1,28 @@
 const checkedFrames = [82850523738, 82850523730];
 
+const fittingHeight = [
+  {
+    name: '1',
+    value: 1
+  },
+  {
+    name: '2',
+    value: 2
+  },
+  {
+    name: '3',
+    value: 3
+  },
+  {
+    name: '4',
+    value: 4
+  },
+  {
+    name: '5',
+    value: 5
+  },
+];
+
 const newFrames = [
   {
     'upc': '82850523738',
@@ -45,78 +68,47 @@ const newFrames = [
   }
 ];
 
-const frames = [
+const similarFrames = [
   {
     'upc': '82850523738',
-    'name': 'FM17116',
+    'label': 'FM17116',
+    'value': '82850523738',
     'img': '1.png'
   },
   {
     'upc': '82852333738',
-    'name': 'FM13416',
+    'label': 'FM13416',
+    'value': '82852333738',
     'img': '2.png'
   },
   {
     'upc': '82850223738',
-    'name': 'FM17786',
+    'label': 'FM17786',
+    'value': '82850223738',
     'img': '3.png'
   },
   {
     'upc': '52850523738',
-    'name': 'FN17116',
+    'label': 'FN17116',
+    'value': '52850523738',
     'img': '4.png'
   },
   {
     'upc': '82850523730',
-    'name': 'FM17110',
+    'label': 'FM17110',
+    'value': '82850523730',
     'img': '5.png'
   },
   {
     'upc': '82850511738',
-    'name': 'FF17116',
+    'label': 'FF17116',
+    'value': '82850511738',
     'img': '6.png'
   },
   {
     'upc': '82840423738',
-    'name': 'RR17116',
-    'img': '7.png'
-  }
-];
-
-const similarFrames = [
-  {
-    'upc': '81850523738',
-    'name': 'FM17116',
-    'img': '1.png'
-  },
-  {
-    'upc': '83852333738',
-    'name': 'FM13416',
-    'img': '2.png'
-  },
-  {
-    'upc': '84850223738',
-    'name': 'FM17786',
-    'img': '3.png'
-  },
-  {
-    'upc': '55850523738',
-    'name': 'FN17116',
-    'img': '4.png'
-  },
-  {
-    'upc': '82850554730',
-    'name': 'FM17110',
-    'img': '5.png'
-  },
-  {
-    'upc': '82850511668',
-    'name': 'FF17116',
-    'img': '6.png'
-  },
-  {
-    'upc': '88940423738',
-    'name': 'RR17116',
+    'label': 'RR17116',
+    'value': '82840423738',
     'img': '7.png'
   }
 ];
@@ -187,5 +179,15 @@ export const getFilterFrames = (order, query) => {
   return {
     success: true,
     frames: newFrames  
+  };
+};
+
+export const onSubmit = (order, frame) => {
+  return {
+    success: true,
+    result: {
+      message: 'The selected parameters for frame and lens are acceptable for cotout.',
+      fittingHeight: fittingHeight
+    }
   };
 };

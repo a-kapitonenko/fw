@@ -21,12 +21,19 @@ export const enum OrderActionTypes {
   SET_RECOMMENDATION = '@@order/SET_RECOMMENDATION',
   SET_LENS = '@@order/SET_LENS',
   SET_FRAME = '@@order/SET_FRAME',
+  SET_MESSAGE = '@@order/SET_MESSAGE',
+  SET_FITTING_PROPERTIES = '@@order/SET_FITTING_PROPERTIES',
+  SET_FITTING_HEIGHT = '@@order/SET_FITTING_HEIGHT',
+  SET_ERRORS = '@@order/SET_ERRORS',
 };
 
 export interface IOrderState {
   readonly prescription: Prescription;
   readonly frame: Frame;
   readonly fittingHeight: number;
+  readonly fittingProperties: any;
   readonly lens: Lens;
   readonly recommendation: string;
+  readonly message: string;
+  readonly errors: object;
 };

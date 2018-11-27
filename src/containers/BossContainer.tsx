@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
-import { PrescriptionFields } from '../constants/prescription';
 import { getCurrentDate } from '../helpers/bossHelper';
 
 import { ApplicationState } from '../store';
 import { IOrderState } from '../store/order/types';
+
+import PrescriptionSelection from '../components/PrescriptionSelection';
 
 import '../styles/orderSelection.css';
 
@@ -30,31 +28,7 @@ class Home extends React.Component<PropsFromState> {
         <h1 className="page__title">Scan This Document To Your System</h1>        
         <section className="page__date-container">{date}</section>
 
-        <section className="order-selection__section">
-          <h2 className="order-selection__section-tittle">Input Rx Information</h2>
-          {PrescriptionFields.map((element, index) => (
-            <TextField 
-              key={index}
-              className="information__text" 
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
-              InputProps={{ readOnly: true }}
-              label={`OD ${element.label}`}
-              defaultValue={order.prescription.OD[element.id]}
-            />
-          ))}
-          {PrescriptionFields.map((element, index) => (
-            <TextField 
-              key={index}
-              className="information__text" 
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
-              InputProps={{ readOnly: true }}
-              label={`OS ${element.label}`}
-              defaultValue={order.prescription.OS[element.id]}
-            />
-          ))}
-        </section>
+        <PrescriptionSelection order={order} readOnly />
 
         <section className="order-selection__section">
           <h2 className="order-selection__section-tittle">Product Information</h2>

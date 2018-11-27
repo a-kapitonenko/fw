@@ -9,7 +9,7 @@ import { PrescriptionFields } from '../constants/prescription';
 type ComponentProps = {
   order: IOrderState;
   readOnly: boolean;
-  handleChange: typeof orderActions.setRxInformation;
+  handleChange?: typeof orderActions.setRxInformation;
 };
 
 const PrescriptionSelection: React.SFC<ComponentProps> = ({ order, readOnly, handleChange }) => {
@@ -26,7 +26,13 @@ const PrescriptionSelection: React.SFC<ComponentProps> = ({ order, readOnly, han
             variant="outlined"
             label={`OD ${element.label}`}
             value={order.prescription.OD[element.id]}
-            onChange={(evt) => handleChange('OD', element.id, evt.target.value)}
+            onChange={(evt) => {
+              if (handleChange) {
+                return handleChange('OD', element.id, evt.target.value);
+              }
+
+              return;
+            }}
           />
         ))}
       </div>
@@ -40,7 +46,13 @@ const PrescriptionSelection: React.SFC<ComponentProps> = ({ order, readOnly, han
             variant="outlined"
             label={`OS ${element.label}`}
             value={order.prescription.OS[element.id]}
-            onChange={(evt) => handleChange('OS', element.id, evt.target.value)}
+            onChange={(evt) => {
+              if (handleChange) {
+                return handleChange('OS', element.id, evt.target.value);
+              }
+
+              return
+            }}
           />
         ))}
       </div>

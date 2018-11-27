@@ -1,40 +1,52 @@
-// import * as React from 'react';
+import * as React from 'react';
+import Button from '@material-ui/core/Button';
 
-// import * as searchPanelActions from '../store/searchPanel/actions';
+import { Frame } from '../store/frames/types';
+import * as framesActions from '../store/frames/actions';
 
-// import Menu from './SearchPanel';
+import { isEmptyObject } from '../helpers/mathHelper';
 
-// import '../styles/frameSelection.css';
+import FrameSearchContainer from '../containers/FrameSearchContainer';
+import FrameFilterContainer from '../containers/FrameFilterContainer';
+import FrameSearchTable from './FrameSearchTable';
+import FrameTable from './FrameTable';
 
-// interface PropsFromState {
-//   open: boolean,
-//   anchor: any
-// }
+import '../styles/frameSelection.css';
 
-// interface PropsFromDispatch {
-//   handleOpen: typeof searchPanelActions.openSearchPanel,
-//   handleClose: typeof searchPanelActions.closeSearchPanel,
-// }
 
-// type AllProps = PropsFromState & PropsFromDispatch;
+type ComponentProps = {
+  searchFrames: Frame[];
+  filterFrames: Frame[];
+  selectedFrame: Frame;
+  setStep: typeof framesActions.setStep;
+  setSelectedFrame: any;
+  handleClose: typeof framesActions.close;
+};
 
-// const FrameSelection = ({
-//   open,
-//   anchor,
-//   handleOpen,
-//   handleClose,
-// }: AllProps) => (
-//   <div className="page__wrapper yellow-section">
-//     <div className="main-content">
-//       <h1 className="page__title">Tailored Frame Selection</h1>
-//       <section className="frame-selection__form">
-//         <h2 className="frame-selection__form-title">Please enter up to five frame UPC's to check for compatibility and select the one that best suits the patient</h2>
-//         <input className="frame-selection__form-input" type="text" onClick={handleOpen} />
-//       </section>
+const FrameSelection: React.SFC<ComponentProps> = ({ searchFrames, filterFrames, selectedFrame, setStep, setSelectedFrame, handleClose }) => {
+  const buttonDisabled = isEmptyObject(selectedFrame);
 
-//       <Menu open={open} anchorEl={anchor} handleClose={handleClose} />
-//     </div>
-//   </div>
-// );
+  return (
+    <div className="frame-selection__content yellow-section">
+      <h1 className="frame-selection__title">Tailored Frame Selection</h1>
+      <section className="frame-selection__form">
+        <div className="frame-selection__form-content -flex">
+          <div className="frame-selection__form-section -flex-column-between">
+            <FrameSearchContainer />
+            <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
+          </div>
+          <div className="frame-selection__form-section">
+            <FrameFilterContainer />
+            <FrameTable frames={filterFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
+          </div>
+        </div>
+        <section className="frame-selection__form-actions">
+          <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Back</Button>
+          <Button className="frame-selection__form-button" variant="contained" disabled={buttonDisabled} onClick={() => setStep(2)}>Next</Button>
+        </section>
+      </section>
+    </div>
+  )
+};
 
-// export default FrameSelection;
+export default FrameSelection;

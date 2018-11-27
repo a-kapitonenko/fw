@@ -12,7 +12,7 @@ import { frameTableConfig } from '../constants/frameTable';
 
 export type ComponentProps = {
   frames: Frame[];
-  selectedFrame: Frame; 
+  selectedFrame: Frame;
   handleClick: any;
 };
 
@@ -42,31 +42,34 @@ class TestTable extends React.Component<ComponentProps> {
     const emptyRows = frameTableConfig.rowsPerPage - frames.length;
 
     return (
-      <Paper className="frame-selection__table">
-      <Table>
-        <TableHead>
-          <TableRow>
-            {this.renderHeader()}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {frames.map((frame: Frame) => {
-            return (
-              <TableRow
-                key={frame.upc}
-                className={`frame-selection__table-row ${selectedFrame === frame ? 'row-selected' : ''}`}
-                onClick={() => handleClick(frame)}
-              >
-                {this.renderBodyRows(frame)}
-              </TableRow>
-            );
-          })}
-          {emptyRows > 0 && (
-            <TableRow style={{ height: frameTableConfig.rowHeight * emptyRows }} />
-          )}
-        </TableBody>
-      </Table>
-    </Paper>
+      <Paper 
+        className="frame-selection__table" 
+        style={{ height: 57 + frameTableConfig.rowHeight * frameTableConfig.rowsPerPage }}
+      >
+        <Table>
+          <TableHead>
+            <TableRow>
+              {this.renderHeader()}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {frames.map((frame: Frame) => {
+              return (
+                <TableRow
+                  key={frame.upc}
+                  className={`frame-selection__table-row ${selectedFrame === frame ? 'row-selected' : ''}`}
+                  onClick={() => handleClick(frame)}
+                >
+                  {this.renderBodyRows(frame)}
+                </TableRow>
+              );
+            })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: frameTableConfig.rowHeight * emptyRows }} />
+            )}
+          </TableBody>
+        </Table>
+      </Paper>
     );
   }
 }

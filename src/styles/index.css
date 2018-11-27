@@ -74,7 +74,7 @@ h5 {
   margin-top: 40px;
 }
 
-.-flex, .-flex-around {
+.-flex, .-flex-around, .-flex-column-between {
   display: flex;
 }
 
@@ -82,6 +82,15 @@ h5 {
   justify-content: space-around
 }
 
+.-flex-column-between {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .-relative {
   position: relative;
+}
+
+.-full-width {
+  width: 100%;
 }

@@ -20,8 +20,11 @@ const initialState: IOrderState = {
   },
   frame: <Frame>{},
   fittingHeight: 0,
+  fittingProperties: [],
   lens: <Lens>{},
   recommendation: '',
+  message: '',
+  errors: {},
 };
 
 const reducer: Reducer<IOrderState> = (state = initialState, action) => {
@@ -46,6 +49,18 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     }
     case OrderActionTypes.SET_FRAME: {
       return { ...state, frame: action.payload };
+    }
+    case OrderActionTypes.SET_MESSAGE: {
+      return { ...state, message: action.payload };
+    }
+    case OrderActionTypes.SET_FITTING_PROPERTIES: {
+      return { ...state, fittingProperties: action.payload };
+    }
+    case OrderActionTypes.SET_FITTING_HEIGHT: {
+      return { ...state, fittingHeight: action.payload };
+    }
+    case OrderActionTypes.SET_ERRORS: {
+      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error }}
     }
     default: {
       return state

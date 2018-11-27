@@ -9,8 +9,6 @@ import * as searchActions from '../store/search/actions';
 
 import FrameSearch from '../components/FrameSearch';
 
-import '../styles/frameSearch.css';
-
 type PropsFromState = {
   order: IOrderState;
   fetching: boolean;
@@ -48,6 +46,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   state: StateProps = { open: false, query: '' };
 
   private onChange = (props: Frame[]) => {
+    console.log(props);
     const { setSelectedFrames } = this.props;
     
     setSelectedFrames(props);
@@ -56,16 +55,23 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   }
 
   private onBlur = (props: any)=> {
-    if (this.state.open) {
+    const { open } = this.state;
+
+    if (open) {
       this.setState({ open: false })
     }
   }
 
   private onInputChange = (props: string) => {
     const { order, handleFetch } = this.props;
+    const { query } = this.state;
 
     if (props.length === 3) {
-      handleFetch(order, props);
+      if (query.length === 0 || query.indexOf(props)) {
+        handleFetch(order, props);
+
+        this.setState({ query: props });
+      }
 
       this.setState({ open: true });
     } else if (props.length < 3 && this.state.open) {
@@ -77,11 +83,12 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
 
   public render() {
     const { fetching, frames, selectedFrames } = this.props;
+    const { open } = this.state;
 
     return (
       <FrameSearch 
         fetching={fetching} 
-        open={this.state.open} 
+        open={open} 
         list={frames}
         selectedFrames={selectedFrames}
         onInputChange={this.onInputChange}
