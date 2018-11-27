@@ -27,6 +27,7 @@ type PropsFromDispatch = {
   handleFetch: typeof filterActions.fetchFilterGroups,
   fetchFrames: typeof filterActions.fetchFrames,
   changeChecked: typeof filterActions.changeChecked,
+  resetChecked: typeof filterActions.resetChecked,
   addQuery: typeof filterActions.addQuery,
   deleteQuery: typeof filterActions.deleteQuery,
   resetQuery: typeof filterActions.resetQuery,
@@ -47,6 +48,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleFetch: (order: IOrderState) => dispatch(filterActions.fetchFilterGroups(order)),
   fetchFrames: (order: IOrderState, query: Object) => dispatch(filterActions.fetchFrames(order, query)),
   changeChecked: (type: string, name: string, value: boolean) => dispatch(filterActions.changeChecked(type, name, value)),
+  resetChecked: () => dispatch(filterActions.resetChecked()),
   addQuery: (type: string, value: any) => dispatch(filterActions.addQuery(type, value)),
   deleteQuery: (type: string, value: any) => dispatch(filterActions.deleteQuery(type, value)),
   resetQuery: () => dispatch(filterActions.resetQuery()),
@@ -56,9 +58,9 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   state = { step: 1 };
 
   public componentDidMount() {
-    const { handleFetch } = this.props;
+    const { order, query, fetchFrames } = this.props;
 
-    handleFetch();
+    fetchFrames(order, query);
   }
 
   public componentDidUpdate(prevProps: ComponentProps) {
@@ -101,7 +103,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   };
 
   render() {
-    const { groups, query, resetQuery } = this.props;
+    const { groups, query, resetChecked, resetQuery } = this.props;
     const disabledResetFilterButton = isEmptyQuery(query);
 
     return (
@@ -111,7 +113,10 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
         disabled={disabledResetFilterButton}
         renderGroup={this.renderGroup} 
         handleClick={this.handleClick}
-        resetQuery={resetQuery}
+        resetFilter={() => {
+          resetChecked();
+          resetQuery();
+        }}
       />
     )
   }

@@ -14,6 +14,7 @@ export const enum FramesActionTypes {
   CLOSE = '@@frames/CLOSE',
   SET_STEP = '@@frames/SET_STEP',
   SET_SELECTED_FRAME = '@@frames/SET_SELECTED_FRAME',
+  RESET_SELECTED_FRAME = '@@frames/RESET_SELECTED_FRAME',
 };
 
 export interface FramesState {

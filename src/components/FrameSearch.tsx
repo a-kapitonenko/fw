@@ -10,9 +10,9 @@ type ComponentProps = {
   open: boolean;
   list: Frame[];
   selectedFrames: Frame[];
-  onInputChange: any;
-  onChange: any;
-  onBlur: any;
+  onInputChange: (props: string) => string;
+  onChange: (props: Frame[]) => Frame[];
+  onBlur: (props: any) => void;
 };
 
 const NoOptionsMessage = (props: any) => {
@@ -40,6 +40,21 @@ const Menu = (props: any) => {
   return <components.Menu {...props} />
 }
 
+const IndicatorsContainer = (props: any) => {
+  return (
+    <components.IndicatorsContainer className="frame-search__indicator" {...props} />
+  );
+};
+
+const MultiValueRemove = (props: any) => {
+  const className = `${props.innerProps.className} frame-search__indicator-remove`;
+  props.innerProps.className = className;
+
+  return (
+    <components.MultiValueRemove {...props} />
+  );
+};
+
 const DropdownIndicator = (props: any) => {
   return components.DropdownIndicator && (
     <div />
@@ -65,7 +80,7 @@ const FrameSearch: React.SFC<ComponentProps> = ({ fetching, open, list, selected
         isMulti
         onChange={onChange}
         onBlur={onBlur}
-        components={{ Menu, Option, IndicatorSeparator, DropdownIndicator, NoOptionsMessage }}
+        components={{ Menu, Option, MultiValueRemove, IndicatorsContainer, IndicatorSeparator, DropdownIndicator, NoOptionsMessage }}
         options={list}
         onInputChange={onInputChange}
       />

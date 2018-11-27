@@ -2,11 +2,15 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
+import IconButton from '@material-ui/core/IconButton';
+import Close from '@material-ui/icons/Close';
 
 import { ApplicationState } from '../store';
 import { IOrderState } from '../store/order/types';
 import { Frame } from '../store/frames/types';
 import * as framesActions from '../store/frames/actions';
+
+import { isEmptyObject } from '../helpers/mathHelper';
 
 import FrameSelection from '../components/FrameSelection';
 import FrameFavorite from '../components/FrameFavorite';
@@ -31,7 +35,8 @@ type PropsFromDispatch = {
   handleClose: typeof framesActions.close;
   setStep: typeof framesActions.setStep;
   setSelectedFrame: typeof framesActions.setSelectedFrame;
-  handleConfirm: any;
+  resetSelectedFrame: typeof framesActions.resetSelectedFrame;
+  handleSubmit: typeof framesActions.fetchSubmit;
 }
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -54,7 +59,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleClose: () => dispatch(framesActions.close()),
   setStep: (step: number) => dispatch(framesActions.setStep(step)),
   setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
-  handleConfirm: (order: IOrderState, frame: Frame) => dispatch(framesActions.fetchSubmit(order, frame)),
+  resetSelectedFrame: () => dispatch(framesActions.resetSelectedFrame()),
+  handleSubmit: (order: IOrderState, frame: Frame) => dispatch(framesActions.fetchSubmit(order, frame)),
 });
 
 class FrameSelectionContainer extends React.Component<ComponentProps> {
@@ -65,12 +71,10 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
   }
 
   private handleClick = (frame: Frame) => {
-    const { selectedFrame, setSelectedFrame } = this.props;
+    const { selectedFrame, setSelectedFrame, resetSelectedFrame } = this.props;
 
     if (selectedFrame === frame) {
-      const emptyFrame = {} as Frame;
-
-      setSelectedFrame(emptyFrame);
+      resetSelectedFrame();
     } else {
       setSelectedFrame(frame);
     }
@@ -79,38 +83,61 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
   public render() {
     const {
       order,
-      open, 
-      step, 
-      searchFrames, 
-      filterFrames, 
-      similarFrames, 
-      selectedFrame, 
+      open,
+      step,
+      searchFrames,
+      filterFrames,
+      similarFrames,
+      selectedFrame,
+      resetSelectedFrame,
       setStep,
-      handleConfirm, 
-      handleClose, 
+      handleSubmit,
+      handleClose,
     } = this.props;
+    const isFrameSelected = !isEmptyObject(selectedFrame);
 
     return (
       <Dialog open={open} fullScreen={true} onEscapeKeyDown={() => handleClose()} className="frame-selection__wrapper">
-        {step === 1 && (
-          <FrameSelection
-            searchFrames={searchFrames}
-            filterFrames={filterFrames}
-            selectedFrame={selectedFrame}
-            setStep={setStep}
-            setSelectedFrame={this.handleClick}
-            handleClose={handleClose}
-          />
-        )}
-        {step === 2 && (
-          <FrameFavorite
-            similarFrames={similarFrames}
-            selectedFrame={selectedFrame}
-            setStep={setStep}
-            setSelectedFrame={this.handleClick}
-            onConfirm={(frame: Frame) => handleConfirm(order, frame)}
-          />
-        )}
+        <div className="frame-selection__content yellow-section">
+          {isFrameSelected && (
+            <div className="frame-selection__frame-selected">
+              <div>{selectedFrame.value}</div>
+              <div>{selectedFrame.label}</div>
+              <div className="-flex"><img className="frame-search__img" src={`/${selectedFrame.img}`} /></div>
+              <div>{selectedFrame.compatibility ? 'true' : 'false'}</div>
+              <div>
+                <IconButton
+                  color="inherit"
+                  aria-label="Menu"
+                  onClick={resetSelectedFrame}
+                >
+                  <Close />
+                </IconButton>
+              </div>
+            </div>
+          )}
+          {step === 1 && (
+            <FrameSelection
+              searchFrames={searchFrames}
+              filterFrames={filterFrames}
+              selectedFrame={selectedFrame}
+              buttonDisabled={!isFrameSelected}
+              setStep={setStep}
+              setSelectedFrame={this.handleClick}
+              handleClose={handleClose}
+            />
+          )}
+          {step === 2 && (
+            <FrameFavorite
+              similarFrames={similarFrames}
+              selectedFrame={selectedFrame}
+              buttonDisabled={!isFrameSelected}
+              setStep={setStep}
+              setSelectedFrame={this.handleClick}
+              handleSubmit={(frame: Frame) => handleSubmit(order, frame)}
+            />
+          )}
+        </div>
       </Dialog>
     );
   }

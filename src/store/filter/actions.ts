@@ -13,12 +13,13 @@ export const fetchRequest = () => action(FilterActionTypes.FETCH_REQUEST);
 export const fetchSuccess = (groups: Groups) => action(FilterActionTypes.FETCH_SUCCESS, groups);
 export const fetchError = (message: string) => action(FilterActionTypes.FETCH_ERROR, message);
 export const changeChecked = (type: string, name: string, value: boolean) => action(FilterActionTypes.CHANGE_CHECKED, { type, name, value });
-export const addQuery = (type: string, value: any) => action(FilterActionTypes.ADD_QUERY, { type, name, value });
-export const deleteQuery = (type: string, value: any) => action(FilterActionTypes.DELETE_QUERY, { type, name, value });
+export const resetChecked = () => action(FilterActionTypes.RESET_CHECKED);
+export const addQuery = (type: string, value: any) => action(FilterActionTypes.ADD_QUERY, { type, value });
+export const deleteQuery = (type: string, value: any) => action(FilterActionTypes.DELETE_QUERY, { type, value });
 export const resetQuery = () => action(FilterActionTypes.RESET_QUERY);
 export const setFrames = (frames: Frame[]) => action(FilterActionTypes.SET_FRAMES, frames);
 
-export const fetchFilterGroups: any = (order: IOrderState) => (dispatch: Dispatch) => {
+export const fetchFilterGroups: any = (order?: IOrderState) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
 
   return new Promise((resolver) => {

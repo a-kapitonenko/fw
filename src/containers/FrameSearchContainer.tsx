@@ -7,6 +7,8 @@ import { IOrderState } from '../store/order/types';
 import { Frame } from '../store/frames/types';
 import * as searchActions from '../store/search/actions';
 
+import { frameSearchConfig } from '../constants/frameSearch';
+
 import FrameSearch from '../components/FrameSearch';
 
 type PropsFromState = {
@@ -46,7 +48,6 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   state: StateProps = { open: false, query: '' };
 
   private onChange = (props: Frame[]) => {
-    console.log(props);
     const { setSelectedFrames } = this.props;
     
     setSelectedFrames(props);
@@ -55,6 +56,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   }
 
   private onBlur = (props: any)=> {
+    console.log(props);
     const { open } = this.state;
 
     if (open) {
@@ -66,7 +68,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
     const { order, handleFetch } = this.props;
     const { query } = this.state;
 
-    if (props.length === 3) {
+    if (props.length === frameSearchConfig.queryLength) {
       if (query.length === 0 || query.indexOf(props)) {
         handleFetch(order, props);
 
@@ -74,7 +76,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
       }
 
       this.setState({ open: true });
-    } else if (props.length < 3 && this.state.open) {
+    } else if (props.length < frameSearchConfig.queryLength && this.state.open) {
       this.setState({ open: false });
     }
 

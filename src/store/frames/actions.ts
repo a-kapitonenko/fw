@@ -14,6 +14,7 @@ export const open = () => action(FramesActionTypes.OPEN);
 export const close = () => action(FramesActionTypes.CLOSE);
 export const setStep = (step: number) => action(FramesActionTypes.SET_STEP, step);
 export const setSelectedFrame = (frame: Frame) => action(FramesActionTypes.SET_SELECTED_FRAME, frame);
+export const resetSelectedFrame = () => action(FramesActionTypes.RESET_SELECTED_FRAME);
 
 export const fetchSimilarFrames: any = (order: IOrderState) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());

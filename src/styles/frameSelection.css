@@ -20,6 +20,21 @@
   flex-wrap: wrap;
 }
 
+.frame-selection__frame-selected {
+  z-index: 1000;
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: LightGray;
+  border: 5px solid gray;
+}
+
+.frame-selection__frame-selected > div {
+  flex: 1;
+  margin: auto;
+  text-align: center;
+}
+
 .frame-selection__form-section {
   flex: 1;
   position: relative;

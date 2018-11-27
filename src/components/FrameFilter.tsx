@@ -1,18 +1,20 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 
+import { Groups, Field } from '../store/filter/types';
+
 import '../styles/frameFilter.css';
 
 type ComponentProps = {
   step: number;
-  groups: any;
+  groups: Groups;
   disabled: boolean;
-  renderGroup: any;
-  handleClick: any;
-  resetQuery: any;
+  renderGroup: (group: Field[], type: string) => JSX.Element[];
+  handleClick: (index: number) => void;
+  resetFilter: () => void;
 };
 
-const FrameFilter: React.SFC<ComponentProps> = ({ step, groups, disabled, renderGroup, handleClick, resetQuery }) => {
+const FrameFilter: React.SFC<ComponentProps> = ({ step, groups, disabled, renderGroup, handleClick, resetFilter }) => {
   return (
     <div className="frame-filter">
       <h2 className="frame-filter__title">Or use filter to find best variant</h2>
@@ -43,7 +45,7 @@ const FrameFilter: React.SFC<ComponentProps> = ({ step, groups, disabled, render
           {renderGroup(groups.material, 'material')}
         </div>
       </div>
-      <Button variant="contained" disabled={disabled} onClick={resetQuery}>Reset filters</Button>
+      <Button variant="contained" disabled={disabled} onClick={resetFilter}>Reset filters</Button>
     </div>
   );
 };

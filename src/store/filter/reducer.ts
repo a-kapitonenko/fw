@@ -45,6 +45,15 @@ const reducer: Reducer<IFilterState> = (state = initialState, action) => {
         }
       };
     }
+    case FilterActionTypes.RESET_CHECKED: {
+      const groups = <Groups>{};
+
+      for (const group in state.groups) {
+        groups[group] = state.groups[group].map((field: Field) => ({ ...field, checked: false }));
+      }
+
+      return { ...state, groups };
+    }
     case FilterActionTypes.ADD_QUERY: {
       return {
         ...state,
@@ -72,13 +81,7 @@ const reducer: Reducer<IFilterState> = (state = initialState, action) => {
       };
     }
     case FilterActionTypes.RESET_QUERY: {
-      const groups = <Groups>{};
-
-      for (const group in state.groups) {
-        groups[group] = state.groups[group].map((field: Field) => ({ ...field, checked: false }));
-      }
-
-      return { ...state, groups };
+      return { ...state, query: initialGroupsState };
     }
     case FilterActionTypes.SET_FRAMES: {
       return { ...state, frames: action.payload };

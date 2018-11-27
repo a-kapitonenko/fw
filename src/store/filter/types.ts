@@ -19,6 +19,7 @@ export const enum FilterActionTypes {
   FETCH_SUCCESS = '@@filter/FETCH_SUCCESS',
   FETCH_ERROR = '@@filter/FETCH_ERROR',
   CHANGE_CHECKED = '@@filter/CHANGE_CHECKED',
+  RESET_CHECKED = '@@filter/RESET_CHECKED',
   ADD_QUERY = '@@filter/ADD_QUERY',
   DELETE_QUERY = '@@filter/DELETE_QUERY',
   RESET_QUERY = '@@filter/RESET_QUERY',

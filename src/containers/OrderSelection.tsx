@@ -7,6 +7,7 @@ import { ApplicationState } from '../store';
 import { IOrderState } from '../store/order/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
+import * as filterActions from '../store/filter/actions';
 
 import { isEmptyObject } from '../helpers/mathHelper';
 
@@ -25,6 +26,7 @@ type PropsFromState = {
 
 type PropsFromDispatch = {
   handleOpen: typeof framesActions.open;
+  fetchFilterGroups: typeof filterActions.fetchFilterGroups;
   setFittingHeight: typeof orderActions.setFittingHeight;
   saveOrder: typeof orderActions.saveOrder;
   setErrors: typeof orderActions.setErrors;
@@ -38,12 +40,19 @@ const mapStateToProps = (state: ApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleOpen: () => dispatch(framesActions.open()),
+  fetchFilterGroups: () => dispatch(filterActions.fetchFilterGroups()),
   setFittingHeight: (height: any) => dispatch(orderActions.setFittingHeight(height)),
   saveOrder: (order: IOrderState) => dispatch(orderActions.saveOrder(order)),
   setErrors: (type: string, error: string) => dispatch(orderActions.setErrors(type, error)),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
+  public componentDidMount() {
+    const { fetchFilterGroups } = this.props;
+
+    fetchFilterGroups();
+  }
+
   public componentDidUpdate(prevProps: ComponentProps) {
     const { order, setErrors } =this.props;
     const isFrameSelected = isEmptyObject(order.frame);

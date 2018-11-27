@@ -35,3 +35,7 @@
   height: 80px;
   width: 160px;
 }
+
+.frame-search__indicator:hover, .frame-search__indicator-remove {
+  cursor: pointer;
+}

@@ -42,3 +42,9 @@ export const saveOrder: any = (order: IOrderState) => (dispatch: Dispatch) => {
     }
   })
 };
+
+// export const checkFrameCompatibility: any = (order: IOrderState) => (dispatch: Dispatch) => {
+//   return new Promise((resolver) => {
+//     const response =
+//   })
+// };

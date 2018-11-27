@@ -11,14 +11,15 @@ import '../styles/frameFilter.css';
 type ComponentProps = {
   similarFrames: Frame[];
   selectedFrame: Frame;
+  buttonDisabled: boolean;
   setStep: typeof framesActions.setStep;
-  setSelectedFrame: any;
-  onConfirm: any;
+  setSelectedFrame: (frame: Frame) => void;
+  handleSubmit: typeof framesActions.fetchSubmit;
 };
 
-const FrameFavorite: React.SFC<ComponentProps> = ({ similarFrames, selectedFrame, setStep, setSelectedFrame, onConfirm }) => {
+const FrameFavorite: React.SFC<ComponentProps> = ({ similarFrames, selectedFrame, buttonDisabled, setStep, setSelectedFrame, handleSubmit }) => {
   return (
-    <div className="frame-selection__content yellow-section">
+    <React.Fragment>
       <h1 className="frame-selection__title">Similar Frames</h1>
       <section className="frame-selection__form">
         <h2 className="frame-selection__form-title">
@@ -28,10 +29,10 @@ const FrameFavorite: React.SFC<ComponentProps> = ({ similarFrames, selectedFrame
         <FrameTable frames={similarFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
         <section className="frame-selection__form-actions">
           <Button className="frame-selection__form-button" variant="contained" onClick={() => setStep(1)}>Back</Button>
-          <Button className="frame-selection__form-button" variant="contained" onClick={() => onConfirm(selectedFrame)}>Confirm</Button>
+          <Button className="frame-selection__form-button" variant="contained" disabled={buttonDisabled} onClick={() => handleSubmit(selectedFrame)}>Confirm</Button>
         </section>
       </section>
-    </div>
+    </React.Fragment>
   );
 };
 

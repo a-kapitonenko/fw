@@ -31,10 +31,13 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
       return { ...state, step: action.payload };
     }
     case FramesActionTypes.SET_SELECTED_FRAME: {
-      return { ...state, selectedFrame: action.payload }
+      return { ...state, selectedFrame: action.payload };
+    }
+    case FramesActionTypes.RESET_SELECTED_FRAME: {
+      return { ...state, selectedFrame: <Frame>{} };
     }
     default: {
-      return state
+      return state;
     }
   }
 };
