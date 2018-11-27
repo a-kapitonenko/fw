@@ -12,7 +12,7 @@ type ComponentProps = {
   selectedFrames: Frame[];
   onInputChange: (props: string) => string;
   onChange: (props: Frame[]) => Frame[];
-  onBlur: (props: any) => void;
+  onBlur: (event: React.FocusEvent<HTMLElement>) => void;
 };
 
 const NoOptionsMessage = (props: any) => {

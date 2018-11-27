@@ -55,8 +55,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
     return props;
   }
 
-  private onBlur = (props: any)=> {
-    console.log(props);
+  private onBlur = (props: React.FocusEvent<HTMLElement>) => {
     const { open } = this.state;
 
     if (open) {
