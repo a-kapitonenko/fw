@@ -37,13 +37,35 @@
   width: 120px;
 }
 
-.order-selection__frame {
-  margin: 2rem 2rem 0;
+.order-selection__img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid gray;
+  height: 300px;
+  width: 600px;
+  background-color: white;
+}
+
+.order-selection__content {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.order-selection__frame-error {
+  color: red;
 }
 
 .order-selection__frame-img {
   height: 200px;
   width: 400px;
+}
+
+.order-selection__frame-description {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem auto;
 }
 
 .order-selection__actions {

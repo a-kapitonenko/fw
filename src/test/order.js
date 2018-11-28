@@ -4,11 +4,30 @@ export const savePrescriptionInformation = (values) => {
   return {
     success: true,
     recommendation: rec
-  }
+  };
+};
+
+export const saveFittingHeightInformation = (order, fittingHeight) => {
+  return {
+    success: true,
+    result: {
+      img: 'blueprint.png'
+    }
+  };
 };
 
 export const saveOrderInformation = (order) => {
   return {
     success: true,
-  }
+    result: {
+      img: 'barcode.png'
+    }
+  };
+};
+
+export const checkFrameCompatibility = (order) => {
+  return {
+    success: false,
+    result: 'This lens does not accecptable with selected frame.'
+  };
 };

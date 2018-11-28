@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { IOrderState, OrderActionTypes, Prescription, OculusInfo } from './types';
+import { IOrderState, OrderActionTypes, Prescription, OculusInfo, Blueprint, Barcode } from './types';
 import { Frame } from '../frames/types';
 import { Lens } from '../lenses/types';
 
@@ -24,6 +24,8 @@ const initialState: IOrderState = {
   lens: <Lens>{},
   recommendation: '',
   message: '',
+  blueprint: <Blueprint>{},
+  barcode: <Barcode>{},
   errors: {},
 };
 
@@ -59,8 +61,20 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     case OrderActionTypes.SET_FITTING_HEIGHT: {
       return { ...state, fittingHeight: action.payload };
     }
+    case OrderActionTypes.SET_BLUEPRINT: {
+      return { ...state, blueprint: action.payload };
+    }
+    case OrderActionTypes.SET_BARCODE: {
+      return { ...state, barcode: action.payload };
+    }
     case OrderActionTypes.SET_ERRORS: {
-      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error }}
+      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error }};
+    }
+    case OrderActionTypes.DELETE_ERRORS: {
+      const errors = { ...state.errors };
+      delete(errors[action.payload]);
+
+      return { ...state, errors }
     }
     default: {
       return state

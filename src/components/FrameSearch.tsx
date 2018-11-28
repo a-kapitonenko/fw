@@ -55,13 +55,13 @@ const MultiValueRemove = (props: any) => {
   );
 };
 
-const DropdownIndicator = (props: any) => {
+const DropdownIndicator = () => {
   return components.DropdownIndicator && (
     <div />
   );
 };
 
-const IndicatorSeparator = ({ innerProps }: any) => {
+const IndicatorSeparator = () => {
   return (
     <span />
   );

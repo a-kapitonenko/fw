@@ -40,8 +40,9 @@ export const fetchSubmit: any = (order: IOrderState, frame: Frame) => (dispatch:
   .then((response: any) => {
     if (response.success) {
       dispatch(close());
-      dispatch(OrderActions.setFrame(frame));
       dispatch(setStep(1));
+      dispatch(OrderActions.setFrame(frame));
+      dispatch(OrderActions.deleteErrors('frame'));
       dispatch(OrderActions.setMessage(response.result.message));
       dispatch(OrderActions.setFittingProperties(response.result.fittingHeight));
     }

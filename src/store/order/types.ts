@@ -16,6 +16,14 @@ export type Prescription = {
   OS: OculusInfo;
 };
 
+export type Blueprint = {
+  img: string;
+};
+
+export type Barcode = {
+  img: string;
+}
+
 export const enum OrderActionTypes {
   SET_RX_INFORMATION = '@@order/SET_RX_INFORMATION',
   SET_RECOMMENDATION = '@@order/SET_RECOMMENDATION',
@@ -24,7 +32,10 @@ export const enum OrderActionTypes {
   SET_MESSAGE = '@@order/SET_MESSAGE',
   SET_FITTING_PROPERTIES = '@@order/SET_FITTING_PROPERTIES',
   SET_FITTING_HEIGHT = '@@order/SET_FITTING_HEIGHT',
+  SET_BLUEPRINT = '@@order/SET_BLUEPRINT',
+  SET_BARCODE = '@@order/SET_BARCODE',
   SET_ERRORS = '@@order/SET_ERRORS',
+  DELETE_ERRORS = '@@order/DELETE_ERRORS'
 };
 
 export interface IOrderState {
@@ -35,5 +46,7 @@ export interface IOrderState {
   readonly lens: Lens;
   readonly recommendation: string;
   readonly message: string;
+  readonly blueprint: Blueprint;
+  readonly barcode: Barcode;
   readonly errors: object;
 };

@@ -27,9 +27,11 @@ type PropsFromState = {
 type PropsFromDispatch = {
   handleOpen: typeof framesActions.open;
   fetchFilterGroups: typeof filterActions.fetchFilterGroups;
-  setFittingHeight: typeof orderActions.setFittingHeight;
+  saveFittingHeight: typeof orderActions.saveFittingHeight;
+  checkCompatibility: typeof orderActions.checkCompatibility;
   saveOrder: typeof orderActions.saveOrder;
   setErrors: typeof orderActions.setErrors;
+  submitOrder: typeof orderActions.submitOrder;
 }
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -41,9 +43,11 @@ const mapStateToProps = (state: ApplicationState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleOpen: () => dispatch(framesActions.open()),
   fetchFilterGroups: () => dispatch(filterActions.fetchFilterGroups()),
-  setFittingHeight: (height: any) => dispatch(orderActions.setFittingHeight(height)),
+  saveFittingHeight: (order: IOrderState, height: number) => dispatch(orderActions.saveFittingHeight(order, height)),
+  checkCompatibility: (order: IOrderState) => dispatch(orderActions.checkCompatibility(order)),
   saveOrder: (order: IOrderState) => dispatch(orderActions.saveOrder(order)),
   setErrors: (type: string, error: string) => dispatch(orderActions.setErrors(type, error)),
+  submitOrder: (order: IOrderState) => dispatch(orderActions.submitOrder(order)),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
@@ -54,16 +58,21 @@ class OrderSelection extends LinkComponent<ComponentProps> {
   }
 
   public componentDidUpdate(prevProps: ComponentProps) {
-    const { order, setErrors } =this.props;
-    const isFrameSelected = isEmptyObject(order.frame);
+    const { order, checkCompatibility } = this.props;
+    const isFrameSelected = !isEmptyObject(order.frame);
+    const isBarcode = !isEmptyObject(order.barcode);
 
-    if (prevProps.order.lens !== order.lens && !isFrameSelected) {
-      setErrors('frame', 'this lens does not accecptable with selected frame');
+    if (prevProps.order.lens !== order.lens && isFrameSelected) {
+      checkCompatibility(order);
+    }
+
+    if (isBarcode) {
+      this.redirectToPage('/order');
     }
   }
 
   public render() {
-    const { order, handleOpen, setFittingHeight, saveOrder } = this.props;
+    const { order, handleOpen, saveFittingHeight, saveOrder, submitOrder } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.lens);
     const isFrameSelected = isEmptyObject(order.frame);
     const isFittingHeightSelected = order.fittingHeight ? true : false;
@@ -82,7 +91,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
                   label="Height"
                   value={order.fittingHeight}
                   list={order.fittingProperties}
-                  onChange={setFittingHeight}
+                  onChange={(value: number) => saveFittingHeight(order, value)}
                 />
               </Section>
               <Section className="order-selection__recommend" tittle="Message">
@@ -102,13 +111,25 @@ class OrderSelection extends LinkComponent<ComponentProps> {
 
         {!isFrameSelected
           ? (
-            <Section className="order-selection__frame" tittle="Frame Selected">
-              <img className="order-selection__frame-img" src={`/${order.frame.img}`} />
-              {order.errors['frame'] && <p>{order.errors['frame']}</p>}
-              <p>UPC Code: {order.frame.upc}</p>
-              <p>Name of Frame: {order.frame.label}</p>
-              <Button className="-full-width" variant="contained" onClick={handleOpen}>Edit</Button>
-            </Section>
+            <React.Fragment>
+              <Section className="order-selection__content" tittle="Frame Selected">
+                <div className="order-selection__img-wrapper">
+                  <img className="order-selection__frame-img" src={`/${order.frame.img}`} />
+                </div>
+                {order.errors['frame'] && <div className="order-selection__frame-error">{order.errors['frame']}</div>}
+                <div className="order-selection__frame-description">
+                  <p>UPC Code: {order.frame.upc}</p>
+                  <p>Name of Frame: {order.frame.label}</p>
+                </div>
+                <Button className="-full-width" variant="contained" onClick={handleOpen}>Edit</Button>
+              </Section>
+
+              <Section className="order-selection__content" tittle="36 Point Trace Dimentions">
+                <div className="order-selection__img-wrapper">
+                  {order.blueprint['img'] && <img className="order-selection__frame-img" src={`/${order.blueprint.img}`} />}
+                </div>
+              </Section>
+            </React.Fragment>
           )
           : (
             <React.Fragment>
@@ -127,7 +148,11 @@ class OrderSelection extends LinkComponent<ComponentProps> {
 
         <section className="order-selection__actions">
           <Button variant="contained" onClick={saveOrder}>Save</Button>
-          {!isFrameSelected && <Button variant="contained" disabled={submitDisabled} onClick={() => this.redirectToPage('/order')}>Submit Order</Button>}
+          {!isFrameSelected && (
+            <Button variant="contained" disabled={submitDisabled} onClick={() => submitOrder(order)}>
+              Submit Order
+            </Button>
+          )}
         </section>
       </div>
     );

@@ -10,9 +10,9 @@ import '../styles/lensSelection.css';
 type ComponentProps = {
   className: string;
   label: string;
-  value: any;
+  value: number | string;
   list: any;
-  onChange: any;
+  onChange: (value: number | string) => void;
 };
 
 const SelectField: React.SFC<ComponentProps> = ({ className, label, value, list, onChange }) => {
