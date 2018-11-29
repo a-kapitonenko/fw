@@ -42,8 +42,9 @@ class TestTable extends React.Component<ComponentProps> {
     const emptyRows = frameTableConfig.rowsPerPage - frames.length;
 
     return (
-      <Paper 
-        className="frame-selection__table" 
+
+      <Paper
+        className="frame-selection__table"
         style={{ height: 57 + frameTableConfig.rowHeight * frameTableConfig.rowsPerPage }}
       >
         <Table>
@@ -57,7 +58,7 @@ class TestTable extends React.Component<ComponentProps> {
               return (
                 <TableRow
                   key={frame.upc}
-                  className={`frame-selection__table-row ${selectedFrame === frame ? 'row-selected' : ''}`}
+                  className={`frame-selection__table-row ${selectedFrame.value === frame.value ? 'row-selected' : ''}`}
                   onClick={() => handleClick(frame)}
                 >
                   {this.renderBodyRows(frame)}

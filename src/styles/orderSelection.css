@@ -41,10 +41,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 2rem;
   border: 2px solid gray;
   height: 300px;
-  width: 600px;
+  max-width: 600px;
   background-color: white;
 }
 
@@ -59,7 +59,7 @@
 
 .order-selection__frame-img {
   height: 200px;
-  width: 400px;
+  min-width: 200px;
 }
 
 .order-selection__frame-description {

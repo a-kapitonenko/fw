@@ -74,3 +74,13 @@
 .row-selected {
   background-color: darkgray !important;
 }
+
+@media screen and (max-width: 900px) {
+  .frame-selection__wrapper {
+    margin: 0;
+  }
+
+  .frame-selection__form-content {
+    display: block;
+  }
+}

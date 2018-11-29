@@ -17,44 +17,46 @@ const PrescriptionSelection: React.SFC<ComponentProps> = ({ order, readOnly, han
     <section className="order-selection__section">
       <h2 className="order-selection__section-tittle">Input Rx Information</h2>
       <div>
-        {PrescriptionFields.map((element, index) => (
-          <TextField
-            key={index}
-            className="information__text"
-            InputLabelProps={{ shrink: true }}
-            InputProps={{ readOnly: readOnly }}
-            variant="outlined"
-            label={`OD ${element.label}`}
-            value={order.prescription.OD[element.id]}
-            onChange={(evt) => {
-              if (handleChange) {
-                return handleChange('OD', element.id, evt.target.value);
-              }
+        <div>
+          {PrescriptionFields.map((element, index) => (
+            <TextField
+              key={index}
+              className="information__text"
+              InputLabelProps={{ shrink: true }}
+              InputProps={{ readOnly: readOnly }}
+              variant="outlined"
+              label={`OD ${element.label}`}
+              value={order.prescription.OD[element.id]}
+              onChange={(evt) => {
+                if (handleChange) {
+                  return handleChange('OD', element.id, evt.target.value);
+                }
 
-              return;
-            }}
-          />
-        ))}
-      </div>
-      <div>
-        {PrescriptionFields.map((element, index) => (
-          <TextField
-            key={index}
-            className="information__text"
-            InputLabelProps={{ shrink: true }}
-            InputProps={{ readOnly: readOnly }}
-            variant="outlined"
-            label={`OS ${element.label}`}
-            value={order.prescription.OS[element.id]}
-            onChange={(evt) => {
-              if (handleChange) {
-                return handleChange('OS', element.id, evt.target.value);
-              }
+                return;
+              }}
+            />
+          ))}
+        </div>
+        <div>
+          {PrescriptionFields.map((element, index) => (
+            <TextField
+              key={index}
+              className="information__text"
+              InputLabelProps={{ shrink: true }}
+              InputProps={{ readOnly: readOnly }}
+              variant="outlined"
+              label={`OS ${element.label}`}
+              value={order.prescription.OS[element.id]}
+              onChange={(evt) => {
+                if (handleChange) {
+                  return handleChange('OS', element.id, evt.target.value);
+                }
 
-              return
-            }}
-          />
-        ))}
+                return
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )

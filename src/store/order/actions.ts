@@ -67,7 +67,6 @@ export const checkCompatibility: any = (order: IOrderState) => (dispatch: Dispat
     resolver(response)
   })
   .then((response: any) => {
-    console.log(response);
     if (!response.success) {
       dispatch(setErrors('frame', response.result));
     }
@@ -84,7 +83,6 @@ export const submitOrder: any = (order: IOrderState) => (dispatch: Dispatch) => 
   })
   .then((response: any) => {
     if (response.success) {
-      console.log(response.result);
       dispatch(setBarcode(response.result));
     }
   })

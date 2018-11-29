@@ -24,24 +24,24 @@ type ComponentProps = {
 const FrameSelection: React.SFC<ComponentProps> = ({ searchFrames, filterFrames, selectedFrame, buttonDisabled, setStep, setSelectedFrame, handleClose }) => {
   return (
     <React.Fragment>
-      <h1 className="frame-selection__title">Tailored Frame Selection</h1>
-      <section className="frame-selection__form">
-        <div className="frame-selection__form-content -flex">
-          <div className="frame-selection__form-section -flex-column-between">
-            <FrameSearchContainer />
-            <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
-          </div>
-          <div className="frame-selection__form-section">
-            <FrameFilterContainer />
-            <FrameTable frames={filterFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
-          </div>
+    <h1 className="frame-selection__title">Tailored Frame Selection</h1>
+    <section className="frame-selection__form">
+      <div className="frame-selection__form-content">
+        <div className="frame-selection__form-section -flex-column-between">
+          <FrameSearchContainer />
+          <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
         </div>
-        <section className="frame-selection__form-actions">
-          <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Back</Button>
-          <Button className="frame-selection__form-button" variant="contained" disabled={buttonDisabled} onClick={() => setStep(2)}>Next</Button>
-        </section>
+        <div className="frame-selection__form-section">
+          <FrameFilterContainer />
+          <FrameTable frames={filterFrames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
+        </div>
+      </div>
+      <section className="frame-selection__form-actions">
+        <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Back</Button>
+        <Button className="frame-selection__form-button" variant="contained" disabled={buttonDisabled} onClick={() => setStep(2)}>Next</Button>
       </section>
-    </React.Fragment>
+    </section>
+  </React.Fragment>
   )
 };
 

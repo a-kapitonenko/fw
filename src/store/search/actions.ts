@@ -23,7 +23,6 @@ export const fetchFrames: any = (order: IOrderState, upc: string) => (dispatch: 
   })
   .then((response: any) => {
     if (response.success) {
-      console.log(response.result)
       dispatch(fetchSuccess(response.result));
     }
   })
