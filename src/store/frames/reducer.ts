@@ -3,6 +3,7 @@ import { Frame, FramesState, FramesActionTypes } from './types';
 
 const initialState: FramesState = {
   fetching: false,
+  update: false,
   errors: '',
   open: false,
   step: 1,
@@ -35,6 +36,9 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     }
     case FramesActionTypes.RESET_SELECTED_FRAME: {
       return { ...state, selectedFrame: <Frame>{} };
+    }
+    case FramesActionTypes.RESET_SIMILAR_FRAMES: {
+      return { ...state, similarFrames: [] };
     }
     default: {
       return state;

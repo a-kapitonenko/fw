@@ -17,6 +17,7 @@ export const fetchFrames: any = (order: IOrderState, upc: string) => (dispatch: 
   
   return new Promise((resolver) => {
     const response = getFramesByUpc(order, upc);
+    
     setTimeout(() => {
       resolver(response);
     }, 1000);

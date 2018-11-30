@@ -15,10 +15,12 @@ export const enum FramesActionTypes {
   SET_STEP = '@@frames/SET_STEP',
   SET_SELECTED_FRAME = '@@frames/SET_SELECTED_FRAME',
   RESET_SELECTED_FRAME = '@@frames/RESET_SELECTED_FRAME',
+  RESET_SIMILAR_FRAMES = '@@frames/RESET_SIMILAR_FRAMES',
 };
 
 export interface FramesState {
   readonly fetching: boolean;
+  readonly update: boolean;
   readonly errors?: string;
   readonly open: boolean;
   readonly step: number;

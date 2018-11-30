@@ -46,6 +46,12 @@ h5 {
   box-shadow: 0 0 15px 8px #c2c2c2;
 }
 
+.page__progress {
+  position: fixed;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+}
+
 .page__content {
   margin: 0 4rem;
   text-align: center;
@@ -58,6 +64,15 @@ h5 {
 .page__title {
   padding: 2rem;
   text-align: center;
+}
+
+.page__img {
+  max-width: 1000px;
+  margin: 2rem !important;
+}
+
+.page__button {
+  margin: 2rem !important;
 }
 
 .information__text {

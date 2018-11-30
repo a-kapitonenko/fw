@@ -4,6 +4,10 @@
   margin: 2rem 0;
 }
 
+.order-selection__section-tittle {
+  margin-bottom: 1rem;
+}
+
 .order-selection__button {
   text-decoration: none;
 }

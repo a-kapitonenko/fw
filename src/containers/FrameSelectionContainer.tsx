@@ -27,7 +27,7 @@ type PropsFromState = {
   filterFrames: Frame[];
   selectedFrame: Frame;
   similarFrames: Frame[];
-}
+};
 
 type PropsFromDispatch = {
   handleFetch: typeof framesActions.fetchSimilarFrames;
@@ -36,8 +36,9 @@ type PropsFromDispatch = {
   setStep: typeof framesActions.setStep;
   setSelectedFrame: typeof framesActions.setSelectedFrame;
   resetSelectedFrame: typeof framesActions.resetSelectedFrame;
+  resetSimilarFrames: typeof framesActions.resetSimilarFrames;
   handleSubmit: typeof framesActions.fetchSubmit;
-}
+};
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
@@ -60,14 +61,18 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setStep: (step: number) => dispatch(framesActions.setStep(step)),
   setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
   resetSelectedFrame: () => dispatch(framesActions.resetSelectedFrame()),
+  resetSimilarFrames: () => dispatch(framesActions.resetSimilarFrames()),
   handleSubmit: (order: IOrderState, frame: Frame) => dispatch(framesActions.fetchSubmit(order, frame)),
 });
 
 class FrameSelectionContainer extends React.Component<ComponentProps> {
-  public componentDidMount() {
-    const { order, handleFetch } = this.props;
+  public componentDidUpdate(prevProps: ComponentProps) {
+    const { order, step, similarFrames, handleFetch } = this.props;
+    const isEmptySimilarFrames = isEmptyObject(similarFrames);
 
-    handleFetch(order);
+    if (step === 2 && prevProps.step === 1 && isEmptySimilarFrames) {
+      handleFetch(order);
+    }
   }
 
   private handleClick = (frame: Frame) => {

@@ -30,6 +30,6 @@ export interface IFilterState {
   readonly fetching: boolean;
   readonly errors: string;
   readonly groups: Groups;
-  readonly query: Object;
+  readonly query: object;
   readonly frames: Frame[];
 };

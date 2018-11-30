@@ -3,7 +3,7 @@ import { ILensesState, LensesActionTypes } from './types';
 
 const initialState: ILensesState = {
   fetching: false,
-  list: [],
+  lenses: [],
   errors: '',
 }
 
@@ -13,18 +13,16 @@ const reducer: Reducer<ILensesState> = (state = initialState, action) => {
       return { ...state, fetching: true };
     }
     case LensesActionTypes.FETCH_SUCCESS: {
-      return { 
-        ...state, 
-        fetching: false, 
-        list: action.payload 
-      };
+      return { ...state, fetching: false, lenses: action.payload };
     }
     case LensesActionTypes.FETCH_ERROR: {
-      return { 
-        ...state, 
-        fetching: false, 
-        errors: action.payload 
-      };
+      return { ...state, fetching: false, errors: action.payload };
+    }
+    case LensesActionTypes.SET_ERROR: {
+      return { ...state, errors: action.payload };
+    }
+    case LensesActionTypes.RESET_ERROR: {
+      return { ...state, errors: '' };
     }
     default: {
       return state

@@ -15,6 +15,7 @@ export const close = () => action(FramesActionTypes.CLOSE);
 export const setStep = (step: number) => action(FramesActionTypes.SET_STEP, step);
 export const setSelectedFrame = (frame: Frame) => action(FramesActionTypes.SET_SELECTED_FRAME, frame);
 export const resetSelectedFrame = () => action(FramesActionTypes.RESET_SELECTED_FRAME);
+export const resetSimilarFrames = () => action(FramesActionTypes.RESET_SIMILAR_FRAMES);
 
 export const fetchSimilarFrames: any = (order: IOrderState) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
@@ -41,7 +42,7 @@ export const fetchSubmit: any = (order: IOrderState, frame: Frame) => (dispatch:
     if (response.success) {
       dispatch(close());
       dispatch(setStep(1));
-      dispatch(OrderActions.setFrame(frame));
+      dispatch(OrderActions.setBoss('frame', frame));
       dispatch(OrderActions.deleteErrors('frame'));
       dispatch(OrderActions.setMessage(response.result.message));
       dispatch(OrderActions.setFittingProperties(response.result.fittingHeight));

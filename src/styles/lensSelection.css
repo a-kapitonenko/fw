@@ -18,3 +18,7 @@
 .lens-selected {
   background-color: darkgray !important;
 }
+
+.lens-selection__error {
+  color: red;
+}

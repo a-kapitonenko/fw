@@ -3,6 +3,12 @@ const rec = 'Based on the prescription, the lens selection will use an 8 base le
 export const savePrescriptionInformation = (values) => {
   return {
     success: true,
+  };
+};
+
+export const saveLensInformation = (prescription, lens) => {
+  return {
+    success: true,
     recommendation: rec
   };
 };
@@ -29,5 +35,19 @@ export const checkFrameCompatibility = (order) => {
   return {
     success: false,
     result: 'This lens does not accecptable with selected frame.'
+  };
+};
+
+export const checkLens = (prescription, lens) => {
+  return {
+    success: true,
+    result: ''
+  };
+};
+
+export const checkLensError = (prescription, lens) => {
+  return {
+    success: false,
+    result: 'error',
   };
 };

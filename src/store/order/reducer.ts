@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { IOrderState, OrderActionTypes, Prescription, OculusInfo, Blueprint, Barcode } from './types';
+import { IOrderState, OrderActionTypes, Boss, Prescription, OculusInfo, Blueprint, Barcode } from './types';
 import { Frame } from '../frames/types';
 import { Lens } from '../lenses/types';
 
@@ -14,31 +14,46 @@ const initialOculusState: OculusInfo = {
 };
 
 const initialState: IOrderState = {
-  prescription: <Prescription>{
-    OD: initialOculusState,
-    OS: initialOculusState
+  isFetching: false,
+  boss: <Boss>{
+    prescription: <Prescription>{
+      OD: initialOculusState,
+      OS: initialOculusState
+    },
+    fittingHeight: 0,
+    frame: <Frame>{},
+    lens: <Lens>{},
+    barcode: <Barcode>{},
   },
-  frame: <Frame>{},
-  fittingHeight: 0,
   fittingProperties: [],
-  lens: <Lens>{},
   recommendation: '',
   message: '',
   blueprint: <Blueprint>{},
-  barcode: <Barcode>{},
   errors: {},
 };
 
 const reducer: Reducer<IOrderState> = (state = initialState, action) => {
   switch (action.type) {
+    case OrderActionTypes.FETCH_REQUEST: {
+      return { ...state, isFetching: true };
+    }
+    case OrderActionTypes.FETCH_CLOSE: {
+      return { ...state, isFetching: false };
+    }
+    case OrderActionTypes.SET_BOSS: {
+      return { ...state, boss: { ...state.boss, [action.payload.type]: action.payload.value } }
+    }
     case OrderActionTypes.SET_RX_INFORMATION: {
-      return { 
-        ...state, 
-        prescription: {
-          ...state.prescription,
-          [action.payload.type]: {
-            ...state.prescription[action.payload.type],
-            [action.payload.field]: action.payload.value
+      return {
+        ...state,
+        boss: {
+          ...state.boss,
+          prescription: {
+            ...state.boss.prescription,
+            [action.payload.type]: {
+              ...state.boss.prescription[action.payload.type],
+              [action.payload.field]: action.payload.value
+            }
           }
         }
       };
@@ -46,26 +61,14 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     case OrderActionTypes.SET_RECOMMENDATION: {
       return { ...state, recommendation: action.payload };
     }
-    case OrderActionTypes.SET_LENS: {
-      return { ...state, lens: action.payload };
-    }
-    case OrderActionTypes.SET_FRAME: {
-      return { ...state, frame: action.payload };
-    }
     case OrderActionTypes.SET_MESSAGE: {
       return { ...state, message: action.payload };
     }
     case OrderActionTypes.SET_FITTING_PROPERTIES: {
       return { ...state, fittingProperties: action.payload };
     }
-    case OrderActionTypes.SET_FITTING_HEIGHT: {
-      return { ...state, fittingHeight: action.payload };
-    }
     case OrderActionTypes.SET_BLUEPRINT: {
       return { ...state, blueprint: action.payload };
-    }
-    case OrderActionTypes.SET_BARCODE: {
-      return { ...state, barcode: action.payload };
     }
     case OrderActionTypes.SET_ERRORS: {
       return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error }};
@@ -77,7 +80,7 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
       return { ...state, errors }
     }
     default: {
-      return state
+      return state;
     }
   }
 };

@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 import PageHeader from './containers/PageHeader';
-import Home from './containers/OrderSelection';
+import Menu from './containers/Menu';
+import OrderSelection from './containers/OrderSelection';
 import BossContainer from './containers/BossContainer';
 
 import './styles/index.css';
@@ -15,8 +16,9 @@ class App extends React.Component {
           <React.Fragment>
             <PageHeader />
               <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/order" component={BossContainer}/>
+                <Route exact path="/" component={Menu} />
+                <Route path="/select" component={OrderSelection} />
+                <Route path="/order" component={BossContainer} />
               </Switch>
           </React.Fragment>
         </BrowserRouter>
