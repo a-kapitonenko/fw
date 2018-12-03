@@ -141,7 +141,7 @@ export const getFramesByUpc = (order, upc) => {
 
 export const checkCompatibility = () => true;
 
-export const getFilterGroups = (order) => {
+export const getFilterGroups = () => {
   return {
     success: true,
     result: {

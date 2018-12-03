@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { ApplicationState } from '../store';
 import { IOrderState } from '../store/order/types';
@@ -19,7 +20,7 @@ import '../styles/frameSelection.css';
 
 type PropsFromState = {
   order: IOrderState;
-  fetching: boolean;
+  isFetching: boolean;
   errors: string;
   open: boolean;
   step: number;
@@ -44,7 +45,7 @@ type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
   order: state.order,
-  fetching: state.frames.fetching,
+  isFetching: state.frames.isFetching,
   errors: state.frames.errors,
   open: state.frames.open,
   step: state.frames.step,
@@ -88,6 +89,7 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
   public render() {
     const {
       order,
+      isFetching,
       open,
       step,
       searchFrames,
@@ -104,6 +106,7 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
     return (
       <Dialog open={open} fullScreen={true} onEscapeKeyDown={() => handleClose()} className="frame-selection__wrapper">
         <div className="frame-selection__content yellow-section">
+        {isFetching && <CircularProgress className="page__progress"/>}
           {isFrameSelected && (
             <div className="frame-selection__frame-selected">
               <div>{selectedFrame.value}</div>

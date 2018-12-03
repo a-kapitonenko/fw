@@ -14,20 +14,30 @@ export type Groups = {
   material: Field[];
 };
 
+export const enum GroupsTypes {
+  COLOR = 'color',
+  WIDTH = 'width',
+  NOSE_BRIDGE = 'noseBridge',
+  SHAPE = 'shape',
+  MATERIAL = 'material',
+}
+
 export const enum FilterActionTypes {
   FETCH_REQUEST = '@@filter/FETCH_REQUEST',
-  FETCH_SUCCESS = '@@filter/FETCH_SUCCESS',
-  FETCH_ERROR = '@@filter/FETCH_ERROR',
+  CLOSE_REQUEST = '@@filter/CLOSE_REQUEST',
+  SET_ERRORS = '@@filter/SET_ERRORS',
+  CLEAR_ERRORS = '@@filter/CLEAR_ERRORS',
+  SET_GROUPS = '@@filter/SET_GROUPS',
+  SET_FRAMES = '@@filter/SET_FRAMES',
   CHANGE_CHECKED = '@@filter/CHANGE_CHECKED',
   RESET_CHECKED = '@@filter/RESET_CHECKED',
   ADD_QUERY = '@@filter/ADD_QUERY',
   DELETE_QUERY = '@@filter/DELETE_QUERY',
-  RESET_QUERY = '@@filter/RESET_QUERY',
-  SET_FRAMES = '@@filter/SET_FRAMES',
-};
+  CLEAR_QUERY = '@@filter/CLEAR_QUERY',
+}
 
 export interface IFilterState {
-  readonly fetching: boolean;
+  readonly isFetching: boolean;
   readonly errors: string;
   readonly groups: Groups;
   readonly query: object;

@@ -2,8 +2,7 @@ import { Reducer } from 'redux';
 import { Frame, FramesState, FramesActionTypes } from './types';
 
 const initialState: FramesState = {
-  fetching: false,
-  update: false,
+  isFetching: false,
   errors: '',
   open: false,
   step: 1,
@@ -14,13 +13,16 @@ const initialState: FramesState = {
 const reducer: Reducer<FramesState> = (state = initialState, action) => {
   switch (action.type) {
     case FramesActionTypes.FETCH_REQUEST: {
-      return { ...state, fetching: true };
+      return { ...state, isFetching: true };
     }
-    case FramesActionTypes.FETCH_SUCCESS: {
-      return { ...state, fetching: false, similarFrames: action.payload };
+    case FramesActionTypes.CLOSE_REQUEST: {
+      return { ...state, isFetching: false };
     }
-    case FramesActionTypes.FETCH_ERROR: {
-      return { ...state, fetching: false, errors: action.payload };
+    case FramesActionTypes.SET_ERRORS: {
+      return { ...state, errors: action.payload };
+    }
+    case FramesActionTypes.CLEAR_ERRORS: {
+      return { ...state, errors: '' };
     }
     case FramesActionTypes.OPEN: {
       return { ...state, open: true };
@@ -37,6 +39,9 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     case FramesActionTypes.RESET_SELECTED_FRAME: {
       return { ...state, selectedFrame: <Frame>{} };
     }
+    case FramesActionTypes.SET_SIMILAR_FRAMES: {
+      return { ...state, similarFrames: action.payload };
+    }
     case FramesActionTypes.RESET_SIMILAR_FRAMES: {
       return { ...state, similarFrames: [] };
     }
@@ -46,4 +51,4 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
   }
 };
 
-export { reducer as FramesReducer }
+export { reducer as FramesReducer };

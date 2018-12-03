@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { IOrderState } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 
 import '../styles/lensSelection.css';
 
 type ComponentProps = {
-  order: IOrderState;
-  lenses: Lens[];
   errors: string;
+  disabled: boolean;
+  lenses: Lens[];
+  selectedLens: Lens;
   handleSubmit: (lens: Lens) => void;
 }
 
-const LensSelection: React.SFC<ComponentProps> = ({ order, lenses, errors, handleSubmit }) => {
+const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, selectedLens, handleSubmit }) => {
   return (
     <section className="order-selection__section">
       <h2 className="order-selection__section-tittle">
@@ -24,8 +24,12 @@ const LensSelection: React.SFC<ComponentProps> = ({ order, lenses, errors, handl
         {lenses.map((lens: Lens) => (
           <div
             key={lens.value}
-            className={`lens-selection__article ${order.boss.lens === lens ? 'lens-selected' : ''}`}
-            onClick={() => handleSubmit(lens)}
+            className={`lens-selection__article ${selectedLens === lens ? 'lens-selected' : ''}`}
+            onClick={() => {
+              if (!disabled) {
+                return handleSubmit(lens);
+              }
+            }}
           >
             {lens.name}
           </div>

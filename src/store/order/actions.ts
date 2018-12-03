@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import * as lensesActions from '../lenses/actions';
-import { OrderActionTypes, Prescription, IOrderState, Blueprint } from './types';
+import { OrderActionTypes, Prescription, IOrderState, Blueprint, BossTypes } from './types';
 import { Lens } from '../lenses/types';
 
 import { 
@@ -15,15 +15,15 @@ import {
 } from '../../test/order';
 
 export const fetchRequest = () => action(OrderActionTypes.FETCH_REQUEST);
-export const fetchClose = () => action(OrderActionTypes.FETCH_CLOSE);
-export const setBoss = (type: string, value: any) => action(OrderActionTypes.SET_BOSS, { type, value });
+export const closeRequest = () => action(OrderActionTypes.CLOSE_REQUEST);
+export const setErrors = (type: string, error: string) => action(OrderActionTypes.SET_ERRORS, { type, error });
+export const clearErrors = (type: string) => action(OrderActionTypes.CLEAR_ERRORS, type);
+export const setBoss = (type: BossTypes, value: any) => action(OrderActionTypes.SET_BOSS, { type, value });
 export const setRxInformation = (type: string, field: string, value: string) => action(OrderActionTypes.SET_RX_INFORMATION, { type, field, value });
 export const setRecommendation = (recommendation: string) => action(OrderActionTypes.SET_RECOMMENDATION, recommendation);
 export const setMessage = (message: string) => action(OrderActionTypes.SET_MESSAGE, message);
 export const setFittingProperties = (properties: any) => action(OrderActionTypes.SET_FITTING_PROPERTIES, properties);
 export const setBlueprint = (blueprint: Blueprint) => action(OrderActionTypes.SET_BLUEPRINT, blueprint);
-export const setErrors = (type: string, error: string) => action(OrderActionTypes.SET_ERRORS, { type, error });
-export const deleteErrors = (type: string) => action(OrderActionTypes.DELETE_ERRORS, type);
 
 export const savePrescription: any = (prescription: Prescription) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
@@ -36,16 +36,16 @@ export const savePrescription: any = (prescription: Prescription) => (dispatch: 
     }, 1000);
   })
   .then((response: any) => {
+    dispatch(closeRequest());
+    
     if (response.success) {
       dispatch(lensesActions.fetchLenses());
     }
-
-    dispatch(fetchClose());
   })
 };
 
 export const saveLens: any = (prescription: Prescription, lens: Lens) => (dispatch: Dispatch) => {
-  dispatch(setBoss('lens', lens));
+  dispatch(setBoss(BossTypes.LENS, lens));
 
   return new Promise((resolver) => {
     const response = saveLensInformation(prescription, lens)
@@ -62,7 +62,7 @@ export const saveLens: any = (prescription: Prescription, lens: Lens) => (dispat
 };
 
 export const saveFittingHeight: any = (order: IOrderState, height: number) => (dispatch: Dispatch) => {
-  dispatch(setBoss('fittingHeight', height));
+  dispatch(setBoss(BossTypes.FITTING_HEIGHT, height));
 
   return new Promise((resolver) => {
     const response = saveFittingHeightInformation(order, height);
@@ -102,7 +102,7 @@ export const checkCompatibility: any = (order: IOrderState) => (dispatch: Dispat
   })
   .then((response: any) => {
     if (!response.success) {
-      dispatch(setErrors('frame', response.result));
+      dispatch(setErrors(BossTypes.FRAME, response.result));
     }
   })
 };
@@ -117,8 +117,8 @@ export const fetchLensCompatibility: any = (prescription: Prescription, lens: Le
   })
   .then((response: any) => {
     if (!response.success) {
-      dispatch(setBoss('lens', {} as Lens));
-      dispatch(lensesActions.setError(response.result));
+      dispatch(setBoss(BossTypes.LENS, {} as Lens));
+      dispatch(lensesActions.setErrors(response.result));
     }
   })
 };
@@ -133,7 +133,7 @@ export const submitOrder: any = (order: IOrderState) => (dispatch: Dispatch) => 
   })
   .then((response: any) => {
     if (response.success) {
-      dispatch(setBoss('barcode', response.result));
+      dispatch(setBoss(BossTypes.BARCODE, response.result));
     }
   })
 }; 

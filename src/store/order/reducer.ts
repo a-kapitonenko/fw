@@ -37,8 +37,18 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     case OrderActionTypes.FETCH_REQUEST: {
       return { ...state, isFetching: true };
     }
-    case OrderActionTypes.FETCH_CLOSE: {
+    case OrderActionTypes.CLOSE_REQUEST: {
       return { ...state, isFetching: false };
+    }
+    case OrderActionTypes.SET_ERRORS: {
+      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error }};
+    }
+    case OrderActionTypes.CLEAR_ERRORS: {
+      const errors = { ...state.errors };
+      
+      delete(errors[action.payload]);
+
+      return { ...state, errors }
     }
     case OrderActionTypes.SET_BOSS: {
       return { ...state, boss: { ...state.boss, [action.payload.type]: action.payload.value } }
@@ -69,15 +79,6 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     }
     case OrderActionTypes.SET_BLUEPRINT: {
       return { ...state, blueprint: action.payload };
-    }
-    case OrderActionTypes.SET_ERRORS: {
-      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error }};
-    }
-    case OrderActionTypes.DELETE_ERRORS: {
-      const errors = { ...state.errors };
-      delete(errors[action.payload]);
-
-      return { ...state, errors }
     }
     default: {
       return state;

@@ -13,7 +13,7 @@ import { isPrescriptionFilled } from '../helpers/orderSelectionHelper';
 import PrescriptionSelection from '../components/PrescriptionSelection';
 
 type PropsFromState = {
-  isFetching: boolean,
+  disabled: boolean,
   prescription: Prescription,
   frame: Frame,
 };
@@ -26,7 +26,7 @@ type PropsFromDispatch = {
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
-  isFetching: state.order.isFetching,
+  disabled: state.order.isFetching,
   prescription: state.order.boss.prescription,
   frame: state.order.boss.frame,
 });
@@ -47,11 +47,11 @@ class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
   }
 
   public render() {
-    const { isFetching, prescription, frame, handleChange } = this.props;
+    const { disabled, prescription, frame, handleChange } = this.props;
     const readOnly = !isEmptyObject(frame);
 
     return (
-      <PrescriptionSelection prescription={prescription} readOnly={readOnly} disabled={isFetching} handleChange={handleChange} />
+      <PrescriptionSelection disabled={disabled} prescription={prescription} readOnly={readOnly}  handleChange={handleChange} />
     );
   }
 }

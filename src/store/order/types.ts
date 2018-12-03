@@ -30,20 +30,27 @@ export type Boss = {
   frame: Frame;
   lens: Lens;
   barcode: Barcode;
+};
+
+export const enum BossTypes {
+  FITTING_HEIGHT = 'fittingHeight',
+  FRAME = 'frame',
+  LENS = 'lens',
+  BARCODE = 'barcode',
 }
 
 export const enum OrderActionTypes {
   FETCH_REQUEST = '@@order/FETCH_REQUEST',
-  FETCH_CLOSE = '@@order/FETCH_CLOSE',
+  CLOSE_REQUEST = '@@order/CLOES_REQUEST',
+  SET_ERRORS = '@@order/SET_ERRORS',
+  CLEAR_ERRORS = '@@order/DELETE_ERRORS',
   SET_BOSS = '@@order/SET_BOSS',
   SET_RX_INFORMATION = '@@order/SET_RX_INFORMATION',
   SET_RECOMMENDATION = '@@order/SET_RECOMMENDATION',
   SET_MESSAGE = '@@order/SET_MESSAGE',
   SET_FITTING_PROPERTIES = '@@order/SET_FITTING_PROPERTIES',
   SET_BLUEPRINT = '@@order/SET_BLUEPRINT',
-  SET_ERRORS = '@@order/SET_ERRORS',
-  DELETE_ERRORS = '@@order/DELETE_ERRORS'
-};
+}
 
 export interface IOrderState {
   readonly isFetching: boolean;

@@ -3,54 +3,59 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { ApplicationState } from '../store';
-import { IOrderState, Prescription } from '../store/order/types';
+import { Prescription } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import * as lensesActions from '../store/lenses/actions';
-import * as orderActions from '../store/order/actions';
 
 import LensSelection from '../components/LensSelection';
 
 import '../styles/lensSelection.css';
 
 type PropsFromState = {
-  order: IOrderState;
-  lenses: Lens[];
   errors: string;
+  disabled: boolean; 
+  lenses: Lens[];
+  selectedLens: Lens;
+  prescription: Prescription;
 };
 
 type PropsFromDispatch = {
-  handleClick: typeof orderActions.saveLens;
-  resetError: typeof lensesActions.resetError;
+  clearErrors: typeof lensesActions.clearErrors;
+  saveLens: typeof lensesActions.saveLens;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
-  order: state.order,
-  lenses: state.lenses.lenses,
   errors: state.lenses.errors,
+  disabled: state.order.isFetching,
+  lenses: state.lenses.lenses,
+  selectedLens: state.order.boss.lens,
+  prescription: state.order.boss.prescription,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleClick: (prescription: Prescription, lens: Lens) => dispatch(orderActions.saveLens(prescription, lens)),
-  resetError: () => dispatch(lensesActions.resetError()),
+  clearErrors: () => dispatch(lensesActions.clearErrors()),
+  saveLens: (prescription: Prescription, lens: Lens) => dispatch(lensesActions.saveLens(prescription, lens)),
 });
 
 class LensSelectionContainer extends React.Component<ComponentProps> {
   handleSubmit = (lens: Lens) => {
-    const { order, errors, resetError, handleClick } = this.props;
+    const { prescription, errors, clearErrors, saveLens } = this.props;
     
     if(errors) {
-      resetError();
+      clearErrors();
     }
 
-    handleClick(order.boss.prescription, lens);
+    saveLens(prescription, lens);
   }
 
   render() {
-    const { order, lenses, errors } = this.props;
+    const { errors, disabled, lenses, selectedLens } = this.props;
 
-    return <LensSelection order={order} lenses={lenses} errors={errors} handleSubmit={this.handleSubmit} />
+    return (
+      <LensSelection errors={errors} disabled={disabled} lenses={lenses} selectedLens={selectedLens}  handleSubmit={this.handleSubmit} />
+    );
   }
 }
 

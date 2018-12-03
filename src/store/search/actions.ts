@@ -2,29 +2,37 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import { SearchActionTypes } from './types';
-import { IOrderState } from '../order/types';
+import { Boss } from '../order/types';
 import { Frame } from '../frames/types';
 
 import { getFramesByUpc } from '../../test/frames';
 
 export const fetchRequest = () => action(SearchActionTypes.FETCH_REQUEST);
-export const fetchSuccess = (frames: Frame[]) => action(SearchActionTypes.FETCH_SUCCESS, frames);
-export const fetchError = (message: string) => action(SearchActionTypes.FETCH_ERROR, message);
+export const closeRequest = () => action(SearchActionTypes.CLOSE_REQUEST);
+export const setErrors = (errors: string) => action(SearchActionTypes.SET_ERRORS, errors);
+export const clearErrors = () => action(SearchActionTypes.CLEAR_ERRORS);
+export const setFrames = (frames: Frame[]) => action(SearchActionTypes.SET_FRAMES, frames); 
 export const setSelectedFrames = (frames: Frame[]) => action(SearchActionTypes.SET_SELECTED_FRAMES, frames);
 
-export const fetchFrames: any = (order: IOrderState, upc: string) => (dispatch: Dispatch) => {
+export const fetchFrames: any = (boss: Boss, upc: string) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
   
   return new Promise((resolver) => {
-    const response = getFramesByUpc(order, upc);
+    const response = getFramesByUpc(boss, upc);
     
     setTimeout(() => {
       resolver(response);
     }, 1000);
   })
   .then((response: any) => {
+    dispatch(closeRequest());
+
     if (response.success) {
-      dispatch(fetchSuccess(response.result));
+      dispatch(clearErrors());
+      dispatch(setFrames(response.result));
+    } else {
+      dispatch(setErrors(response.errors));
     }
   })
+  .catch((errors: any) => dispatch(setErrors(errors)))
 };

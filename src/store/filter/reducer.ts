@@ -10,9 +10,9 @@ const initialGroupsState = {
 }
 
 const initialState: IFilterState = {
-  fetching: false,
-  groups: <Groups>initialGroupsState,
+  isFetching: false,
   errors: '',
+  groups: <Groups>initialGroupsState,
   query: initialGroupsState,
   frames: []
 };
@@ -20,13 +20,22 @@ const initialState: IFilterState = {
 const reducer: Reducer<IFilterState> = (state = initialState, action) => {
   switch (action.type) {
     case FilterActionTypes.FETCH_REQUEST: {
-      return { ...state, fetching: true };
+      return { ...state, isFetching: true };
     }
-    case FilterActionTypes.FETCH_SUCCESS: {
-      return { ...state, fetching: false, groups: action.payload };
+    case FilterActionTypes.CLOSE_REQUEST: {
+      return { ...state, isFetching: false };
     }
-    case FilterActionTypes.FETCH_ERROR: {
-      return { ...state, fetching: false, errors: action.payload };
+    case FilterActionTypes.SET_ERRORS: {
+      return { ...state, errors: action.payload };
+    }
+    case FilterActionTypes.CLEAR_ERRORS: {
+      return { ...state, errors: '' };
+    }
+    case FilterActionTypes.SET_GROUPS: {
+      return { ...state, groups: action.payload };
+    }
+    case FilterActionTypes.SET_FRAMES: {
+      return { ...state, frames: action.payload };
     }
     case FilterActionTypes.CHANGE_CHECKED: {
       const item = state.groups[action.payload.type].map((field: Field) => {
@@ -80,14 +89,11 @@ const reducer: Reducer<IFilterState> = (state = initialState, action) => {
         }
       };
     }
-    case FilterActionTypes.RESET_QUERY: {
+    case FilterActionTypes.CLEAR_QUERY: {
       return { ...state, query: initialGroupsState };
     }
-    case FilterActionTypes.SET_FRAMES: {
-      return { ...state, frames: action.payload };
-    }
     default: {
-      return state
+      return state;
     }
   }
 };

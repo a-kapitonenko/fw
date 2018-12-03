@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 import { ISearchState, SearchActionTypes } from './types';
 
 const initialState: ISearchState = {
-  fetching: false,
+  isFetching: false,
   errors: '',
   frames: [],
   selectedFrames: []
@@ -11,19 +11,25 @@ const initialState: ISearchState = {
 const reducer: Reducer<ISearchState> = (state = initialState, action) => {
   switch (action.type) {
     case SearchActionTypes.FETCH_REQUEST: {
-      return { ...state, fetching: true };
+      return { ...state, isFetching: true };
     }
-    case SearchActionTypes.FETCH_SUCCESS: {
-      return { ...state, fetching: false, frames: action.payload };
+    case SearchActionTypes.CLOSE_REQUEST: {
+      return { ...state, isFetching: false };
     }
-    case SearchActionTypes.FETCH_ERROR: {
-      return { ...state, fetching: false, error: action.payload };
+    case SearchActionTypes.SET_ERRORS: {
+      return { ...state, errors: action.payload };
+    }
+    case SearchActionTypes.CLEAR_ERRORS: {
+      return { ...state, errors: action.payload };
+    }
+    case SearchActionTypes.SET_FRAMES: {
+      return { ...state, frames: action.payload };
     }
     case SearchActionTypes.SET_SELECTED_FRAMES: {
       return { ...state, selectedFrames: action.payload };
     }
     default: {
-      return state
+      return state;
     }
   }
 };

@@ -53,8 +53,13 @@
 }
 
 .frame-selection__table {
+  position: relative;
   overflow-x: auto;
   margin: 2rem;
+}
+
+.frame-selection__table-opacity {
+  opacity: 0.5;
 }
 
 .frame-selection__table-row {

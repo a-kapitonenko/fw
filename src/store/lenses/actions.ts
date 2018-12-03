@@ -2,27 +2,60 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import { LensesActionTypes, Lens } from './types';
-import { IOrderState } from '../order/types';
+import { IOrderState, Prescription, BossTypes } from '../order/types';
+import * as orderActions from '../order/actions';
 
 import { getLenses } from '../../test/lenses';
+import { saveLensInformation } from '../../test/order';
 
-export const fetchRequest = () => action(LensesActionTypes.FETCH_REQUEST);
-export const fetchSuccess = (list: Lens[]) => action(LensesActionTypes.FETCH_SUCCESS, list);
-export const fetchError = (message: string) => action(LensesActionTypes.FETCH_ERROR, message);
-export const setError = (error: string) => action(LensesActionTypes.SET_ERROR, error);
-export const resetError = () => action(LensesActionTypes.RESET_ERROR);
+// export const fetchRequest = () => action(LensesActionTypes.FETCH_REQUEST);
+// export const closeReauest = () => action(LensesActionTypes.CLOSE_REQUEST);
+export const setErrors = (errors: string) => action(LensesActionTypes.SET_ERRORS, errors);
+export const clearErrors = () => action(LensesActionTypes.CLEAR_ERRORS);
+export const setLenses = (lenses: Lens[]) => action(LensesActionTypes.SET_LENSES, lenses);
 
 export const fetchLenses: any = (order: IOrderState) => (dispatch: Dispatch) => {
-  dispatch(fetchRequest());
+  dispatch(orderActions.fetchRequest());
 
   return new Promise((resolver) => {
     const response = getLenses(order);
-
-    resolver(response)
+    
+    setTimeout(() => {
+      resolver(response);
+    }, 1000);
   })
   .then((response: any) => {
+    dispatch(orderActions.closeRequest());
+
     if (response.success) {
-      dispatch(fetchSuccess(response.lenses));
+      dispatch(setLenses(response.lenses));
+    } else { 
+      dispatch(setErrors(response.errors));
     }
   })
+  .catch((errors: any) => dispatch(setErrors(errors)))
+};
+
+export const saveLens: any = (prescription: Prescription, lens: Lens) => (dispatch: Dispatch) => {
+  dispatch(orderActions.fetchRequest());
+
+  return new Promise((resolver) => {
+    const response = saveLensInformation(prescription, lens)
+
+    setTimeout(() => {
+      resolver(response);
+    }, 1000);
+  })
+  .then((response: any) => {
+    dispatch(orderActions.closeRequest());
+
+    if (response.success) {
+      dispatch(orderActions.setRecommendation(response.recommendation));
+      dispatch(orderActions.setBoss(BossTypes.LENS, lens));
+
+    } else { 
+      dispatch(setErrors(response.errors));
+    }
+  })
+  .catch((errors: any) => dispatch(setErrors(errors)))
 };
