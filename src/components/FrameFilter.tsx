@@ -20,6 +20,7 @@ const FrameFilter: React.SFC<ComponentProps> = ({ disabled, errors, step, groups
   return (
     <div className="frame-filter">
       <h2 className="frame-filter__title">Or use filter to find best variant</h2>
+      {errors && <div className="frame-filter__error">{errors}</div>}
       <div className="frame-filter__bar">
         <Button variant="contained" disabled={disabled} onClick={() => handleClick(1)}>Color</Button>
         <Button variant="contained" disabled={disabled} onClick={() => handleClick(2)}>Fit</Button>

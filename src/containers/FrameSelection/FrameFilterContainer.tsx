@@ -4,18 +4,16 @@ import { connect } from 'react-redux';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import { ApplicationState } from '../store';
-import { Boss } from '../store/order/types';
-import { Groups, Field } from '../store/filter/types';
-import { Frame } from '../store/frames/types';
-import * as filterActions from '../store/filter/actions';
-import * as framesActions from '../store/frames/actions';
+import { ApplicationState } from '../../store';
+import { Boss } from '../../store/order/types';
+import { Groups, Field } from '../../store/filter/types';
+import { Frame } from '../../store/frames/types';
+import * as filterActions from '../../store/filter/actions';
 
-import { isEmptyObject } from '../helpers/mathHelper';
-import { isEmptyQuery } from '../helpers/filterHelper';
+import { isEmptyObject } from '../../helpers/mathHelper';
+import { isEmptyQuery } from '../../helpers/filterHelper';
 
-import FrameFilter from '../components/FrameFilter';
-import FrameTable from '../components/FrameTable';
+import FrameFilter from '../../components/FrameFilter';
 
 type PropsFromState = {
   isFetching: boolean;
@@ -24,17 +22,16 @@ type PropsFromState = {
   query: Object;
   boss: Boss;
   frames: Frame[];
-  selectedFrame: Frame;
 }
 
 type PropsFromDispatch = {
   fetchFrames: typeof filterActions.fetchFrames,
+  clearErrors: typeof filterActions.clearErrors,
   changeChecked: typeof filterActions.changeChecked,
   resetChecked: typeof filterActions.resetChecked,
   addQuery: typeof filterActions.addQuery,
   deleteQuery: typeof filterActions.deleteQuery,
   resetQuery: typeof filterActions.clearQuery,
-  setSelectedFrame: typeof framesActions.setSelectedFrame,
 }
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -50,17 +47,16 @@ const mapStateToProps = (state: ApplicationState) => ({
   query: state.filter.query,
   boss: state.order.boss,
   frames: state.filter.frames,
-  selectedFrame: state.frames.selectedFrame,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchFrames: (boss: Boss, query: Object) => dispatch(filterActions.fetchFrames(boss, query)),
+  clearErrors: () => dispatch(filterActions.clearErrors()),
   changeChecked: (type: string, name: string, value: boolean) => dispatch(filterActions.changeChecked(type, name, value)),
   resetChecked: () => dispatch(filterActions.resetChecked()),
   addQuery: (type: string, value: any) => dispatch(filterActions.addQuery(type, value)),
   deleteQuery: (type: string, value: any) => dispatch(filterActions.deleteQuery(type, value)),
   resetQuery: () => dispatch(filterActions.clearQuery()),
-  setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame))
 });
 
 class FrameSearchContainer extends React.Component<ComponentProps> {
@@ -68,17 +64,21 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
 
   public componentDidMount() {
     const { query, boss, frames, fetchFrames } = this.props;
-    const isFramesEmpty = isEmptyObject(frames);
+    const isEmptyFrames = isEmptyObject(frames);
 
-    if (isFramesEmpty) {
+    if (isEmptyFrames) {
       fetchFrames(boss, query);
     }
   }
 
   public componentDidUpdate(prevProps: ComponentProps) {
-    const { query, boss, fetchFrames } = this.props;
+    const { errors, query, boss, fetchFrames, clearErrors } = this.props;
 
     if (query !== prevProps.query) {
+      if (errors) {
+        clearErrors();
+      }
+
       fetchFrames(boss, query);
     }
   }
@@ -120,27 +120,23 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   };
 
   render() {
-    const { isFetching, errors, groups, query, frames, selectedFrame, resetChecked, resetQuery, setSelectedFrame } = this.props;
+    const { isFetching, errors, groups, query, resetChecked, resetQuery } = this.props;
     const disabledResetFilterButton = isEmptyQuery(query);
 
     return (
-      <div className="frame-selection__form-section -flex-column-between">
-        <FrameFilter
-          disabled={isFetching}
-          errors={errors}
-          step={this.state.step}
-          groups={groups}
-          disabledButton={disabledResetFilterButton}
-          renderGroup={this.renderGroup}
-          handleClick={this.handleClick}
-          resetFilter={() => {
-            resetChecked();
-            resetQuery();
-          }}
-        />
-
-        <FrameTable disabled={isFetching} frames={frames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
-      </div>
+      <FrameFilter
+        disabled={isFetching}
+        errors={errors}
+        step={this.state.step}
+        groups={groups}
+        disabledButton={disabledResetFilterButton}
+        renderGroup={this.renderGroup}
+        handleClick={this.handleClick}
+        resetFilter={() => {
+          resetChecked();
+          resetQuery();
+        }}
+      />
     );
   }
 }

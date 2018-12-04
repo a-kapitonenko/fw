@@ -48,6 +48,6 @@ export const checkLens = (prescription, lens) => {
 export const checkLensError = (prescription, lens) => {
   return {
     success: false,
-    result: 'error',
+    result: "Selected lens doesn't compatibility with patient prescription. Please, select from the following lenses",
   };
 };

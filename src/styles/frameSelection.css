@@ -11,6 +11,10 @@
   text-align: center;
 }
 
+.frame-selection__error {
+  color: red;
+}
+
 /* .frame-selection__form {
 
 } */
@@ -52,11 +56,15 @@
   height: 60px;
 }
 
-.frame-selection__table {
+.frame-selection__table-wrapper {
   position: relative;
   overflow-x: auto;
   margin: 2rem;
 }
+
+/* .frame-selection__table {
+  
+} */
 
 .frame-selection__table-opacity {
   opacity: 0.5;

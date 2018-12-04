@@ -2,16 +2,14 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-import { ApplicationState } from '../store';
-import { Boss } from '../store/order/types';
-import { Frame } from '../store/frames/types';
-import * as searchActions from '../store/search/actions';
-import * as framesActions from '../store/frames/actions';
+import { ApplicationState } from '../../store';
+import { Boss } from '../../store/order/types';
+import { Frame } from '../../store/frames/types';
+import * as searchActions from '../../store/search/actions';
 
-import { frameSearchConfig } from '../constants/frameSearch';
+import { frameSearchConfig } from '../../constants/frameSearch';
 
-import FrameSearch from '../components/FrameSearch';
-import FrameSearchTable from '../components/FrameSearchTable';
+import FrameSearch from '../../components/FrameSearch';
 
 type PropsFromState = {
   isFetching: boolean;
@@ -19,13 +17,12 @@ type PropsFromState = {
   boss: Boss;
   frames: Frame[];
   selectedFrames: Frame[];
-  selectedFrame: Frame;
 };
 
 type PropsFromDispatch = {
   fetchFrames: typeof searchActions.fetchFrames,
+  clearErrors: typeof searchActions.clearErrors,
   setSelectedFrames: typeof searchActions.setSelectedFrames,
-  setSelectedFrame: typeof framesActions.setSelectedFrame,
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -41,13 +38,12 @@ const mapStateToProps = (state: ApplicationState) => ({
   boss: state.order.boss,
   frames: state.search.frames,
   selectedFrames: state.search.selectedFrames,
-  selectedFrame: state.frames.selectedFrame,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchFrames: (boss: Boss, upc: string) => dispatch(searchActions.fetchFrames(boss, upc)),
+  clearErrors: () => dispatch(searchActions.clearErrors()),
   setSelectedFrames: (frames: Frame[]) => dispatch(searchActions.setSelectedFrames(frames)),
-  setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
 });
 
 class FrameSearchContainer extends React.Component<ComponentProps> {
@@ -70,11 +66,15 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   }
 
   private onInputChange = (props: string) => {
-    const { boss, fetchFrames } = this.props;
+    const { errors, boss, fetchFrames, clearErrors } = this.props;
     const { query } = this.state;
 
     if (props.length === frameSearchConfig.queryLength) {
       if (query.length === 0 || query.indexOf(props)) {
+        if (errors) {
+          clearErrors();
+        }
+        
         fetchFrames(boss, props);
 
         this.setState({ query: props });
@@ -89,23 +89,20 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   }
 
   public render() {
-    const { isFetching, frames, selectedFrames, selectedFrame, setSelectedFrame } = this.props;
+    const { isFetching, errors, frames, selectedFrames } = this.props;
     const { open } = this.state;
 
     return (
-      <div className="frame-selection__form-section -flex-column-between">
-        <FrameSearch
-          fetching={isFetching}
-          open={open}
-          list={frames}
-          selectedFrames={selectedFrames}
-          onInputChange={this.onInputChange}
-          onChange={this.onChange}
-          onBlur={this.onBlur}
-        />
-        
-        <FrameSearchTable frames={frames} selectedFrame={selectedFrame} handleClick={setSelectedFrame} />
-      </div>
+      <FrameSearch
+        isFetching={isFetching}
+        errors={errors}
+        open={open}
+        list={frames}
+        selectedFrames={selectedFrames}
+        onInputChange={this.onInputChange}
+        onChange={this.onChange}
+        onBlur={this.onBlur}
+      />
     );
   }
 }

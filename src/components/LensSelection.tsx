@@ -19,7 +19,7 @@ const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, se
         The following products can be used with the patients prescription<br />
         (Select the best NikonEyes Lens that best fits your needs)
       </h2>
-      {errors && <div className="lens-selection__error">{errors}</div>}
+      {errors && <div className="order-selection__error">{errors}</div>}
       <section className="lens-selection__section">
         {lenses.map((lens: Lens) => (
           <div

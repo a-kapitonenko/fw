@@ -18,10 +18,6 @@ type ComponentProps = {
 };
 
 class FrameFavorite extends React.Component<ComponentProps> {
-  componentDidMount() {
-    console.log(111111111111111111);
-  }
-  
   public render() {
     const { similarFrames, selectedFrame, buttonDisabled, setStep, setSelectedFrame, handleSubmit } = this.props;
     return (

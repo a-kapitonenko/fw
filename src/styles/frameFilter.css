@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.frame-filter__error {
+  color: red;
+}
+
 .frame-filter__bar, .frame-filter__groups {
   text-align: center;
 }

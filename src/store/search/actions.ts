@@ -28,7 +28,6 @@ export const fetchFrames: any = (boss: Boss, upc: string) => (dispatch: Dispatch
     dispatch(closeRequest());
 
     if (response.success) {
-      dispatch(clearErrors());
       dispatch(setFrames(response.result));
     } else {
       dispatch(setErrors(response.errors));

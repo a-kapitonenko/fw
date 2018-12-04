@@ -6,11 +6,23 @@ export type Frame = {
   compatibility?: boolean;
 };
 
+export type Errors = {
+  select: string;
+  similarFrames: string;
+  submit: string;
+};
+
+export const enum ErrorTypes {
+  SELECT = 'select',
+  SIMILAR_FRAMES = 'similarFrames',
+  SUBMIT = 'submit',
+}
+
 export const enum FramesActionTypes {
   FETCH_REQUEST = '@@frames/FETCH_REQUEST',
   CLOSE_REQUEST = '@@frames/CLOSE_REQUEST',
-  SET_ERRORS = '@@frames/SET_ERRORS',
-  CLEAR_ERRORS = '@@frames/CLEAR_ERRORS',
+  SET_ERROR = '@@frames/SET_ERROR',
+  CLEAR_ERROR = '@@frames/CLEAR_ERROR',
   OPEN = '@@frames/OPEN',
   CLOSE = '@@frames/CLOSE',
   SET_STEP = '@@frames/SET_STEP',
@@ -22,8 +34,7 @@ export const enum FramesActionTypes {
 
 export interface FramesState {
   readonly isFetching: boolean;
-  // readonly update: boolean;
-  readonly errors?: string;
+  readonly errors: Errors;
   readonly open: boolean;
   readonly step: number;
   readonly selectedFrame: Frame;

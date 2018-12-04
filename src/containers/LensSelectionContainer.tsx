@@ -12,8 +12,8 @@ import LensSelection from '../components/LensSelection';
 import '../styles/lensSelection.css';
 
 type PropsFromState = {
+  isFetching: boolean;
   errors: string;
-  disabled: boolean; 
   lenses: Lens[];
   selectedLens: Lens;
   prescription: Prescription;
@@ -27,8 +27,8 @@ type PropsFromDispatch = {
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
+  isFetching: state.order.isFetching,
   errors: state.lenses.errors,
-  disabled: state.order.isFetching,
   lenses: state.lenses.lenses,
   selectedLens: state.order.boss.lens,
   prescription: state.order.boss.prescription,
@@ -51,10 +51,10 @@ class LensSelectionContainer extends React.Component<ComponentProps> {
   }
 
   render() {
-    const { errors, disabled, lenses, selectedLens } = this.props;
+    const { isFetching, errors, lenses, selectedLens } = this.props;
 
     return (
-      <LensSelection errors={errors} disabled={disabled} lenses={lenses} selectedLens={selectedLens}  handleSubmit={this.handleSubmit} />
+      <LensSelection errors={errors} disabled={isFetching} lenses={lenses} selectedLens={selectedLens}  handleSubmit={this.handleSubmit} />
     );
   }
 }

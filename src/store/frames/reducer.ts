@@ -1,9 +1,13 @@
 import { Reducer } from 'redux';
-import { Frame, FramesState, FramesActionTypes } from './types';
+import { FramesState, FramesActionTypes, Frame, Errors } from './types';
 
 const initialState: FramesState = {
   isFetching: false,
-  errors: '',
+  errors: <Errors>{
+    select: '',
+    similarFrames: '',
+    submit: '',
+  },
   open: false,
   step: 1,
   selectedFrame: <Frame>{},
@@ -18,11 +22,11 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     case FramesActionTypes.CLOSE_REQUEST: {
       return { ...state, isFetching: false };
     }
-    case FramesActionTypes.SET_ERRORS: {
-      return { ...state, errors: action.payload };
+    case FramesActionTypes.SET_ERROR: {
+      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error } };
     }
-    case FramesActionTypes.CLEAR_ERRORS: {
-      return { ...state, errors: '' };
+    case FramesActionTypes.CLEAR_ERROR: {
+      return { ...state, errors: { ...state.errors, [action.payload]: '' } };
     }
     case FramesActionTypes.OPEN: {
       return { ...state, open: true };

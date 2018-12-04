@@ -1,3 +1,5 @@
+let counter = 0;
+
 const checkedFrames = [82850523738, 82850523730];
 
 const fittingHeight = [
@@ -70,46 +72,53 @@ const newFrames = [
 
 const similarFrames = [
   {
-    'upc': '82850523738',
-    'label': 'FM17116',
-    'value': '82850523738',
-    'img': '1.png'
+    upc: '82850523738',
+    label: 'FM17116',
+    value: '82850523738',
+    img: '1.png',
+    compatibility: true
   },
   {
-    'upc': '82852333738',
-    'label': 'FM13416',
-    'value': '82852333738',
-    'img': '2.png'
+    upc: '82852333738',
+    label: 'FM13416',
+    value: '82852333738',
+    img: '2.png',
+    compatibility: true
   },
   {
     'upc': '82850223738',
     'label': 'FM17786',
     'value': '82850223738',
-    'img': '3.png'
+    'img': '3.png',
+    compatibility: true
   },
   {
     'upc': '52850523738',
     'label': 'FN17116',
     'value': '52850523738',
-    'img': '4.png'
+    'img': '4.png',
+    compatibility: true
   },
   {
     'upc': '82850523730',
     'label': 'FM17110',
     'value': '82850523730',
-    'img': '5.png'
+    'img': '5.png',
+    compatibility: true
   },
   {
     'upc': '82850511738',
     'label': 'FF17116',
     'value': '82850511738',
-    'img': '6.png'
+    'img': '6.png',
+    compatibility: true
   },
   {
     'upc': '82840423738',
     'label': 'RR17116',
     'value': '82840423738',
-    'img': '7.png'
+    'img': '7.png',
+    compatibility: true
   }
 ];
 
@@ -139,7 +148,13 @@ export const getFramesByUpc = (order, upc) => {
   }
 };
 
-export const checkCompatibility = () => true;
+export const checkCompatibility = () => {
+  if (counter++ % 2 === 0){
+    return true;
+  }
+
+  return false;
+};
 
 export const getFilterGroups = () => {
   return {
@@ -176,9 +191,11 @@ export const getFilterGroups = () => {
 };
 
 export const getFilterFrames = (order, query) => {
+  const response = newFrames.map((frame) => ({ ...frame, compatibility: true }));
+
   return {
     success: true,
-    frames: newFrames  
+    frames: response  
   };
 };
 

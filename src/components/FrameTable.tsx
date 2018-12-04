@@ -50,14 +50,15 @@ class TestTable extends React.Component<ComponentProps> {
     const { scrollHeight } = this.state;
 
     const emptyRows = frameTableConfig.rowsPerPage - frames.length;
-
+// 
     return (
       <Paper
-        className="frame-selection__table"
+        className="frame-selection__table-wrapper"
         style={{ height: 57 + frameTableConfig.rowHeight * frameTableConfig.rowsPerPage }}
         onScroll={this.handleScroll}
       >
       {disabled && <CircularProgress style={{position: 'absolute', top: `calc(50% + ${scrollHeight}px - 24px)`, left: 'calc(50% - 24px)'}} />}
+        <div className="frame-selection__table">
         <Table className={disabled ? 'frame-selection__table-opacity' : ''}>
           <TableHead>
             <TableRow>
@@ -85,6 +86,7 @@ class TestTable extends React.Component<ComponentProps> {
             )}
           </TableBody>
         </Table>
+        </div>
       </Paper>
     );
   }

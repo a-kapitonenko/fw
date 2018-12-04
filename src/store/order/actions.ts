@@ -11,7 +11,6 @@ import {
   checkFrameCompatibility, 
   saveFittingHeightInformation, 
   checkLensError,
-  saveLensInformation, 
 } from '../../test/order';
 
 export const fetchRequest = () => action(OrderActionTypes.FETCH_REQUEST);
@@ -41,27 +40,14 @@ export const savePrescription: any = (prescription: Prescription) => (dispatch: 
     if (response.success) {
       dispatch(lensesActions.fetchLenses());
     }
-  })
-};
-
-export const saveLens: any = (prescription: Prescription, lens: Lens) => (dispatch: Dispatch) => {
-  dispatch(setBoss(BossTypes.LENS, lens));
-
-  return new Promise((resolver) => {
-    const response = saveLensInformation(prescription, lens)
-
-    setTimeout(() => {
-      resolver(response);
-    }, 1000);
-  })
-  .then((response: any) => {
-    if (response.success) {
-      dispatch(setRecommendation(response.recommendation));
+    else {
+      dispatch(setErrors('prescription', response.errors));
     }
   })
 };
 
 export const saveFittingHeight: any = (order: IOrderState, height: number) => (dispatch: Dispatch) => {
+  dispatch(fetchRequest());
   dispatch(setBoss(BossTypes.FITTING_HEIGHT, height));
 
   return new Promise((resolver) => {
@@ -69,9 +55,11 @@ export const saveFittingHeight: any = (order: IOrderState, height: number) => (d
 
     setTimeout(() => {
       resolver(response);
-    }, 1000);
+    }, 7000);
   })
   .then((response: any) => {
+    dispatch(closeRequest());
+
     if (response.success) {
       dispatch(setBlueprint(response.result));
     }
@@ -123,15 +111,19 @@ export const fetchLensCompatibility: any = (prescription: Prescription, lens: Le
   })
 };
 
-export const submitOrder: any = (order: IOrderState) => (dispatch: Dispatch) => {
+export const fetchSubmitOrder: any = (order: IOrderState) => (dispatch: Dispatch) => {
+  dispatch(fetchRequest());
+
   return new Promise((resolver) => {
     const response = saveOrderInformation(order);
 
     setTimeout(() => {
       resolver(response);
-    }, 1000);
+    }, 3000);
   })
   .then((response: any) => {
+    dispatch(closeRequest());
+
     if (response.success) {
       dispatch(setBoss(BossTypes.BARCODE, response.result));
     }

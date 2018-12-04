@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import '../styles/lensSelection.css';
 
 type ComponentProps = {
+  disabled: boolean;
   className: string;
   label: string;
   value: number | string;
@@ -15,11 +16,12 @@ type ComponentProps = {
   onChange: (value: number | string) => void;
 };
 
-const SelectField: React.SFC<ComponentProps> = ({ className, label, value, list, onChange }) => {
+const SelectField: React.SFC<ComponentProps> = ({ disabled, className, label, value, list, onChange }) => {
   return (
     <FormControl variant="outlined" className={className}>
       <InputLabel>{label}</InputLabel>
       <Select
+        disabled={disabled}
         value={value}
         onChange={(evt) => onChange(evt.target.value)}
         input={
