@@ -122,7 +122,7 @@ const similarFrames = [
   }
 ];
 
-export const getSimilarFrames = (order) => {
+export const getSimilarFrames = (boss) => {
   return {
     success: true,
     similarFrames
@@ -137,7 +137,7 @@ export const checkFrames = (frames) => {
   });
 };
 
-export const getFramesByUpc = (order, upc) => {
+export const getFramesByUpc = ({ boss, upc }) => {
   const response = newFrames.filter((frame) => {
     return frame.upc.indexOf(upc) === -1 ? false : true;
   }).map((frame) => ({ ...frame, compatibility: checkCompatibility() }));
@@ -190,7 +190,7 @@ export const getFilterGroups = () => {
   }
 };
 
-export const getFilterFrames = (order, query) => {
+export const getFilterFrames = ({ boss, query }) => {
   const response = newFrames.map((frame) => ({ ...frame, compatibility: true }));
 
   return {
@@ -199,7 +199,7 @@ export const getFilterFrames = (order, query) => {
   };
 };
 
-export const onSubmit = (order, frame) => {
+export const onSubmit = ({ boss, frame }) => {
   return {
     success: true,
     result: {

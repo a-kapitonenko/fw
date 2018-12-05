@@ -17,7 +17,6 @@ import LinkComponent from '../components/LinkComponent';
 import Section from '../components/Section';
 import PrescriptionSelectionContainer from './PrescriptionSelectionContainer';
 import LensSelectionContainer from './LensSelectionContainer';
-// import FrameSelection from './FrameSelectionContainer';
 import FrameSelection from './FrameSelection';
 import SelectField from '../components/SelectField';
 

@@ -27,6 +27,8 @@ export const enum FilterActionTypes {
   CLOSE_REQUEST = '@@filter/CLOSE_REQUEST',
   SET_ERRORS = '@@filter/SET_ERRORS',
   CLEAR_ERRORS = '@@filter/CLEAR_ERRORS',
+  FETCH_GROUPS = '@@filter/FETCH_GROUPS',
+  FETCH_FRAMES = '@@filter/FETCH_FRAMES',
   SET_GROUPS = '@@filter/SET_GROUPS',
   SET_FRAMES = '@@filter/SET_FRAMES',
   CHANGE_CHECKED = '@@filter/CHANGE_CHECKED',

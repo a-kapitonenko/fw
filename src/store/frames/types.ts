@@ -23,6 +23,8 @@ export const enum FramesActionTypes {
   CLOSE_REQUEST = '@@frames/CLOSE_REQUEST',
   SET_ERROR = '@@frames/SET_ERROR',
   CLEAR_ERROR = '@@frames/CLEAR_ERROR',
+  FETCH_SIMILAR_FRAMES = '@@frames/FETCH_SIMILAR_FRAMES',
+  FETCH_SUBMIT = '@@frames/FETCH_SUBMIT',
   OPEN = '@@frames/OPEN',
   CLOSE = '@@frames/CLOSE',
   SET_STEP = '@@frames/SET_STEP',

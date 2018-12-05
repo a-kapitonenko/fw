@@ -50,7 +50,7 @@ class TestTable extends React.Component<ComponentProps> {
     const { scrollHeight } = this.state;
 
     const emptyRows = frameTableConfig.rowsPerPage - frames.length;
-// 
+
     return (
       <Paper
         className="frame-selection__table-wrapper"
