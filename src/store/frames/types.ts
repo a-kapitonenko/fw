@@ -42,3 +42,4 @@ export interface FramesState {
   readonly selectedFrame: Frame;
   readonly similarFrames: Frame[];
 };
+//
