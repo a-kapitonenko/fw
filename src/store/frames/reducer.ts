@@ -1,32 +1,37 @@
 import { Reducer } from 'redux';
-import { FramesState, FramesActionTypes, Frame, Errors } from './types';
+import { FramesState, FramesActionTypes, Frame } from './types';
 
 const initialState: FramesState = {
   isFetching: false,
-  errors: <Errors>{
-    select: '',
-    similarFrames: '',
-    submit: '',
-  },
+  errors: '',
   open: false,
-  step: 1,
   selectedFrame: <Frame>{},
-  similarFrames: [],
+  similarFrames: {
+    isFetching: false,
+    errors: '',
+    data: []
+  },
 };
 
 const reducer: Reducer<FramesState> = (state = initialState, action) => {
   switch (action.type) {
-    case FramesActionTypes.FETCH_REQUEST: {
-      return { ...state, isFetching: true };
+    case FramesActionTypes.FETCH_SIMILAR_FRAMES_START: {
+      return { ...state, similarFrames: { ...state.similarFrames, isFetching: true, errors: '' } };
     }
-    case FramesActionTypes.CLOSE_REQUEST: {
+    case FramesActionTypes.FETCH_SIMILAR_FRAMES_SUCCESS: {
+      return { ...state, similarFrames: { ...state.similarFrames, isFetching: false, data: action.payload } };
+    }
+    case FramesActionTypes.FETCH_SIMILAR_FRAMES_FAILED: {
+      return { ...state, similarFrames: { ...state.similarFrames, isFetching: false, errors: action.payload } };
+    }
+    case FramesActionTypes.SUBMIT_START: {
+      return { ...state, isFetching: true, errors: '' };
+    }
+    case FramesActionTypes.SUBMIT_SUCCESS: {
       return { ...state, isFetching: false };
     }
-    case FramesActionTypes.SET_ERROR: {
-      return { ...state, errors: { ...state.errors, [action.payload.type]: action.payload.error } };
-    }
-    case FramesActionTypes.CLEAR_ERROR: {
-      return { ...state, errors: { ...state.errors, [action.payload]: '' } };
+    case FramesActionTypes.SUBMIT_FAILED: {
+      return { ...state, isFetching: false, errors: action.payload };
     }
     case FramesActionTypes.OPEN: {
       return { ...state, open: true };
@@ -34,20 +39,11 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     case FramesActionTypes.CLOSE: {
       return { ...state, open: false };
     }
-    case FramesActionTypes.SET_STEP: {
-      return { ...state, step: action.payload };
-    }
     case FramesActionTypes.SET_SELECTED_FRAME: {
       return { ...state, selectedFrame: action.payload };
     }
-    case FramesActionTypes.RESET_SELECTED_FRAME: {
+    case FramesActionTypes.CLEAR_SELECTED_FRAME: {
       return { ...state, selectedFrame: <Frame>{} };
-    }
-    case FramesActionTypes.SET_SIMILAR_FRAMES: {
-      return { ...state, similarFrames: action.payload };
-    }
-    case FramesActionTypes.RESET_SIMILAR_FRAMES: {
-      return { ...state, similarFrames: [] };
     }
     default: {
       return state;

@@ -2,19 +2,19 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-
 import { ApplicationState } from '../../store';
 import { Frame } from '../../store/frames/types';
 import * as framesActions from '../../store/frames/actions';
-
 import { isEmptyObject } from '../../helpers/mathHelper';
-
 import FrameSearchContainer from './FrameSearchContainer';
 import FrameFilterContainer from './FrameFilterContainer';
 import FrameSearchTable from '../../components/FrameSearchTable';
 import FrameTable from '../../components/FrameTable';
 
-import '../../styles/frameSelection.css';
+type OwnProps = {
+  setStep: (step: number) => void;
+  handleClick: (frame: Frame) => void;
+};
 
 type PropsFromState = {
   filterFetching: boolean;
@@ -23,44 +23,30 @@ type PropsFromState = {
   filterFrames: Frame[];
 };
 
+type MergeProps = OwnProps & PropsFromState;
+
 type PropsFromDispatch = {
-  setStep: typeof framesActions.setStep;
-  setSelectedFrame: typeof framesActions.setSelectedFrame;
-  resetSelectedFrame: typeof framesActions.resetSelectedFrame;
   handleClose: typeof framesActions.close;
 };
 
-type ComponentProps = PropsFromState & PropsFromDispatch;
+type ComponentProps = MergeProps & PropsFromDispatch;
 
-const mapStateToProps = (state: ApplicationState) => ({
+const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) => ({
   filterFetching: state.filter.isFetching,
   selectedFrame: state.frames.selectedFrame,
   searchFrames: state.search.selectedFrames,
   filterFrames: state.filter.frames,
+  setStep: ownProps.setStep,
+  handleClose: ownProps.handleClick,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setStep: (step: number) => dispatch(framesActions.setStep(step)),
-  setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
-  resetSelectedFrame: () => dispatch(framesActions.resetSelectedFrame()),
   handleClose: () => dispatch(framesActions.close()),
 });
 
 class FrameSelectionFirstPage extends React.Component<ComponentProps> {
-  private handleClick = (frame: Frame) => {
-    const { selectedFrame, setSelectedFrame, resetSelectedFrame } = this.props;
-    if (frame.compatibility) {
-      if (selectedFrame === frame) {
-        resetSelectedFrame();
-      } else {
-        setSelectedFrame(frame);
-      }
-    } else {
-    }
-  }
-
   public render() {
-    const { filterFetching, selectedFrame, searchFrames, filterFrames, setStep, handleClose } = this.props;
+    const { filterFetching, selectedFrame, searchFrames, filterFrames, setStep, handleClick, handleClose } = this.props;
     const buttonDisabled = isEmptyObject(selectedFrame);
 
     return (
@@ -70,11 +56,11 @@ class FrameSelectionFirstPage extends React.Component<ComponentProps> {
           <div className="frame-selection__form-content">
             <div className="frame-selection__form-section -flex-column-between">
               <FrameSearchContainer />
-              <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={this.handleClick} />
+              <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
             </div>
             <div className="frame-selection__form-section -flex-column-between">
               <FrameFilterContainer />
-              <FrameTable disabled={filterFetching} frames={filterFrames} selectedFrame={selectedFrame} handleClick={this.handleClick} />
+              <FrameTable isFetching={filterFetching} frames={filterFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
             </div>
           </div>
           <section className="frame-selection__form-actions">

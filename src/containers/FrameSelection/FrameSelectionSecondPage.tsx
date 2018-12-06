@@ -2,50 +2,50 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-
 import { ApplicationState } from '../../store';
 import { Frame } from '../../store/frames/types';
 import { Boss } from '../../store/order/types';
 import * as framesActions from '../../store/frames/actions';
-
 import { isEmptyObject } from '../../helpers/mathHelper';
-
 import FrameTable from '../../components/FrameTable';
 
-import '../../styles/frameSelection.css';
+type OwnProps = {
+  setStep: (step: number) => void;
+  handleClick: (frame: Frame) => void;
+};
 
 type PropsFromState = {
   isFetching: boolean;
+  isSubmiting: boolean;
   errors: string,
   boss: Boss;
   selectedFrame: Frame;
   similarFrames: Frame[];
 };
 
+type MergeProps = OwnProps & PropsFromState;
+
 type PropsFromDispatch = {
-  handleSubmit: typeof framesActions.fetchSubmit;
-  fetchSimilarFrames: typeof framesActions.fetchSimilarFrames;
-  setStep: typeof framesActions.setStep;
-  setSelectedFrame: typeof framesActions.setSelectedFrame;
-  resetSelectedFrame: typeof framesActions.resetSelectedFrame;
+  handleSubmit: typeof framesActions.submitStart;
+  fetchSimilarFrames: typeof framesActions.fetchSimilarFramesStart;
 };
 
-type ComponentProps = PropsFromState & PropsFromDispatch;
+type ComponentProps = MergeProps & PropsFromDispatch;
 
-const mapStateToProps = (state: ApplicationState) => ({
-  isFetching: state.frames.isFetching,
-  errors: state.frames.errors.similarFrames,
+const mapStateToProps = (state: ApplicationState, ownProps: OwnProps) => ({
+  isFetching: state.frames.similarFrames.isFetching,
+  isSubmiting: state.frames.isFetching,
+  errors: state.frames.similarFrames.errors,
   boss: state.order.boss,
   selectedFrame: state.frames.selectedFrame,
-  similarFrames: state.frames.similarFrames,
+  similarFrames: state.frames.similarFrames.data,
+  setStep: ownProps.setStep,
+  handleClose: ownProps.handleClick,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleSubmit: (boss: Boss, frame: Frame) => dispatch(framesActions.fetchSubmit(boss, frame)),
-  fetchSimilarFrames: (boss: Boss) => dispatch(framesActions.fetchSimilarFrames(boss)),
-  setStep: (step: number) => dispatch(framesActions.setStep(step)),
-  setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
-  resetSelectedFrame: () => dispatch(framesActions.resetSelectedFrame()),
+  handleSubmit: (boss: Boss, frame: Frame) => dispatch(framesActions.submitStart(boss, frame)),
+  fetchSimilarFrames: (boss: Boss) => dispatch(framesActions.fetchSimilarFramesStart(boss)),
 });
 
 class FrameSelectionSecondPage extends React.Component<ComponentProps> {
@@ -57,18 +57,8 @@ class FrameSelectionSecondPage extends React.Component<ComponentProps> {
     }
   }
 
-  private handleClick = (frame: Frame) => {
-    const { selectedFrame, setSelectedFrame, resetSelectedFrame } = this.props;
-
-    if (selectedFrame === frame) {
-      resetSelectedFrame();
-    } else {
-      setSelectedFrame(frame);
-    }
-  };
-
   public render() {
-    const { isFetching, errors, boss, selectedFrame, similarFrames, handleSubmit, setStep } = this.props;
+    const { isFetching, isSubmiting, errors, boss, selectedFrame, similarFrames, handleSubmit, setStep, handleClick } = this.props;
     const buttonDisabled = isEmptyObject(selectedFrame);
 
     return (
@@ -80,13 +70,13 @@ class FrameSelectionSecondPage extends React.Component<ComponentProps> {
             These frames are also compatible with the patients Rx and lens selection <br />
             Continue if patient is happy with current frame selection
           </h2>
-          <FrameTable disabled={isFetching} frames={similarFrames} selectedFrame={selectedFrame} handleClick={this.handleClick} />
+          <FrameTable isFetching={isFetching} disabled={isSubmiting} frames={similarFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
           <section className="frame-selection__form-actions">
-            <Button className="frame-selection__form-button" variant="contained" disabled={isFetching} onClick={() => setStep(1)}>Back</Button>
+            <Button className="frame-selection__form-button" variant="contained" disabled={isSubmiting} onClick={() => setStep(1)}>Back</Button>
             <Button
               className="frame-selection__form-button"
               variant="contained"
-              disabled={isFetching || buttonDisabled}
+              disabled={isSubmiting || buttonDisabled}
               onClick={() => handleSubmit(boss, selectedFrame)}
             >
               Confirm

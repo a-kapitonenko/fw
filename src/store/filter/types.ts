@@ -23,16 +23,16 @@ export const enum GroupsTypes {
 }
 
 export const enum FilterActionTypes {
-  FETCH_REQUEST = '@@filter/FETCH_REQUEST',
-  CLOSE_REQUEST = '@@filter/CLOSE_REQUEST',
-  SET_ERRORS = '@@filter/SET_ERRORS',
-  CLEAR_ERRORS = '@@filter/CLEAR_ERRORS',
-  FETCH_GROUPS = '@@filter/FETCH_GROUPS',
-  FETCH_FRAMES = '@@filter/FETCH_FRAMES',
-  SET_GROUPS = '@@filter/SET_GROUPS',
-  SET_FRAMES = '@@filter/SET_FRAMES',
+  FILTERING_START = '@@filter/FILTERING_START',
+  FILTERING_SUCCESS = '@@filter/FILTERING_SUCCESS',
+  FILTERING_FAILED = '@@filter/FILTERING_FAILDE',
+
+  FETCH_GROUPS_START = '@@filter/FETCHING_GROUPS_START',
+  FETCH_GROUPS_SUCCESS = '@@filter/FETCHING_GROUPS_SUCCESS',
+  FETCH_GROUPS_FAILED = '@@filter/FETCHING_GROUPS_FAILED',
+
   CHANGE_CHECKED = '@@filter/CHANGE_CHECKED',
-  RESET_CHECKED = '@@filter/RESET_CHECKED',
+  CLEAR_CHECKED = '@@filter/CLEAR_CHECKED',
   ADD_QUERY = '@@filter/ADD_QUERY',
   DELETE_QUERY = '@@filter/DELETE_QUERY',
   CLEAR_QUERY = '@@filter/CLEAR_QUERY',
@@ -41,7 +41,11 @@ export const enum FilterActionTypes {
 export interface IFilterState {
   readonly isFetching: boolean;
   readonly errors: string;
-  readonly groups: Groups;
   readonly query: object;
   readonly frames: Frame[];
+  readonly groups: {
+    readonly isFetching: boolean;
+    readonly errors: string;
+    readonly data: Groups;
+  };
 };

@@ -25,13 +25,12 @@ type PropsFromState = {
 }
 
 type PropsFromDispatch = {
-  fetchFrames: typeof filterActions.fetchFrames,
-  clearErrors: typeof filterActions.clearErrors,
+  filteringStart: typeof filterActions.filteringStart,
   changeChecked: typeof filterActions.changeChecked,
-  resetChecked: typeof filterActions.resetChecked,
+  clearChecked: typeof filterActions.clearChecked,
   addQuery: typeof filterActions.addQuery,
   deleteQuery: typeof filterActions.deleteQuery,
-  resetQuery: typeof filterActions.clearQuery,
+  clearQuery: typeof filterActions.clearQuery,
 }
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -43,43 +42,38 @@ type StateProps = {
 const mapStateToProps = (state: ApplicationState) => ({
   isFetching: state.filter.isFetching,
   errors: state.filter.errors,
-  groups: state.filter.groups,
+  groups: state.filter.groups.data,
   query: state.filter.query,
   boss: state.order.boss,
   frames: state.filter.frames,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchFrames: (boss: Boss, query: Object) => dispatch(filterActions.fetchFrames(boss, query)),
-  clearErrors: () => dispatch(filterActions.clearErrors()),
+  filteringStart: (boss: Boss, query: Object) => dispatch(filterActions.filteringStart(boss, query)),
   changeChecked: (type: string, name: string, value: boolean) => dispatch(filterActions.changeChecked(type, name, value)),
-  resetChecked: () => dispatch(filterActions.resetChecked()),
+  clearChecked: () => dispatch(filterActions.clearChecked()),
   addQuery: (type: string, value: any) => dispatch(filterActions.addQuery(type, value)),
   deleteQuery: (type: string, value: any) => dispatch(filterActions.deleteQuery(type, value)),
-  resetQuery: () => dispatch(filterActions.clearQuery()),
+  clearQuery: () => dispatch(filterActions.clearQuery()),
 });
 
 class FrameSearchContainer extends React.Component<ComponentProps> {
   state: StateProps = { step: 1 };
 
   public componentDidMount() {
-    const { query, boss, frames, fetchFrames } = this.props;
+    const { query, boss, frames, filteringStart } = this.props;
     const isEmptyFrames = isEmptyObject(frames);
 
     if (isEmptyFrames) {
-      fetchFrames(boss, query);
+      filteringStart(boss, query);
     }
   }
 
   public componentDidUpdate(prevProps: ComponentProps) {
-    const { errors, query, boss, fetchFrames, clearErrors } = this.props;
+    const { query, boss, filteringStart } = this.props;
 
     if (query !== prevProps.query) {
-      if (errors) {
-        clearErrors();
-      }
-
-      fetchFrames(boss, query);
+      filteringStart(boss, query);
     }
   }
 
@@ -120,7 +114,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   };
 
   render() {
-    const { isFetching, errors, groups, query, resetChecked, resetQuery } = this.props;
+    const { isFetching, errors, groups, query, clearChecked, clearQuery } = this.props;
     const disabledResetFilterButton = isEmptyQuery(query);
 
     return (
@@ -133,8 +127,8 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
         renderGroup={this.renderGroup}
         handleClick={this.handleClick}
         resetFilter={() => {
-          resetChecked();
-          resetQuery();
+          clearChecked();
+          clearQuery();
         }}
       />
     );

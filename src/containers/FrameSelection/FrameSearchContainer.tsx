@@ -20,8 +20,7 @@ type PropsFromState = {
 };
 
 type PropsFromDispatch = {
-  fetchFrames: typeof searchActions.fetchFrames,
-  clearErrors: typeof searchActions.clearErrors,
+  searchFrames: typeof searchActions.searchStart,
   setSelectedFrames: typeof searchActions.setSelectedFrames,
 };
 
@@ -41,8 +40,7 @@ const mapStateToProps = (state: ApplicationState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchFrames: (boss: Boss, upc: string) => dispatch(searchActions.fetchFrames(boss, upc)),
-  clearErrors: () => dispatch(searchActions.clearErrors()),
+  searchFrames: (boss: Boss, upc: string) => dispatch(searchActions.searchStart(boss, upc)),
   setSelectedFrames: (frames: Frame[]) => dispatch(searchActions.setSelectedFrames(frames)),
 });
 
@@ -66,16 +64,12 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   }
 
   private onInputChange = (props: string) => {
-    const { errors, boss, fetchFrames, clearErrors } = this.props;
+    const { boss, searchFrames } = this.props;
     const { query } = this.state;
 
     if (props.length === frameSearchConfig.queryLength) {
       if (query.length === 0 || query.indexOf(props)) {
-        if (errors) {
-          clearErrors();
-        }
-        
-        fetchFrames(boss, props);
+        searchFrames(boss, props);
 
         this.setState({ query: props });
       }

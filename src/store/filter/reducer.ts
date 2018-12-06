@@ -12,33 +12,37 @@ const initialGroupsState = {
 const initialState: IFilterState = {
   isFetching: false,
   errors: '',
-  groups: <Groups>initialGroupsState,
   query: initialGroupsState,
-  frames: []
+  frames: [],
+  groups: {
+    isFetching: false,
+    errors: '',
+    data: <Groups>initialGroupsState,
+  }
 };
 
 const reducer: Reducer<IFilterState> = (state = initialState, action) => {
   switch (action.type) {
-    case FilterActionTypes.FETCH_REQUEST: {
-      return { ...state, isFetching: true };
+    case FilterActionTypes.FILTERING_START: {
+      return { ...state, isFetching: true, errors: '' };
     }
-    case FilterActionTypes.CLOSE_REQUEST: {
-      return { ...state, isFetching: false };
+    case FilterActionTypes.FILTERING_SUCCESS: {
+      return { ...state, isFetching: false, frames: action.payload };
     }
-    case FilterActionTypes.SET_ERRORS: {
-      return { ...state, errors: action.payload };
+    case FilterActionTypes.FILTERING_FAILED: {
+      return { ...state, isFetching: false, errors: action.payload };
     }
-    case FilterActionTypes.CLEAR_ERRORS: {
-      return { ...state, errors: '' };
+    case FilterActionTypes.FETCH_GROUPS_START: {
+      return { ...state, groups: { ...state.groups, isFetching: true, errors: '' } };
     }
-    case FilterActionTypes.SET_GROUPS: {
-      return { ...state, groups: action.payload };
+    case FilterActionTypes.FETCH_GROUPS_SUCCESS: {
+      return { ...state, groups: { ...state.groups, isFetching: false, data: action.payload } };
     }
-    case FilterActionTypes.SET_FRAMES: {
-      return { ...state, frames: action.payload };
+    case FilterActionTypes.FETCH_GROUPS_FAILED: {
+      return { ...state, groups: { ...state.groups, isFetching: true, errors: action.paylaod } };
     }
     case FilterActionTypes.CHANGE_CHECKED: {
-      const item = state.groups[action.payload.type].map((field: Field) => {
+      const item = state.groups.data[action.payload.type].map((field: Field) => {
         if (field.name === action.payload.name) {
           return { ...field, checked: action.payload.value };
         }
@@ -50,18 +54,21 @@ const reducer: Reducer<IFilterState> = (state = initialState, action) => {
         ...state,
         groups: {
           ...state.groups,
-          [action.payload.type]: item
+          data: {
+            ...state.groups.data,
+            [action.payload.type]: item
+          }
         }
       };
     }
-    case FilterActionTypes.RESET_CHECKED: {
+    case FilterActionTypes.CLEAR_CHECKED: {
       const groups = <Groups>{};
 
-      for (const group in state.groups) {
-        groups[group] = state.groups[group].map((field: Field) => ({ ...field, checked: false }));
+      for (const group in state.groups.data) {
+        groups[group] = state.groups.data[group].map((field: Field) => ({ ...field, checked: false }));
       }
 
-      return { ...state, groups };
+      return { ...state, groups: { ...state.groups, data: groups } };
     }
     case FilterActionTypes.ADD_QUERY: {
       return {

@@ -32,7 +32,7 @@ type PropsFromState = {
 type PropsFromDispatch = {
   handleOpen: typeof framesActions.open;
   fetchSubmitOrder: typeof orderActions.fetchSubmitOrder;
-  fetchFilterGroups: typeof filterActions.fetchFilterGroups;
+  fetchFilterGroups: typeof filterActions.fetchGroupsStart;
   saveFittingHeight: typeof orderActions.saveFittingHeight;
   checkCompatibility: typeof orderActions.checkCompatibility;
   fetchLensCompatibility: typeof orderActions.fetchLensCompatibility;
@@ -52,7 +52,7 @@ const mapStateToProps = (state: ApplicationState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleOpen: () => dispatch(framesActions.open()),
   fetchSubmitOrder: (order: IOrderState) => dispatch(orderActions.fetchSubmitOrder(order)),
-  fetchFilterGroups: () => dispatch(filterActions.fetchFilterGroups()),
+  fetchFilterGroups: () => dispatch(filterActions.fetchGroupsStart()),
   saveFittingHeight: (order: IOrderState, height: number) => dispatch(orderActions.saveFittingHeight(order, height)),
   checkCompatibility: (order: IOrderState) => dispatch(orderActions.checkCompatibility(order)),
   fetchLensCompatibility: (prescription: Prescription, lens: Lens) => dispatch(orderActions.fetchLensCompatibility(prescription, lens)),

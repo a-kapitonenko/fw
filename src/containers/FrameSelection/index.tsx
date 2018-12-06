@@ -2,49 +2,74 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
-
 import { ApplicationState } from '../../store';
 import { Frame } from '../../store/frames/types';
 import * as framesActions from '../../store/frames/actions';
-
 import { isEmptyObject } from '../../helpers/mathHelper';
-
 import FrameSelectionFirstPage from './FrameSelectionFirstPage';
 import FrameSelectionSecondPage from './FrameSelectionSecondPage';
 
 import '../../styles/frameSelection.css';
 
 type PropsFromState = {
+  isFetching: boolean;
   open: boolean;
-  step: number;
   selectedFrame: Frame;
 };
 
 type PropsFromDispatch = {
-  resetSelectedFrame: typeof framesActions.resetSelectedFrame;
+  setSelectedFrame: typeof framesActions.setSelectedFrame;
+  clearSelectedFrame: typeof framesActions.clearSelectedFrame;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
+type StateProps = {
+  step: number;
+};
+
 const mapStateToProps = (state: ApplicationState) => ({
+  isFetching: state.frames.isFetching,
   open: state.frames.open,
-  step: state.frames.step,
   selectedFrame: state.frames.selectedFrame,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  resetSelectedFrame: () => dispatch(framesActions.resetSelectedFrame()),
+  setSelectedFrame: (frame: Frame) => dispatch(framesActions.setSelectedFrame(frame)),
+  clearSelectedFrame: () => dispatch(framesActions.clearSelectedFrame()),
 });
 
 class FrameSelectionContainer extends React.Component<ComponentProps> {
+  state: StateProps = { step: 1 }
+
+  private changeStep = (step: number) => {
+    this.setState({ step });
+  };
+
+  private handleClick = (frame: Frame) => {
+    const { selectedFrame, setSelectedFrame, clearSelectedFrame } = this.props;
+    if (frame.compatibility) {
+      if (selectedFrame === frame) {
+        clearSelectedFrame();
+      } else {
+        setSelectedFrame(frame);
+      }
+    } else {
+    }
+  }
+
   public render() {
-    const { open, step, selectedFrame, resetSelectedFrame } = this.props;
+    const { isFetching, open, selectedFrame, clearSelectedFrame } = this.props;
+    const { step } = this.state;
+
     const isFrameSelected = !isEmptyObject(selectedFrame);
 
     return (
       <Dialog open={open} fullScreen={true} className="frame-selection__wrapper">
+        {isFetching && <CircularProgress className="frame-selection__progress" />}
         <div className="frame-selection__content yellow-section">
           {isFrameSelected && (
             <div className="frame-selection__frame-selected">
@@ -56,15 +81,15 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
                 <IconButton
                   color="inherit"
                   aria-label="Menu"
-                  onClick={resetSelectedFrame}
+                  onClick={clearSelectedFrame}
                 >
                   <Close />
                 </IconButton>
               </div>
             </div>
           )}
-          {step === 1 && <FrameSelectionFirstPage />}
-          {step === 2 && <FrameSelectionSecondPage />}
+          {step === 1 && <FrameSelectionFirstPage setStep={this.changeStep} handleClick={this.handleClick} />}
+          {step === 2 && <FrameSelectionSecondPage setStep={this.changeStep} handleClick={this.handleClick} />}
         </div>
       </Dialog>
     );

@@ -1,5 +1,13 @@
 .frame-selection__wrapper {
   margin: 3rem;
+  position: relative;
+}
+
+.frame-selection__progress {
+  z-index: 10000;
+  position: absolute;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
 }
 
 /* .frame-selection__content {

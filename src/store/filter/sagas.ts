@@ -6,45 +6,37 @@ import { createFilterGroupsData } from '../../helpers/filterHelper';
 
 function* fetchGroups() {
   try {
-    yield put(filterActions.fetchRequest());
-
     const response = yield call(fetchGroupsRequest);
-
-    yield put(filterActions.closeRequest());
 
     if (response.success) {
       const groups = createFilterGroupsData(response.result);
 
-      yield put(filterActions.setGroups(groups));
+      yield put(filterActions.fetchGroupsSuccess(groups));
     } else {
-      yield put(filterActions.setErrors(response.error));
+      yield put(filterActions.fetchGroupsFailed(response.error));
     }
   } catch (err) {
-    yield put(filterActions.setErrors(err));
+    yield put(filterActions.fetchGroupsFailed(err));
   }
 }
 
 function* fetchFrames({ payload }: any) {
   try {
-    yield put(filterActions.fetchRequest());
-
     const response = yield call(fetchFramesRequest, payload);
 
-    yield put(filterActions.closeRequest());
-
     if (response.success) {
-      yield put(filterActions.setFrames(response.frames));
+      yield put(filterActions.filteringSuccess(response.frames));
     } else {
-      yield put(filterActions.setErrors(response.error));
+      yield put(filterActions.filteringFailed(response.error));
     }
   } catch (err) {
-    yield put(filterActions.setErrors(err));
+    yield put(filterActions.filteringFailed(err));
   }
 }
 
 function* watchFilterFetch() {
-  yield takeEvery(FilterActionTypes.FETCH_GROUPS, fetchGroups);
-  yield takeEvery(FilterActionTypes.FETCH_FRAMES, fetchFrames);
+  yield takeEvery(FilterActionTypes.FETCH_GROUPS_START, fetchGroups);
+  yield takeEvery(FilterActionTypes.FILTERING_START, fetchFrames);
 }
 
 function* filterSaga() {

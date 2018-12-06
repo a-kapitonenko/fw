@@ -1,17 +1,16 @@
 import * as React from 'react';
+import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
 import { Frame } from '../store/frames/types';
-
 import { frameTableConfig } from '../constants/frameTable';
 
 export type ComponentProps = {
+  isFetching?: boolean;
   disabled?: boolean;
   frames: Frame[];
   selectedFrame: Frame;
@@ -46,9 +45,10 @@ class TestTable extends React.Component<ComponentProps> {
   }
 
   public render() {
-    const { disabled, frames, selectedFrame, handleClick } = this.props;
+    const { isFetching, disabled, frames, selectedFrame, handleClick } = this.props;
     const { scrollHeight } = this.state;
 
+    const mergeDisabled = isFetching || disabled;
     const emptyRows = frameTableConfig.rowsPerPage - frames.length;
 
     return (
@@ -57,9 +57,9 @@ class TestTable extends React.Component<ComponentProps> {
         style={{ height: 57 + frameTableConfig.rowHeight * frameTableConfig.rowsPerPage }}
         onScroll={this.handleScroll}
       >
-      {disabled && <CircularProgress style={{position: 'absolute', top: `calc(50% + ${scrollHeight}px - 24px)`, left: 'calc(50% - 24px)'}} />}
+      {isFetching && <CircularProgress style={{position: 'absolute', top: `calc(50% + ${scrollHeight}px - 24px)`, left: 'calc(50% - 24px)'}} />}
         <div className="frame-selection__table">
-        <Table className={disabled ? 'frame-selection__table-opacity' : ''}>
+        <Table className={mergeDisabled ? 'frame-selection__table-opacity' : ''}>
           <TableHead>
             <TableRow>
               {this.renderHeader()}
@@ -72,7 +72,7 @@ class TestTable extends React.Component<ComponentProps> {
                   key={frame.upc}
                   className={`frame-selection__table-row ${selectedFrame.value === frame.value ? 'row-selected' : ''}`}
                   onClick={() => { 
-                    if (!disabled) {
+                    if (!mergeDisabled) {
                       handleClick(frame)
                     }
                   }}

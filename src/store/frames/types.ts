@@ -6,40 +6,30 @@ export type Frame = {
   compatibility?: boolean;
 };
 
-export type Errors = {
-  select: string;
-  similarFrames: string;
-  submit: string;
-};
-
-export const enum ErrorTypes {
-  SELECT = 'select',
-  SIMILAR_FRAMES = 'similarFrames',
-  SUBMIT = 'submit',
-}
-
 export const enum FramesActionTypes {
-  FETCH_REQUEST = '@@frames/FETCH_REQUEST',
-  CLOSE_REQUEST = '@@frames/CLOSE_REQUEST',
-  SET_ERROR = '@@frames/SET_ERROR',
-  CLEAR_ERROR = '@@frames/CLEAR_ERROR',
-  FETCH_SIMILAR_FRAMES = '@@frames/FETCH_SIMILAR_FRAMES',
-  FETCH_SUBMIT = '@@frames/FETCH_SUBMIT',
+  FETCH_SIMILAR_FRAMES_START = '@@frames/FETCH_SIMILAR_FRAMES_START',
+  FETCH_SIMILAR_FRAMES_SUCCESS = '@@frames/FETCH_SIMILAR_FRAMES_SUCCESS',
+  FETCH_SIMILAR_FRAMES_FAILED = '@@frames/FETCH_SIMILAR_FRAMES_FAILED',
+  
+  SUBMIT_START = '@@frames/SUBMIT_START',
+  SUBMIT_SUCCESS = '@@frames/SUBMIT_SUCCESS',
+  SUBMIT_FAILED = '@@frames/SUBMIT_FAILED',
+
   OPEN = '@@frames/OPEN',
   CLOSE = '@@frames/CLOSE',
-  SET_STEP = '@@frames/SET_STEP',
+
   SET_SELECTED_FRAME = '@@frames/SET_SELECTED_FRAME',
-  RESET_SELECTED_FRAME = '@@frames/RESET_SELECTED_FRAME',
-  SET_SIMILAR_FRAMES = '@@frames/SET_SIMILAR_FRAMES',
-  RESET_SIMILAR_FRAMES = '@@frames/RESET_SIMILAR_FRAMES',
+  CLEAR_SELECTED_FRAME = '@@frame/CLEAR_SELECTED_FRAME',
 };
 
 export interface FramesState {
   readonly isFetching: boolean;
-  readonly errors: Errors;
+  readonly errors: string;
   readonly open: boolean;
-  readonly step: number;
   readonly selectedFrame: Frame;
-  readonly similarFrames: Frame[];
+  readonly similarFrames: {
+    readonly isFetching: boolean;
+    readonly errors: string;
+    readonly data: Frame[];
+  };
 };
-//

@@ -5,24 +5,20 @@ import { fetchFramesRequest } from '../../api/search';
 
 function* fetchFrames({ payload }: any) {
   try {
-    yield put(searchActions.fetchRequest());
-
     const response = yield call(fetchFramesRequest, payload);
 
-    yield put(searchActions.closeRequest());
-
     if (response.success) {
-      yield put(searchActions.setFrames(response.result));
+      yield put(searchActions.searchSuccess(response.result));
     } else {
-      yield put(searchActions.setErrors(response.error));
+      yield put(searchActions.searchFailed(response.error));
     }
   } catch (err) {
-    yield put(searchActions.setErrors(err));
+    yield put(searchActions.searchFailed(err));
   }
 }
 
 function* watchSearchFetch() {
-  yield takeEvery(SearchActionTypes.FETCH_FRAMES, fetchFrames);
+  yield takeEvery(SearchActionTypes.SEARCH_START, fetchFrames);
 }
 
 function* searchSaga() {

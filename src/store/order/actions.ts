@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 
 import * as lensesActions from '../lenses/actions';
-import { OrderActionTypes, Prescription, IOrderState, Blueprint, BossTypes } from './types';
+import { OrderActionTypes, Prescription, IOrderState, Blueprint, BossTypes, Boss } from './types';
 import { Lens } from '../lenses/types';
 
 import { 
@@ -12,6 +12,15 @@ import {
   saveFittingHeightInformation, 
   checkLensError,
 } from '../../test/order';
+
+export const submitStart = (boss: Boss) => action(OrderActionTypes.SUBMIT_START, boss);
+export const submitSuccess = () => action(OrderActionTypes.SUBMIT_SUCCESS);
+export const submitFailed = (message: string) => action(OrderActionTypes.SUBMIT_FAILED, message);
+
+export const savePrescriptionStart = (prescription: Prescription) => action(OrderActionTypes.SAVE_PRESCRIPTION_START, prescription);
+export const savePrescriptionSuccess = ()
+
+
 
 export const fetchRequest = () => action(OrderActionTypes.FETCH_REQUEST);
 export const closeRequest = () => action(OrderActionTypes.CLOSE_REQUEST);
@@ -24,27 +33,41 @@ export const setMessage = (message: string) => action(OrderActionTypes.SET_MESSA
 export const setFittingProperties = (properties: any) => action(OrderActionTypes.SET_FITTING_PROPERTIES, properties);
 export const setBlueprint = (blueprint: Blueprint) => action(OrderActionTypes.SET_BLUEPRINT, blueprint);
 
-export const savePrescription: any = (prescription: Prescription) => (dispatch: Dispatch) => {
-  dispatch(fetchRequest());
 
-  return new Promise((resolver) => {
-    const response = savePrescriptionInformation(prescription);
 
-    setTimeout(() => {
-      resolver(response);
-    }, 1000);
-  })
-  .then((response: any) => {
-    dispatch(closeRequest());
+
+
+
+
+
+
+
+
+
+
+
+
+// export const savePrescription: any = (prescription: Prescription) => (dispatch: Dispatch) => {
+//   dispatch(fetchRequest());
+
+//   return new Promise((resolver) => {
+//     const response = savePrescriptionInformation(prescription);
+
+//     setTimeout(() => {
+//       resolver(response);
+//     }, 1000);
+//   })
+//   .then((response: any) => {
+//     dispatch(closeRequest());
     
-    if (response.success) {
-      dispatch(lensesActions.fetchLenses());
-    }
-    else {
-      dispatch(setErrors('prescription', response.errors));
-    }
-  })
-};
+//     if (response.success) {
+//       dispatch(lensesActions.fetchLenses());
+//     }
+//     else {
+//       dispatch(setErrors('prescription', response.errors));
+//     }
+//   })
+// };
 
 export const saveFittingHeight: any = (order: IOrderState, height: number) => (dispatch: Dispatch) => {
   dispatch(fetchRequest());
