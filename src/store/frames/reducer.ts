@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
 import { FramesState, FramesActionTypes, Frame } from './types';
+import { saveStart, saveSuccess, saveFailed } from '../index';
 
 const initialState: FramesState = {
   isFetching: false,
@@ -16,23 +17,17 @@ const initialState: FramesState = {
 const reducer: Reducer<FramesState> = (state = initialState, action) => {
   switch (action.type) {
     case FramesActionTypes.FETCH_SIMILAR_FRAMES_START: {
-      return { ...state, similarFrames: { ...state.similarFrames, isFetching: true, errors: '' } };
+      return { ...state, similarFrames: saveStart(state.similarFrames) };
     }
     case FramesActionTypes.FETCH_SIMILAR_FRAMES_SUCCESS: {
-      return { ...state, similarFrames: { ...state.similarFrames, isFetching: false, data: action.payload } };
+      return { ...state, similarFrames: saveSuccess(state.similarFrames, 'data', action.payload) };
     }
     case FramesActionTypes.FETCH_SIMILAR_FRAMES_FAILED: {
-      return { ...state, similarFrames: { ...state.similarFrames, isFetching: false, errors: action.payload } };
+      return { ...state, similarFrames: saveFailed(state.similarFrames, action.payload) };
     }
-    case FramesActionTypes.SUBMIT_START: {
-      return { ...state, isFetching: true, errors: '' };
-    }
-    case FramesActionTypes.SUBMIT_SUCCESS: {
-      return { ...state, isFetching: false };
-    }
-    case FramesActionTypes.SUBMIT_FAILED: {
-      return { ...state, isFetching: false, errors: action.payload };
-    }
+    case FramesActionTypes.SUBMIT_START: return saveStart(state);
+    case FramesActionTypes.SUBMIT_SUCCESS: return saveSuccess(state);
+    case FramesActionTypes.SUBMIT_FAILED: return saveFailed(state, action.payload);
     case FramesActionTypes.OPEN: {
       return { ...state, open: true };
     }

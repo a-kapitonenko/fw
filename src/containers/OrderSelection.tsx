@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { ApplicationState } from '../store';
-import { IOrderState, Prescription } from '../store/order/types';
+import { IOrderState, Prescription, Boss } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
@@ -23,41 +23,43 @@ import SelectField from '../components/SelectField';
 import '../styles/orderSelection.css';
 
 type PropsFromState = {
-  order: IOrderState;
   isFetching: boolean;
+  state: ApplicationState;
+  order: IOrderState;
   selectedLens: Lens;
   prescription: Prescription;
 };
 
 type PropsFromDispatch = {
   handleOpen: typeof framesActions.open;
-  fetchSubmitOrder: typeof orderActions.fetchSubmitOrder;
+  submitOrder: typeof orderActions.submitStart;
+  saveOrder: typeof orderActions.saveOrderStart;
   fetchFilterGroups: typeof filterActions.fetchGroupsStart;
-  saveFittingHeight: typeof orderActions.saveFittingHeight;
-  checkCompatibility: typeof orderActions.checkCompatibility;
-  fetchLensCompatibility: typeof orderActions.fetchLensCompatibility;
-  saveOrder: typeof orderActions.saveOrder;
-  setErrors: typeof orderActions.setErrors;
+  saveFittingHeight: typeof orderActions.saveFittingHeightStart;
+  // checkCompatibility: typeof orderActions.checkCompatibility;
+  // fetchLensCompatibility: typeof orderActions.fetchLensCompatibility;
+  // setErrors: typeof orderActions.setErrors;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
+  isFetching: state.order.isFetching || state.lenses.isFetching,
+  state: state,
   order: state.order,
-  isFetching: state.order.isFetching,
   selectedLens: state.order.boss.lens,
   prescription: state.order.boss.prescription,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleOpen: () => dispatch(framesActions.open()),
-  fetchSubmitOrder: (order: IOrderState) => dispatch(orderActions.fetchSubmitOrder(order)),
+  submitOrder: (boss: Boss) => dispatch(orderActions.submitStart(boss)),
+  saveOrder: (state: ApplicationState) => dispatch(orderActions.saveOrderStart(state)),
   fetchFilterGroups: () => dispatch(filterActions.fetchGroupsStart()),
-  saveFittingHeight: (order: IOrderState, height: number) => dispatch(orderActions.saveFittingHeight(order, height)),
-  checkCompatibility: (order: IOrderState) => dispatch(orderActions.checkCompatibility(order)),
-  fetchLensCompatibility: (prescription: Prescription, lens: Lens) => dispatch(orderActions.fetchLensCompatibility(prescription, lens)),
-  saveOrder: (order: IOrderState) => dispatch(orderActions.saveOrder(order)),
-  setErrors: (type: string, error: string) => dispatch(orderActions.setErrors(type, error)),
+  saveFittingHeight: (boss: Boss, height: number) => dispatch(orderActions.saveFittingHeightStart(boss, height)),
+  // checkCompatibility: (order: IOrderState) => dispatch(orderActions.checkCompatibility(order)),
+  // fetchLensCompatibility: (prescription: Prescription, lens: Lens) => dispatch(orderActions.fetchLensCompatibility(prescription, lens)),
+  // setErrors: (type: string, error: string) => dispatch(orderActions.setErrors(type, error)),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
@@ -68,30 +70,38 @@ class OrderSelection extends LinkComponent<ComponentProps> {
   }
 
   public componentDidUpdate(prevProps: ComponentProps) {
-    const { order, selectedLens, prescription, checkCompatibility, fetchLensCompatibility } = this.props;
-    const isFrameSelected = !isEmptyObject(order.boss.frame);
-    const isLensSelected = !isEmptyObject(selectedLens);
-    const isBarcode = !isEmptyObject(order.boss.barcode);
+    const { order } = this.props;
 
-    if (prevProps.selectedLens !== selectedLens && isFrameSelected) {
-      checkCompatibility(order);
-    }
-
-    if (prevProps.prescription !== prescription && isLensSelected) {
-      fetchLensCompatibility(prescription, selectedLens);
-    }
-
-    if (isBarcode) {
+    if (order.redirect) {
       this.redirectToPage('/order');
     }
   }
 
+  // public componentDidUpdate(prevProps: ComponentProps) {
+  //   const { order } = this.props;
+  //   //const isFrameSelected = !isEmptyObject(order.boss.frame);
+  //   //const isLensSelected = !isEmptyObject(selectedLens);
+  //   const isBarcode = !isEmptyObject(order.boss.barcode);
+
+  //   // if (prevProps.selectedLens !== selectedLens && isFrameSelected) {
+  //   //   checkCompatibility(order);
+  //   // }
+
+  //   // if (prevProps.prescription !== prescription && isLensSelected) {
+  //   //   fetchLensCompatibility(prescription, selectedLens);
+  //   // }
+
+  //   if (isBarcode) {
+  //     this.redirectToPage('/order');
+  //   }
+  // }
+
   public render() {
-    const { isFetching, order, handleOpen, saveFittingHeight, saveOrder, fetchSubmitOrder } = this.props;
+    const { isFetching, state, order, handleOpen, submitOrder, saveOrder, saveFittingHeight } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.boss.lens);
     const isFrameSelected = isEmptyObject(order.boss.frame);
     const isFittingHeightSelected = order.boss.fittingHeight ? true : false;
-    const submitDisabled = !isEmptyObject(order.errors) || !isFittingHeightSelected
+    const submitDisabled =  !isFittingHeightSelected
 
     return (
       <div className="page__content">
@@ -108,7 +118,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
                   label="Height"
                   value={order.boss.fittingHeight}
                   list={order.fittingProperties}
-                  onChange={(value: number) => saveFittingHeight(order, value)}
+                  onChange={(value: number) => saveFittingHeight(order.boss, value)}
                 />
               </Section>
               <Section className="order-selection__recommend" tittle="Message">
@@ -166,9 +176,9 @@ class OrderSelection extends LinkComponent<ComponentProps> {
         }
 
         <section className="order-selection__actions">
-          <Button variant="contained" disabled={isFetching} onClick={saveOrder}>Save</Button>
+          <Button variant="contained" disabled={isFetching} onClick={() => saveOrder(state)}>Save</Button>
           {!isFrameSelected && (
-            <Button variant="contained" disabled={isFetching || submitDisabled} onClick={() => fetchSubmitOrder(order)}>
+            <Button variant="contained" disabled={isFetching || submitDisabled} onClick={() => submitOrder(order.boss)}>
               Submit Order
             </Button>
           )}

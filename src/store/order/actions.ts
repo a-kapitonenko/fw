@@ -1,154 +1,72 @@
-import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
-
-import * as lensesActions from '../lenses/actions';
-import { OrderActionTypes, Prescription, IOrderState, Blueprint, BossTypes, Boss } from './types';
-import { Lens } from '../lenses/types';
-
-import { 
-  savePrescriptionInformation, 
-  saveOrderInformation, 
-  checkFrameCompatibility, 
-  saveFittingHeightInformation, 
-  checkLensError,
-} from '../../test/order';
+import { ApplicationState } from '../index';
+import { OrderActionTypes, Prescription, Blueprint, BossTypes, Boss } from './types';
 
 export const submitStart = (boss: Boss) => action(OrderActionTypes.SUBMIT_START, boss);
 export const submitSuccess = () => action(OrderActionTypes.SUBMIT_SUCCESS);
 export const submitFailed = (message: string) => action(OrderActionTypes.SUBMIT_FAILED, message);
 
+export const saveOrderStart = (state: ApplicationState) => action(OrderActionTypes.SAVE_ORDER_START, state);
+export const saveOrderSuccess = () => action(OrderActionTypes.SAVE_ORDER_SUCCESS);
+export const saveOrderFailed = (message: string) => action(OrderActionTypes.SAVE_ORDER_FAILED, message);
+
 export const savePrescriptionStart = (prescription: Prescription) => action(OrderActionTypes.SAVE_PRESCRIPTION_START, prescription);
-export const savePrescriptionSuccess = ()
+export const savePrescriptionSuccess = () => action(OrderActionTypes.SAVE_PRESCRIPTION_SUCCESS);
+export const savePrescriptionFailed = (message: string) => action(OrderActionTypes.SAVE_PRESCRIPTION_FAILED, message);
 
+export const saveFittingHeightStart = (boss: Boss, height: number) => action(OrderActionTypes.SAVE_FITTING_HEIGHT_START, { boss, height });
+export const saveFittingHeightSuccess = (blueprint: Blueprint) => action(OrderActionTypes.SAVE_FITTING_HEIGHT_SUCCESS, blueprint);
+export const saveFittingHeightFailed = (message: string) => action(OrderActionTypes.SAVE_FITTING_HEIGHT_FAILED, message);
 
-
-export const fetchRequest = () => action(OrderActionTypes.FETCH_REQUEST);
-export const closeRequest = () => action(OrderActionTypes.CLOSE_REQUEST);
-export const setErrors = (type: string, error: string) => action(OrderActionTypes.SET_ERRORS, { type, error });
-export const clearErrors = (type: string) => action(OrderActionTypes.CLEAR_ERRORS, type);
-export const setBoss = (type: BossTypes, value: any) => action(OrderActionTypes.SET_BOSS, { type, value });
 export const setRxInformation = (type: string, field: string, value: string) => action(OrderActionTypes.SET_RX_INFORMATION, { type, field, value });
 export const setRecommendation = (recommendation: string) => action(OrderActionTypes.SET_RECOMMENDATION, recommendation);
 export const setMessage = (message: string) => action(OrderActionTypes.SET_MESSAGE, message);
 export const setFittingProperties = (properties: any) => action(OrderActionTypes.SET_FITTING_PROPERTIES, properties);
-export const setBlueprint = (blueprint: Blueprint) => action(OrderActionTypes.SET_BLUEPRINT, blueprint);
+// export const setBlueprint = (blueprint: Blueprint) => action(OrderActionTypes.SET_BLUEPRINT, blueprint);
 
+export const setBoss = (type: BossTypes, value: any) => action(OrderActionTypes.SET_BOSS, { type, value });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export const savePrescription: any = (prescription: Prescription) => (dispatch: Dispatch) => {
-//   dispatch(fetchRequest());
-
+// export const saveOrder: any = (order: IOrderState) => (dispatch: Dispatch) => {
 //   return new Promise((resolver) => {
-//     const response = savePrescriptionInformation(prescription);
+//     const response = saveOrderInformation(order);
 
 //     setTimeout(() => {
 //       resolver(response);
 //     }, 1000);
 //   })
 //   .then((response: any) => {
-//     dispatch(closeRequest());
-    
 //     if (response.success) {
-//       dispatch(lensesActions.fetchLenses());
-//     }
-//     else {
-//       dispatch(setErrors('prescription', response.errors));
 //     }
 //   })
 // };
 
-export const saveFittingHeight: any = (order: IOrderState, height: number) => (dispatch: Dispatch) => {
-  dispatch(fetchRequest());
-  dispatch(setBoss(BossTypes.FITTING_HEIGHT, height));
+// export const checkCompatibility: any = (order: IOrderState) => (dispatch: Dispatch) => {
+//   return new Promise((resolver) => {
+//     const response = checkFrameCompatibility(order);
 
-  return new Promise((resolver) => {
-    const response = saveFittingHeightInformation(order, height);
+//     setTimeout(() => {
+//       resolver(response);
+//     }, 1000);
+//   })
+//   .then((response: any) => {
+//     if (!response.success) {
+//       dispatch(setErrors(BossTypes.FRAME, response.result));
+//     }
+//   })
+// };
 
-    setTimeout(() => {
-      resolver(response);
-    }, 7000);
-  })
-  .then((response: any) => {
-    dispatch(closeRequest());
+// export const fetchLensCompatibility: any = (prescription: Prescription, lens: Lens) => (dispatch: Dispatch) => {
+//   return new Promise((resolver) => {
+//     const response = checkLensError(prescription, lens);
 
-    if (response.success) {
-      dispatch(setBlueprint(response.result));
-    }
-  })
-};
-
-export const saveOrder: any = (order: IOrderState) => (dispatch: Dispatch) => {
-  return new Promise((resolver) => {
-    const response = saveOrderInformation(order);
-
-    setTimeout(() => {
-      resolver(response);
-    }, 1000);
-  })
-  .then((response: any) => {
-    if (response.success) {
-    }
-  })
-};
-
-export const checkCompatibility: any = (order: IOrderState) => (dispatch: Dispatch) => {
-  return new Promise((resolver) => {
-    const response = checkFrameCompatibility(order);
-
-    setTimeout(() => {
-      resolver(response);
-    }, 1000);
-  })
-  .then((response: any) => {
-    if (!response.success) {
-      dispatch(setErrors(BossTypes.FRAME, response.result));
-    }
-  })
-};
-
-export const fetchLensCompatibility: any = (prescription: Prescription, lens: Lens) => (dispatch: Dispatch) => {
-  return new Promise((resolver) => {
-    const response = checkLensError(prescription, lens);
-
-    setTimeout(() => {
-      resolver(response);
-    }, 1000);
-  })
-  .then((response: any) => {
-    if (!response.success) {
-      dispatch(setBoss(BossTypes.LENS, {} as Lens));
-      dispatch(lensesActions.setErrors(response.result));
-    }
-  })
-};
-
-export const fetchSubmitOrder: any = (order: IOrderState) => (dispatch: Dispatch) => {
-  dispatch(fetchRequest());
-
-  return new Promise((resolver) => {
-    const response = saveOrderInformation(order);
-
-    setTimeout(() => {
-      resolver(response);
-    }, 3000);
-  })
-  .then((response: any) => {
-    dispatch(closeRequest());
-
-    if (response.success) {
-      dispatch(setBoss(BossTypes.BARCODE, response.result));
-    }
-  })
-}; 
+//     setTimeout(() => {
+//       resolver(response);
+//     }, 1000);
+//   })
+//   .then((response: any) => {
+//     if (!response.success) {
+//       dispatch(setBoss(BossTypes.LENS, {} as Lens));
+//       dispatch(lensesActions.setErrors(response.result));
+//     }
+//   })
+// };

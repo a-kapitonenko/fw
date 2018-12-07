@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class LinkComponent<T> extends React.Component<T> {
   constructor(props: any) {
     super(props);
+
     this.context = props.context;
   }
 
@@ -13,7 +14,7 @@ class LinkComponent<T> extends React.Component<T> {
 
   redirectToPage = (path: string) => {
     this.context.router.history.push(path)
-  }
+  };
 }
 
 export default LinkComponent;

@@ -20,20 +20,20 @@ type PropsFromState = {
 
 type PropsFromDispatch = {
   handleChange: typeof orderActions.setRxInformation,
-  savePrescription: typeof orderActions.savePrescription,
+  savePrescription: typeof orderActions.savePrescriptionStart,
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
-  disabled: state.order.isFetching,
+  disabled: state.order.isFetching || state.lenses.isFetching,
   prescription: state.order.boss.prescription,
   frame: state.order.boss.frame,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleChange: (type: string, field: string, value: string) => dispatch(orderActions.setRxInformation(type, field, value)),
-  savePrescription: (prescription: Prescription) => dispatch(orderActions.savePrescription(prescription)),
+  savePrescription: (prescription: Prescription) => dispatch(orderActions.savePrescriptionStart(prescription)),
 });
 
 class PrescriptionSelectionContainer extends React.Component<ComponentProps> {

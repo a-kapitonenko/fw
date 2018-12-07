@@ -21,19 +21,21 @@ const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, se
       </h2>
       {errors && <div className="order-selection__error">{errors}</div>}
       <section className="lens-selection__section">
-        {lenses.map((lens: Lens) => (
-          <div
-            key={lens.value}
-            className={`lens-selection__article ${selectedLens === lens ? 'lens-selected' : ''}`}
-            onClick={() => {
-              if (!disabled) {
-                return handleSubmit(lens);
-              }
-            }}
-          >
-            {lens.name}
-          </div>
-        ))}
+        <div className={`lens-selection__lenses ${disabled ? '-opacity' : ''}`}>
+          {lenses.map((lens: Lens) => (
+            <div
+              key={lens.value}
+              className={`lens-selection__lens ${selectedLens === lens ? 'lens-selected' : ''}`}
+              onClick={() => {
+                if (!disabled) {
+                  return handleSubmit(lens);
+                }
+              }}
+            >
+              {lens.name}
+            </div>
+          ))}
+        </div>
       </section>
     </section>
   );

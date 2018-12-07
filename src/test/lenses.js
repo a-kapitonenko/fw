@@ -41,7 +41,7 @@ const lenses = [
   },
 ];
 
-export const getLenses = (order) => {
+export const getLenses = (boss) => {
   return {
     success: true,
     lenses 

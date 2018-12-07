@@ -1,33 +1,27 @@
 import { Reducer } from 'redux';
 import { ILensesState, LensesActionTypes } from './types';
+import { saveStart, saveSuccess, saveFailed } from '../index';
 
 const initialState: ILensesState = {
-  // fetching: false,
-  lenses: [],
+  isFetching: false,
   errors: '',
-}
+  lenses: [],
+};
 
 const reducer: Reducer<ILensesState> = (state = initialState, action) => {
   switch (action.type) {
-    // case LensesActionTypes.FETCH_REQUEST: {
-    //   return { ...state, fetching: true };
-    // }
-    // case LensesActionTypes.CLOSE_REQUEST: {
-    //   return { ...state, fetching: false };
-    // }
-    case LensesActionTypes.SET_ERRORS: {
-      return { ...state, errors: action.payload };
-    }
-    case LensesActionTypes.CLEAR_ERRORS: {
-      return { ...state, errors: '' };
-    }
-    case LensesActionTypes.SET_LENSES: {
-      return { ...state, lenses: action.payload };
-    }
+    case LensesActionTypes.FETCH_LENSES_START: return saveStart(state);
+    case LensesActionTypes.FETCH_LENSES_SUCCESS: return saveSuccess(state, 'lenses', action.payload);
+    case LensesActionTypes.FETCH_LENSES_FAILED: return saveFailed(state, action.payload);
+
+    case LensesActionTypes.SAVE_LENS_START: return saveStart(state);
+    case LensesActionTypes.SAVE_LENS_SUCCESS: return saveSuccess(state);
+    case LensesActionTypes.SAVE_LENS_FAILED: return saveFailed(state, action.paylaod);
+    
     default: {
-      return state
+      return state;
     }
   }
 };
 
-export { reducer as LensesReducer }
+export { reducer as LensesReducer };

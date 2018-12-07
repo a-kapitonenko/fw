@@ -6,12 +6,12 @@
   background-color: white;
 }
 
-.lens-selection__article {
+.lens-selection__lens {
   cursor: pointer;
   padding: 0.5rem 0;
 }
 
-.lens-selection__article:hover {
+.lens-selection__lens:hover {
   background-color: lightgray;
 }
 

@@ -1,19 +1,25 @@
 const rec = 'Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)';
 
-export const savePrescriptionInformation = (values) => {
+export const saveOrder = (state) => {
   return {
     success: true,
   };
 };
 
-export const saveLensInformation = (prescription, lens) => {
+export const savePrescription = (values) => {
+  return {
+    success: true,
+  };
+};
+
+export const saveLens = ({prescription, lens}) => {
   return {
     success: true,
     recommendation: rec
   };
 };
 
-export const saveFittingHeightInformation = (order, fittingHeight) => {
+export const saveFittingHeight = (boss, fittingHeight) => {
   return {
     success: true,
     result: {
@@ -22,7 +28,7 @@ export const saveFittingHeightInformation = (order, fittingHeight) => {
   };
 };
 
-export const saveOrderInformation = (order) => {
+export const saveOrderInformation = (boss) => {
   return {
     success: true,
     result: {

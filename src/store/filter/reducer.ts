@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
 import { IFilterState, FilterActionTypes, Groups, Field } from './types';
+import { saveStart, saveSuccess, saveFailed } from '../index';
 
 const initialGroupsState = {
   color: [],
@@ -23,23 +24,17 @@ const initialState: IFilterState = {
 
 const reducer: Reducer<IFilterState> = (state = initialState, action) => {
   switch (action.type) {
-    case FilterActionTypes.FILTERING_START: {
-      return { ...state, isFetching: true, errors: '' };
-    }
-    case FilterActionTypes.FILTERING_SUCCESS: {
-      return { ...state, isFetching: false, frames: action.payload };
-    }
-    case FilterActionTypes.FILTERING_FAILED: {
-      return { ...state, isFetching: false, errors: action.payload };
-    }
+    case FilterActionTypes.FILTERING_START: return saveStart(state);
+    case FilterActionTypes.FILTERING_SUCCESS: return saveSuccess(state, 'frames', action.payload);
+    case FilterActionTypes.FILTERING_FAILED: return saveFailed(state, action.payload);
     case FilterActionTypes.FETCH_GROUPS_START: {
-      return { ...state, groups: { ...state.groups, isFetching: true, errors: '' } };
+      return { ...state, groups: saveStart(state.groups) };
     }
     case FilterActionTypes.FETCH_GROUPS_SUCCESS: {
-      return { ...state, groups: { ...state.groups, isFetching: false, data: action.payload } };
+      return { ...state, groups: saveSuccess(state.groups, 'data', action.payload) };
     }
     case FilterActionTypes.FETCH_GROUPS_FAILED: {
-      return { ...state, groups: { ...state.groups, isFetching: true, errors: action.paylaod } };
+      return { ...state, groups: saveFailed(state.groups, action.payload) };
     }
     case FilterActionTypes.CHANGE_CHECKED: {
       const item = state.groups.data[action.payload.type].map((field: Field) => {
