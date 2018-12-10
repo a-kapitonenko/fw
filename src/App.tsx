@@ -11,7 +11,7 @@ import './styles/index.css';
 class App extends React.Component {
   render() {
     return (
-      <div className="page__wrapper yellow-section">
+      <div className="p-template yellow-section">
         <BrowserRouter>
           <React.Fragment>
             <PageHeader />

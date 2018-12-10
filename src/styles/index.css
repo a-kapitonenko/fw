@@ -39,54 +39,53 @@ h5 {
   background-color: #FFBF00;
 }
 
-.page__wrapper {
+.p-template {
   height: 100%;
   max-width: 1280px;
   margin: 0 auto;
   box-shadow: 0 0 15px 8px #c2c2c2;
 }
 
-.page__progress {
+.p-template__main {
+  margin: 0 4rem;
+  text-align: center;
+}
+
+.p-template__tittle {
+  padding: 2rem;
+  text-align: center;
+}
+
+.p-template__progress {
   position: fixed;
   top: calc(50% - 24px);
   left: calc(50% - 24px);
 }
 
-.page__content {
-  margin: 0 4rem;
-  text-align: center;
+.s-template {
+  border: 3px solid gray;
+  padding: 1.5rem 0;
+  margin: 2rem 0;
+}
+
+.s-template__tittle {
+  margin-bottom: 1rem;
+}
+
+.s-template__content {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  border: 2px solid gray;
+  background-color: white;
+}
+
+.s-template__content > p {
+  margin: auto 2rem;
 }
 
 .yellow-section {
   background: #FFDC00;
-}
-
-.page__title {
-  padding: 2rem;
-  text-align: center;
-}
-
-.page__img {
-  max-width: 1000px;
-  margin: 2rem !important;
-}
-
-.page__button {
-  margin: 2rem !important;
-}
-
-.information__text {
-  margin: 10px 20px !important;
-  width: 120px;
-}
-
-.information__text input {
-  text-align: center;
-}
-
-.information__form {
-  text-align: center;
-  margin-top: 40px;
 }
 
 .-flex, .-flex-around, .-flex-column-between {
@@ -133,7 +132,7 @@ h5 {
 }
 
 @media screen and (max-width: 680px) {
-  .page__content {
+  .p-template__main {
     margin: 0;
   }
 }

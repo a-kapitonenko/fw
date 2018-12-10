@@ -104,14 +104,14 @@ class OrderSelection extends LinkComponent<ComponentProps> {
     const submitDisabled =  !isFittingHeightSelected
 
     return (
-      <div className="page__content">
-      {isFetching && <CircularProgress className="page__progress"/>}
+      <main className="p-template__main">
+      {isFetching && <CircularProgress className="p-template__progress"/>}
         <PrescriptionSelectionContainer />
 
         {!isFrameSelected
           ? (
             <React.Fragment>
-              <Section className="order-selection__recommend" tittle="Enter fitting height" wrap>
+              <Section tittle="Enter fitting height" wrap>
                 <SelectField
                   disabled={isFetching}
                   className="order-selection__select"
@@ -121,13 +121,13 @@ class OrderSelection extends LinkComponent<ComponentProps> {
                   onChange={(value: number) => saveFittingHeight(order.boss, value)}
                 />
               </Section>
-              <Section className="order-selection__recommend" tittle="Message">
+              <Section className="order-selection__info s-template__content" tittle="Message">
                 <p>{order.message}</p>
               </Section>
             </React.Fragment>
           )
           : (
-            <Section className="order-selection__recommend" tittle="Recommendation">
+            <Section className="order-selection__info s-template__content" tittle="Recommendation">
               <p>{order.recommendation}</p>
             </Section>
           )
@@ -140,10 +140,10 @@ class OrderSelection extends LinkComponent<ComponentProps> {
           ? (
             <React.Fragment>
               <Section className="order-selection__content" tittle="Frame Selected">
-                <div className="order-selection__img-wrapper">
-                  <img className="order-selection__frame-img" src={`/${order.boss.frame.img}`} />
+                <div className="order-selection__img-wrapper s-template__content">
+                  <img className="order-selection__img" src={`/${order.boss.frame.img}`} />
                 </div>
-                {order.errors['frame'] && <div className="order-selection__frame-error">{order.errors['frame']}</div>}
+                {order.errors['frame'] && <div className="order-selection__error">{order.errors['frame']}</div>}
                 <div className="order-selection__frame-description">
                   <p>UPC Code: {order.boss.frame.upc}</p>
                   <p>Name of Frame: {order.boss.frame.label}</p>
@@ -154,15 +154,15 @@ class OrderSelection extends LinkComponent<ComponentProps> {
               </Section>
 
               <Section className="order-selection__content" tittle="36 Point Trace Dimentions">
-                <div className="order-selection__img-wrapper">
-                  {order.blueprint['img'] && <img className="order-selection__frame-img" src={`/${order.blueprint.img}`} />}
+                <div className="order-selection__img-wrapper s-template__content">
+                  {order.blueprint['img'] && <img className="order-selection__img" src={`/${order.blueprint.img}`} />}
                 </div>
               </Section>
             </React.Fragment>
           )
           : (
             <React.Fragment>
-              <Section className="order-selection__field" tittle="Selected NikonEyes Lens">
+              <Section className="order-selection__lens s-template__content" tittle="Selected NikonEyes Lens">
                 <p>{order.boss.lens.name}</p>
               </Section>
 
@@ -183,7 +183,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
             </Button>
           )}
         </section>
-      </div>
+      </main>
     );
   }
 }

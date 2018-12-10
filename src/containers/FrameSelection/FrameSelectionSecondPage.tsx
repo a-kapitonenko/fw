@@ -63,10 +63,10 @@ class FrameSelectionSecondPage extends React.Component<ComponentProps> {
 
     return (
       <React.Fragment>
-        <h1 className="frame-selection__title">Similar Frames</h1>
+        <h1 className="p-template__tittle">Similar Frames</h1>
         {errors && <div className="frame-selection__error">{errors}</div>}
         <section className="frame-selection__form">
-          <h2 className="frame-selection__form-title">
+          <h2 className="p-template__tittle">
             These frames are also compatible with the patients Rx and lens selection <br />
             Continue if patient is happy with current frame selection
           </h2>

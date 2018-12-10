@@ -100,6 +100,9 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     // case OrderActionTypes.SET_BLUEPRINT: {
     //   return { ...state, blueprint: action.payload };
     // }
+    case OrderActionTypes.DISABLE_REDIRECT: {
+      return { ...state, redirect: false };
+    }
     case OrderActionTypes.SET_BOSS: {
       return { ...state, boss: { ...state.boss, [action.payload.type]: action.payload.value } }
     }

@@ -2,3 +2,7 @@
   display: flex;
 }
 
+.boss__title {
+  padding: 2rem;
+  text-align: center;
+}

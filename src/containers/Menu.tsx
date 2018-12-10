@@ -10,13 +10,13 @@ type ComponentProps = {};
 class Menu extends LinkComponent<ComponentProps> {
   public render() {
     return (
-      <div className="page__content">
-        <h1 className="page__title">Tailored Frame and Lens Design</h1>
+      <main className="p-template__main">
+        <h1 className="p-template__tittle">Tailored Frame and Lens Design</h1>
         <img className="page__img" src="/menu.png" />
         <Button className="page__button" variant="contained" onClick={() => this.redirectToPage('/select')}>
           Enter
         </Button>
-      </div>
+      </main>
     );
   }
 }

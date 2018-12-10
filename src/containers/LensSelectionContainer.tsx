@@ -5,6 +5,7 @@ import { ApplicationState } from '../store';
 import { Prescription } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import * as lensesActions from '../store/lenses/actions';
+// import { isEmptyObject } from '../helpers/mathHelper';
 import LensSelection from '../components/LensSelection';
 
 import '../styles/lensSelection.css';
@@ -36,10 +37,21 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 class LensSelectionContainer extends React.Component<ComponentProps> {
-  handleSubmit = (lens: Lens) => {
-    const { prescription, saveLens } = this.props;
+  // componentDidUpdate(prevProps: ComponentProps) {
+  //   const { prescription, selectedLens } = this.props;
+  //   const isLensSelected = !isEmptyObject(selectedLens);
 
-    saveLens(prescription, lens);
+  //   if (prevProps.prescription !== prescription && isLensSelected) {
+  //     console.log(11111111111111111111111111);
+  //   }
+  // }
+
+  handleSubmit = (lens: Lens) => {
+    const { prescription, selectedLens, saveLens } = this.props;
+
+    if (lens.name !== selectedLens.name ) {
+      saveLens(prescription, lens);
+    }
   }
 
   render() {

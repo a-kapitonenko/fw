@@ -51,7 +51,7 @@ class FrameSelectionFirstPage extends React.Component<ComponentProps> {
 
     return (
       <React.Fragment>
-        <h1 className="frame-selection__title">Tailored Frame Selection</h1>
+        <h1 className="p-template__tittle">Tailored Frame Selection</h1>
         <section className="frame-selection__form">
           <div className="frame-selection__form-content">
             <div className="frame-selection__form-section -flex-column-between">
@@ -64,7 +64,7 @@ class FrameSelectionFirstPage extends React.Component<ComponentProps> {
             </div>
           </div>
           <section className="frame-selection__form-actions">
-            <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Back</Button>
+            <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Close</Button>
             <Button className="frame-selection__form-button" variant="contained" disabled={buttonDisabled} onClick={() => setStep(2)}>Next</Button>
           </section>
         </section>

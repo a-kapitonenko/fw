@@ -1,10 +1,10 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
-
 import * as orderActions from '../store/order/actions';
 import { Prescription } from '../store/order/types';
-
 import { PrescriptionFields } from '../constants/prescription';
+import Section from './Section';
+import '../styles/prescription.css';
 
 type ComponentProps = {
   prescription: Prescription;
@@ -15,14 +15,13 @@ type ComponentProps = {
 
 const PrescriptionSelection: React.SFC<ComponentProps> = ({ prescription, readOnly, disabled, handleChange }) => {
   return (
-    <section className="order-selection__section">
-      <h2 className="order-selection__section-tittle">Input Rx Information</h2>
-      <div>
-        <div>
+    <Section tittle="Input Rx Information" wrap>
+      <div className="prescription">
+        <div className="prescription__content">
           {PrescriptionFields.map((element, index) => (
             <TextField
               key={index}
-              className="information__text"
+              className="prescription__text-field"
               InputLabelProps={{ shrink: true }}
               InputProps={{ readOnly: readOnly }}
               disabled={disabled}
@@ -43,7 +42,7 @@ const PrescriptionSelection: React.SFC<ComponentProps> = ({ prescription, readOn
           {PrescriptionFields.map((element, index) => (
             <TextField
               key={index}
-              className="information__text"
+              className="prescription__text-field"
               InputLabelProps={{ shrink: true }}
               InputProps={{ readOnly: readOnly }}
               disabled={disabled}
@@ -61,7 +60,7 @@ const PrescriptionSelection: React.SFC<ComponentProps> = ({ prescription, readOn
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

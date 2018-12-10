@@ -68,7 +68,7 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
     const isFrameSelected = !isEmptyObject(selectedFrame);
 
     return (
-      <Dialog open={open} fullScreen={true} className="frame-selection__wrapper">
+      <Dialog open={open} fullScreen={true} className="frame-selection">
         {isFetching && <CircularProgress className="frame-selection__progress" />}
         <div className="frame-selection__content yellow-section">
           {isFrameSelected && (

@@ -6,14 +6,14 @@ export type Frame = {
   compatibility?: boolean;
 };
 
-export const enum FramesActionTypes {
-  FETCH_SIMILAR_FRAMES_START = '@@frames/FETCH_SIMILAR_FRAMES_START',
-  FETCH_SIMILAR_FRAMES_SUCCESS = '@@frames/FETCH_SIMILAR_FRAMES_SUCCESS',
-  FETCH_SIMILAR_FRAMES_FAILED = '@@frames/FETCH_SIMILAR_FRAMES_FAILED',
-  
+export const enum FramesActionTypes {  
   SUBMIT_START = '@@frames/SUBMIT_START',
   SUBMIT_SUCCESS = '@@frames/SUBMIT_SUCCESS',
   SUBMIT_FAILED = '@@frames/SUBMIT_FAILED',
+
+  FETCH_SIMILAR_FRAMES_START = '@@frames/FETCH_SIMILAR_FRAMES_START',
+  FETCH_SIMILAR_FRAMES_SUCCESS = '@@frames/FETCH_SIMILAR_FRAMES_SUCCESS',
+  FETCH_SIMILAR_FRAMES_FAILED = '@@frames/FETCH_SIMILAR_FRAMES_FAILED',
 
   OPEN = '@@frames/OPEN',
   CLOSE = '@@frames/CLOSE',

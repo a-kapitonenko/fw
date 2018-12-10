@@ -1,7 +1,6 @@
 import * as React from 'react';
-
 import { Lens } from '../store/lenses/types';
-
+import Section from './Section';
 import '../styles/lensSelection.css';
 
 type ComponentProps = {
@@ -14,11 +13,15 @@ type ComponentProps = {
 
 const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, selectedLens, handleSubmit }) => {
   return (
-    <section className="order-selection__section">
-      <h2 className="order-selection__section-tittle">
-        The following products can be used with the patients prescription<br />
-        (Select the best NikonEyes Lens that best fits your needs)
-      </h2>
+    <Section
+      tittle={
+        <React.Fragment>
+          The following products can be used with the patients prescription<br />
+          (Select the best NikonEyes Lens that best fits your needs)
+      </React.Fragment>
+      }
+      wrap
+    >
       {errors && <div className="order-selection__error">{errors}</div>}
       <section className="lens-selection__section">
         <div className={`lens-selection__lenses ${disabled ? '-opacity' : ''}`}>
@@ -37,7 +40,7 @@ const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, se
           ))}
         </div>
       </section>
-    </section>
+    </Section>
   );
 };
 
