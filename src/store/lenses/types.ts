@@ -11,6 +11,10 @@ export const enum LensesActionTypes {
   SAVE_LENS_START = '@@lenses/SAVE_LENS_START',
   SAVE_LENS_SUCCESS = '@@lenses/SAVE_LENS_SUCCESS',
   SAVE_LENS_FAILED = '@@lenses/SAVE_LENS_FAILED',
+
+  CHECK_LENS_START = '@@lenses/CHECK_LENS_START',
+  CHECK_LENS_SUCCESS = '@@lenses/CHECK_LENS_SUCCESS',
+  CHECK_LENS_FALIED = '@@lenses/CHECK_LENS_FAILED',
 };
 
 export interface ILensesState {

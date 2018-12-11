@@ -23,15 +23,14 @@
 }
 
 .order-selection__img-wrapper {
-  align-items: center;
   margin: 2rem;
   height: 300px;
   max-width: 600px;
 }
 
 .order-selection__img {
-  height: 200px;
-  min-width: 200px;
+  height: auto;
+  width: 100%;
 }
 
 .order-selection__frame-description {

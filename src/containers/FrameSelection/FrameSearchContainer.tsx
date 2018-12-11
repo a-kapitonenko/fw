@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-
 import { ApplicationState } from '../../store';
 import { Boss } from '../../store/order/types';
 import { Frame } from '../../store/frames/types';
 import * as searchActions from '../../store/search/actions';
-
 import { frameSearchConfig } from '../../constants/frameSearch';
-
 import FrameSearch from '../../components/FrameSearch';
 
 type PropsFromState = {

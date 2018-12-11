@@ -4,8 +4,8 @@
 }
 
 .frame-selection__progress {
-  z-index: 10000;
-  position: absolute;
+  z-index: 1000;
+  position: fixed;
   top: calc(50% - 24px);
   left: calc(50% - 24px);
 }

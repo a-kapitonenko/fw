@@ -4,8 +4,8 @@ export const enum SearchActionTypes {
   SEARCH_START = '@@search/SEARCH_START',
   SEARCH_SUCCESS = '@@search/SEARCH_SUCCESS',
   SEARCH_FAILED = '@@search/SEARCH_FAILED',
-  SEARCH_CLEAR = '@@search/SEARCH_CLEAR',
-  SET_SELECTED_FRAMES = '@@search_SET_SELECTED_FRAMES',
+  SET_SELECTED_FRAMES = '@@search/SET_SELECTED_FRAMES',
+  CLEAR_RESULT = '@@search/CLEAR_RESULT',
 }
 
 export interface ISearchState {

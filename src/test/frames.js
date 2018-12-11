@@ -208,3 +208,10 @@ export const onSubmit = ({ boss, frame }) => {
     }
   };
 };
+
+export const checkFrameCompatibility = ({ boss }) => {
+  return {
+    success: false,
+    error: 'This lens does not accecptable with selected frame.'
+  };
+};

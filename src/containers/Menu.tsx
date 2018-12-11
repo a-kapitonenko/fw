@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
-
 import LinkComponent from '../components/LinkComponent';
-
-import '../styles/orderSelection.css';
+import '../styles/menu.css';
 
 type ComponentProps = {};
 

@@ -10,8 +10,14 @@ export const fetchSimilarFramesStart = (boss: Boss) => action(FramesActionTypes.
 export const fetchSimilarFramesSuccess = (frames: Frame[]) => action(FramesActionTypes.FETCH_SIMILAR_FRAMES_SUCCESS, frames);
 export const fetchSimilarFramesFailed = (message: string) => action(FramesActionTypes.FETCH_SIMILAR_FRAMES_FAILED, message);
 
+export const checkFrameStart = (boss: Boss) => action(FramesActionTypes.CHECK_FRAME_START, boss);
+export const checkFrameSuccess = () => action(FramesActionTypes.CHECK_FRAME_SUCCESS);
+export const checkFrameFailed = (message: string) => action(FramesActionTypes.CHECK_FRAME_FAILED, message);
+
 export const open = () => action(FramesActionTypes.OPEN);
 export const close = () => action(FramesActionTypes.CLOSE);
 
 export const setSelectedFrame = (frame: Frame) => action(FramesActionTypes.SET_SELECTED_FRAME, frame);
 export const clearSelectedFrame = () => action(FramesActionTypes.CLEAR_SELECTED_FRAME);
+
+export const clearResult = () => action(FramesActionTypes.CLEAR_RESULT);

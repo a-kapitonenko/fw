@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import LinkComponent from '../components/LinkComponent';
 
 class PageHeader extends LinkComponent<{}>{

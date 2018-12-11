@@ -28,6 +28,9 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     case FramesActionTypes.SUBMIT_START: return saveStart(state);
     case FramesActionTypes.SUBMIT_SUCCESS: return saveSuccess(state);
     case FramesActionTypes.SUBMIT_FAILED: return saveFailed(state, action.payload);
+    case FramesActionTypes.CHECK_FRAME_START: return saveStart(state);
+    case FramesActionTypes.CHECK_FRAME_SUCCESS: return saveSuccess(state);
+    case FramesActionTypes.CHECK_FRAME_FAILED: return saveFailed(state, action.payload);
     case FramesActionTypes.OPEN: {
       return { ...state, open: true };
     }
@@ -39,6 +42,9 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
     }
     case FramesActionTypes.CLEAR_SELECTED_FRAME: {
       return { ...state, selectedFrame: <Frame>{} };
+    }
+    case FramesActionTypes.CLEAR_RESULT: {
+      return { ...initialState };
     }
     default: {
       return state;

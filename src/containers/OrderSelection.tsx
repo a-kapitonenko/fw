@@ -3,16 +3,13 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import { ApplicationState } from '../store';
 import { IOrderState, Prescription, Boss } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
 import * as filterActions from '../store/filter/actions';
-
 import { isEmptyObject } from '../helpers/mathHelper';
-
 import LinkComponent from '../components/LinkComponent';
 import Section from '../components/Section';
 import PrescriptionSelectionContainer from './PrescriptionSelectionContainer';
@@ -25,6 +22,7 @@ import '../styles/orderSelection.css';
 type PropsFromState = {
   isFetching: boolean;
   state: ApplicationState;
+  frameErrors: string;
   order: IOrderState;
   selectedLens: Lens;
   prescription: Prescription;
@@ -36,16 +34,14 @@ type PropsFromDispatch = {
   saveOrder: typeof orderActions.saveOrderStart;
   fetchFilterGroups: typeof filterActions.fetchGroupsStart;
   saveFittingHeight: typeof orderActions.saveFittingHeightStart;
-  // checkCompatibility: typeof orderActions.checkCompatibility;
-  // fetchLensCompatibility: typeof orderActions.fetchLensCompatibility;
-  // setErrors: typeof orderActions.setErrors;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
-  isFetching: state.order.isFetching || state.lenses.isFetching,
+  isFetching: state.order.isFetching || state.lenses.isFetching || state.frames.isFetching,
   state: state,
+  frameErrors: state.frames.errors,
   order: state.order,
   selectedLens: state.order.boss.lens,
   prescription: state.order.boss.prescription,
@@ -57,9 +53,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   saveOrder: (state: ApplicationState) => dispatch(orderActions.saveOrderStart(state)),
   fetchFilterGroups: () => dispatch(filterActions.fetchGroupsStart()),
   saveFittingHeight: (boss: Boss, height: number) => dispatch(orderActions.saveFittingHeightStart(boss, height)),
-  // checkCompatibility: (order: IOrderState) => dispatch(orderActions.checkCompatibility(order)),
-  // fetchLensCompatibility: (prescription: Prescription, lens: Lens) => dispatch(orderActions.fetchLensCompatibility(prescription, lens)),
-  // setErrors: (type: string, error: string) => dispatch(orderActions.setErrors(type, error)),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
@@ -77,38 +70,20 @@ class OrderSelection extends LinkComponent<ComponentProps> {
     }
   }
 
-  // public componentDidUpdate(prevProps: ComponentProps) {
-  //   const { order } = this.props;
-  //   //const isFrameSelected = !isEmptyObject(order.boss.frame);
-  //   //const isLensSelected = !isEmptyObject(selectedLens);
-  //   const isBarcode = !isEmptyObject(order.boss.barcode);
-
-  //   // if (prevProps.selectedLens !== selectedLens && isFrameSelected) {
-  //   //   checkCompatibility(order);
-  //   // }
-
-  //   // if (prevProps.prescription !== prescription && isLensSelected) {
-  //   //   fetchLensCompatibility(prescription, selectedLens);
-  //   // }
-
-  //   if (isBarcode) {
-  //     this.redirectToPage('/order');
-  //   }
-  // }
-
   public render() {
-    const { isFetching, state, order, handleOpen, submitOrder, saveOrder, saveFittingHeight } = this.props;
+    const { isFetching, state, frameErrors, order, handleOpen, submitOrder, saveOrder, saveFittingHeight } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.boss.lens);
-    const isFrameSelected = isEmptyObject(order.boss.frame);
+    const isFrameSelected = !isEmptyObject(order.boss.frame);
     const isFittingHeightSelected = order.boss.fittingHeight ? true : false;
-    const submitDisabled =  !isFittingHeightSelected
+    const isErrors = frameErrors ? true: false;
+    const submitDisabled =  !isFittingHeightSelected || isErrors;
 
     return (
       <main className="p-template__main">
       {isFetching && <CircularProgress className="p-template__progress"/>}
         <PrescriptionSelectionContainer />
 
-        {!isFrameSelected
+        {isFrameSelected
           ? (
             <React.Fragment>
               <Section tittle="Enter fitting height" wrap>
@@ -136,10 +111,11 @@ class OrderSelection extends LinkComponent<ComponentProps> {
         <LensSelectionContainer />
         <FrameSelection />
 
-        {!isFrameSelected
+        {isFrameSelected
           ? (
             <React.Fragment>
               <Section className="order-selection__content" tittle="Frame Selected">
+                {frameErrors && <div className="frame-selection__error">{frameErrors}</div>}
                 <div className="order-selection__img-wrapper s-template__content">
                   <img className="order-selection__img" src={`/${order.boss.frame.img}`} />
                 </div>
@@ -177,7 +153,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
 
         <section className="order-selection__actions">
           <Button variant="contained" disabled={isFetching} onClick={() => saveOrder(state)}>Save</Button>
-          {!isFrameSelected && (
+          {isFrameSelected && (
             <Button variant="contained" disabled={isFetching || submitDisabled} onClick={() => submitOrder(order.boss)}>
               Submit Order
             </Button>

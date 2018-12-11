@@ -94,6 +94,9 @@ const reducer: Reducer<IFilterState> = (state = initialState, action) => {
     case FilterActionTypes.CLEAR_QUERY: {
       return { ...state, query: initialGroupsState };
     }
+    case FilterActionTypes.CLEAR_RESULT: {
+      return { ...initialState, groups: state.groups };
+    }
     default: {
       return state;
     }

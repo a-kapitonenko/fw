@@ -3,16 +3,13 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-
 import { ApplicationState } from '../../store';
 import { Boss } from '../../store/order/types';
 import { Groups, Field } from '../../store/filter/types';
 import { Frame } from '../../store/frames/types';
 import * as filterActions from '../../store/filter/actions';
-
 import { isEmptyObject } from '../../helpers/mathHelper';
 import { isEmptyQuery } from '../../helpers/filterHelper';
-
 import FrameFilter from '../../components/FrameFilter';
 
 type PropsFromState = {

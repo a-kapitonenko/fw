@@ -17,6 +17,9 @@ const reducer: Reducer<ISearchState> = (state = initialState, action) => {
     case SearchActionTypes.SET_SELECTED_FRAMES: {
       return { ...state, selectedFrames: action.payload };
     }
+    case SearchActionTypes.CLEAR_RESULT: {
+      return { ...initialState };
+    }
     default: {
       return state;
     }

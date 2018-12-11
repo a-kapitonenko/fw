@@ -1,3 +1,5 @@
+const rec = 'Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)';
+
 const lenses = [
   {
     name: 'Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown',
@@ -41,9 +43,31 @@ const lenses = [
   },
 ];
 
+export const saveLens = ({ prescription, lens }) => {
+  return {
+    success: true,
+    recommendation: rec
+  };
+};
+
 export const getLenses = (boss) => {
   return {
     success: true,
     lenses 
   }
 };
+
+export const checkLens = ({ prescription, lens }) => {
+  return {
+    success: true,
+    result: ''
+  };
+};
+
+export const checkLensError = ({ prescription, lens }) => {
+  return {
+    success: false,
+    error: "Selected lens doesn't compatibility with patient prescription. Please, select from the following lenses",
+  };
+};
+

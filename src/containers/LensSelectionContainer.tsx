@@ -7,7 +7,6 @@ import { Lens } from '../store/lenses/types';
 import * as lensesActions from '../store/lenses/actions';
 // import { isEmptyObject } from '../helpers/mathHelper';
 import LensSelection from '../components/LensSelection';
-
 import '../styles/lensSelection.css';
 
 type PropsFromState = {
@@ -20,6 +19,7 @@ type PropsFromState = {
 
 type PropsFromDispatch = {
   saveLens: typeof lensesActions.saveLensStart;
+  //checkLens: typeof lensesActions.checkLensStart;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -34,15 +34,16 @@ const mapStateToProps = (state: ApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   saveLens: (prescription: Prescription, lens: Lens) => dispatch(lensesActions.saveLensStart(prescription, lens)),
+  //checkLens: (prescription: Prescription, lens: Lens) => dispatch(lensesActions.checkLensStart(prescription, lens)),
 });
 
 class LensSelectionContainer extends React.Component<ComponentProps> {
   // componentDidUpdate(prevProps: ComponentProps) {
-  //   const { prescription, selectedLens } = this.props;
+  //   const { prescription, selectedLens, checkLens } = this.props;
   //   const isLensSelected = !isEmptyObject(selectedLens);
 
   //   if (prevProps.prescription !== prescription && isLensSelected) {
-  //     console.log(11111111111111111111111111);
+  //     checkLens(prescription, selectedLens);
   //   }
   // }
 

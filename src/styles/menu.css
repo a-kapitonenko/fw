@@ -1,6 +1,6 @@
 .page__img {
-  max-width: 1000px;
-  margin: 2rem !important;
+  max-width: 100%;
+  height: auto;
 }
 
 .page__button {

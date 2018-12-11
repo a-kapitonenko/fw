@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Select, { components } from 'react-select';
-
 import { Frame } from '../store/frames/types';
-
 import '../styles/frameSearch.css';
 
 type ComponentProps = {

@@ -57,6 +57,7 @@ h5 {
 }
 
 .p-template__progress {
+  z-index: 10000;
   position: fixed;
   top: calc(50% - 24px);
   left: calc(50% - 24px);
