@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ApplicationState } from '../store';
-import { IOrderState, Prescription, Boss } from '../store/order/types';
+import { IOrderState, Errors,  Prescription, Boss } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
@@ -22,6 +22,7 @@ import '../styles/orderSelection.css';
 type PropsFromState = {
   isFetching: boolean;
   state: ApplicationState;
+  errors: Errors;
   frameErrors: string;
   order: IOrderState;
   selectedLens: Lens;
@@ -41,6 +42,7 @@ type ComponentProps = PropsFromState & PropsFromDispatch;
 const mapStateToProps = (state: ApplicationState) => ({
   isFetching: state.order.isFetching || state.lenses.isFetching || state.frames.isFetching,
   state: state,
+  errors: state.order.errors,
   frameErrors: state.frames.errors,
   order: state.order,
   selectedLens: state.order.boss.lens,
@@ -71,7 +73,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
   }
 
   public render() {
-    const { isFetching, state, frameErrors, order, handleOpen, submitOrder, saveOrder, saveFittingHeight } = this.props;
+    const { isFetching, state, errors, frameErrors, order, handleOpen, submitOrder, saveOrder, saveFittingHeight } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.boss.lens);
     const isFrameSelected = !isEmptyObject(order.boss.frame);
     const isFittingHeightSelected = order.boss.fittingHeight ? true : false;
@@ -87,6 +89,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
           ? (
             <React.Fragment>
               <Section tittle="Enter fitting height" wrap>
+                {errors.fittingHeight && <div className="order-selection__error">{errors.fittingHeight}</div>}
                 <SelectField
                   disabled={isFetching}
                   className="order-selection__select"
@@ -152,6 +155,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
         }
 
         <section className="order-selection__actions">
+          {errors.submit && <div className="order-selection__error">{errors.submit}</div>}
           <Button variant="contained" disabled={isFetching} onClick={() => saveOrder(state)}>Save</Button>
           {isFrameSelected && (
             <Button variant="contained" disabled={isFetching || submitDisabled} onClick={() => submitOrder(order.boss)}>

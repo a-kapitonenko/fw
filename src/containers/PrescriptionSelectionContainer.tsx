@@ -11,6 +11,7 @@ import PrescriptionSelection from '../components/PrescriptionSelection';
 
 type PropsFromState = {
   disabled: boolean,
+  errors: string,
   prescription: Prescription,
   frame: Frame,
 };
@@ -24,6 +25,7 @@ type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
   disabled: state.order.isFetching || state.lenses.isFetching,
+  errors: state.order.errors.prescription,
   prescription: state.order.boss.prescription,
   frame: state.order.boss.frame,
 });
@@ -44,11 +46,11 @@ class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
   }
 
   public render() {
-    const { disabled, prescription, frame, handleChange } = this.props;
+    const { disabled, errors, prescription, frame, handleChange } = this.props;
     const readOnly = !isEmptyObject(frame);
 
     return (
-      <PrescriptionSelection disabled={disabled} prescription={prescription} readOnly={readOnly}  handleChange={handleChange} />
+      <PrescriptionSelection disabled={disabled} errors={errors} prescription={prescription} readOnly={readOnly}  handleChange={handleChange} />
     );
   }
 }

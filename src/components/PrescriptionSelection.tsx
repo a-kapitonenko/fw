@@ -7,15 +7,17 @@ import Section from './Section';
 import '../styles/prescription.css';
 
 type ComponentProps = {
+  errors?: string;
   prescription: Prescription;
   readOnly: boolean;
   disabled?: boolean;
   handleChange?: typeof orderActions.setRxInformation;
 };
 
-const PrescriptionSelection: React.SFC<ComponentProps> = ({ prescription, readOnly, disabled, handleChange }) => {
+const PrescriptionSelection: React.SFC<ComponentProps> = ({ errors, prescription, readOnly, disabled, handleChange }) => {
   return (
     <Section tittle="Input Rx Information" wrap>
+      {errors && <div className="order-selection__error">{errors}</div>}
       <div className="prescription">
         <div className="prescription__content">
           {PrescriptionFields.map((element, index) => (
