@@ -1,6 +1,11 @@
-export const saveOrder = (state) => {
+import database from '../test/database';
+
+export const saveOrder = (request) => {
+  let user =  database.find(user => user.id === request.id);
+
   return {
     success: true,
+    id: '6E8C896C14153342DE34BBF26F69A8135BA548864A8C838F035CB35A593C2399',
   };
 };
 
@@ -10,7 +15,7 @@ export const savePrescription = (values) => {
   };
 };
 
-export const saveFittingHeight = (boss, fittingHeight) => {
+export const saveFittingHeight = ({ boss, fittingHeight }) => {
   return {
     success: true,
     result: {
@@ -25,5 +30,20 @@ export const saveOrderInformation = (boss) => {
     result: {
       img: 'barcode.png'
     }
+  };
+};
+
+export const loadOrderValues = (id) => {
+  let user =  database.find(user => user.id === id);
+  if (user) {
+    return {
+      success: true,
+      values: user.order,
+    };
+  }
+
+  return {
+    success: false,
+    error: 'Failed to load order values',
   };
 };

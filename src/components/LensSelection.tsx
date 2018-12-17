@@ -18,17 +18,17 @@ const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, se
         <React.Fragment>
           The following products can be used with the patients prescription<br />
           (Select the best NikonEyes Lens that best fits your needs)
-      </React.Fragment>
+        </React.Fragment>
       }
       wrap
     >
       {errors && <div className="order-selection__error">{errors}</div>}
-      <section className="lens-selection__section">
+      <div className="lens-selection">
         <div className={`lens-selection__lenses ${disabled ? '-opacity' : ''}`}>
           {lenses.map((lens: Lens) => (
             <div
               key={lens.value}
-              className={`lens-selection__lens ${selectedLens === lens ? 'lens-selected' : ''}`}
+              className={`lens-selection__lens ${selectedLens.value === lens.value ? 'lens-selected' : ''}`}
               onClick={() => {
                 if (!disabled) {
                   return handleSubmit(lens);
@@ -39,7 +39,7 @@ const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, se
             </div>
           ))}
         </div>
-      </section>
+      </div>
     </Section>
   );
 };

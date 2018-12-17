@@ -25,7 +25,7 @@ const Boss: React.SFC<ComponentProps> = ({
   fittingHeight,
   barcode,
   onClick,
-  redirectToPage
+  redirectToPage,
 }) => {
   return (
     <main className="p-template__main">

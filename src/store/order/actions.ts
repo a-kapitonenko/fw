@@ -10,6 +10,10 @@ export const saveOrderStart = (state: ApplicationState) => action(OrderActionTyp
 export const saveOrderSuccess = () => action(OrderActionTypes.SAVE_ORDER_SUCCESS);
 export const saveOrderFailed = (message: string) => action(OrderActionTypes.SAVE_ORDER_FAILED, message);
 
+export const fetchOrderValuesStart = (id: string) => action(OrderActionTypes.FETCH_ORDER_VALUES_START, id);
+export const fetchOrderValuesSuccess = (values: any) => action(OrderActionTypes.FETCH_ORDER_VALUES_SUCCESS, values);
+export const fetchOrderValuesFailed = (message: string) => action(OrderActionTypes.FETCH_ORDER_VALUES_FAILED, message);
+
 export const savePrescriptionStart = (prescription: Prescription) => action(OrderActionTypes.SAVE_PRESCRIPTION_START, prescription);
 export const savePrescriptionSuccess = () => action(OrderActionTypes.SAVE_PRESCRIPTION_SUCCESS);
 export const savePrescriptionFailed = (message: string) => action(OrderActionTypes.SAVE_PRESCRIPTION_FAILED, message);

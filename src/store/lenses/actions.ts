@@ -13,3 +13,5 @@ export const saveLensFailed = (message: string) => action(LensesActionTypes.SAVE
 export const checkLensStart = (prescription: Prescription, lens: Lens) => action(LensesActionTypes.CHECK_LENS_START, { prescription, lens });
 export const checkLensSuccess = () => action(LensesActionTypes.CHECK_LENS_SUCCESS);
 export const checkLensFailed = (message: string) => action(LensesActionTypes.CHECK_LENS_FALIED, message);
+
+export const setInitialValue = (lenses: Lens[]) => action(LensesActionTypes.SET_INITIAL_VALUE, lenses);

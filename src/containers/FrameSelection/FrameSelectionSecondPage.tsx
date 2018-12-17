@@ -52,13 +52,24 @@ class FrameSelectionSecondPage extends React.Component<ComponentProps> {
   public componentDidMount() {
     const { boss, similarFrames, fetchSimilarFrames } = this.props;
     const isEmptySimilarFrames = isEmptyObject(similarFrames);
+
     if (isEmptySimilarFrames) {
       fetchSimilarFrames(boss);
     }
   }
 
   public render() {
-    const { isFetching, isSubmiting, errors, boss, selectedFrame, similarFrames, handleSubmit, setStep, handleClick } = this.props;
+    const { 
+      isFetching, 
+      isSubmiting,
+      errors,
+      boss,
+      selectedFrame,
+      similarFrames,
+      handleSubmit,
+      setStep,
+      handleClick
+    } = this.props;
     const buttonDisabled = isEmptyObject(selectedFrame);
 
     return (
@@ -70,9 +81,22 @@ class FrameSelectionSecondPage extends React.Component<ComponentProps> {
             These frames are also compatible with the patients Rx and lens selection <br />
             Continue if patient is happy with current frame selection
           </h2>
-          <FrameTable isFetching={isFetching} disabled={isSubmiting} frames={similarFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
+          <FrameTable 
+            isFetching={isFetching}
+            disabled={isSubmiting}
+            frames={similarFrames}
+            selectedFrame={selectedFrame}
+            handleClick={handleClick}
+          />
           <section className="frame-selection__form-actions">
-            <Button className="frame-selection__form-button" variant="contained" disabled={isSubmiting} onClick={() => setStep(1)}>Back</Button>
+            <Button 
+              className="frame-selection__form-button"
+              variant="contained"
+              disabled={isSubmiting}
+              onClick={() => setStep(1)}
+            >
+              Back
+            </Button>
             <Button
               className="frame-selection__form-button"
               variant="contained"

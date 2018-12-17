@@ -47,7 +47,13 @@ class LensSelectionContainer extends React.Component<ComponentProps> {
     const { isFetching, errors, lenses, selectedLens } = this.props;
 
     return (
-      <LensSelection errors={errors} disabled={isFetching} lenses={lenses} selectedLens={selectedLens}  handleSubmit={this.handleSubmit} />
+      <LensSelection 
+        errors={errors}
+        disabled={isFetching}
+        lenses={lenses}
+        selectedLens={selectedLens}
+        handleSubmit={this.handleSubmit}
+      />
     );
   }
 }

@@ -2,7 +2,15 @@ import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import { OrderActionTypes, BossTypes } from './types';
 import * as orderActions from './actions';
 import * as lensesActions from '../lenses/actions';
-import { submitRequest, saveOrderRequest, savePrescriptionRequest, saveFittingHeightRequest } from '../../api/order';
+import * as configHelper from '../../helpers/configHelper';
+import { createRequestData } from '../../helpers/orderSelectionHelper'; 
+import { 
+  submitRequest,
+  saveOrderRequest,
+  fetchOrderValuesRequest,
+  savePrescriptionRequest,
+  saveFittingHeightRequest,
+} from '../../api/order';
 
 function* submitSaga({ payload }: any) {
   try {
@@ -20,16 +28,37 @@ function* submitSaga({ payload }: any) {
 }
 
 function* saveOrderSaga({ payload }: any) {
+  const userId = configHelper.getUserId();
+  const request = createRequestData(payload);
+
   try {
-    const response = yield call(saveOrderRequest, payload);
+    const response = yield call(saveOrderRequest, { ...request, id: userId });
 
     if (response.success) {
       yield put(orderActions.saveOrderSuccess());
+      if (userId === null) {
+        configHelper.setUserId(response.id);
+      }
     } else {
       yield put(orderActions.saveOrderFailed(response.error));
     }
   } catch (err) {
     yield put(orderActions.saveOrderFailed(err));
+  }
+}
+
+function* fetchOrderValuesSaga({ payload }: any) {
+  try {
+    const response = yield call(fetchOrderValuesRequest, payload);
+
+    if (response.success) {
+      yield put(orderActions.fetchOrderValuesSuccess(response.values));
+      yield put(lensesActions.setInitialValue(response.values.lenses));
+    } else {
+      yield put(orderActions.fetchOrderValuesFailed(response.error));
+    }
+  } catch (err) {
+    yield put(orderActions.fetchOrderValuesFailed(err));
   }
 }
 
@@ -67,6 +96,7 @@ function* saveFittingHeight({ payload }: any) {
 function* watchOrderFetch() {
   yield takeEvery(OrderActionTypes.SUBMIT_START, submitSaga);
   yield takeEvery(OrderActionTypes.SAVE_ORDER_START, saveOrderSaga);
+  yield takeEvery(OrderActionTypes.FETCH_ORDER_VALUES_START, fetchOrderValuesSaga);
   yield takeEvery(OrderActionTypes.SAVE_PRESCRIPTION_START, savePrescriptionSaga);
   yield takeEvery(OrderActionTypes.SAVE_FITTING_HEIGHT_START, saveFittingHeight);
 }

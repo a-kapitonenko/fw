@@ -66,10 +66,21 @@ const IndicatorSeparator = () => {
   );
 };
 
-const FrameSearch: React.SFC<ComponentProps> = ({ isFetching, errors, open, list, selectedFrames, onInputChange, onChange, onBlur }) => {
+const FrameSearch: React.SFC<ComponentProps> = ({
+  isFetching,
+  errors,
+  open,
+  list,
+  selectedFrames,
+  onInputChange,
+  onChange,
+  onBlur,
+}) => {
   return (
     <div className="frame-search">
-      <h2 className="frame-search__title">Please enter up to five frame UPC's to check for compatibility and select the one that best suits the patient</h2>
+      <h2 className="frame-search__title">
+        Please enter up to five frame UPC's to check for compatibility and select the one that best suits the patient
+      </h2>
       {errors && <div className="frame-search__error">{errors}</div>}
       <Select
         defaultValue={selectedFrames}

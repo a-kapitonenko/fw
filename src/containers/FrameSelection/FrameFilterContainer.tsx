@@ -100,8 +100,8 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
             disabled={disabled}
             onChange={(evt) => {
               if (!disabled) {
-                this.handleChange(type, field.name, field.value, evt.target.checked)
-              };
+                this.handleChange(type, field.name, field.value, evt.target.checked);
+              }
             }}
           />
         }

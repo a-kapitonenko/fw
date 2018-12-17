@@ -51,6 +51,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 class FrameSelectionContainer extends React.Component<ComponentProps> {
   state: StateProps = { step: 1 }
 
+  componentDidMount() {
+    const { step } = this.state;
+
+    if (step !== 0) {
+      this.setState({ step: 0 });
+    }
+  }
+
   componentDidUpdate(prevProps: ComponentProps) {
     const { boss, checkFrame, clearResult } = this.props;
     const isLensSelected = !isEmptyObject(prevProps.boss.lens);
@@ -95,7 +103,9 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
             <div className="frame-selection__frame-selected">
               <div>{selectedFrame.value}</div>
               <div>{selectedFrame.label}</div>
-              <div className="-flex"><img className="frame-search__img" src={`/${selectedFrame.img}`} /></div>
+              <div className="-flex">
+                <img className="frame-search__img" src={`/${selectedFrame.img}`} />
+              </div>
               <div>{selectedFrame.compatibility ? 'true' : 'false'}</div>
               <div>
                 <IconButton

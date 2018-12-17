@@ -1,8 +1,10 @@
+export const message = 'The selected parameters for frame and lens are acceptable for cotout.';
+
 let counter = 0;
 
 const checkedFrames = [82850523738, 82850523730];
 
-const fittingHeight = [
+export const fittingHeight = [
   {
     name: '1',
     value: 1
@@ -203,7 +205,7 @@ export const onSubmit = ({ boss, frame }) => {
   return {
     success: true,
     result: {
-      message: 'The selected parameters for frame and lens are acceptable for cotout.',
+      message: message,
       fittingHeight: fittingHeight
     }
   };

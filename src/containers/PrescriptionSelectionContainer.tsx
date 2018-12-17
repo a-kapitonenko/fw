@@ -23,6 +23,10 @@ type PropsFromDispatch = {
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
+type StateProps = {
+  value: any;
+};
+
 const mapStateToProps = (state: ApplicationState) => ({
   disabled: state.order.isFetching || state.lenses.isFetching,
   errors: state.order.errors.prescription,
@@ -31,26 +35,45 @@ const mapStateToProps = (state: ApplicationState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleChange: (type: string, field: string, value: string) => dispatch(orderActions.setRxInformation(type, field, value)),
-  savePrescription: (prescription: Prescription) => dispatch(orderActions.savePrescriptionStart(prescription)),
+  handleChange: (type: string, field: string, value: string) => {
+    return dispatch(orderActions.setRxInformation(type, field, value));
+  },
+  savePrescription: (prescription: Prescription) => { 
+    return dispatch(orderActions.savePrescriptionStart(prescription));
+  },
 });
 
 class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
-  public componentDidUpdate(prevProps: ComponentProps) {
+  state: StateProps = { value: '' };
+
+  private handleFocus = (value: string) => {
+    this.setState({ value })
+  };
+
+  private handleBlur = (value: string) => {
+    const prevValue = this.state.value;
     const { prescription, savePrescription } = this.props;
     const prescriptionFilled = isPrescriptionFilled(prescription);
 
-    if (prescription !== prevProps.prescription && prescriptionFilled) {
+    if (prescriptionFilled && prevValue !== value) {
       savePrescription(prescription);
     }
-  }
+  };
 
   public render() {
     const { disabled, errors, prescription, frame, handleChange } = this.props;
     const readOnly = !isEmptyObject(frame);
 
     return (
-      <PrescriptionSelection disabled={disabled} errors={errors} prescription={prescription} readOnly={readOnly}  handleChange={handleChange} />
+      <PrescriptionSelection
+        disabled={disabled}
+        errors={errors}
+        prescription={prescription}
+        readOnly={readOnly}
+        onFocus={this.handleFocus}
+        onChange={handleChange}
+        onBlur={this.handleBlur}
+      />
     );
   }
 }

@@ -8,7 +8,6 @@ import { IOrderState, Errors,  Prescription, Boss } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
-import * as filterActions from '../store/filter/actions';
 import { isEmptyObject } from '../helpers/mathHelper';
 import LinkComponent from '../components/LinkComponent';
 import Section from '../components/Section';
@@ -33,7 +32,6 @@ type PropsFromDispatch = {
   handleOpen: typeof framesActions.open;
   submitOrder: typeof orderActions.submitStart;
   saveOrder: typeof orderActions.saveOrderStart;
-  fetchFilterGroups: typeof filterActions.fetchGroupsStart;
   saveFittingHeight: typeof orderActions.saveFittingHeightStart;
 };
 
@@ -53,17 +51,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleOpen: () => dispatch(framesActions.open()),
   submitOrder: (boss: Boss) => dispatch(orderActions.submitStart(boss)),
   saveOrder: (state: ApplicationState) => dispatch(orderActions.saveOrderStart(state)),
-  fetchFilterGroups: () => dispatch(filterActions.fetchGroupsStart()),
   saveFittingHeight: (boss: Boss, height: number) => dispatch(orderActions.saveFittingHeightStart(boss, height)),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
-  public componentDidMount() {
-    const { fetchFilterGroups } = this.props;
-
-    fetchFilterGroups();
-  }
-
   public componentDidUpdate(prevProps: ComponentProps) {
     const { order } = this.props;
 
@@ -73,7 +64,17 @@ class OrderSelection extends LinkComponent<ComponentProps> {
   }
 
   public render() {
-    const { isFetching, state, errors, frameErrors, order, handleOpen, submitOrder, saveOrder, saveFittingHeight } = this.props;
+    const {
+      isFetching,
+      errors,
+      frameErrors,
+      state,
+      order,
+      handleOpen,
+      submitOrder,
+      saveOrder,
+      saveFittingHeight
+    } = this.props;
     const frameSelectionButtonDisabled = isEmptyObject(order.boss.lens);
     const isFrameSelected = !isEmptyObject(order.boss.frame);
     const isFittingHeightSelected = order.boss.fittingHeight ? true : false;
@@ -117,24 +118,33 @@ class OrderSelection extends LinkComponent<ComponentProps> {
         {isFrameSelected
           ? (
             <React.Fragment>
-              <Section className="order-selection__content" tittle="Frame Selected">
-                {frameErrors && <div className="frame-selection__error">{frameErrors}</div>}
+              <Section 
+                className="order-selection__content" 
+                tittle="Frame Selected" 
+                errors={frameErrors}
+              >
                 <div className="order-selection__img-wrapper s-template__content">
                   <img className="order-selection__img" src={`/${order.boss.frame.img}`} />
                 </div>
-                {order.errors['frame'] && <div className="order-selection__error">{order.errors['frame']}</div>}
                 <div className="order-selection__frame-description">
                   <p>UPC Code: {order.boss.frame.upc}</p>
                   <p>Name of Frame: {order.boss.frame.label}</p>
                 </div>
-                <Button className="-full-width" variant="contained" disabled={isFetching} onClick={handleOpen}>
+                <Button 
+                  className="-full-width"
+                  variant="contained"
+                  disabled={isFetching}
+                  onClick={handleOpen}
+                >
                   Edit
                 </Button>
               </Section>
 
               <Section className="order-selection__content" tittle="36 Point Trace Dimentions">
                 <div className="order-selection__img-wrapper s-template__content">
-                  {order.blueprint['img'] && <img className="order-selection__img" src={`/${order.blueprint.img}`} />}
+                  {order.blueprint['img'] && (
+                    <img className="order-selection__img" src={`/${order.blueprint.img}`} />
+                  )}
                 </div>
               </Section>
             </React.Fragment>
@@ -146,7 +156,11 @@ class OrderSelection extends LinkComponent<ComponentProps> {
               </Section>
 
               <Section tittle="The following frames are best suited for the patient" wrap>
-                <Button variant="contained" disabled={isFetching || frameSelectionButtonDisabled} onClick={handleOpen}>
+                <Button 
+                  variant="contained" 
+                  disabled={isFetching || frameSelectionButtonDisabled} 
+                  onClick={handleOpen}
+                >
                   Frame Selection
                 </Button>
               </Section>
@@ -158,7 +172,11 @@ class OrderSelection extends LinkComponent<ComponentProps> {
           {errors.submit && <div className="order-selection__error">{errors.submit}</div>}
           <Button variant="contained" disabled={isFetching} onClick={() => saveOrder(state)}>Save</Button>
           {isFrameSelected && (
-            <Button variant="contained" disabled={isFetching || submitDisabled} onClick={() => submitOrder(order.boss)}>
+            <Button 
+              variant="contained" 
+              disabled={isFetching || submitDisabled} 
+              onClick={() => submitOrder(order.boss)}
+            >
               Submit Order
             </Button>
           )}

@@ -6,7 +6,9 @@ export type Frame = {
   compatibility?: boolean;
 };
 
-export const enum FramesActionTypes {  
+export const enum FramesActionTypes {
+  OPEN = '@@frames/OPEN',
+  CLOSE = '@@frames/CLOSE',
   SUBMIT_START = '@@frames/SUBMIT_START',
   SUBMIT_SUCCESS = '@@frames/SUBMIT_SUCCESS',
   SUBMIT_FAILED = '@@frames/SUBMIT_FAILED',
@@ -16,8 +18,6 @@ export const enum FramesActionTypes {
   CHECK_FRAME_START = '@@frames/CHECK_FRAME_START',
   CHECK_FRAME_SUCCESS = '@@frames/CHECK_FRAME_SUCCESS',
   CHECK_FRAME_FAILED = '@@frames/CHECK_FRAME_FAILED',
-  OPEN = '@@frames/OPEN',
-  CLOSE = '@@frames/CLOSE',
   SET_SELECTED_FRAME = '@@frames/SET_SELECTED_FRAME',
   CLEAR_SELECTED_FRAME = '@@frame/CLEAR_SELECTED_FRAME',
   CLEAR_RESULT = '@@frames/CLEAR_RESULT',

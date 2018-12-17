@@ -14,7 +14,16 @@ type ComponentProps = {
   resetFilter: () => void;
 };
 
-const FrameFilter: React.SFC<ComponentProps> = ({ disabled, errors, step, groups, disabledButton, renderGroup, handleClick, resetFilter }) => {
+const FrameFilter: React.SFC<ComponentProps> = ({
+  disabled,
+  errors,
+  step,
+  groups,
+  disabledButton,
+  renderGroup,
+  handleClick,
+  resetFilter,
+}) => {
   return (
     <div className="frame-filter">
       <h2 className="frame-filter__title">Or use filter to find best variant</h2>

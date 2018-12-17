@@ -13,7 +13,9 @@ export const fetchGroupsFailed = (message: string) => action(FilterActionTypes.F
 
 export const changeChecked = (type: string, name: string, value: boolean) => action(FilterActionTypes.CHANGE_CHECKED, { type, name, value });
 export const clearChecked = () => action(FilterActionTypes.CLEAR_CHECKED);
+
 export const addQuery = (type: string, value: any) => action(FilterActionTypes.ADD_QUERY, { type, value });
 export const deleteQuery = (type: string, value: any) => action(FilterActionTypes.DELETE_QUERY, { type, value });
 export const clearQuery = () => action(FilterActionTypes.CLEAR_QUERY);
+
 export const clearResult = () => action(FilterActionTypes.CLEAR_RESULT);

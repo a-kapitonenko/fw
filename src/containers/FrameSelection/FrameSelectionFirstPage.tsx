@@ -46,7 +46,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 class FrameSelectionFirstPage extends React.Component<ComponentProps> {
   public render() {
-    const { filterFetching, selectedFrame, searchFrames, filterFrames, setStep, handleClick, handleClose } = this.props;
+    const {
+      filterFetching,
+      selectedFrame,
+      searchFrames,
+      filterFrames,
+      setStep,
+      handleClick,
+      handleClose
+    } = this.props;
     const buttonDisabled = isEmptyObject(selectedFrame);
 
     return (
@@ -56,16 +64,38 @@ class FrameSelectionFirstPage extends React.Component<ComponentProps> {
           <div className="frame-selection__form-content">
             <div className="frame-selection__form-section -flex-column-between">
               <FrameSearchContainer />
-              <FrameSearchTable frames={searchFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
+              <FrameSearchTable 
+                frames={searchFrames} 
+                selectedFrame={selectedFrame} 
+                handleClick={handleClick}
+              />
             </div>
             <div className="frame-selection__form-section -flex-column-between">
               <FrameFilterContainer />
-              <FrameTable isFetching={filterFetching} frames={filterFrames} selectedFrame={selectedFrame} handleClick={handleClick} />
+              <FrameTable
+                isFetching={filterFetching}
+                frames={filterFrames}
+                selectedFrame={selectedFrame}
+                handleClick={handleClick}
+              />
             </div>
           </div>
           <section className="frame-selection__form-actions">
-            <Button className="frame-selection__form-button" variant="contained" onClick={handleClose}>Close</Button>
-            <Button className="frame-selection__form-button" variant="contained" disabled={buttonDisabled} onClick={() => setStep(2)}>Next</Button>
+            <Button 
+              className="frame-selection__form-button" 
+              variant="contained" 
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+            <Button 
+              className="frame-selection__form-button"
+              variant="contained"
+              disabled={buttonDisabled}
+              onClick={() => setStep(2)}
+            >
+              Next
+            </Button>
           </section>
         </section>
       </React.Fragment>
