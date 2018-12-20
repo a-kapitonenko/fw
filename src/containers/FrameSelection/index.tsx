@@ -54,8 +54,8 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
   componentDidMount() {
     const { step } = this.state;
 
-    if (step !== 0) {
-      this.setState({ step: 0 });
+    if (step !== 1) {
+      this.setState({ step: 1 });
     }
   }
 
@@ -89,37 +89,42 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
     }
   }
 
+  private renderSelectedFrame(frame: Frame, clearSelectedFrame: typeof framesActions.clearSelectedFrame) {
+    return (
+      <div className="frame-selection__frame-selected">
+        <div>{frame.value}</div>
+        <div>{frame.label}</div>
+        <div className="-flex">
+          <img className="frame-search__img" src={`/${frame.img}`} />
+        </div>
+        <div>{frame.compatibility ? 'true' : 'false'}</div>
+        <div>
+          <IconButton
+            color="inherit"
+            aria-label="Menu"
+            onClick={clearSelectedFrame}
+          >
+            <Close />
+          </IconButton>
+        </div>
+      </div>
+    );
+  }
+
   public render() {
     const { isFetching, open, selectedFrame, clearSelectedFrame } = this.props;
-    const { step } = this.state;
-
+    const stepSelectingFrame = this.state.step;
+  
     const isFrameSelected = !isEmptyObject(selectedFrame);
 
     return (
       <Dialog open={open} fullScreen={true} className="frame-selection">
-        {isFetching &&  <CircularProgress className="frame-selection__progress" />}
+        {isFetching && <CircularProgress className="frame-selection__progress" />}
         <div className="frame-selection__content yellow-section">
-          {isFrameSelected && (
-            <div className="frame-selection__frame-selected">
-              <div>{selectedFrame.value}</div>
-              <div>{selectedFrame.label}</div>
-              <div className="-flex">
-                <img className="frame-search__img" src={`/${selectedFrame.img}`} />
-              </div>
-              <div>{selectedFrame.compatibility ? 'true' : 'false'}</div>
-              <div>
-                <IconButton
-                  color="inherit"
-                  aria-label="Menu"
-                  onClick={clearSelectedFrame}
-                >
-                  <Close />
-                </IconButton>
-              </div>
-            </div>
-          )}
-          {step === 1 && <FrameSelectionFirstPage setStep={this.changeStep} handleClick={this.handleClick} />}
-          {step === 2 && <FrameSelectionSecondPage setStep={this.changeStep} handleClick={this.handleClick} />}
+          {isFrameSelected && this.renderSelectedFrame(selectedFrame, clearSelectedFrame)}
+
+          {stepSelectingFrame === 1 && <FrameSelectionFirstPage setStep={this.changeStep} handleClick={this.handleClick} />}
+          {stepSelectingFrame === 2 && <FrameSelectionSecondPage setStep={this.changeStep} handleClick={this.handleClick} />}
         </div>
       </Dialog>
     );

@@ -63,16 +63,20 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
   private onInputChange = (props: string) => {
     const { boss, searchFrames } = this.props;
     const { query } = this.state;
+    const isSearchStart = props.length === frameSearchConfig.queryLength;
+    const isSearchEnd = props.length < frameSearchConfig.queryLength && this.state.open;
 
-    if (props.length === frameSearchConfig.queryLength) {
-      if (query.length === 0 || query.indexOf(props)) {
+    if (isSearchStart) {
+      const isSearchNeed = query.length === 0 || query.indexOf(props);
+
+      if (isSearchNeed) {
         searchFrames(boss, props);
 
         this.setState({ query: props });
       }
 
       this.setState({ open: true });
-    } else if (props.length < frameSearchConfig.queryLength && this.state.open) {
+    } else if (isSearchEnd) {
       this.setState({ open: false });
     }
 

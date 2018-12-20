@@ -1,12 +1,12 @@
 import * as React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import { Frame } from '../store/frames/types';
-import FrameTable, { ComponentProps } from './FrameTable';
+import FrameTable from './FrameTable';
 
 class FrameSearchTable extends FrameTable {
-  constructor(props: ComponentProps) {
-    super(props);
-  }
+  // constructor(props: ComponentProps) {
+  //   super(props);
+  // }
 
   protected renderHeader() {
     return ( 

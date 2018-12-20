@@ -58,7 +58,7 @@ const PrescriptionSelection: React.SFC<ComponentProps> = ({
               label={`OS ${element.label}`}
               value={prescription.OS[element.id]}
               onBlur={(evt) => onBlur ? onBlur(evt.target.value) : {}}
-              onChange={({ target }) => onChange ? onChange('OD', element.id, target.value) : {}}
+              onChange={({ target }) => onChange ? onChange('OS', element.id, target.value) : {}}
               onFocus={(evt) => onFocus ? onFocus(evt.target.value) : {}}
             />
           ))}
