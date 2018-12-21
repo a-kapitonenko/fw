@@ -1,13 +1,3 @@
-export function isNumber(value: any): boolean {
-  const numberValue = Number(value);
-
-  if (Number.isNaN(numberValue)) {
-    return false;
-  }
-
-  return true;
-};
-
 export function isEmptyObject(obj: Object): boolean {
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -16,4 +6,15 @@ export function isEmptyObject(obj: Object): boolean {
   }
   
   return true;
+};
+
+export function isNumber(value: any): boolean {
+  const isValueNaN = isNaN(parseFloat(value));
+  const isValueFinite = isFinite(value);
+
+  if (!isValueNaN && isValueFinite) {
+    return true;
+  }
+
+  return false;
 };

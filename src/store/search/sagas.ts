@@ -3,7 +3,7 @@ import { SearchActionTypes } from './types';
 import * as searchActions from './actions';
 import { fetchFramesRequest } from '../../api/search';
 
-function* fetchFrames({ payload }: any) {
+export function* fetchFrames({ payload }: any) {
   try {
     const response = yield call(fetchFramesRequest, payload);
 

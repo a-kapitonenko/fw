@@ -60,13 +60,13 @@ class OrderSelection extends LinkComponent<ComponentProps> {
     }
   }
 
-  private renderActions() {
+  private renderActions = () => {
     const { isFetching, errors, frameErrors, state, order, saveOrder, submitOrder } = this.props;
 
     const isFrameSelected = !isEmptyObject(order.boss.frame);
     const isErrors = frameErrors ? true : false;
     const isFittingHeightSelected = order.boss.fittingHeight ? true : false;
-    const submitDisabled = !isFittingHeightSelected || isErrors;
+    const submitDisabled = !isFittingHeightSelected || isErrors || isFetching;
 
     return (
       <section className="order-selection__actions">
@@ -87,7 +87,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
 
   public render() {
     const { isFetching, errors, frameErrors, order, handleOpen, saveFittingHeight } = this.props;
-    const frameSelectionButtonDisabled = isEmptyObject(order.boss.lens);
+    const frameSelectionButtonDisabled = isEmptyObject(order.boss.lens) || isFetching;
     const isFrameSelected = !isEmptyObject(order.boss.frame);
 
     return (
