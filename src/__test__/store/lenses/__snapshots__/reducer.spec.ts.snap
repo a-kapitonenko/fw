@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lenses reducer test handles CHECK_LENS_FALIED 1`] = `
+Object {
+  "errors": "Error message",
+  "isFetching": false,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles CHECK_LENS_START 1`] = `
+Object {
+  "errors": "",
+  "isFetching": true,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles CHECK_LENS_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles FETCH_LENSES_FAILED 1`] = `
+Object {
+  "errors": "Error message",
+  "isFetching": false,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles FETCH_LENSES_START 1`] = `
+Object {
+  "errors": "",
+  "isFetching": true,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles FETCH_LENSES_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "lenses": Array [
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Transitions* Signature VII",
+      "value": 2,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- XTRActive* Gray",
+      "value": 3,
+    },
+  ],
+}
+`;
+
+exports[`lenses reducer test handles SAVE_LENS_FAILED 1`] = `
+Object {
+  "errors": "Error message",
+  "isFetching": false,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles SAVE_LENS_START 1`] = `
+Object {
+  "errors": "",
+  "isFetching": true,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles SAVE_LENS_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "lenses": Array [],
+}
+`;
+
+exports[`lenses reducer test handles SET_INITIAL_VALUE 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "lenses": Array [
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Transitions* Signature VII",
+      "value": 2,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- XTRActive* Gray",
+      "value": 3,
+    },
+  ],
+}
+`;

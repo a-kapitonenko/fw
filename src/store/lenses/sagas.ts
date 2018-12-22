@@ -9,7 +9,7 @@ import { fetchLensesRequest, saveLensRequest, checkLensRequest } from '../../api
 
 const getLens = (state: ApplicationState) => state.order.boss.lens;
 
-function* fetchLensesSaga({ payload }: any) {
+export function* fetchLensesSaga({ payload }: any) {
   try {
     const response = yield call(fetchLensesRequest, payload);
 

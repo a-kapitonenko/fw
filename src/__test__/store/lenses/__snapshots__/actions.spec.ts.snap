@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lenses actions test checkLensFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@lenses/CHECK_LENS_FAILED",
+}
+`;
+
+exports[`lenses actions test checkLensStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "lens": Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "2",
+        "axis": "1",
+        "cyclinder": "2",
+        "prism": "1",
+        "sphere": "1",
+      },
+      "OS": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "2",
+        "axis": "1",
+        "cyclinder": "2",
+        "prism": "1",
+        "sphere": "1",
+      },
+    },
+  },
+  "type": "@@lenses/CHECK_LENS_START",
+}
+`;
+
+exports[`lenses actions test checkLensSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@lenses/CHECK_LENS_SUCCESS",
+}
+`;
+
+exports[`lenses actions test fetchLensesFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@lenses/FETCH_LENSES_FAILED",
+}
+`;
+
+exports[`lenses actions test fetchLensesStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "OD": Object {
+      "PDDistance": "1",
+      "PDNear": "1",
+      "addition": "2",
+      "axis": "1",
+      "cyclinder": "2",
+      "prism": "1",
+      "sphere": "1",
+    },
+    "OS": Object {
+      "PDDistance": "1",
+      "PDNear": "1",
+      "addition": "2",
+      "axis": "1",
+      "cyclinder": "2",
+      "prism": "1",
+      "sphere": "1",
+    },
+  },
+  "type": "@@lenses/FETCH_LENSES_START",
+}
+`;
+
+exports[`lenses actions test fetchLensesSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Transitions* Signature VII",
+      "value": 2,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- XTRActive* Gray",
+      "value": 3,
+    },
+  ],
+  "type": "@@lenses/FETCH_LENSES_SUCCESS",
+}
+`;
+
+exports[`lenses actions test saveLensFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@lenses/SAVE_LENS_FAILED",
+}
+`;
+
+exports[`lenses actions test saveLensStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "lens": Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "2",
+        "axis": "1",
+        "cyclinder": "2",
+        "prism": "1",
+        "sphere": "1",
+      },
+      "OS": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "2",
+        "axis": "1",
+        "cyclinder": "2",
+        "prism": "1",
+        "sphere": "1",
+      },
+    },
+  },
+  "type": "@@lenses/SAVE_LENS_START",
+}
+`;
+
+exports[`lenses actions test saveLensSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@lenses/SAVE_LENS_SUCCESS",
+}
+`;
+
+exports[`lenses actions test setInitialValue action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Transitions* Signature VII",
+      "value": 2,
+    },
+    Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- XTRActive* Gray",
+      "value": 3,
+    },
+  ],
+  "type": "@@lenses/SET_INITIAL_VALUE",
+}
+`;

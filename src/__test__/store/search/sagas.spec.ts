@@ -20,7 +20,7 @@ describe('fetch frames search saga', () => {
   
   const failedResponse = {
     success: false,
-    error: 'Error message'
+    error: mockData.errorMessage,
   };
 
   expect(generator.next().value).toEqual(call(fetchFramesRequest, { boss, upc }));
@@ -35,7 +35,7 @@ describe('fetch frames search saga', () => {
   it('handle failed fetch response', () => {
     const clone = generator.clone();
     
-    expect(clone.next(failedResponse).value).toEqual(put(searchActions.searchFailed('Error message')));
+    expect(clone.next(failedResponse).value).toEqual(put(searchActions.searchFailed(mockData.errorMessage)));
     expect(clone.next().done).toEqual(true);
   });
 });

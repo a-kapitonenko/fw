@@ -1,9 +1,8 @@
 import { FilterActionTypes } from '../../../store/filter/types';
 import { FilterReducer } from '../../../store/filter/reducer';
-import { Frame } from '../../../store/frames/types';
 import * as mockData from '../../mockData';
 
-describe('search reducer', () => {
+describe('filter reducer', () => {
   it('test handles FILTERING_START', () => {
     const filterAction = {
       type: FilterActionTypes.FILTERING_START,
@@ -70,6 +69,61 @@ describe('search reducer', () => {
       payload: filterPayload,
     };
 
+    expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
+  });
+
+  it('test handles CLEAR_CHECKED', () => {
+    const filterAction = {
+      type: FilterActionTypes.CLEAR_CHECKED,
+      payload: {},
+    };
+    
+    expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
+  });
+
+  it('test handles ADD_QUERY', () => {
+    const filterPayload = {
+      type: 'color',
+      value: 'test',
+    };
+
+    const filterAction = {
+      type: FilterActionTypes.ADD_QUERY,
+      payload: filterPayload,
+    };
+
+    expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
+  });
+
+  it('test handles DELETE_QUERY', () => {
+    const filterPayload = {
+      type: 'color',
+      value: 'test',
+    };
+
+    const filterAction = {
+      type: FilterActionTypes.DELETE_QUERY,
+      payload: filterPayload,
+    };
+
+    expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
+  });
+
+  it('test handles CLEAR_QUERY', () => {
+    const filterAction = {
+      type: FilterActionTypes.CLEAR_QUERY,
+      payload: {},
+    };
+    
+    expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
+  });
+
+  it('test handles CLEAR_RESULT', () => {
+    const filterAction = {
+      type: FilterActionTypes.CLEAR_RESULT,
+      payload: {},
+    };
+    
     expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
   });
 });

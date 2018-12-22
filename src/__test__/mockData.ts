@@ -1,7 +1,44 @@
 import { Frame } from '../store/frames/types';
 import { Groups } from '../store/filter/types';
+import { OculusInfo, Prescription } from '../store/order/types';
+import { Lens } from '../store/lenses/types';
+
+const oculusData: OculusInfo = {
+  sphere: '1',
+  cyclinder: '2',
+  axis: '1',
+  addition: '2',
+  PDDistance: '1',
+  PDNear: '1',
+  prism: '1',
+};
 
 export const errorMessage: string = 'Error message';
+
+export const prescription: Prescription = {
+  OD: oculusData,
+  OS: oculusData,
+};
+
+export const lenses: Lens[] = [
+  {
+    name: 'Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown',
+    value: 1
+  },
+  {
+    name: 'Nikon Eyes* Advanced + Polycarbonate- Transitions* Signature VII',
+    value: 2
+  },
+  {
+    name: 'Nikon Eyes* Advanced + Polycarbonate- XTRActive* Gray',
+    value: 3
+  },
+];
+
+export const lens: Lens = {
+  name: 'Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown',
+  value: 1
+};
 
 export const frames: Frame[] = [
   {
@@ -36,4 +73,12 @@ export const groups: Groups = {
   material: [
     { name: 'Acetate', value: 'acetate' },
   ],
+};
+
+export const query: object = {
+  color: ['black', 'gold', 'brown'],
+  width: ['narrow', 'medium'],
+  noseBridge: ['standard'],
+  shape: ['square'],
+  material: ['acetate'],
 };

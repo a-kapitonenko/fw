@@ -4,7 +4,7 @@ import * as filterActions from './actions';
 import { fetchGroupsRequest, fetchFramesRequest } from '../../api/filter';
 import { createFilterGroupsData } from '../../helpers/filterHelper';
 
-function* fetchGroups() {
+export function* fetchGroups() {
   try {
     const response = yield call(fetchGroupsRequest);
 
@@ -20,7 +20,7 @@ function* fetchGroups() {
   }
 }
 
-function* fetchFrames({ payload }: any) {
+export function* fetchFrames({ payload }: any) {
   try {
     const response = yield call(fetchFramesRequest, payload);
 
