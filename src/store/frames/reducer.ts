@@ -28,6 +28,15 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
         open: false,
       };
     }
+    case FramesActionTypes.SUBMIT_START: {
+      return saveStart(state);
+    }
+    case FramesActionTypes.SUBMIT_SUCCESS: {
+      return saveSuccess(state);
+    }
+    case FramesActionTypes.SUBMIT_FAILED: {
+      return saveFailed(state, action.payload);
+    }
     case FramesActionTypes.FETCH_SIMILAR_FRAMES_START: {
       return {
         ...state,
@@ -45,15 +54,6 @@ const reducer: Reducer<FramesState> = (state = initialState, action) => {
         ...state,
         similarFrames: saveFailed(state.similarFrames, action.payload),
       };
-    }
-    case FramesActionTypes.SUBMIT_START: {
-      return saveStart(state);
-    }
-    case FramesActionTypes.SUBMIT_SUCCESS: {
-      return saveSuccess(state);
-    }
-    case FramesActionTypes.SUBMIT_FAILED: {
-      return saveFailed(state, action.payload);
     }
     case FramesActionTypes.CHECK_FRAME_START: {
       return saveStart(state);

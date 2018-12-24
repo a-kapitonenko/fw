@@ -1,6 +1,6 @@
 import { SearchActionTypes } from '../../../store/search/types';
-import { SearchReducer } from '../../../store/search/reducer';
 import { Frame } from '../../../store/frames/types';
+import { SearchReducer } from '../../../store/search/reducer';
 import * as mockData from '../../mockData';
 
 describe('search reducer', () => {
@@ -25,7 +25,7 @@ describe('search reducer', () => {
   });
 
   it('test handles SEARCH_FAILED', () => {
-    const searchPayload = 'Error message';
+    const searchPayload: string = mockData.errorMessage;
 
     const searchAction = {
       type: SearchActionTypes.SEARCH_FAILED,

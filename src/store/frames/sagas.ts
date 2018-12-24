@@ -1,27 +1,31 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { FramesActionTypes } from './types';
-import { BossTypes } from '../order/types';
+import { FramesActionTypes, Frame } from './types';
+import { BossTypes, Boss } from '../order/types';
 import * as framesActions from './actions';
 import * as orderActions from '../order/actions';
 import * as filterActions from '../filter/actions';
 import * as searchActions from '../search/actions';
-import { fetchSimilarFramesRequest, submitRequest, checkFrameRequest } from '../../api/frames';
+import { submitRequest, fetchSimilarFramesRequest, checkFrameRequest } from '../../api/frames';
 
-function* fetchSimilarFramesSaga({ payload }: any) {
-  try {
-    const response = yield call(fetchSimilarFramesRequest, payload);
+type TSubmit = {
+  type: FramesActionTypes.SUBMIT_START,
+  payload: {
+    boss: Boss, 
+    frame: Frame,
+  },
+};
 
-    if (response.success) {
-      yield put(framesActions.fetchSimilarFramesSuccess(response.similarFrames));
-    } else {
-      yield put(framesActions.fetchSimilarFramesFailed(response.error));
-    }
-  } catch (err) {
-    yield put(framesActions.fetchSimilarFramesFailed(err));
-  }
-}
+type TfetchSimilarFrames = {
+  type: FramesActionTypes.FETCH_SIMILAR_FRAMES_START,
+  payload: Boss,
+};
 
-function* submitSaga({ payload }: any) {
+type TCheckFrames = {
+  type: FramesActionTypes.CHECK_FRAME_START,
+  payload: Boss,
+};
+
+export function* submitSaga({ payload }: TSubmit) {
   try {
     const response = yield call(submitRequest, payload);
 
@@ -39,7 +43,21 @@ function* submitSaga({ payload }: any) {
   }
 }
 
-function* checkFrameSaga({ payload }: any) {
+export function* fetchSimilarFramesSaga({ payload }: TfetchSimilarFrames) {
+  try {
+    const response = yield call(fetchSimilarFramesRequest, payload);
+
+    if (response.success) {
+      yield put(framesActions.fetchSimilarFramesSuccess(response.similarFrames));
+    } else {
+      yield put(framesActions.fetchSimilarFramesFailed(response.error));
+    }
+  } catch (err) {
+    yield put(framesActions.fetchSimilarFramesFailed(err));
+  }
+}
+
+export function* checkFrameSaga({ payload }: TCheckFrames) {
   try {
     const response = yield call(checkFrameRequest, payload);
 
@@ -53,7 +71,7 @@ function* checkFrameSaga({ payload }: any) {
   }
 }
 
-function* clearResultSaga() {
+export function* clearResultSaga() {
   yield put(filterActions.clearResult());
   yield put(searchActions.clearResult());
 }

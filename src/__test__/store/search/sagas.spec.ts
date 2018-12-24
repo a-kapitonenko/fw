@@ -1,24 +1,35 @@
 import { put, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
 import { Boss } from '../../../store/order/types';
+import { Frame } from '../../../store/frames/types';
 import * as searchActions from '../../../store/search/actions';
 import { fetchFramesRequest } from '../../../api/search';
 import { fetchFrames } from '../../../store/search/sagas';
 import * as mockData from '../../mockData';
 
+type TFetchSuccessResponse = {
+  success: boolean;
+  result: Frame[];
+};
+
+type TFailedResponse = {
+  success: boolean;
+  error: string;
+};
+
 describe('fetch frames search saga', () => {
-  const boss: Boss = {} as Boss;
+  const boss: Boss = mockData.boss;
   const upc: string = '82850523738';
   const searchAction = searchActions.searchStart(boss, upc);
   
   const generator = cloneableGenerator(fetchFrames)(searchAction);
   
-  const successResponse = {
+  const successResponse: TFetchSuccessResponse = {
     success: true,
     result: mockData.frames,
   };
   
-  const failedResponse = {
+  const failedResponse: TFailedResponse = {
     success: false,
     error: mockData.errorMessage,
   };
@@ -28,14 +39,14 @@ describe('fetch frames search saga', () => {
   it('handle success fetch response', () => {
     const clone = generator.clone();
 
-    expect(clone.next(successResponse).value).toEqual(put(searchActions.searchSuccess(mockData.frames)));
+    expect(clone.next(successResponse).value).toEqual(put(searchActions.searchSuccess(successResponse.result)));
     expect(clone.next().done).toEqual(true);
   });
 
   it('handle failed fetch response', () => {
     const clone = generator.clone();
     
-    expect(clone.next(failedResponse).value).toEqual(put(searchActions.searchFailed(mockData.errorMessage)));
+    expect(clone.next(failedResponse).value).toEqual(put(searchActions.searchFailed(failedResponse.error)));
     expect(clone.next().done).toEqual(true);
   });
 });

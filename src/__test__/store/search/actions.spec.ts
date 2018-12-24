@@ -1,12 +1,12 @@
 import * as searchActions from '../../../store/search/actions';
-import { Frame } from '../../../store/frames/types';
 import { Boss } from '../../../store/order/types';
+import { Frame } from '../../../store/frames/types';
 import * as mockData from '../../mockData';
 
 describe('search actions', () => {
   it('test searchStart action creator', () => {
-    const boss = {} as Boss;
-    const upc = '82850523738';
+    const boss: Boss = mockData.boss;
+    const upc: string = '82850523738';
 
     expect(searchActions.searchStart(boss, upc)).toMatchSnapshot();
   });
@@ -18,7 +18,7 @@ describe('search actions', () => {
   });
 
   it('test searchFailed action creator', () => {
-    const message: string = 'Error message';
+    const message: string = mockData.errorMessage;
 
     expect(searchActions.searchFailed(message)).toMatchSnapshot();
   });

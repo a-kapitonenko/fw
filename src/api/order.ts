@@ -5,6 +5,6 @@ import { saveOrderInformation, saveOrder, savePrescription, saveFittingHeight, l
 
 export const submitRequest = (data: Boss) => request(saveOrderInformation, data);
 export const saveOrderRequest = (data: any) => request(saveOrder, data);
-export const fetchOrderValuesRequest = (data: {id: string}) => request(loadOrderValues, data);
+export const fetchOrderValuesRequest = (data: string) => request(loadOrderValues, data);
 export const savePrescriptionRequest = (data: Prescription) => request(savePrescription, data)
 export const saveFittingHeightRequest = (data: { boss: Boss, height: number }) => request(saveFittingHeight, data);

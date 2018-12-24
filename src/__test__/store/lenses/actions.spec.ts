@@ -17,7 +17,9 @@ describe('lenses actions', () => {
   });
 
   it('test fetchLensesFailed action creator', () => {
-    expect(lensesActions.fetchLensesFailed(mockData.errorMessage)).toMatchSnapshot();
+    const message: string = mockData.errorMessage;
+
+    expect(lensesActions.fetchLensesFailed(message)).toMatchSnapshot();
   });
 
   it('test saveLensStart action creator', () => {
@@ -32,7 +34,9 @@ describe('lenses actions', () => {
   });
 
   it('test saveLensFailed action creator', () => {
-    expect(lensesActions.saveLensFailed(mockData.errorMessage)).toMatchSnapshot();
+    const message: string = mockData.errorMessage;
+
+    expect(lensesActions.saveLensFailed(message)).toMatchSnapshot();
   });
 
   it('test checkLensStart action creator', () => {
@@ -47,7 +51,9 @@ describe('lenses actions', () => {
   });
 
   it('test checkLensFailed action creator', () => {
-    expect(lensesActions.checkLensFailed(mockData.errorMessage)).toMatchSnapshot();
+    const message: string = mockData.errorMessage;
+
+    expect(lensesActions.checkLensFailed(message)).toMatchSnapshot();
   });
 
   it('test setInitialValue action creator', () => {

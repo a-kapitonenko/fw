@@ -1,22 +1,38 @@
 import { put, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
-import { Boss } from '../../../store/order/types';
 import { Groups } from '../../../store/filter/types';
+import { Boss } from '../../../store/order/types';
+import { Frame } from '../../../store/frames/types';
+import { fetchGroups, fetchFrames } from '../../../store/filter/sagas';
 import * as filterActions from '../../../store/filter/actions';
 import { fetchGroupsRequest, fetchFramesRequest } from '../../../api/filter';
-import { fetchGroups, fetchFrames } from '../../../store/filter/sagas';
 import { createFilterGroupsData } from '../../../helpers/filterHelper'
 import * as mockData from '../../mockData';
+
+type TGroupsSuccessResponse = {
+  success: boolean;
+  result: Groups;
+};
+
+type TFramesSuccessResponse = {
+  success: boolean;
+  frames: Frame[];
+};
+
+type TFailedResponse = {
+  success: boolean;
+  error: string;
+};
 
 describe('fetch groups saga filter', () => {
   const generator = cloneableGenerator(fetchGroups)();
 
-  const successResponse = {
+  const successResponse: TGroupsSuccessResponse = {
     success: true,
     result: mockData.groups,
   };
 
-  const failedResponse = {
+  const failedResponse: TFailedResponse = {
     success: false,
     error: mockData.errorMessage,
   };
@@ -47,12 +63,12 @@ describe('fetch frames saga filter', () => {
 
   const generator = cloneableGenerator(fetchFrames)(filterAction);
 
-  const successResponse = {
+  const successResponse: TFramesSuccessResponse = {
     success: true,
     frames: mockData.frames,
   };
 
-  const failedResponse = {
+  const failedResponse: TFailedResponse = {
     success: false,
     error: mockData.errorMessage,
   };

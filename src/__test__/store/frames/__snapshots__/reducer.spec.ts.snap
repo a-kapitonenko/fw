@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frames reducer test handles CHECK_FRAME_FAILED 1`] = `
+Object {
+  "errors": "Error message",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles CHECK_FRAME_START 1`] = `
+Object {
+  "errors": "",
+  "isFetching": true,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles CHECK_FRAME_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles CLEAR_RESULT 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles CLEAR_SELECTED_FRAME 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles CLOSE 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles FETCH_SIMILAR_FRAMES_FAILED 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "Error message",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles FETCH_SIMILAR_FRAMES_START 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": true,
+  },
+}
+`;
+
+exports[`frames reducer test handles FETCH_SIMILAR_FRAMES_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [
+      Object {
+        "compatibility": true,
+        "img": "1.png",
+        "label": "FM17116",
+        "upc": 82850553738,
+        "value": "82850553738",
+      },
+      Object {
+        "compatibility": false,
+        "img": "2.png",
+        "label": "SA17346",
+        "upc": 82850523999,
+        "value": "82850523999",
+      },
+    ],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles OPEN 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": true,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles SET_SELECTED_FRAME 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {
+    "compatibility": true,
+    "img": "1.png",
+    "label": "FM17116",
+    "upc": 82850553738,
+    "value": "82850553738",
+  },
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles SUBMIT_FAILED 1`] = `
+Object {
+  "errors": "Error message",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles SUBMIT_START 1`] = `
+Object {
+  "errors": "",
+  "isFetching": true,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;
+
+exports[`frames reducer test handles SUBMIT_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "isFetching": false,
+  "open": false,
+  "selectedFrame": Object {},
+  "similarFrames": Object {
+    "data": Array [],
+    "errors": "",
+    "isFetching": false,
+  },
+}
+`;

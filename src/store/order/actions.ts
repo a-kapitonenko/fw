@@ -26,6 +26,5 @@ export const setRxInformation = (type: string, field: string, value: string) => 
 export const setRecommendation = (recommendation: string) => action(OrderActionTypes.SET_RECOMMENDATION, recommendation);
 export const setMessage = (message: string) => action(OrderActionTypes.SET_MESSAGE, message);
 export const setFittingProperties = (properties: any) => action(OrderActionTypes.SET_FITTING_PROPERTIES, properties);
-// export const setBlueprint = (blueprint: Blueprint) => action(OrderActionTypes.SET_BLUEPRINT, blueprint);
-export const disableRedirect = () => action(OrderActionTypes.DISABLE_REDIRECT);
 export const setBoss = (type: BossTypes, value: any) => action(OrderActionTypes.SET_BOSS, { type, value });
+export const disableRedirect = () => action(OrderActionTypes.DISABLE_REDIRECT);

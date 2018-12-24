@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { OrderActionTypes, BossTypes } from './types';
+import { OrderActionTypes, BossTypes, Boss, Prescription } from './types';
 import * as orderActions from './actions';
 import * as lensesActions from '../lenses/actions';
 import * as configHelper from '../../helpers/configHelper';
@@ -11,8 +11,37 @@ import {
   savePrescriptionRequest,
   saveFittingHeightRequest,
 } from '../../api/order';
+import { ApplicationState } from '..';
 
-function* submitSaga({ payload }: any) {
+type TSubmitOrder = {
+  type: OrderActionTypes.SUBMIT_START;
+  payload: Boss;
+};
+
+type TSaveOrder = {
+  type: OrderActionTypes.SAVE_ORDER_START;
+  payload: ApplicationState;
+};
+
+type TFetchOrder = {
+  type: OrderActionTypes.FETCH_ORDER_VALUES_START;
+  payload: string;
+};
+
+type TSavePrescription = {
+  type: OrderActionTypes.SAVE_PRESCRIPTION_START;
+  payload: Prescription;
+};
+
+type TSaveFittingHeight = {
+  type: OrderActionTypes.SAVE_FITTING_HEIGHT_START;
+  payload: {
+    boss: Boss;
+    height: number;
+  };
+};
+
+export function* submitSaga({ payload }: TSubmitOrder) {
   try {
     const response = yield call(submitRequest, payload);
 
@@ -27,7 +56,7 @@ function* submitSaga({ payload }: any) {
   }
 }
 
-function* saveOrderSaga({ payload }: any) {
+export function* saveOrderSaga({ payload }: TSaveOrder) {
   const userId = configHelper.getUserId();
   const request = createRequestData(payload);
 
@@ -36,6 +65,7 @@ function* saveOrderSaga({ payload }: any) {
 
     if (response.success) {
       yield put(orderActions.saveOrderSuccess());
+
       if (userId === null) {
         configHelper.setUserId(response.id);
       }
@@ -47,7 +77,7 @@ function* saveOrderSaga({ payload }: any) {
   }
 }
 
-function* fetchOrderValuesSaga({ payload }: any) {
+export function* fetchOrderValuesSaga({ payload }: TFetchOrder) {
   try {
     const response = yield call(fetchOrderValuesRequest, payload);
 
@@ -62,7 +92,7 @@ function* fetchOrderValuesSaga({ payload }: any) {
   }
 }
 
-function* savePrescriptionSaga({ payload }: any) {
+export function* savePrescriptionSaga({ payload }: TSavePrescription) {
   try {
     const response = yield call(savePrescriptionRequest, payload);
 
@@ -77,7 +107,7 @@ function* savePrescriptionSaga({ payload }: any) {
   }
 }
 
-function* saveFittingHeight({ payload }: any) {
+export function* saveFittingHeightSaga({ payload }: TSaveFittingHeight) {
   yield put(orderActions.setBoss(BossTypes.FITTING_HEIGHT, payload.height));
 
   try {
@@ -98,7 +128,7 @@ function* watchOrderFetch() {
   yield takeEvery(OrderActionTypes.SAVE_ORDER_START, saveOrderSaga);
   yield takeEvery(OrderActionTypes.FETCH_ORDER_VALUES_START, fetchOrderValuesSaga);
   yield takeEvery(OrderActionTypes.SAVE_PRESCRIPTION_START, savePrescriptionSaga);
-  yield takeEvery(OrderActionTypes.SAVE_FITTING_HEIGHT_START, saveFittingHeight);
+  yield takeEvery(OrderActionTypes.SAVE_FITTING_HEIGHT_START, saveFittingHeightSaga);
 }
 
 function* orderSaga() {

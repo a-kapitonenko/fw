@@ -6,8 +6,8 @@ import * as mockData from '../../mockData';
 
 describe('filter actions', () => {
   it('test filteringStart action creator', () => {
-    const boss = {} as Boss;
-    const query = {};
+    const boss: Boss = mockData.boss;
+    const query: object = {};
 
     expect(filterActions.filteringStart(boss, query)).toMatchSnapshot();
   });
@@ -19,7 +19,9 @@ describe('filter actions', () => {
   });
 
   it('test filteringFailed action creator', () => {
-    expect(filterActions.filteringFailed(mockData.errorMessage)).toMatchSnapshot();
+    const message: string = mockData.errorMessage;
+
+    expect(filterActions.filteringFailed(message)).toMatchSnapshot();
   });
 
   it('test fetchGroupsStart action creator', () => {

@@ -104,7 +104,7 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     case OrderActionTypes.SAVE_PRESCRIPTION_SUCCESS: {
       return saveSuccess(state);
     }
-    case OrderActionTypes.SAVE_FITTING_HEIGHT_FAILED: {
+    case OrderActionTypes.SAVE_PRESCRIPTION_FAILED: {
       return saveFailed(state, action.payload, ErrorTypes.PRESCRIPTION);
     }
     case OrderActionTypes.SAVE_FITTING_HEIGHT_START: {
@@ -149,15 +149,6 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
         fittingProperties: action.payload
       };
     }
-    // case OrderActionTypes.SET_BLUEPRINT: {
-    //   return { ...state, blueprint: action.payload };
-    // }
-    case OrderActionTypes.DISABLE_REDIRECT: {
-      return {
-        ...state,
-        redirect: false
-      };
-    }
     case OrderActionTypes.SET_BOSS: {
       return {
         ...state, 
@@ -165,6 +156,12 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
           ...state.boss,
           [action.payload.type]: action.payload.value
         },
+      };
+    }
+    case OrderActionTypes.DISABLE_REDIRECT: {
+      return {
+        ...state,
+        redirect: false
       };
     }
     default: {

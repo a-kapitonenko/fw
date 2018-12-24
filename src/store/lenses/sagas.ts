@@ -1,25 +1,44 @@
 import { all, call, fork, put, takeEvery, select } from 'redux-saga/effects';
-import { ApplicationState } from '../index';
 import { LensesActionTypes, Lens } from './types';
-import { BossTypes } from '../order/types';
+import { BossTypes, Prescription } from '../order/types';
 import * as lensesActions from './actions';
 import * as orderActions from '../order/actions';
 import { isEmptyObject } from '../../helpers/mathHelper';
+import { getLensFromState } from '../../helpers/lensesHelper';
 import { fetchLensesRequest, saveLensRequest, checkLensRequest } from '../../api/lenses';
 
-const getLens = (state: ApplicationState) => state.order.boss.lens;
+type TFetchLenses = {
+  type: LensesActionTypes.FETCH_LENSES_START,
+  payload: Prescription,
+};
 
-export function* fetchLensesSaga({ payload }: any) {
+type TSaveLens = {
+  type: LensesActionTypes.SAVE_LENS_START,
+  payload: {
+    prescription: Prescription,
+    lens: Lens,
+  },
+};
+
+type TCheckLens = {
+  type: LensesActionTypes.CHECK_LENS_START,
+  payload: {
+    prescription: Prescription,
+    lens: Lens,
+  },
+};
+
+export function* fetchLensesSaga({ payload }: TFetchLenses) {
   try {
     const response = yield call(fetchLensesRequest, payload);
 
     if (response.success) {
       yield put(lensesActions.fetchLensesSuccess(response.lenses));
 
-      const lens = yield select(getLens);
+      const lens = yield select(getLensFromState);
       
       if (!isEmptyObject(lens)) {
-        yield put(lensesActions.checkLensStart(payload.prescription, lens));
+        yield put(lensesActions.checkLensStart(payload, lens));
       }
     } else {
       yield put(lensesActions.fetchLensesFailed(response.error));
@@ -29,7 +48,7 @@ export function* fetchLensesSaga({ payload }: any) {
   }
 }
 
-function* saveLensSaga({ payload }: any) {
+export function* saveLensSaga({ payload }: TSaveLens) {
   yield put(orderActions.setBoss(BossTypes.LENS, payload.lens));
 
   try {
@@ -46,14 +65,16 @@ function* saveLensSaga({ payload }: any) {
   }
 }
 
-function* checkLensSaga({ payload }: any) {
+export function* checkLensSaga({ payload }: TCheckLens) {
   try {
     const response = yield call(checkLensRequest, payload);
 
     if (response.success) {
       yield put(lensesActions.checkLensSuccess());
     } else {
-      yield put(orderActions.setBoss(BossTypes.LENS, {} as Lens));
+      const emptyLens: Lens = {} as Lens;
+
+      yield put(orderActions.setBoss(BossTypes.LENS, emptyLens));
       yield put(lensesActions.checkLensFailed(response.error));
     }
   } catch (err) {

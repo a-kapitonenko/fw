@@ -197,7 +197,7 @@ export const getFilterFrames = ({ boss, query }) => {
 
   return {
     success: true,
-    frames: response  
+    frames: response,
   };
 };
 
@@ -206,14 +206,14 @@ export const onSubmit = ({ boss, frame }) => {
     success: true,
     result: {
       message: message,
-      fittingHeight: fittingHeight
-    }
+      fittingHeight: fittingHeight,
+    },
   };
 };
 
 export const checkFrameCompatibility = ({ boss }) => {
   return {
     success: false,
-    error: 'This lens does not accecptable with selected frame.'
+    error: 'This lens does not accecptable with selected frame.',
   };
 };

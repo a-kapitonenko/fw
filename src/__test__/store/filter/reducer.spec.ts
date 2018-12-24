@@ -1,4 +1,5 @@
-import { FilterActionTypes } from '../../../store/filter/types';
+import { FilterActionTypes, Groups } from '../../../store/filter/types';
+import { Frame } from '../../../store/frames/types';
 import { FilterReducer } from '../../../store/filter/reducer';
 import * as mockData from '../../mockData';
 
@@ -13,18 +14,22 @@ describe('filter reducer', () => {
   });
 
   it('test handles FILTERING_SUCCESS', () => {
+    const filterPayload: Frame[] = mockData.frames;
+
     const filterAction = {
       type: FilterActionTypes.FILTERING_SUCCESS,
-      payload: mockData.frames,
+      payload: filterPayload,
     };
     
     expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
   });
 
   it('test handles FILTERING_FAILED', () => {
+    const filterPayload: string = mockData.errorMessage;
+
     const filterAction = {
       type: FilterActionTypes.FILTERING_FAILED,
-      payload: mockData.errorMessage,
+      payload: filterPayload,
     };
 
     expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
@@ -40,25 +45,29 @@ describe('filter reducer', () => {
   });
 
   it('test handles FETCH_GROUPS_SUCCESS', () => {
+    const filterPayload: Groups = mockData.groups;
+
     const filterAction = {
       type: FilterActionTypes.FETCH_GROUPS_SUCCESS,
-      payload: mockData.groups,
+      payload: filterPayload,
     };
     
     expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
   });
 
   it('test handles FETCH_GROUPS_FAILED', () => {
+    const filterPayload: string = mockData.errorMessage;
+
     const filterAction = {
       type: FilterActionTypes.FETCH_GROUPS_FAILED,
-      payload: mockData.errorMessage,
+      payload: filterPayload,
     };
 
     expect(FilterReducer(undefined, filterAction)).toMatchSnapshot();
   });
 
   it('test handles CHANGE_CHECKED', () => {
-    const filterPayload = {
+    const filterPayload: { type: string, name: string, value: boolean } = {
       type: 'color',
       name: 'Black',
       value: true,
@@ -82,7 +91,7 @@ describe('filter reducer', () => {
   });
 
   it('test handles ADD_QUERY', () => {
-    const filterPayload = {
+    const filterPayload: { type: string, value: string } = {
       type: 'color',
       value: 'test',
     };
@@ -96,7 +105,7 @@ describe('filter reducer', () => {
   });
 
   it('test handles DELETE_QUERY', () => {
-    const filterPayload = {
+    const filterPayload: { type: string, value: string } = {
       type: 'color',
       value: 'test',
     };

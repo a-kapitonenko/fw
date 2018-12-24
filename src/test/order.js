@@ -12,6 +12,7 @@ export const saveOrder = (request) => {
 export const savePrescription = (values) => {
   return {
     success: true,
+    result: '',
   };
 };
 
