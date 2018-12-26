@@ -51,5 +51,8 @@
     "karma-requirejs": "^1.1.0",
     "redux-mock-store": "^1.5.3",
     "typescript": "^3.1.6"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
   }
 }
