@@ -1,11 +1,20 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import { SearchActionTypes } from './types';
+import { Boss } from '../order/types';
 import * as searchActions from './actions';
-import { fetchFramesRequest } from '../../api/search';
+import { searchFramesRequest } from '../../api/search';
 
-export function* fetchFrames({ payload }: any) {
+type TSearchFrames = {
+  type: SearchActionTypes.SEARCH_START;
+  payload: {
+    boss: Boss;
+    upc: string;
+  }
+};
+
+export function* searchFrames({ payload }: TSearchFrames) {
   try {
-    const response = yield call(fetchFramesRequest, payload);
+    const response = yield call(searchFramesRequest, payload);
 
     if (response.success) {
       yield put(searchActions.searchSuccess(response.result));
@@ -18,7 +27,7 @@ export function* fetchFrames({ payload }: any) {
 }
 
 function* watchSearchFetch() {
-  yield takeEvery(SearchActionTypes.SEARCH_START, fetchFrames);
+  yield takeEvery(SearchActionTypes.SEARCH_START, searchFrames);
 }
 
 function* searchSaga() {

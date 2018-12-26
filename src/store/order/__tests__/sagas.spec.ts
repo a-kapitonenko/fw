@@ -1,16 +1,16 @@
 import { put, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
-import { Prescription, BossTypes, Boss, Barcode, Blueprint } from '../../../store/order/types';
-import { ApplicationState } from '../../../store';
-import * as orderActions from '../../../store/order/actions';
-import * as lensesActions from '../../../store/lenses/actions';
+import { ApplicationState } from '../../index';
+import { Prescription, BossTypes, Boss, Barcode, Blueprint } from '../types';
+import * as orderActions from '../actions';
+import * as lensesActions from '../../lenses/actions';
 import {
   submitSaga,
   saveOrderSaga,
   fetchOrderValuesSaga,
   savePrescriptionSaga,
   saveFittingHeightSaga,
-} from '../../../store/order/sagas';
+} from '../sagas';
 import { 
   submitRequest,
   saveOrderRequest,
@@ -19,7 +19,7 @@ import {
   saveFittingHeightRequest,
 } from '../../../api/order';
 
-import * as mockData from '../../mockData';
+import * as mockData from '../../../mockData';
 import { createRequestData } from '../../../helpers/orderSelectionHelper';
 import * as configHelper from '../../../helpers/configHelper';
 
@@ -52,34 +52,6 @@ type TFailedResponse = {
   success: boolean;
   error: string;
 };
-
-// const localStorageMock = {
-//   getItem: jest.fn(),
-//   setItem: jest.fn(),
-//   clear: jest.fn()
-// };
-
-// window.localStorage = localStorageMock;
-
-// var localStorageMock = (function() {
-//   var store = {};
-//   return {
-//     getItem: function(key: any) {
-//       return store[key];
-//     },
-//     setItem: function(key: any, value: any) {
-//       store[key] = value.toString();
-//     },
-//     clear: function() {
-//       store = {};
-//     },
-//     removeItem: function(key: any) {
-//       delete store[key];
-//     }
-//   };
-// })();
-
-// Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 describe('submit order saga order', () => {
   const boss: Boss = mockData.boss;

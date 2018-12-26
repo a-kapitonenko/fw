@@ -3,8 +3,8 @@ import Button from '@material-ui/core/Button';
 import { Prescription, Barcode } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import { Frame } from '../store/frames/types';
-import PrescriptionSelection from '../components/PrescriptionSelection';
-import Section from '../components/Section';
+import PrescriptionSelection from './PrescriptionSelection';
+import Section from './Section';
 import '../styles/boss.css';
 
 type ComponentProps = {

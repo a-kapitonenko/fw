@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filterHelper test createFilterGroupsData function 1`] = `
+Object {
+  "color": Array [
+    Object {
+      "checked": false,
+      "name": "Black",
+      "value": "black",
+    },
+  ],
+  "material": Array [
+    Object {
+      "checked": false,
+      "name": "Acetate",
+      "value": "acetate",
+    },
+  ],
+  "noseBridge": Array [
+    Object {
+      "checked": false,
+      "name": "Standard",
+      "value": "standard",
+    },
+  ],
+  "shape": Array [
+    Object {
+      "checked": false,
+      "name": "Square",
+      "value": "square",
+    },
+  ],
+  "width": Array [
+    Object {
+      "checked": false,
+      "name": "Narrow",
+      "value": "narrow",
+    },
+  ],
+}
+`;

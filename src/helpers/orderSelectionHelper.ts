@@ -1,7 +1,14 @@
 import { ApplicationState } from '../store';
 import { Prescription } from '../store/order/types';
+import { isEmptyObject } from './mathHelper';
 
 export function isPrescriptionFilled(prescription: Prescription): boolean {
+  const isEmptyPrescription = isEmptyObject(prescription);
+
+  if (isEmptyPrescription) {
+    return false;
+  }
+
   for (const a in prescription) {
     for (const b in prescription[a]) {
       if (prescription[a][b].length === 0) {

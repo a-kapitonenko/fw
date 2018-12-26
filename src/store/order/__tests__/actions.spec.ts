@@ -1,7 +1,7 @@
-import { ApplicationState } from '../../../store';
-import { Boss, Prescription, Blueprint, BossTypes } from '../../../store/order/types';
-import * as orderActions from '../../../store/order/actions';
-import * as mockData from '../../mockData';
+import { ApplicationState } from '../../index';
+import { Boss, Prescription, Blueprint, BossTypes } from '../types';
+import * as orderActions from '../actions';
+import * as mockData from '../../../mockData';
 
 describe('order actions', () => {
   it('test submitStart action creator', () => {

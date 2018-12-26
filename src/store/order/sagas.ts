@@ -1,4 +1,5 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { ApplicationState } from '../index';
 import { OrderActionTypes, BossTypes, Boss, Prescription } from './types';
 import * as orderActions from './actions';
 import * as lensesActions from '../lenses/actions';
@@ -11,7 +12,6 @@ import {
   savePrescriptionRequest,
   saveFittingHeightRequest,
 } from '../../api/order';
-import { ApplicationState } from '..';
 
 type TSubmitOrder = {
   type: OrderActionTypes.SUBMIT_START;

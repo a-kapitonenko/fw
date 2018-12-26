@@ -1,11 +1,11 @@
 import { put, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
-import { Boss } from '../../../store/order/types';
-import { Frame } from '../../../store/frames/types';
-import * as searchActions from '../../../store/search/actions';
-import { fetchFramesRequest } from '../../../api/search';
-import { fetchFrames } from '../../../store/search/sagas';
-import * as mockData from '../../mockData';
+import { Boss } from '../../order/types';
+import { Frame } from '../../frames/types';
+import * as searchActions from '../actions';
+import { searchFramesRequest } from '../../../api/search';
+import { searchFrames } from '../sagas';
+import * as mockData from '../../../mockData';
 
 type TFetchSuccessResponse = {
   success: boolean;
@@ -22,7 +22,7 @@ describe('fetch frames search saga', () => {
   const upc: string = '82850523738';
   const searchAction = searchActions.searchStart(boss, upc);
   
-  const generator = cloneableGenerator(fetchFrames)(searchAction);
+  const generator = cloneableGenerator(searchFrames)(searchAction);
   
   const successResponse: TFetchSuccessResponse = {
     success: true,
@@ -34,7 +34,7 @@ describe('fetch frames search saga', () => {
     error: mockData.errorMessage,
   };
 
-  expect(generator.next().value).toEqual(call(fetchFramesRequest, { boss, upc }));
+  expect(generator.next().value).toEqual(call(searchFramesRequest, { boss, upc }));
 
   it('handle success fetch response', () => {
     const clone = generator.clone();

@@ -1,7 +1,7 @@
-import { SearchActionTypes } from '../../../store/search/types';
-import { Frame } from '../../../store/frames/types';
-import { SearchReducer } from '../../../store/search/reducer';
-import * as mockData from '../../mockData';
+import { SearchActionTypes } from '../types';
+import { Frame } from '../../frames/types';
+import { SearchReducer } from '../reducer';
+import * as mockData from '../../../mockData';
 
 describe('search reducer', () => {
   it('test handles SEARCH_START', () => {

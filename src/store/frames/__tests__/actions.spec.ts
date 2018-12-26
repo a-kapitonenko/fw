@@ -1,7 +1,7 @@
-import { Frame } from '../../../store/frames/types';
-import { Boss } from '../../../store/order/types';
-import * as framesActions from '../../../store/frames/actions';
-import * as mockData from '../../mockData';
+import { Frame } from '../types';
+import { Boss } from '../../order/types';
+import * as framesActions from '../../frames/actions';
+import * as mockData from '../../../mockData';
 
 describe('frames actions', () => {
   it('test open action creator', () => {

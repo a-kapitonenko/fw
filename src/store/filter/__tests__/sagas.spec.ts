@@ -1,13 +1,13 @@
 import { put, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
-import { Groups } from '../../../store/filter/types';
-import { Boss } from '../../../store/order/types';
-import { Frame } from '../../../store/frames/types';
-import { fetchGroups, fetchFrames } from '../../../store/filter/sagas';
-import * as filterActions from '../../../store/filter/actions';
+import { Groups } from '../types';
+import { Boss } from '../../order/types';
+import { Frame } from '../../frames/types';
+import { fetchGroups, fetchFrames } from '../sagas';
+import * as filterActions from '../actions';
 import { fetchGroupsRequest, fetchFramesRequest } from '../../../api/filter';
 import { createFilterGroupsData } from '../../../helpers/filterHelper'
-import * as mockData from '../../mockData';
+import * as mockData from '../../../mockData';
 
 type TGroupsSuccessResponse = {
   success: boolean;

@@ -10,7 +10,7 @@ export function createFilterGroupsData(groups: Groups): Groups {
   return newGroups;
 }
 
-export function isEmptyQuery(query: Object): boolean {
+export function isEmptyQuery(query: object): boolean {
   for (const item in query) {
     if (query[item].length !== 0) {
       return false;

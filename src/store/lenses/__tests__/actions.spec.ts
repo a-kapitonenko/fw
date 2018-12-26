@@ -1,7 +1,7 @@
-import * as lensesActions from '../../../store/lenses/actions';
-import { Prescription } from '../../../store/order/types';
-import { Lens } from '../../../store/lenses/types';
-import * as mockData from '../../mockData';
+import * as lensesActions from '../actions';
+import { Prescription } from '../../order/types';
+import { Lens } from '../types';
+import * as mockData from '../../../mockData';
 
 describe('lenses actions', () => {
   it('test fetchLensesStart action creator', () => {

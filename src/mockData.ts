@@ -1,11 +1,11 @@
-import { ApplicationState } from '../store';
-import { OculusInfo, Prescription, Boss, Blueprint, Barcode, Errors } from '../store/order/types';
-import { Frame, FramesState } from '../store/frames/types';
-import { Groups, IFilterState } from '../store/filter/types';
-import { Lens } from '../store/lenses/types';
-import { initialValue } from '../test/database';
+import { ApplicationState } from './store';
+import { OculusInfo, Prescription, Boss, Blueprint, Barcode, Errors } from './store/order/types';
+import { Frame, FramesState } from './store/frames/types';
+import { Groups, IFilterState } from './store/filter/types';
+import { Lens } from './store/lenses/types';
+import { initialValue } from './test/database';
 import { RouterState } from 'react-router-redux';
-import { ISearchState } from '../store/search/types';
+import { ISearchState } from './store/search/types';
 
 export const errorMessage: string = 'Error message';
 export const recommendation: string = 'Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)';

@@ -30,9 +30,11 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
+    "test-conf": "react-scripts-ts test --env=jsdom --setupTestFrameworkScriptFile ./src/setupTests.js",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.15",
     "@types/jest": "^23.3.9",
     "@types/lodash": "^4.14.118",
     "@types/material-ui": "^0.21.5",
@@ -44,15 +46,16 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/react-router-redux": "^5.0.16",
     "@types/react-select": "^2.0.6",
+    "@types/react-test-renderer": "^16.0.3",
     "@types/redux-form": "^7.4.12",
     "@types/redux-logger": "^3.0.6",
     "@types/redux-thunk": "^2.1.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "karma": "^3.1.4",
     "karma-requirejs": "^1.1.0",
+    "react-test-renderer": "^16.7.0",
     "redux-mock-store": "^1.5.3",
     "typescript": "^3.1.6"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
   }
 }

@@ -1,19 +1,19 @@
 import { put, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
-import { Frame } from '../../../store/frames/types';
-import { BossTypes, Boss } from '../../../store/order/types';
+import { Frame } from '../types';
+import { BossTypes, Boss } from '../../order/types';
 import { 
   submitSaga,
   fetchSimilarFramesSaga,
   checkFrameSaga,
   clearResultSaga,
-} from '../../../store/frames/sagas';
-import * as framesActions from '../../../store/frames/actions';
-import * as orderActions from '../../../store/order/actions';
-import * as filterActions from '../../../store/filter/actions';
-import * as searchActions from '../../../store/search/actions';
+} from '../sagas';
+import * as framesActions from '../actions';
+import * as orderActions from '../../order/actions';
+import * as filterActions from '../../filter/actions';
+import * as searchActions from '../../search/actions';
 import { submitRequest, fetchSimilarFramesRequest, checkFrameRequest } from '../../../api/frames';
-import * as mockData from '../../mockData';
+import * as mockData from '../../../mockData';
 
 type TSubmitSuccessResponse = {
   success: boolean;

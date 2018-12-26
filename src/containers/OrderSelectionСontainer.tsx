@@ -62,7 +62,6 @@ class OrderSelection extends LinkComponent<ComponentProps> {
 
   private renderActions = () => {
     const { isFetching, errors, frameErrors, state, order, saveOrder, submitOrder } = this.props;
-
     const isFrameSelected = !isEmptyObject(order.boss.frame);
     const isErrors = frameErrors ? true : false;
     const isFittingHeightSelected = order.boss.fittingHeight ? true : false;

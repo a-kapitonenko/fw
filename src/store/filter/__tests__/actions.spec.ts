@@ -1,8 +1,8 @@
-import * as filterActions from '../../../store/filter/actions';
-import { Frame } from '../../../store/frames/types';
-import { Boss } from '../../../store/order/types';
-import { Groups } from '../../../store/filter/types';
-import * as mockData from '../../mockData';
+import { Groups } from '../types';
+import { Boss } from '../../order/types';
+import { Frame } from '../../frames/types';
+import * as filterActions from '../actions';
+import * as mockData from '../../../mockData';
 
 describe('filter actions', () => {
   it('test filteringStart action creator', () => {

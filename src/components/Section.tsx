@@ -5,7 +5,7 @@ type ComponentProps = {
   tittle: any;
   errors?: string;
   wrap?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Section: React.SFC<ComponentProps> = ({ className, tittle, errors, wrap, children }) => {

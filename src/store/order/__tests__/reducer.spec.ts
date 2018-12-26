@@ -1,6 +1,6 @@
-import { OrderActionTypes, Blueprint, BossTypes } from '../../../store/order/types';
-import { OrderReducer } from '../../../store/order/reducer';
-import * as mockData from '../../mockData';
+import { OrderActionTypes, Blueprint, BossTypes } from '../types';
+import { OrderReducer } from '../reducer';
+import * as mockData from '../../../mockData';
 
 describe('order reducer', () => {
   it('test handles SUBMIT_START', () => {

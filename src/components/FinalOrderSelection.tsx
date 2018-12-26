@@ -5,7 +5,7 @@ import { Boss, Blueprint } from '../store/order/types';
 import { Frame } from '../store/frames/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
-import Section from '../components/Section';
+import Section from './Section';
 import SelectField from './SelectField';
 import PrescriptionSelectionContainer from '../containers/PrescriptionSelectionContainer';
 import LensSelectionContainer from '../containers/LensSelectionContainer';

@@ -3,6 +3,15 @@ import { FilterActionTypes } from './types';
 import * as filterActions from './actions';
 import { fetchGroupsRequest, fetchFramesRequest } from '../../api/filter';
 import { createFilterGroupsData } from '../../helpers/filterHelper';
+import { Boss } from '../order/types';
+
+type TFetchFrames = {
+  type: FilterActionTypes.FILTERING_START;
+  payload: {
+    boss: Boss;
+    query: object;
+  }
+};
 
 export function* fetchGroups() {
   try {
@@ -20,7 +29,7 @@ export function* fetchGroups() {
   }
 }
 
-export function* fetchFrames({ payload }: any) {
+export function* fetchFrames({ payload }: TFetchFrames) {
   try {
     const response = yield call(fetchFramesRequest, payload);
 

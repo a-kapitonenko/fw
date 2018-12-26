@@ -1,7 +1,7 @@
-import * as searchActions from '../../../store/search/actions';
-import { Boss } from '../../../store/order/types';
-import { Frame } from '../../../store/frames/types';
-import * as mockData from '../../mockData';
+import * as searchActions from '../actions';
+import { Boss } from '../../order/types';
+import { Frame } from '../../frames/types';
+import * as mockData from '../../../mockData';
 
 describe('search actions', () => {
   it('test searchStart action creator', () => {

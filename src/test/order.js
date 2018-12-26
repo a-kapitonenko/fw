@@ -1,4 +1,4 @@
-import database from '../test/database';
+import database from './database';
 
 export const saveOrder = (request) => {
   let user =  database.find(user => user.id === request.id);

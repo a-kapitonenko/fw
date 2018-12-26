@@ -1,7 +1,7 @@
-import { FilterActionTypes, Groups } from '../../../store/filter/types';
-import { Frame } from '../../../store/frames/types';
-import { FilterReducer } from '../../../store/filter/reducer';
-import * as mockData from '../../mockData';
+import { FilterActionTypes, Groups } from '../types';
+import { Frame } from '../../frames/types';
+import { FilterReducer } from '../reducer';
+import * as mockData from '../../../mockData';
 
 describe('filter reducer', () => {
   it('test handles FILTERING_START', () => {

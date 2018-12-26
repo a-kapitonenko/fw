@@ -1,13 +1,13 @@
 import { put, call, select } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
-import { Prescription, BossTypes } from '../../../store/order/types';
-import { Lens } from '../../../store/lenses/types';
-import { fetchLensesSaga, saveLensSaga, checkLensSaga } from '../../../store/lenses/sagas';
-import * as lensesActions from '../../../store/lenses/actions';
-import * as orderActions from '../../../store/order/actions';
+import { Prescription, BossTypes } from '../../order/types';
+import { Lens } from '../types';
+import { fetchLensesSaga, saveLensSaga, checkLensSaga } from '../sagas';
+import * as lensesActions from '../actions';
+import * as orderActions from '../../order/actions';
 import { fetchLensesRequest, saveLensRequest, checkLensRequest } from '../../../api/lenses';
 import { getLensFromState } from '../../../helpers/lensesHelper';
-import * as mockData from '../../mockData';
+import * as mockData from '../../../mockData';
 
 type TFetchSuccessResponse = {
   success: boolean;

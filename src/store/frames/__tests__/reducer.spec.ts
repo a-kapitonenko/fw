@@ -1,6 +1,6 @@
-import { FramesActionTypes, Frame } from '../../../store/frames/types';
-import { FramesReducer } from '../../../store/frames/reducer';
-import * as mockData from '../../mockData';
+import { FramesActionTypes, Frame } from '../types';
+import { FramesReducer } from '../reducer';
+import * as mockData from '../../../mockData';
 
 describe('frames reducer', () => {
   it('test handles OPEN', () => {

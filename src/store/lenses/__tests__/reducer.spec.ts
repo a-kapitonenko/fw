@@ -1,6 +1,6 @@
-import { LensesActionTypes, Lens } from '../../../store/lenses/types';
-import { LensesReducer } from '../../../store/lenses/reducer';
-import * as mockData from '../../mockData';
+import { LensesActionTypes, Lens } from '../types';
+import { LensesReducer } from '../reducer';
+import * as mockData from '../../../mockData';
 
 describe('lenses reducer', () => {
   it('test handles FETCH_LENSES_START', () => {

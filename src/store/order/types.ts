@@ -71,7 +71,6 @@ export const enum OrderActionTypes {
   SET_RECOMMENDATION = '@@order/SET_RECOMMENDATION',
   SET_MESSAGE = '@@order/SET_MESSAGE',
   SET_FITTING_PROPERTIES = '@@order/SET_FITTING_PROPERTIES',
-  // SET_BLUEPRINT = '@@order/SET_BLUEPRINT',
   DISABLE_REDIRECT = '@@order/DISABLE_REDIRECT',
   SET_BOSS = '@@order/SET_BOSS',
 }
