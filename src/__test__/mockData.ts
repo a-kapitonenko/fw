@@ -1,8 +1,8 @@
 import { ApplicationState } from '../store';
-import { OculusInfo, Prescription, Boss, Blueprint, Barcode, IOrderState, ErrorTypes, Errors } from '../store/order/types';
+import { OculusInfo, Prescription, Boss, Blueprint, Barcode, Errors } from '../store/order/types';
 import { Frame, FramesState } from '../store/frames/types';
 import { Groups, IFilterState } from '../store/filter/types';
-import { Lens, ILensesState } from '../store/lenses/types';
+import { Lens } from '../store/lenses/types';
 import { initialValue } from '../test/database';
 import { RouterState } from 'react-router-redux';
 import { ISearchState } from '../store/search/types';

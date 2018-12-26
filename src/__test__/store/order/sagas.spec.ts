@@ -53,13 +53,33 @@ type TFailedResponse = {
   error: string;
 };
 
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn()
-};
+// const localStorageMock = {
+//   getItem: jest.fn(),
+//   setItem: jest.fn(),
+//   clear: jest.fn()
+// };
 
-window.localStorage = localStorageMock;
+// window.localStorage = localStorageMock;
+
+// var localStorageMock = (function() {
+//   var store = {};
+//   return {
+//     getItem: function(key: any) {
+//       return store[key];
+//     },
+//     setItem: function(key: any, value: any) {
+//       store[key] = value.toString();
+//     },
+//     clear: function() {
+//       store = {};
+//     },
+//     removeItem: function(key: any) {
+//       delete store[key];
+//     }
+//   };
+// })();
+
+// Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 describe('submit order saga order', () => {
   const boss: Boss = mockData.boss;
