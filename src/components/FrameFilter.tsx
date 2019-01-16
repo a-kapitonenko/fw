@@ -32,11 +32,20 @@ const FrameFilter: React.SFC<ComponentProps> = ({
   
   return (
     <div className="frame-filter">
-      <h2 className="frame-filter__title">Or use filter to find best variant</h2>
+      <h2 className="frame-filter__title">
+        Or use filter to find best variant
+      </h2>
       {errors && <div className="frame-filter__error">{errors}</div>}
       <div className="frame-filter__bar">
         {filterBar.map((item, index) => (
-           <Button variant="contained" disabled={disabled} onClick={() => handleClick(index + 1)}>{item}</Button>
+           <Button
+            key={index}
+            variant="contained"
+            disabled={disabled}
+            onClick={() => handleClick(index + 1)}
+          >
+            {item}
+          </Button>
         ))}
       </div>
       <div className="frame-filter__groups">
@@ -60,7 +69,14 @@ const FrameFilter: React.SFC<ComponentProps> = ({
           {renderGroup(groups.material, GroupsTypes.MATERIAL, disabled)}
         </div>
       </div>
-      <Button variant="contained" disabled={disabled || disabledButton} onClick={resetFilter}>Reset filters</Button>
+      
+      <Button
+        variant="contained"
+        disabled={disabled || disabledButton}
+        onClick={resetFilter}
+      >
+        Reset filters
+      </Button>
     </div>
   );
 };

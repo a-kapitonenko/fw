@@ -1,34 +1,11 @@
 import * as React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import LinkComponent from '../components/LinkComponent';
-import * as orderActions from '../store/order/actions';
-import * as filterActions from '../store/filter/actions';
 import '../styles/menu.css';
 
-type ComponentProps = {
-  fetchOrderValues: typeof orderActions.fetchOrderValuesStart;
-  fetchFilterGroups: typeof filterActions.fetchGroupsStart;
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchOrderValues: (id: string) => dispatch(orderActions.fetchOrderValuesStart(id)), 
-  fetchFilterGroups: () => dispatch(filterActions.fetchGroupsStart()),
-});
+type ComponentProps = {};
 
 class Menu extends LinkComponent<ComponentProps> {
-  private handleClick() {
-    const { fetchFilterGroups, fetchOrderValues } = this.props;
-    const userId = localStorage.getItem('id');
-    
-    fetchFilterGroups();
-    
-    if (userId !== null) {
-      fetchOrderValues(userId);
-    }
-  }
-
   public render() {
     return (
       <main className="p-template__main">
@@ -37,10 +14,7 @@ class Menu extends LinkComponent<ComponentProps> {
         <Button 
           className="page__button"
           variant="contained"
-          onClick={() => {
-            this.handleClick();
-            this.redirectToPage('/select');
-          }}
+          onClick={() => this.redirectToPage('/select')}
         >
           Enter
         </Button>
@@ -49,4 +23,4 @@ class Menu extends LinkComponent<ComponentProps> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Menu);
+export default Menu;

@@ -10,9 +10,9 @@ export function createFilterGroupsData(groups: Groups): Groups {
   return newGroups;
 }
 
-export function isEmptyQuery(query: object): boolean {
-  for (const item in query) {
-    if (query[item].length !== 0) {
+export function isEmptyNestedObject(nestedObject: object): boolean {
+  for (const key in nestedObject) {
+    if (nestedObject[key].length !== 0) {
       return false;
     } 
   }

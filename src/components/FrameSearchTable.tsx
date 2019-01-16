@@ -4,10 +4,6 @@ import { Frame } from '../store/frames/types';
 import FrameTable from './FrameTable';
 
 class FrameSearchTable extends FrameTable {
-  // constructor(props: ComponentProps) {
-  //   super(props);
-  // }
-
   protected renderHeader() {
     return ( 
       <React.Fragment>

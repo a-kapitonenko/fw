@@ -25,24 +25,38 @@ type ComponentProps = {
   saveFittingHeight: typeof orderActions.saveFittingHeightStart;
 };
 
-const renderFittingHeight = (
-  isFetching: boolean, 
-  fittingHeightErrors: string, 
-  boss: Boss,
-  fittingProperties: any,
-  saveFittingHeight: typeof orderActions.saveFittingHeightStart,
-) => {
+type FittingHeightProps = {
+  isFetching: boolean;
+  errors: string; 
+  boss: Boss;
+  properties: any;
+  onSave: typeof orderActions.saveFittingHeightStart;
+};
+
+const FittingHeight: React.SFC<FittingHeightProps> = ({
+  isFetching, 
+  errors, 
+  boss,
+  properties,
+  onSave,
+}) => {
   return (
     <Section tittle="Enter fitting height" wrap>
-      {fittingHeightErrors && <div className="order-selection__error">{fittingHeightErrors}</div>}
+      {errors
+        && (
+          <div className="order-selection__error">
+            {errors}
+          </div>
+        )
+      }
 
       <SelectField
         disabled={isFetching}
         className="order-selection__select"
         label="Height"
         value={boss.fittingHeight}
-        list={fittingProperties}
-        onChange={(value: number) => saveFittingHeight(boss, value)}
+        list={properties}
+        onChange={(value: number) => onSave(boss, value)}
       />
     </Section>
   );
@@ -99,8 +113,17 @@ const FinalOrderSelection: React.SFC<ComponentProps> = ({
     <main className="p-template__main">
       {isFetching && <CircularProgress className="p-template__progress" />}
       <PrescriptionSelectionContainer />
-      {renderFittingHeight(isFetching, fittingHeightErrors, boss, fittingProperties, saveFittingHeight)}
-      <Section className="order-selection__info s-template__content" tittle="Message">
+      <FittingHeight
+        isFetching={isFetching}
+        errors={fittingHeightErrors}
+        boss={boss}
+        properties={fittingProperties}
+        onSave={saveFittingHeight}
+      />
+      <Section
+        className="order-selection__info s-template__content"
+        tittle="Message"
+      >
         <p>{message}</p>
       </Section>
       <LensSelectionContainer />

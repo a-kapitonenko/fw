@@ -5,14 +5,15 @@ import Button from '@material-ui/core/Button';
 import { ApplicationState } from '../store';
 import { IOrderState, Errors, Prescription, Boss } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
+import { Groups } from '../store/filter/types';
 import * as orderActions from '../store/order/actions';
 import * as framesActions from '../store/frames/actions';
+import * as filterActions from '../store/filter/actions';
 import { isEmptyObject } from '../helpers/mathHelper';
+import { isEmptyNestedObject } from '../helpers/filterHelper';
 import LinkComponent from '../components/LinkComponent';
-
 import PreliminaryOrderSelection from '../components/PreliminaryOrderSelection';
 import FinalOrderSelection from '../components/FinalOrderSelection';
-
 import '../styles/orderSelection.css';
 
 type PropsFromState = {
@@ -23,6 +24,7 @@ type PropsFromState = {
   order: IOrderState;
   selectedLens: Lens;
   prescription: Prescription;
+  groups: Groups;
 };
 
 type PropsFromDispatch = {
@@ -30,6 +32,8 @@ type PropsFromDispatch = {
   submitOrder: typeof orderActions.submitStart;
   saveOrder: typeof orderActions.saveOrderStart;
   saveFittingHeight: typeof orderActions.saveFittingHeightStart;
+  fetchOrderValues: typeof orderActions.fetchOrderValuesStart;
+  fetchFilterGroups: typeof filterActions.fetchGroupsStart;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -42,6 +46,7 @@ const mapStateToProps = (state: ApplicationState) => ({
   order: state.order,
   selectedLens: state.order.boss.lens,
   prescription: state.order.boss.prescription,
+  groups: state.filter.groups.data,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -49,9 +54,26 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   submitOrder: (boss: Boss) => dispatch(orderActions.submitStart(boss)),
   saveOrder: (state: ApplicationState) => dispatch(orderActions.saveOrderStart(state)),
   saveFittingHeight: (boss: Boss, height: number) => dispatch(orderActions.saveFittingHeightStart(boss, height)),
+  fetchOrderValues: (id: string) => dispatch(orderActions.fetchOrderValuesStart(id)), 
+  fetchFilterGroups: () => dispatch(filterActions.fetchGroupsStart()),
 });
 
 class OrderSelection extends LinkComponent<ComponentProps> {
+  public componentDidMount() {
+    const { groups, fetchFilterGroups, fetchOrderValues } = this.props;
+    const userId = localStorage.getItem('id');
+    const isEmptyGroups = isEmptyNestedObject(groups);
+
+    if (isEmptyGroups) {
+      fetchFilterGroups();
+      
+      if (userId !== null) {
+        fetchOrderValues(userId);
+      }
+    }
+    
+  }
+
   public componentDidUpdate(prevProps: ComponentProps) {
     const { order } = this.props;
 
@@ -82,7 +104,7 @@ class OrderSelection extends LinkComponent<ComponentProps> {
         )}
       </section>
     );
-  }
+  };
 
   public render() {
     const { isFetching, errors, frameErrors, order, handleOpen, saveFittingHeight } = this.props;

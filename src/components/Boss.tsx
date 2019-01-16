@@ -29,10 +29,15 @@ const Boss: React.SFC<ComponentProps> = ({
 }) => {
   return (
     <main className="p-template__main">
-      <h1 className="p-template__tittle">Scan This Document To Your System</h1>
+      <h1 className="p-template__tittle">
+        Scan This Document To Your System
+      </h1>
       <div className="boss__date">{date}</div>
       <PrescriptionSelection prescription={prescription} readOnly />
-      <Section className="boss__lens  s-template__content" tittle="Selected NikonEyes Lens">
+      <Section 
+        className="boss__lens  s-template__content"
+        tittle="Selected NikonEyes Lens"
+      >
         <p>{lens.name}</p>
       </Section>
       <Section tittle="Frame Information" wrap>
@@ -55,8 +60,20 @@ const Boss: React.SFC<ComponentProps> = ({
         <img src={`/${barcode.img}`} className="boss__img" />
       </section>
       <section className="boss__actions">
-        <Button className="boss__button" variant="contained" onClick={onClick}>Back</Button>
-        <Button className="boss__button" variant="contained" onClick={() => redirectToPage('/')}>Main Menu</Button>
+        <Button
+          className="boss__button"
+          variant="contained"
+          onClick={onClick}
+        >
+          Back
+        </Button>
+        <Button
+          className="boss__button"
+          variant="contained"
+          onClick={() => redirectToPage('/')}
+        >
+          Main Menu
+        </Button>
       </section>
     </main>
   );

@@ -9,7 +9,7 @@ import { Groups, Field } from '../../store/filter/types';
 import { Frame } from '../../store/frames/types';
 import * as filterActions from '../../store/filter/actions';
 import { isEmptyObject } from '../../helpers/mathHelper';
-import { isEmptyQuery } from '../../helpers/filterHelper';
+import { isEmptyNestedObject } from '../../helpers/filterHelper';
 import FrameFilter from '../../components/FrameFilter';
 
 type PropsFromState = {
@@ -112,7 +112,7 @@ class FrameSearchContainer extends React.Component<ComponentProps> {
 
   render() {
     const { isFetching, errors, groups, query, clearChecked, clearQuery } = this.props;
-    const disabledResetFilterButton = isEmptyQuery(query);
+    const disabledResetFilterButton = isEmptyNestedObject(query);
 
     return (
       <FrameFilter

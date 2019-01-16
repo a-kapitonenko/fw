@@ -26,6 +26,7 @@ type PropsFromDispatch = {
   clearSelectedFrame: typeof framesActions.clearSelectedFrame;
   checkFrame: typeof framesActions.checkFrameStart;
   clearResult: typeof framesActions.clearResult;
+  handleClose: typeof framesActions.close;
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -46,6 +47,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   clearSelectedFrame: () => dispatch(framesActions.clearSelectedFrame()),
   checkFrame: (boss: Boss) => dispatch(framesActions.checkFrameStart(boss)),
   clearResult: () => dispatch(framesActions.clearResult()),
+  handleClose: () => dispatch(framesActions.close()),
 });
 
 class FrameSelectionContainer extends React.Component<ComponentProps> {
@@ -85,7 +87,6 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
       } else {
         setSelectedFrame(frame);
       }
-    } else {
     }
   }
 
@@ -112,13 +113,19 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
   }
 
   public render() {
-    const { isFetching, open, selectedFrame, clearSelectedFrame } = this.props;
+    const { isFetching, open, selectedFrame, clearSelectedFrame, handleClose } = this.props;
     const stepSelectingFrame = this.state.step;
   
     const isFrameSelected = !isEmptyObject(selectedFrame);
 
     return (
-      <Dialog open={open} fullScreen={true} className="frame-selection">
+      <Dialog
+        className="frame-selection"
+        fullScreen
+        disableBackdropClick
+        open={open}
+        onClose={handleClose}
+      >
         {isFetching && <CircularProgress className="frame-selection__progress" />}
         <div className="frame-selection__content yellow-section">
           {isFrameSelected && this.renderSelectedFrame(selectedFrame, clearSelectedFrame)}

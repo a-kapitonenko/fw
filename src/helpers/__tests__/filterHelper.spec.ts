@@ -1,4 +1,4 @@
-import { createFilterGroupsData, isEmptyQuery } from '../filterHelper';
+import { createFilterGroupsData, isEmptyNestedObject } from '../filterHelper';
 import * as mockData from '../../mockData';
 import { Groups } from '../../store/filter/types';
 
@@ -9,16 +9,16 @@ describe('filterHelper', () => {
     expect(createFilterGroupsData(groups)).toMatchSnapshot();
   });
 
-  describe('test isEmptyQuery function', () => {
-    const emptyQuery: object = {};
-    const filledQuery: object = mockData.query;
+  describe('test isEmptyNestedObject function', () => {
+    const emptyObject: object = {};
+    const filledObject: object = mockData.query;
 
-    it('should return true for empty query', () => {
-      expect(isEmptyQuery(emptyQuery)).toEqual(true);
+    it('should return true for empty nested object', () => {
+      expect(isEmptyNestedObject(emptyObject)).toEqual(true);
     });
 
-    it('should return false for filled query', () => {
-      expect(isEmptyQuery(filledQuery)).toEqual(false);
+    it('should return false for filled nested object', () => {
+      expect(isEmptyNestedObject(filledObject)).toEqual(false);
     });
   });
 });
