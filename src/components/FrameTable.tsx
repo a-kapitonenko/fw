@@ -36,7 +36,7 @@ class TestTable extends React.Component<ComponentProps> {
       <React.Fragment>
         <TableCell>{frame.upc}</TableCell>
         <TableCell>{frame.label}</TableCell>
-        <TableCell><img className="frame-table__img" src={`/${frame.img}`} /></TableCell>
+        <TableCell><img className="frame-table__img" src={`./${frame.img}`} /></TableCell>
       </React.Fragment>
     );
   }

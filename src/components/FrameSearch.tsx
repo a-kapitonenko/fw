@@ -28,7 +28,7 @@ const Option = (props: any) => {
       <components.Option {...props}>
         <div>{props.value}</div>
         <div>{props.label}</div>
-        <img className="frame-search__img" src={`/${props.data.img}`} />
+        <img className="frame-search__img" src={`./${props.data.img}`} />
         <div>{props.data.compatibility ? 'true' : 'false'}</div>
       </components.Option>
     </div>

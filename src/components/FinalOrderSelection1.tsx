@@ -78,7 +78,7 @@ const renderFrameSelection = (
         errors={frameErrors}
       >
         <div className="order-selection__img-wrapper s-template__content">
-          <img className="order-selection__img" src={`/${frame.img}`} />
+          <img className="order-selection__img" src={`./${frame.img}`} />
         </div>
         <div className="order-selection__frame-description">
           <p>UPC Code: {frame.upc}</p>
@@ -132,7 +132,7 @@ const FinalOrderSelection: React.SFC<ComponentProps> = ({
       <Section className="order-selection__content" tittle="36 Point Trace Dimentions">
         <div className="order-selection__img-wrapper s-template__content">
           {blueprint['img'] && (
-            <img className="order-selection__img" src={`/${blueprint.img}`} />
+            <img className="order-selection__img" src={`./${blueprint.img}`} />
           )}
         </div>
       </Section>

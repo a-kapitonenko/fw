@@ -51,10 +51,10 @@ const PreliminaryOrderSelection: React.SFC<ComponentProps> = ({
     <main className="p-template__main">
       {isFetching && <CircularProgress className="p-template__progress" />}
       <PrescriptionSelectionContainer />
+      <LensSelectionContainer />
       <Section className="order-selection__info s-template__content" tittle="Recommendation">
         <p>{recommendation}</p>
       </Section>
-      <LensSelectionContainer />
       {renderFrameSelection(buttonDisabled, handleOpen)}
 
       <Section className="order-selection__lens s-template__content" tittle="Selected NikonEyes Lens">

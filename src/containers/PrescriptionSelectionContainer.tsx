@@ -10,15 +10,17 @@ import { isPrescriptionFilled } from '../helpers/orderSelectionHelper';
 import PrescriptionSelection from '../components/PrescriptionSelection';
 
 type PropsFromState = {
-  disabled: boolean,
+  isFetching: boolean,
   errors: string,
   prescription: Prescription,
   frame: Frame,
 };
 
 type PropsFromDispatch = {
-  handleChange: typeof orderActions.setRxInformation,
+  setRxInformation: typeof orderActions.setRxInformation,
   savePrescription: typeof orderActions.savePrescriptionStart,
+  saveFailed: typeof orderActions.savePrescriptionFailed,
+  saveClear: typeof orderActions.savePrescriptionClear,
 };
 
 type ComponentProps = PropsFromState & PropsFromDispatch;
@@ -28,51 +30,63 @@ type StateProps = {
 };
 
 const mapStateToProps = (state: ApplicationState) => ({
-  disabled: state.order.isFetching || state.lenses.isFetching,
+  isFetching: state.order.isFetching || state.lenses.isFetching || state.frames.isFetching,
   errors: state.order.errors.prescription,
   prescription: state.order.boss.prescription,
   frame: state.order.boss.frame,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleChange: (type: string, field: string, value: string) => {
+  setRxInformation: (type: string, field: string, value: string) => {
     return dispatch(orderActions.setRxInformation(type, field, value));
   },
-  savePrescription: (prescription: Prescription) => { 
+  savePrescription: (prescription: Prescription) => {
     return dispatch(orderActions.savePrescriptionStart(prescription));
+  },
+  saveFailed: (error: string) => {
+    return dispatch(orderActions.savePrescriptionFailed(error));
+  },
+  saveClear: () => {
+    return dispatch(orderActions.savePrescriptionClear());
   },
 });
 
 class PrescriptionSelectionContainer extends React.Component<ComponentProps> {
   state: StateProps = { value: '' };
 
-  private handleFocus = (value: string) => {
-    this.setState({ value })
-  };
+  private handleChange = (type: string, field: string, value: string) => {
+    const { errors, setRxInformation, saveClear } = this.props;
 
-  private handleBlur = (value: string) => {
-    const prevValue = this.state.value;
-    const { prescription, savePrescription } = this.props;
+    setRxInformation(type, field, value);
+
+    if (errors) {
+      saveClear();
+    }
+  }
+
+  private handleSubmit = () => {
+    const { prescription, savePrescription, saveFailed } = this.props;
     const prescriptionFilled = isPrescriptionFilled(prescription);
 
-    if (prescriptionFilled && prevValue !== value) {
+    if (prescriptionFilled) {
       savePrescription(prescription);
+    } else {
+      saveFailed('Please fill in all fields');
     }
-  };
+  }
 
   public render() {
-    const { disabled, errors, prescription, frame, handleChange } = this.props;
+    const { isFetching, errors, prescription, frame } = this.props;
     const readOnly = !isEmptyObject(frame);
 
     return (
       <PrescriptionSelection
-        disabled={disabled}
+        disabled={isFetching}
         errors={errors}
         prescription={prescription}
         readOnly={readOnly}
-        onFocus={this.handleFocus}
-        onChange={handleChange}
-        onBlur={this.handleBlur}
+        onSubmit={this.handleSubmit}
+        onChange={this.handleChange}
       />
     );
   }

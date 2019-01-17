@@ -28,7 +28,7 @@ const FrameSection: React.SFC<ComponentProps> = ({
         errors={errors}
       >
         <div className="order-selection__img-wrapper s-template__content">
-          <img className="order-selection__img" src={`/${frame.img}`} />
+          <img className="order-selection__img" src={`./${frame.img}`} />
         </div>
         <div className="order-selection__frame-description">
           <p>UPC Code: {frame.upc}</p>

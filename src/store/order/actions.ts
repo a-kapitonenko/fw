@@ -17,6 +17,7 @@ export const fetchOrderValuesFailed = (message: string) => action(OrderActionTyp
 export const savePrescriptionStart = (prescription: Prescription) => action(OrderActionTypes.SAVE_PRESCRIPTION_START, prescription);
 export const savePrescriptionSuccess = () => action(OrderActionTypes.SAVE_PRESCRIPTION_SUCCESS);
 export const savePrescriptionFailed = (message: string) => action(OrderActionTypes.SAVE_PRESCRIPTION_FAILED, message);
+export const savePrescriptionClear = () => action(OrderActionTypes.SAVE_PRESCRIPTION_CLEAR);
 
 export const saveFittingHeightStart = (boss: Boss, height: number) => action(OrderActionTypes.SAVE_FITTING_HEIGHT_START, { boss, height });
 export const saveFittingHeightSuccess = (blueprint: Blueprint) => action(OrderActionTypes.SAVE_FITTING_HEIGHT_SUCCESS, blueprint);

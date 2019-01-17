@@ -10,7 +10,7 @@ class Menu extends LinkComponent<ComponentProps> {
     return (
       <main className="p-template__main">
         <h1 className="p-template__tittle">Tailored Frame and Lens Design</h1>
-        <img className="page__img" src="/menu.png" />
+        <img className="page__img" src="./menu.png" />
         <Button 
           className="page__button"
           variant="contained"

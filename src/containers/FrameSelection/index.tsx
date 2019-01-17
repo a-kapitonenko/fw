@@ -53,18 +53,19 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 class FrameSelectionContainer extends React.Component<ComponentProps> {
   state: StateProps = { step: 1 }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps: ComponentProps, prevState: StateProps) {
+    const { boss, checkFrame, clearResult } = this.props;
     const { step } = this.state;
 
-    if (step !== 1) {
-      this.setState({ step: 1 });
-    }
-  }
-
-  componentDidUpdate(prevProps: ComponentProps) {
-    const { boss, checkFrame, clearResult } = this.props;
     const isLensSelected = !isEmptyObject(prevProps.boss.lens);
     const isBossFrameSelected = !isEmptyObject(boss.frame);
+    
+    const domElement = document.querySelector('.frame-selection__scroll');
+    const isStepChanged = step !== prevState.step;
+
+    if (domElement && isStepChanged) {
+      domElement.scrollTo(0, 0);
+    }
 
     if (boss.lens.value !== prevProps.boss.lens.value && isLensSelected) {
       if (isBossFrameSelected) {
@@ -81,6 +82,7 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
 
   private handleClick = (frame: Frame) => {
     const { selectedFrame, setSelectedFrame, clearSelectedFrame } = this.props;
+
     if (frame.compatibility) {
       if (selectedFrame === frame) {
         clearSelectedFrame();
@@ -90,13 +92,21 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
     }
   }
 
+  private onDialogEnter = () => {
+    const { step } = this.state;
+
+    if (step !== 1) {
+      this.setState({ step: 1 });
+    }
+  }
+
   private renderSelectedFrame(frame: Frame, clearSelectedFrame: typeof framesActions.clearSelectedFrame) {
     return (
       <div className="frame-selection__frame-selected">
         <div>{frame.value}</div>
         <div>{frame.label}</div>
         <div className="-flex">
-          <img className="frame-search__img" src={`/${frame.img}`} />
+          <img className="frame-search__img" src={`./${frame.img}`} />
         </div>
         <div>{frame.compatibility ? 'true' : 'false'}</div>
         <div>
@@ -122,7 +132,11 @@ class FrameSelectionContainer extends React.Component<ComponentProps> {
       <Dialog
         className="frame-selection"
         fullScreen
+        classes={{
+          paperScrollPaper: 'frame-selection__scroll',
+        }}
         disableBackdropClick
+        onEnter={this.onDialogEnter}
         open={open}
         onClose={handleClose}
       >

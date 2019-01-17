@@ -52,12 +52,12 @@ const Boss: React.SFC<ComponentProps> = ({
             </div>
           </div>
           <div className="boss__frame-img s-template__content">
-            <img src={`/${frame.img}`} className="boss__img" />
+            <img src={`./${frame.img}`} className="boss__img" />
           </div>
         </div>
       </Section>
       <section className="boss__barcode s-template__content">
-        <img src={`/${barcode.img}`} className="boss__img" />
+        <img src={`./${barcode.img}`} className="boss__img" />
       </section>
       <section className="boss__actions">
         <Button

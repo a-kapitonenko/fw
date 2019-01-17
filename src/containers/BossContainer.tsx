@@ -11,6 +11,7 @@ import LinkComponent from '../components/LinkComponent';
 import Boss from '../components/Boss';
 
 type PropsFromState = {
+  redirect: boolean;
   prescription: Prescription;
   lens: Lens;
   frame: Frame;
@@ -25,6 +26,7 @@ type PropsFromDispatch = {
 type ComponentProps = PropsFromState & PropsFromDispatch;
 
 const mapStateToProps = (state: ApplicationState) => ({
+  redirect: state.order.redirect,
   prescription: state.order.boss.prescription,
   lens: state.order.boss.lens,
   frame: state.order.boss.frame,
@@ -37,6 +39,14 @@ const mapDispatchFromProps = (dispatch: Dispatch) => ({
 });
 
 class BossContainer extends LinkComponent<ComponentProps> {
+  componentDidMount() {
+    const { redirect } = this.props;
+
+    if (!redirect) {
+      this.redirectToPage('/select');
+    }
+  }
+
   onClick = () => {
     const { disableRedirect } = this.props;
 

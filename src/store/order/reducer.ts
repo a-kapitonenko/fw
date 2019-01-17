@@ -107,6 +107,13 @@ const reducer: Reducer<IOrderState> = (state = initialState, action) => {
     case OrderActionTypes.SAVE_PRESCRIPTION_FAILED: {
       return saveFailed(state, action.payload, ErrorTypes.PRESCRIPTION);
     }
+    case OrderActionTypes.SAVE_PRESCRIPTION_CLEAR: {
+      return {
+        ...state,
+        isFetching: false,
+        errors: { ...state.errors, prescription: '' },
+      };
+    }
     case OrderActionTypes.SAVE_FITTING_HEIGHT_START: {
       return saveStart(state, ErrorTypes.FITTING_HEIGHT);
     }
