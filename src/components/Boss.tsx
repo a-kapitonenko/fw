@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { Prescription, Barcode } from '../store/order/types';
 import { Lens } from '../store/lenses/types';
 import { Frame } from '../store/frames/types';
+import * as routes from '../constants/routes'
 import PrescriptionSelection from './PrescriptionSelection';
 import Section from './Section';
 import '../styles/boss.css';
@@ -14,8 +15,7 @@ type ComponentProps = {
   frame: Frame;
   fittingHeight: number;
   barcode: Barcode;
-  onClick: () => void;
-  redirectToPage: (path: string) => void;
+  onClick: (path: string) => void;
 };
 
 const Boss: React.SFC<ComponentProps> = ({ 
@@ -25,7 +25,6 @@ const Boss: React.SFC<ComponentProps> = ({
   fittingHeight,
   barcode,
   onClick,
-  redirectToPage,
 }) => {
   return (
     <main className="p-template__main">
@@ -63,14 +62,14 @@ const Boss: React.SFC<ComponentProps> = ({
         <Button
           className="boss__button"
           variant="contained"
-          onClick={onClick}
+          onClick={() => onClick(routes.SELECT)}
         >
           Back
         </Button>
         <Button
           className="boss__button"
           variant="contained"
-          onClick={() => redirectToPage('/')}
+          onClick={() => onClick(routes.HOME)}
         >
           Main Menu
         </Button>

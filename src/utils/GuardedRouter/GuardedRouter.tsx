@@ -1,46 +1,59 @@
-// import * as React from 'react';
-// import { Dispatch } from 'redux';
-// import { connect } from 'react-redux';
-// import { Redirect, Switch, HashRouter } from 'react-router-dom';
-// import * as routes from '../../constants/routes';
-// import { ApplicationState } from '../../store';
-// import ProtectedRoute from './ProtectedRoute';
-// import Menu from '../../containers/Menu';
-// import OrderSelection from '../../containers/OrderSelectionСontainer';
-// import Boss from '../../containers/BossContainer';
+import * as React from 'react';
+import { HashRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Switch, Redirect } from 'react-router-dom';
+import * as routes from '../../constants/routes';
+import { ApplicationState } from '../../store';
+import ProtectedRoute from './ProtectedRoute';
+import Menu from '../../containers/Menu';
+import OrderSelection from '../../containers/OrderSelectionСontainer';
+import Boss from '../../containers/BossContainer';
+import PageHeader from '../../containers/PageHeader';
 
-// type PropsFromState = {
-//   redirect: boolean;
-// };
+type ComponentProps = {
+  redirect: boolean;
+};
 
-// type PropsFromDispatch = {
+const mapStateToProps = (state: ApplicationState) => ({
+  redirect: state.order.redirect,
+});
 
-// };
+class GuardedRouter extends React.Component<ComponentProps> {
+  render() {
+    const { redirect } = this.props;
+    const isUserSet = localStorage.getItem('id');
 
-// type ComponentProps = PropsFromState & PropsFromDispatch;
+    return (
+      <HashRouter>
+        <React.Fragment>
+          <PageHeader />
 
-// const mapStateToProps = (state: ApplicationState) => ({
-//   redirect: state.order.redirect,
-// });
+          <Switch>
+            <ProtectedRoute
+              exact
+              path={routes.HOME}
+              component={Menu}
+              isAllowed={true}
+              redirectTo={routes.ORDER}
+            />
+            <ProtectedRoute
+              path={routes.SELECT}
+              component={OrderSelection}
+              isAllowed={!redirect}
+              redirectTo={routes.ORDER}
+            />
+            <ProtectedRoute
+              path={routes.ORDER}
+              component={Boss}
+              isAllowed={redirect}
+              redirectTo={routes.HOME}
+            />
+            <Redirect to={!isUserSet ? routes.HOME : routes.SELECT} />
+          </Switch>
+        </React.Fragment>
+      </HashRouter>
+    );
+  }
+}
 
-// const mapDispatchToProps = (dispatch: Dispatch) => ({
-// });
-
-// class GuardedRouter extends React.Component<ComponentProps> {
-//   render() {
-//     const { } = this.props;
-
-//     return (
-//       <HashRouter>
-//         <Switch>
-//           <ProtectedRoute path={routes.HOME} component={Menu} isAllowed={true} redirectTo={routes.TASKS} />
-//           <ProtectedRoute path={routes.SIGNIN} component={Signin}  isAllowed={!isLogIn}  redirectTo={routes.TASKS} />
-//           <ProtectedRoute path={routes.TASKS} component={Main} isAllowed={isLogIn} redirectTo={routes.LOGIN} />
-//           <Redirect to={isLogIn ? routes.TASKS : routes.LOGIN} />,
-//         </Switch>
-//       </HashRouter>
-//     );
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(GuardedRouter);
+export default connect(mapStateToProps)(GuardedRouter);

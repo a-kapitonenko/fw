@@ -60,13 +60,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 class OrderSelection extends LinkComponent<ComponentProps> {
   public componentDidMount() {
-    const { groups, fetchFilterGroups, fetchOrderValues, order } = this.props;
+    const { groups, fetchFilterGroups, fetchOrderValues } = this.props;
     const userId = localStorage.getItem('id');
     const isEmptyGroups = isEmptyNestedObject(groups);
 
-    if (order.redirect) {
-      this.redirectToPage('/order');
-    }
+    // if (order.redirect) {
+    //   this.redirectToPage('/order');
+    // }
 
     if (isEmptyGroups) {
       fetchFilterGroups();
@@ -77,13 +77,13 @@ class OrderSelection extends LinkComponent<ComponentProps> {
     }
   }
 
-  public componentDidUpdate(prevProps: ComponentProps) {
-    const { order } = this.props;
+  // public componentDidUpdate(prevProps: ComponentProps) {
+  //   const { order } = this.props;
 
-    if (order.redirect) {
-      this.redirectToPage('/order');
-    }
-  }
+  //   if (order.redirect) {
+  //     this.redirectToPage('/order');
+  //   }
+  // }
 
   private renderActions = () => {
     const { isFetching, errors, frameErrors, state, order, saveOrder, submitOrder } = this.props;
