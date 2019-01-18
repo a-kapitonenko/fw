@@ -7,7 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Frame } from '../store/frames/types';
-import { frameTableConfig } from '../constants/frameTable';
+import { frameTableConfig as tableConfig } from '../constants/frameTable';
+import * as tableHelper from '../helpers/frameTableHelper';
 import '../styles/frameTable.css';
 
 export type ComponentProps = {
@@ -18,7 +19,7 @@ export type ComponentProps = {
   handleClick: any;
 };
 
-class TestTable extends React.Component<ComponentProps> {
+class FrameTable extends React.Component<ComponentProps> {
   state = { scrollHeight: 0 };
 
   protected renderHeader() {
@@ -42,23 +43,27 @@ class TestTable extends React.Component<ComponentProps> {
   }
 
   protected handleScroll = ({ target }: any) => {
-    this.setState({ scrollHeight: target.scrollTop })
-  }
+    this.setState({ scrollHeight: target.scrollTop });
+  };
 
   public render() {
     const { isFetching, disabled, frames, selectedFrame, handleClick } = this.props;
     const { scrollHeight } = this.state;
 
     const mergeDisabled = isFetching || disabled;
-    const emptyRows = frameTableConfig.rowsPerPage - frames.length;
+    const emptyRows = tableConfig.rowsPerPage - frames.length;
+
+    const progressStyle = tableHelper.getProgressStyle(scrollHeight);
+    const paperStyle = tableHelper.getPaperStyle(tableConfig.rowHeight, tableConfig.rowsPerPage);
+    const rowStyle = tableHelper.getRowStyle(tableConfig.rowHeight, emptyRows);
 
     return (
       <Paper
         className="frame-table"
-        style={{ height: 57 + frameTableConfig.rowHeight * frameTableConfig.rowsPerPage }}
+        style={paperStyle}
         onScroll={this.handleScroll}
       >
-        {isFetching && <CircularProgress style={{ position: 'absolute', top: `calc(50% + ${scrollHeight}px - 24px)`, left: 'calc(50% - 24px)' }} />}
+        {isFetching && <CircularProgress style={progressStyle} />}
         <div className="frame-table__content">
           <Table className={mergeDisabled ? 'frame-table__opacity' : ''}>
             <TableHead>
@@ -83,7 +88,7 @@ class TestTable extends React.Component<ComponentProps> {
                 );
               })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: frameTableConfig.rowHeight * emptyRows }} />
+                <TableRow style={rowStyle} />
               )}
             </TableBody>
           </Table>
@@ -93,4 +98,4 @@ class TestTable extends React.Component<ComponentProps> {
   }
 }
 
-export default TestTable;
+export default FrameTable;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
+import * as routes from '../constants/routes';
 import LinkComponent from '../components/LinkComponent';
 import '../styles/menu.css';
 
@@ -14,7 +15,7 @@ class Menu extends LinkComponent<ComponentProps> {
         <Button 
           className="page__button"
           variant="contained"
-          onClick={() => this.redirectToPage('/select')}
+          onClick={() => this.redirectToPage(routes.SELECT)}
         >
           Enter
         </Button>

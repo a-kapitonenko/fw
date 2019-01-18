@@ -58,4 +58,6 @@ class LensSelectionContainer extends React.Component<ComponentProps> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LensSelectionContainer);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
+
+export default enhance(LensSelectionContainer);

@@ -11,12 +11,19 @@ type ComponentProps = {
   handleSubmit: (lens: Lens) => void;
 }
 
-const LensSelection: React.SFC<ComponentProps> = ({ errors, disabled, lenses, selectedLens, handleSubmit }) => {
+const LensSelection: React.SFC<ComponentProps> = ({
+  errors,
+  disabled,
+  lenses,
+  selectedLens,
+  handleSubmit
+}) => {
   return (
     <Section
       tittle={
         <React.Fragment>
-          The following products can be used with the patients prescription<br />
+          The following products can be used with the patients prescription
+          <br />
           (Select the best NikonEyes Lens that best fits your needs)
         </React.Fragment>
       }
