@@ -5,7 +5,7 @@ html {
   color: rgba(0,0,0,0.87);
 }
 
-body, h1, h2, p {
+body, h1, h2, h3, p {
   margin: 0;
   padding: 0;
 }
@@ -26,41 +26,114 @@ h5 {
   margin: 1.0933333333rem 0 .656rem 0;
 }
 
-input[type="text"] {
-  border: 1px solid #808184;
-  vertical-align: top;
-  font-size: 16px;
-  width: 140px;
-  padding: 12px 10px;
+::-webkit-scrollbar {
+  background-color: #808184;
+  width: 6px;
+  height: 0px;
+  border-radius: 5px;
+  position: absolute;
 }
 
-.page__wrapper {
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #FFBF00;
+}
+
+.p-template {
   height: 100%;
   max-width: 1280px;
   margin: 0 auto;
   box-shadow: 0 0 15px 8px #c2c2c2;
 }
 
-.main-content {
-  margin: 0 5rem;
+.p-template__main {
+  margin: 0 4rem;
   text-align: center;
+}
+
+.p-template__tittle {
+  padding: 2rem;
+  text-align: center;
+}
+
+.p-template__progress {
+  z-index: 10000;
+  position: fixed;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+}
+
+.s-template {
+  border: 3px solid gray;
+  padding: 1.5rem 0;
+  margin: 2rem 0;
+}
+
+.s-template__tittle {
+  margin-bottom: 1rem;
+}
+
+.s-template__content {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  border: 2px solid gray;
+  background-color: white;
+}
+
+.s-template__content > p {
+  margin: auto 2rem;
 }
 
 .yellow-section {
   background: #FFDC00;
 }
 
-.page__title {
-  padding: 2rem;
-  text-align: center;
+.-flex, .-flex-around, .-flex-column-between {
+  display: flex;
 }
 
-.information__text {
-  margin: 10px 20px !important;
-  width: 150px;
+.-flex-around {
+  justify-content: space-around
 }
 
-.information__form {
-  text-align: center;
-  margin-top: 40px;
+.-flex-column-between {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.-relative {
+  position: relative;
+}
+
+.-full-width {
+  width: 100%;
+}
+
+.-opacity {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .p-template__main {
+    margin: 0;
+  }
 }

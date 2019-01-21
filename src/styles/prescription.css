@@ -1,0 +1,8 @@
+.prescription__text-field {
+  margin: 10px 20px !important;
+  width: 120px;
+}
+  
+.prescription__text-field  input {
+  text-align: center;
+}

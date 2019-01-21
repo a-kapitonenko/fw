@@ -1,0 +1,44 @@
+.order-selection__error {
+  color: red;
+}
+
+.order-selection__info {
+  height: 200px;
+  margin: 2rem;
+}
+
+.order-selection__lens {
+  height: 50px;
+  margin: 2rem;
+}
+
+.order-selection__select {
+  margin: auto;
+  width: 120px;
+}
+
+.order-selection__content {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.order-selection__img-wrapper {
+  margin: 2rem;
+  height: 300px;
+  max-width: 600px;
+}
+
+.order-selection__img {
+  height: auto;
+  width: 100%;
+}
+
+.order-selection__frame-description {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem auto;
+}
+
+.order-selection__actions {
+  margin: 2rem;
+}

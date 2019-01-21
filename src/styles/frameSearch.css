@@ -1,0 +1,45 @@
+.frame-search {
+  position: relative;
+}
+
+.frame-search__title {
+  margin: 2rem;
+  text-align: center;
+}
+
+.frame-search__error {
+  color: red;
+}
+
+.frame-search__input {
+  padding-top: 2rem;
+  margin: 0 2rem;
+}
+
+.frame-search__input > div {
+  cursor: text;
+}
+
+.frame-search__option {
+  border-bottom: 1px solid lightgray;
+}
+
+.frame-search__option > div {
+  cursor: text;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.frame-search__option > div:hover {
+  background-color: lightgray;
+}
+
+.frame-search__img {
+  height: 80px;
+  width: 160px;
+}
+
+.frame-search__indicator:hover, .frame-search__indicator-remove {
+  cursor: pointer;
+}

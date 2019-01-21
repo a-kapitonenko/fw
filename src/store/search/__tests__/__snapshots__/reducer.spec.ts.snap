@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`search reducer test handles CLEAR_RESULT 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "isFetching": false,
+  "selectedFrames": Array [],
+}
+`;
+
+exports[`search reducer test handles SEARCH_FAILED 1`] = `
+Object {
+  "errors": "Error message",
+  "frames": Array [],
+  "isFetching": false,
+  "selectedFrames": Array [],
+}
+`;
+
+exports[`search reducer test handles SEARCH_START 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "isFetching": true,
+  "selectedFrames": Array [],
+}
+`;
+
+exports[`search reducer test handles SEARCH_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+  "isFetching": false,
+  "selectedFrames": Array [],
+}
+`;
+
+exports[`search reducer test handles SET_SELECTED_FRAMES 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "isFetching": false,
+  "selectedFrames": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+}
+`;

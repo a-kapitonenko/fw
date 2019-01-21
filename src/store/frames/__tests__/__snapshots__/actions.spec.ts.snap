@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frames actions test checkFrameFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@frames/CHECK_FRAME_FAILED",
+}
+`;
+
+exports[`frames actions test checkFrameStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {},
+  "type": "@@frames/CHECK_FRAME_START",
+}
+`;
+
+exports[`frames actions test checkFrameSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@frames/CHECK_FRAME_SUCCESS",
+}
+`;
+
+exports[`frames actions test clearResult action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@frames/CLEAR_RESULT",
+}
+`;
+
+exports[`frames actions test clearSelectedFrame action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@frame/CLEAR_SELECTED_FRAME",
+}
+`;
+
+exports[`frames actions test close action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@frames/CLOSE",
+}
+`;
+
+exports[`frames actions test fetchSimilarFramesFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@frames/FETCH_SIMILAR_FRAMES_FAILED",
+}
+`;
+
+exports[`frames actions test fetchSimilarFramesStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {},
+  "type": "@@frames/FETCH_SIMILAR_FRAMES_START",
+}
+`;
+
+exports[`frames actions test fetchSimilarFramesSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+  "type": "@@frames/FETCH_SIMILAR_FRAMES_SUCCESS",
+}
+`;
+
+exports[`frames actions test open action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@frames/OPEN",
+}
+`;
+
+exports[`frames actions test setSelectedFrame action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "compatibility": true,
+    "img": "1.png",
+    "label": "FM17116",
+    "upc": 82850553738,
+    "value": "82850553738",
+  },
+  "type": "@@frames/SET_SELECTED_FRAME",
+}
+`;
+
+exports[`frames actions test submitFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@frames/SUBMIT_FAILED",
+}
+`;
+
+exports[`frames actions test submitStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "boss": Object {},
+    "frame": Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+  },
+  "type": "@@frames/SUBMIT_START",
+}
+`;
+
+exports[`frames actions test submitSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@frames/SUBMIT_SUCCESS",
+}
+`;

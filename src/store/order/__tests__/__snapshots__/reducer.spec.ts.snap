@@ -1,0 +1,863 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`order reducer test DISABLE_REDIRECT SET_BOSS 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles FETCH_ORDER_VALUES_FAILED 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "submit": "Error message",
+  },
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles FETCH_ORDER_VALUES_START 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "submit": "",
+  },
+  "fittingProperties": Array [],
+  "isFetching": true,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles FETCH_ORDER_VALUES_SUCCESS 1`] = `
+Object {
+  "blueprint": 0,
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {
+      "compatibility": true,
+      "img": "4.png",
+      "label": "FN17116",
+      "upc": "52850523738",
+      "value": "52850523738",
+    },
+    "lens": Object {
+      "name": "Nikon Eyes* Affinity Trivex-Clear",
+      "value": 4,
+    },
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "11",
+        "axis": "11",
+        "cyclinder": "1",
+        "prism": "11",
+        "sphere": "1",
+      },
+      "OS": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "11",
+        "axis": "11",
+        "cyclinder": "1",
+        "prism": "11",
+        "sphere": "1",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [
+    Object {
+      "name": "1",
+      "value": 1,
+    },
+    Object {
+      "name": "2",
+      "value": 2,
+    },
+    Object {
+      "name": "3",
+      "value": 3,
+    },
+    Object {
+      "name": "4",
+      "value": 4,
+    },
+    Object {
+      "name": "5",
+      "value": 5,
+    },
+  ],
+  "isFetching": false,
+  "message": "The selected parameters for frame and lens are acceptable for cotout.",
+  "recommendation": "Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_FITTING_HEIGHT_FAILED 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "fittingHeight": "Error message",
+  },
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_FITTING_HEIGHT_START 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "fittingHeight": "",
+  },
+  "fittingProperties": Array [],
+  "isFetching": true,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_FITTING_HEIGHT_SUCCESS 1`] = `
+Object {
+  "blueprint": Object {
+    "img": "1.png",
+  },
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_ORDER_FAILED 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "submit": "Error message",
+  },
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_ORDER_START 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "submit": "",
+  },
+  "fittingProperties": Array [],
+  "isFetching": true,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_ORDER_SUCCESS 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_PRESCRIPTION_FAILED 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "prescription": "Error message",
+  },
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_PRESCRIPTION_START 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "prescription": "",
+  },
+  "fittingProperties": Array [],
+  "isFetching": true,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SAVE_PRESCRIPTION_SUCCESS 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SET_BOSS 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SET_FITTING_PROPERTIES 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [
+    Object {
+      "name": "1",
+      "value": 1,
+    },
+    Object {
+      "name": "2",
+      "value": 2,
+    },
+  ],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SET_MESSAGE 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "The selected parameters for frame and lens are acceptable for cotout.",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SET_RECOMMENDATION 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SET_RX_INFORMATION 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "-7.5",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SUBMIT_FAILED 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "submit": "Error message",
+  },
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SUBMIT_START 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {
+    "submit": "",
+  },
+  "fittingProperties": Array [],
+  "isFetching": true,
+  "message": "",
+  "recommendation": "",
+  "redirect": false,
+}
+`;
+
+exports[`order reducer test handles SUBMIT_SUCCESS 1`] = `
+Object {
+  "blueprint": Object {},
+  "boss": Object {
+    "barcode": Object {},
+    "fittingHeight": 0,
+    "frame": Object {},
+    "lens": Object {},
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+      "OS": Object {
+        "PDDistance": "",
+        "PDNear": "",
+        "addition": "",
+        "axis": "",
+        "cyclinder": "",
+        "prism": "",
+        "sphere": "",
+      },
+    },
+  },
+  "errors": Object {},
+  "fittingProperties": Array [],
+  "isFetching": false,
+  "message": "",
+  "recommendation": "",
+  "redirect": true,
+}
+`;

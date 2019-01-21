@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter actions test addQuery action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "type": "color",
+    "value": "test",
+  },
+  "type": "@@filter/ADD_QUERY",
+}
+`;
+
+exports[`filter actions test changeChecked action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "name": "Black",
+    "type": "color",
+    "value": true,
+  },
+  "type": "@@filter/CHANGE_CHECKED",
+}
+`;
+
+exports[`filter actions test clearChecked action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@filter/CLEAR_CHECKED",
+}
+`;
+
+exports[`filter actions test clearQuery action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@filter/CLEAR_QUERY",
+}
+`;
+
+exports[`filter actions test clearResult action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@filter/CLEAR_RESULT",
+}
+`;
+
+exports[`filter actions test deleteQuery action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "type": "color",
+    "value": "test",
+  },
+  "type": "@@filter/DELETE_QUERY",
+}
+`;
+
+exports[`filter actions test fetchGroupsFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@filter/FETCHING_GROUPS_FAILED",
+}
+`;
+
+exports[`filter actions test fetchGroupsStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@filter/FETCHING_GROUPS_START",
+}
+`;
+
+exports[`filter actions test fetchGroupsSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "color": Array [
+      Object {
+        "name": "Black",
+        "value": "black",
+      },
+    ],
+    "material": Array [
+      Object {
+        "name": "Acetate",
+        "value": "acetate",
+      },
+    ],
+    "noseBridge": Array [
+      Object {
+        "name": "Standard",
+        "value": "standard",
+      },
+    ],
+    "shape": Array [
+      Object {
+        "name": "Square",
+        "value": "square",
+      },
+    ],
+    "width": Array [
+      Object {
+        "name": "Narrow",
+        "value": "narrow",
+      },
+    ],
+  },
+  "type": "@@filter/FETCHING_GROUPS_SUCCESS",
+}
+`;
+
+exports[`filter actions test filteringFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@filter/FILTERING_FAILDE",
+}
+`;
+
+exports[`filter actions test filteringStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "boss": Object {},
+    "query": Object {},
+  },
+  "type": "@@filter/FILTERING_START",
+}
+`;
+
+exports[`filter actions test filteringSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+  "type": "@@filter/FILTERING_SUCCESS",
+}
+`;

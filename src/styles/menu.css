@@ -1,0 +1,9 @@
+.page__img {
+  max-width: 100%;
+  height: auto;
+}
+
+.page__button {
+  margin: 2rem !important;
+}
+    

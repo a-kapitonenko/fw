@@ -1,21 +1,90 @@
-// import { EnthusiasmAction } from './actions';
-// import { StoreState } from '../interface';
-// import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from './types';
+import { Reducer } from 'redux';
+import { FramesState, FramesActionTypes, Frame } from './types';
+import { saveStart, saveSuccess, saveFailed } from '../index';
 
-// export interface initialState {
-//   open: boolean,
-// }
+const initialState: FramesState = {
+  isFetching: false,
+  errors: '',
+  open: false,
+  selectedFrame: <Frame>{},
+  similarFrames: {
+    isFetching: false,
+    errors: '',
+    data: [],
+  },
+};
 
-// const initialState: initialState = {
-//   open: false,
-// }
+const reducer: Reducer<FramesState> = (state = initialState, action) => {
+  switch (action.type) {
+    case FramesActionTypes.OPEN: {
+      return {
+        ...state,
+        open: true,
+      };
+    }
+    case FramesActionTypes.CLOSE: {
+      return {
+        ...state,
+        open: false,
+      };
+    }
+    case FramesActionTypes.SUBMIT_START: {
+      return saveStart(state);
+    }
+    case FramesActionTypes.SUBMIT_SUCCESS: {
+      return saveSuccess(state);
+    }
+    case FramesActionTypes.SUBMIT_FAILED: {
+      return saveFailed(state, action.payload);
+    }
+    case FramesActionTypes.FETCH_SIMILAR_FRAMES_START: {
+      return {
+        ...state,
+        similarFrames: saveStart(state.similarFrames),
+      };
+    }
+    case FramesActionTypes.FETCH_SIMILAR_FRAMES_SUCCESS: {
+      return {
+        ...state,
+        similarFrames: saveSuccess(state.similarFrames, 'data', action.payload),
+      };
+    }
+    case FramesActionTypes.FETCH_SIMILAR_FRAMES_FAILED: {
+      return {
+        ...state,
+        similarFrames: saveFailed(state.similarFrames, action.payload),
+      };
+    }
+    case FramesActionTypes.CHECK_FRAME_START: {
+      return saveStart(state);
+    }
+    case FramesActionTypes.CHECK_FRAME_SUCCESS: {
+      return saveSuccess(state);
+    }
+    case FramesActionTypes.CHECK_FRAME_FAILED: {
+      return saveFailed(state, action.payload);
+    }
+    case FramesActionTypes.SET_SELECTED_FRAME: {
+      return {
+        ...state,
+        selectedFrame: action.payload,
+      };
+    }
+    case FramesActionTypes.CLEAR_SELECTED_FRAME: {
+      return {
+        ...state,
+        selectedFrame: <Frame>{},
+      };
+    }
+    case FramesActionTypes.CLEAR_RESULT: {
+      return {
+        ...initialState,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
 
-// export function enthusiasm(state: StoreState, action: EnthusiasmAction): StoreState {
-//   switch (action.type) {
-//     case INCREMENT_ENTHUSIASM:
-//       return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };
-//     case DECREMENT_ENTHUSIASM:
-//       return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
-//   }
-//   return state;
-// }
+export { reducer as FramesReducer };

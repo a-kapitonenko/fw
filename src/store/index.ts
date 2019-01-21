@@ -1,26 +1,68 @@
-// import { createStore, applyMiddleware, compose } from 'redux';
-// import { routerMiddleware } from 'react-router-redux';
-// import { createLogger } from 'redux-logger';
-// import thunk from 'redux-thunk';
-// import createHistory from 'history/createBrowserHistory';
+import { combineReducers } from 'redux';
+import { routerReducer, RouterState } from 'react-router-redux';
+import { all, fork } from 'redux-saga/effects';
+import { FramesState } from './frames/types';
+import { FramesReducer } from './frames/reducer';
+import framesSaga from './frames/sagas';
+import { ILensesState } from './lenses/types';
+import { LensesReducer } from './lenses/reducer';
+import lensesSaga from './lenses/sagas';
+import { IOrderState } from './order/types';
+import { OrderReducer } from './order/reducer';
+import orderSaga from './order/sagas';
+import { IFilterState } from './filter/types';
+import { FilterReducer } from './filter/reducer';
+import filterSaga from './filter/sagas';
+import { ISearchState } from './search/types';
+import { SearchReducer } from './search/reducer';
+import searchSaga from './search/sagas';
 
-// import rootReducer from './rootReducer';
+export const saveStart = (state: any) => ({
+  ...state,
+  isFetching: true,
+  errors: '',
+});
 
-// const history = createHistory();
-// const logger = createLogger();
-// const enhancers: any = [];
-// const middleware = [logger, thunk, routerMiddleware(history)];
+export const saveSuccess = (state: any, type?: any, data?: any) => {
+  const object = {};
 
-// // if (process.env.NODE_ENV === 'development') {
-// //   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION;
+  if (type) {
+    object[type] = data;
+  }
 
-// //   if (typeof devToolsExtension === 'function') {
-// //     enhancers.push(devToolsExtension());
-// //   }
-// // }
+  return { ...state, isFetching: false, ...object };
+};
 
-// const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
+export const saveFailed = (state: any, error: string) => ({
+  ...state,
+  isFetching: false,
+  errors: error,
+});
 
-// const store = createStore(rootReducer, composedEnhancers);
+export interface ApplicationState {
+  routing: RouterState;
+  frames: FramesState;
+  lenses: ILensesState;
+  order: IOrderState;
+  filter: IFilterState;
+  search: ISearchState;
+}
 
-// export default store;
+export const rootReducer = combineReducers<ApplicationState>({
+  routing: routerReducer,
+  frames: FramesReducer,
+  lenses: LensesReducer,
+  order: OrderReducer,
+  filter: FilterReducer,
+  search: SearchReducer,
+});
+
+export function* rootSaga() {
+  yield all([
+    fork(framesSaga),
+    fork(lensesSaga),
+    fork(orderSaga),
+    fork(filterSaga),
+    fork(searchSaga),
+  ]);
+}

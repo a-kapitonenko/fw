@@ -1,0 +1,71 @@
+.boss__content {
+  display: flex;
+}
+
+.boss__title {
+  padding: 2rem;
+  text-align: center;
+}
+
+.boss__lens {
+  height: 100px;
+  margin: 2rem;
+}
+
+.boss__frame {
+  display: flex;
+}
+
+.boss__frame-info {
+  display: flex;
+  flex: 1; 
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.boss__frame-des {
+  height: 100px;
+  margin: 2rem;
+  flex-direction: column;
+}
+
+.boss__frame-des2 {
+  height: 60px;
+  margin: 2rem;
+}
+
+.boss__frame-img {
+  flex: 1;
+  height: 300px;
+  margin: 2rem; 
+}
+
+.boss__img {
+  height: auto;
+  width: 100%;
+}
+
+.boss__barcode {
+  align-items: center;
+  margin: 2rem auto;
+  height: 300px;
+  max-width: 600px;
+}
+
+@media screen and (max-width: 680px) {
+  .boss__frame {
+    display: block;
+  }
+}
+
+.boss__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.boss__button {
+  margin: 2rem !important;
+  width: 200px;
+  height: 60px;
+}

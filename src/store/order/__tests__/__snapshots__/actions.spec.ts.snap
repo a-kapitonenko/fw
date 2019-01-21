@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`order actions test disableRedirect action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@order/DISABLE_REDIRECT",
+}
+`;
+
+exports[`order actions test fetchOrderValuesFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@order/FETCH_ORDER_FAILED",
+}
+`;
+
+exports[`order actions test fetchOrderValuesStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "6E8C896C14153342DE34BBF26F69A8135BA548864A8C838F035CB35A593C2399",
+  "type": "@@order/FETCH_ORDER_VALUES_START",
+}
+`;
+
+exports[`order actions test fetchOrderValuesSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "blueprint": 0,
+    "fittingProperties": Array [
+      Object {
+        "name": "1",
+        "value": 1,
+      },
+      Object {
+        "name": "2",
+        "value": 2,
+      },
+      Object {
+        "name": "3",
+        "value": 3,
+      },
+      Object {
+        "name": "4",
+        "value": 4,
+      },
+      Object {
+        "name": "5",
+        "value": 5,
+      },
+    ],
+    "lenses": Array [
+      Object {
+        "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+        "value": 1,
+      },
+      Object {
+        "name": "Nikon Eyes* Advanced + Polycarbonate- Transitions* Signature VII",
+        "value": 2,
+      },
+      Object {
+        "name": "Nikon Eyes* Advanced + Polycarbonate- XTRActive* Gray",
+        "value": 3,
+      },
+      Object {
+        "name": "Nikon Eyes* Affinity Trivex-Clear",
+        "value": 4,
+      },
+      Object {
+        "name": "Nikon Eyes* Affinity 1.67- Transitions* Signature VII Gray",
+        "value": 5,
+      },
+      Object {
+        "name": "Nikon Eyes* Affinity 1.67- Transitions* XTRActive Gray",
+        "value": 6,
+      },
+      Object {
+        "name": "Nikon Eyes* Customized + 1.67- Clear",
+        "value": 7,
+      },
+      Object {
+        "name": "Nikon Eyes* Customized* + 1.67- Transitions* Signature VII Gray",
+        "value": 8,
+      },
+      Object {
+        "name": "Nikon Eyes* Customized* + 1.67- Transitions* XTRActive* Gray",
+        "value": 9,
+      },
+      Object {
+        "name": "Nikon Eyes* Customized* + 1.67- Polarized Gray",
+        "value": 10,
+      },
+    ],
+    "message": "The selected parameters for frame and lens are acceptable for cotout.",
+    "prescription": Object {
+      "OD": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "11",
+        "axis": "11",
+        "cyclinder": "1",
+        "prism": "11",
+        "sphere": "1",
+      },
+      "OS": Object {
+        "PDDistance": "1",
+        "PDNear": "1",
+        "addition": "11",
+        "axis": "11",
+        "cyclinder": "1",
+        "prism": "11",
+        "sphere": "1",
+      },
+    },
+    "recommendation": "Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)",
+    "selectedFrame": Object {
+      "compatibility": true,
+      "img": "4.png",
+      "label": "FN17116",
+      "upc": "52850523738",
+      "value": "52850523738",
+    },
+    "selectedLens": Object {
+      "name": "Nikon Eyes* Affinity Trivex-Clear",
+      "value": 4,
+    },
+  },
+  "type": "@@order/FETCH_ORDER_VALUES_SUCCESS",
+}
+`;
+
+exports[`order actions test saveFittingHeightFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@order/SAVE_FITTING_HEIGHT_FAILED",
+}
+`;
+
+exports[`order actions test saveFittingHeightStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "boss": Object {},
+    "height": 3,
+  },
+  "type": "@@order/SAVE_FITTING_HEIGHT_START",
+}
+`;
+
+exports[`order actions test saveFittingHeightSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "img": "1.png",
+  },
+  "type": "@@order/SAVE_FITTING_HEIGHT_SUCCESS",
+}
+`;
+
+exports[`order actions test saveOrderFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@order/SAVE_ORDER_FAILED",
+}
+`;
+
+exports[`order actions test saveOrderStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {},
+  "type": "@@order/SAVE_ORDER_START",
+}
+`;
+
+exports[`order actions test saveOrderSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@order/SAVE_ORDER_SUCCESS",
+}
+`;
+
+exports[`order actions test savePrescriptionFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@order/SAVE_PRESCRIPTION_FAILED",
+}
+`;
+
+exports[`order actions test savePrescriptionStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "OD": Object {
+      "PDDistance": "1",
+      "PDNear": "1",
+      "addition": "2",
+      "axis": "1",
+      "cyclinder": "2",
+      "prism": "1",
+      "sphere": "1",
+    },
+    "OS": Object {
+      "PDDistance": "1",
+      "PDNear": "1",
+      "addition": "2",
+      "axis": "1",
+      "cyclinder": "2",
+      "prism": "1",
+      "sphere": "1",
+    },
+  },
+  "type": "@@order/SAVE_PRESCRIPTION_START",
+}
+`;
+
+exports[`order actions test savePrescriptionSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@order/SAVE_PRESCRIPTION_SUCCESS",
+}
+`;
+
+exports[`order actions test setBoss action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "type": "lens",
+    "value": Object {
+      "name": "Nikon Eyes* Advanced + Polycarbonate- Polarized Gray/Brown",
+      "value": 1,
+    },
+  },
+  "type": "@@order/SET_BOSS",
+}
+`;
+
+exports[`order actions test setFittingProperties action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "name": "1",
+      "value": 1,
+    },
+    Object {
+      "name": "2",
+      "value": 2,
+    },
+  ],
+  "type": "@@order/SET_FITTING_PROPERTIES",
+}
+`;
+
+exports[`order actions test setMessage action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "The selected parameters for frame and lens are acceptable for cotout.",
+  "type": "@@order/SET_MESSAGE",
+}
+`;
+
+exports[`order actions test setRecommendation action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Based on the prescription, the lens selection will use an 8 base lenses that is 70 MM in diameter. We recommend you look for frames with a strong front curve and a small Frame ED (<60 ED)",
+  "type": "@@order/SET_RECOMMENDATION",
+}
+`;
+
+exports[`order actions test setRxInformation action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "field": "sphere",
+    "type": "OD",
+    "value": "-7.5",
+  },
+  "type": "@@order/SET_RX_INFORMATION",
+}
+`;
+
+exports[`order actions test submitFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@order/SUBMIT_FAILED",
+}
+`;
+
+exports[`order actions test submitStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {},
+  "type": "@@order/SUBMIT_START",
+}
+`;
+
+exports[`order actions test submitSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@order/SUBMIT_SUCCESS",
+}
+`;

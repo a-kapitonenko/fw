@@ -1,0 +1,20 @@
+.lens-selection {
+  overflow: auto;
+  border: 2px solid gray;
+  height: 200px;
+  margin: 2rem;
+  background-color: white;
+}
+
+.lens-selection__lens {
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.lens-selection__lens:hover {
+  background-color: lightgray;
+}
+
+.lens-selected {
+  background-color: darkgray !important;
+}

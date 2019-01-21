@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`search actions test clearResult action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": undefined,
+  "type": "@@search/CLEAR_RESULT",
+}
+`;
+
+exports[`search actions test searchFailed action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": "Error message",
+  "type": "@@search/SEARCH_FAILED",
+}
+`;
+
+exports[`search actions test searchStart action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Object {
+    "boss": Object {},
+    "upc": "82850523738",
+  },
+  "type": "@@search/SEARCH_START",
+}
+`;
+
+exports[`search actions test searchSuccess action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+  "type": "@@search/SEARCH_SUCCESS",
+}
+`;
+
+exports[`search actions test setSelectedFrames action creator 1`] = `
+Object {
+  "meta": undefined,
+  "payload": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+  "type": "@@search/SET_SELECTED_FRAMES",
+}
+`;

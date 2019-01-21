@@ -1,0 +1,355 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter reducer test handles ADD_QUERY 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [
+      "test",
+    ],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles CHANGE_CHECKED 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles CLEAR_CHECKED 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles CLEAR_QUERY 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles CLEAR_RESULT 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles DELETE_QUERY 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles FETCH_GROUPS_FAILED 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "Error message",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles FETCH_GROUPS_START 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": true,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles FETCH_GROUPS_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [
+        Object {
+          "name": "Black",
+          "value": "black",
+        },
+      ],
+      "material": Array [
+        Object {
+          "name": "Acetate",
+          "value": "acetate",
+        },
+      ],
+      "noseBridge": Array [
+        Object {
+          "name": "Standard",
+          "value": "standard",
+        },
+      ],
+      "shape": Array [
+        Object {
+          "name": "Square",
+          "value": "square",
+        },
+      ],
+      "width": Array [
+        Object {
+          "name": "Narrow",
+          "value": "narrow",
+        },
+      ],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles FILTERING_FAILED 1`] = `
+Object {
+  "errors": "Error message",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles FILTERING_START 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": true,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
+
+exports[`filter reducer test handles FILTERING_SUCCESS 1`] = `
+Object {
+  "errors": "",
+  "frames": Array [
+    Object {
+      "compatibility": true,
+      "img": "1.png",
+      "label": "FM17116",
+      "upc": 82850553738,
+      "value": "82850553738",
+    },
+    Object {
+      "compatibility": false,
+      "img": "2.png",
+      "label": "SA17346",
+      "upc": 82850523999,
+      "value": "82850523999",
+    },
+  ],
+  "groups": Object {
+    "data": Object {
+      "color": Array [],
+      "material": Array [],
+      "noseBridge": Array [],
+      "shape": Array [],
+      "width": Array [],
+    },
+    "errors": "",
+    "isFetching": false,
+  },
+  "isFetching": false,
+  "query": Object {
+    "color": Array [],
+    "material": Array [],
+    "noseBridge": Array [],
+    "shape": Array [],
+    "width": Array [],
+  },
+}
+`;
